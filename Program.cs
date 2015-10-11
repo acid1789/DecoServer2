@@ -13,7 +13,7 @@ namespace DecoServer2
         static void Main(string[] args)
         {
             LogThread.AlwaysPrintToConsole = true;
-            _server = new ServerBase(1255, "server=127.0.0.1;uid=DecoServer;pwd=dspass;database=deco;");
+            _server = new ServerBase(11299, "server=127.0.0.1;uid=DecoServer;pwd=dspass;database=deco;");
             _server.TaskProcessor = new TaskProcessor(_server);
 
             _server.Run();

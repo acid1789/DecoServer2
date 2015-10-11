@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.IO;
+using System.Diagnostics;
 
 namespace JuggleServerCore
 {
@@ -113,7 +114,10 @@ namespace JuggleServerCore
                             sw.WriteLine(entryLine);
 
                             if (e.LogToConsole || _alwaysPrintToConsole)
+                            {
                                 Console.WriteLine(entryLine);
+                                Debug.WriteLine(entryLine);
+                            }
                         }
 
                         sw.Close();
@@ -122,6 +126,7 @@ namespace JuggleServerCore
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                     throw ex;
                 }
 

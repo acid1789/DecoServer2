@@ -1,1 +1,27 @@
 CREATE SCHEMA `deco` ;
+
+CREATE TABLE `deco`.`accounts` (
+  `account_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `user_name` VARCHAR(64) NOT NULL COMMENT '',
+  `password` VARCHAR(64) NOT NULL COMMENT '',
+  PRIMARY KEY (`account_id`)  COMMENT '',
+  UNIQUE INDEX `account_id_UNIQUE` (`account_id` ASC)  COMMENT '');
+
+
+  CREATE TABLE `deco`.`characters` (
+  `account_id` INT NOT NULL COMMENT '',
+  `name` VARCHAR(16) NOT NULL COMMENT '',
+  `model_info` INT NULL COMMENT '',
+  `job` TINYINT NULL COMMENT '',
+  `level` TINYINT NULL COMMENT '',
+  `shirt` INT NULL COMMENT '',
+  `pants` INT NULL COMMENT '',
+  `right_hand` INT NULL COMMENT '',
+  `left_hand` INT NULL COMMENT '',
+  `hat` INT NULL COMMENT '',
+  `suit` INT NULL COMMENT '',
+  `gloves` INT NULL COMMENT '',
+  `boots` INT NULL COMMENT '',
+  `neck1` INT NULL COMMENT '',
+  `neck2` INT NULL COMMENT '',
+  PRIMARY KEY (`account_id`)  COMMENT '');

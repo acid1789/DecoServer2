@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterThings\Booster.cs" />
+    <Compile Include="CharacterThings\Buff.cs" />
+    <Compile Include="CharacterThings\CharacterInfo.cs" />
+    <Compile Include="CharacterThings\CharacterSelectInfo.cs" />
+    <Compile Include="CharacterThings\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerCore\Connection.cs" />
@@ -52,8 +57,13 @@
     <Compile Include="ServerCore\ListenThread.cs" />
     <Compile Include="ServerCore\LogInterface.cs" />
     <Compile Include="ServerCore\LogThread.cs" />
+    <Compile Include="ServerCore\Packets.cs" />
+    <Compile Include="ServerCore\PacketSecurity.cs" />
+    <Compile Include="ServerCore\PlayServerInfo.cs" />
+    <Compile Include="ServerCore\RockCrypto.cs" />
     <Compile Include="ServerCore\ServerBase.cs" />
     <Compile Include="ServerCore\TaskProcessor.cs" />
+    <Compile Include="ServerCore\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
