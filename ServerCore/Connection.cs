@@ -27,6 +27,9 @@ namespace JuggleServerCore
         public event EventHandler<CharacterNameClass> OnDeleteCharacter;
         public event EventHandler<CharacterNameClass> OnSelectCharacter;
         public event EventHandler OnLoadSelectedCharacter;
+        public event EventHandler OnPlayerEnterMap;
+        public event EventHandler<CharacterPositionClass> OnMoveTo;
+        public event EventHandler<CharacterPositionClass> OnUpdatePosition;
         #endregion
 
         Socket _socket;
@@ -62,6 +65,9 @@ namespace JuggleServerCore
             _packetHandlers[0x0004] = DeleteCharacter_Handler;
             _packetHandlers[0x0010] = SelectCharacter_Handler;
             _packetHandlers[0x0014] = LoadSelectedCharacter_Handler;
+            _packetHandlers[0x0121] = MoveTo_Handler;
+            _packetHandlers[0x0124] = UpdatePosition_Handler;
+            _packetHandlers[0x0133] = PlayerEnterMap_Handler;
             _packetHandlers[0x7FD3] = LoginRequest_Handler;
             _packetHandlers[0x7FD4] = CharacterListRequest_Handler;
         }
@@ -214,6 +220,21 @@ namespace JuggleServerCore
             OnLoadSelectedCharacter(this, null);
         }
 
+        void PlayerEnterMap_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnPlayerEnterMap(this, null);
+        }
+
+        void MoveTo_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnMoveTo(this, CharacterPositionClass.Read(header, br));
+        }
+
+        void UpdatePosition_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnUpdatePosition(this, CharacterPositionClass.Read(header, br));
+        }
+
         void LoginRequest_Handler(PacketHeader header, BinaryReader br)
         {
             LoginRequestPacket lrp = LoginRequestPacket.Read(header, br);
@@ -248,6 +269,11 @@ namespace JuggleServerCore
         public int SelectedCharacter
         {
             get { return _selectedCharacterID; }
+        }
+
+        public CharacterInfo Character
+        {
+            get { return _ci; }
         }
         #endregion
     }

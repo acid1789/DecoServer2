@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.IO;
 
 namespace JuggleServerCore
@@ -87,7 +88,7 @@ namespace JuggleServerCore
             return (gender != 0);
         }
 
-        public static uint EncodeCellIndex(ushort map, uint x, uint y)
+        public static uint GetMapSize(ushort map)
         {
             uint mapSize = 512;
             switch (map)
@@ -112,9 +113,22 @@ namespace JuggleServerCore
                     mapSize = 256;
                     break;
             }
+            return mapSize;
+        }
 
+        public static uint EncodeCellIndex(ushort map, uint x, uint y)
+        {
+            uint mapSize = GetMapSize(map);
             uint cell = (y * mapSize) + x;
             return cell;
+        }
+
+        public static Vector DecodeCellIndex(ushort map, uint cellIndex)
+        {
+            uint mapSize = GetMapSize(map);
+            uint y = cellIndex / mapSize;
+            uint x = cellIndex - (y * mapSize);
+            return new Vector(x, y);
         }
 
         public static string PrintBinaryData(byte[] data)

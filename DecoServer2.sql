@@ -28,7 +28,7 @@ CREATE TABLE `accounts` (
   `password` varchar(64) NOT NULL,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `account_id_UNIQUE` (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `characters` (
   `account_id` int(11) NOT NULL,
   PRIMARY KEY (`character_id`),
   UNIQUE KEY `character_id_UNIQUE` (`character_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +167,39 @@ CREATE TABLE `item_instances` (
   PRIMARY KEY (`instance_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `play_maps`
+--
+
+DROP TABLE IF EXISTS `play_maps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `play_maps` (
+  `map_id` smallint(6) unsigned NOT NULL,
+  PRIMARY KEY (`map_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `static_npcs`
+--
+
+DROP TABLE IF EXISTS `static_npcs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `static_npcs` (
+  `static_npc_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `game_id` smallint(5) unsigned NOT NULL,
+  `location_x` int(10) unsigned NOT NULL,
+  `location_y` int(10) unsigned NOT NULL,
+  `hp` int(10) unsigned NOT NULL DEFAULT '10000',
+  `direction` int(10) unsigned NOT NULL DEFAULT '0',
+  `map_id` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`static_npc_id`),
+  UNIQUE KEY `static_npc_id_UNIQUE` (`static_npc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -177,4 +210,4 @@ CREATE TABLE `item_instances` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-11 10:11:57
+-- Dump completed on 2015-10-12  8:11:02

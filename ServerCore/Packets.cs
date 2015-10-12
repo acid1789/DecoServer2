@@ -75,6 +75,17 @@ namespace JuggleServerCore
         }
     }
 
+    public class CharacterPositionClass : EventArgs           // 0x121
+    {
+        public uint CellIndex;
+        public static CharacterPositionClass Read(PacketHeader header, BinaryReader br)
+        {
+            CharacterPositionClass mtp = new CharacterPositionClass();
+            mtp.CellIndex = br.ReadUInt32();
+            return mtp;
+        }
+    }
+
     public class LoginRequestPacket : EventArgs //  0x7FD3
     {
         public PacketHeader Header;
@@ -237,6 +248,77 @@ namespace JuggleServerCore
             header.Write(bw);
 
             _ci.WritePacket(bw);
+        }
+    }
+
+    public class PlayerMovePacket : SendPacketBase  // 0x0122
+    {
+        uint _cellIndex;
+        ushort _moveSpeed;
+        public PlayerMovePacket(uint cellIndex, ushort moveSpeed)
+        {
+            _cellIndex = cellIndex;
+            _moveSpeed = moveSpeed;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x122;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 7;
+            header.Write(bw);
+
+            bw.Write(_cellIndex);
+            bw.Write(_moveSpeed);
+            bw.Write((byte)1);
+        }
+    }
+
+    public class ObserveMovementPacket : SendPacketBase // 0x0123
+    {
+        uint _moverID;
+        uint _cellIndex;
+        ushort _speed;
+        public ObserveMovementPacket(uint worldID, uint cellIndex, ushort speed)
+        {
+            _moverID = worldID;
+            _cellIndex = cellIndex;
+            _speed = speed;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0123;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 10;
+            header.Write(bw);
+
+            bw.Write(_moverID);
+            bw.Write(_cellIndex);
+            bw.Write(_speed);
+        }
+    }
+
+    public class NPCInfoPacket : SendPacketBase     // 0x5002
+    {
+        DecoServer2.NPC _npc;
+
+        public NPCInfoPacket(DecoServer2.NPC npc)
+        {
+            _npc = npc;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x5002;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = _npc.DataSize;
+            header.Write(bw);
+            
+            _npc.Write(bw);
         }
     }
 

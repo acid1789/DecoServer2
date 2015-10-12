@@ -17,6 +17,8 @@ namespace DecoServer2.CharacterThings
 
         CharacterSelectInfo _csi;
 
+        uint _worldID;
+
         ushort _mapID;
         uint _cellIndex;
         uint _curHP;
@@ -80,7 +82,7 @@ namespace DecoServer2.CharacterThings
         public CharacterInfo(CharacterSelectInfo csi)
         {
             _csi = csi;
-            
+
             //_buffs.Add(125);   
             //_boosters.Add(new Booster(11114, 500));
             //_boosters.Add(new Booster(11115, 500));
@@ -125,7 +127,7 @@ namespace DecoServer2.CharacterThings
             _pvpWins = _pvpCount = 0;
             _exp = 0;
 
-            _expectingHV = false;            
+            _expectingHV = false;
             return HVString;
         }
 
@@ -377,7 +379,7 @@ namespace DecoServer2.CharacterThings
 
             foreach (ushort buff in _buffs)
                 bw.Write(buff);
-            
+
             foreach (Booster booster in _boosters)
                 booster.Write(bw);
 
@@ -403,7 +405,7 @@ namespace DecoServer2.CharacterThings
                 if (_loadingData)
                 {
                     complete = !_expectingHV && !_expectingLV && !_expectingItems && !_expectingFrontier && !_expectingSkills;
-                    if( complete )
+                    if (complete)
                         _loadingData = false;
                 }
                 return complete;
@@ -478,7 +480,7 @@ namespace DecoServer2.CharacterThings
                 size += 16 * _ridingItems.Count;
 
                 size += 14; // end bytes
-                return (ushort)size;                    
+                return (ushort)size;
             }
         }
 
@@ -487,6 +489,27 @@ namespace DecoServer2.CharacterThings
             get { return _csi.ID; }
         }
 
+        public uint WorldID
+        {
+            get { return _worldID; }
+            set { _worldID = value; }
+        }
+
+        public ushort MapID
+        {
+            get { return _mapID; }
+        }
+
+        public ushort MoveSpeed
+        {
+            get { return _moveSpeed; }
+        }
+
+        public uint CellIndex
+        {
+            get { return _cellIndex; }
+            set { _cellIndex = value; }
+        }
         #endregion
 
     }

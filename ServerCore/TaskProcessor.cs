@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using DecoServer2.CharacterThings;
+using DecoServer2;
 
 namespace JuggleServerCore
 {    
@@ -11,6 +12,10 @@ namespace JuggleServerCore
     {
         public enum TaskType
         {
+            LoadPlayMaps_Fetch,
+            LoadPlayMaps_Process,
+            LoadNPCs_Fetch,
+            LoadNPCs_Process,
             LoginRequest_Fetch,
             LoginRequest_Process,
             CharacterList_Fetch,
@@ -24,6 +29,9 @@ namespace JuggleServerCore
             CharacterDataItems_Process,
             CharacterFrontierData_Process,
             CharacterSkills_Process,
+            PlayerEnterMap,
+            PlayerMove,
+            PlayerUpdatePosition,
         }
 
         public TaskType Type;
@@ -84,6 +92,10 @@ namespace JuggleServerCore
             _tasksLock = new Mutex();
 
             _taskHandlers = new Dictionary<Task.TaskType, TaskHandler>();
+            _taskHandlers[Task.TaskType.LoadPlayMaps_Fetch] = LoadPlayMaps_Fetch_Handler;
+            _taskHandlers[Task.TaskType.LoadPlayMaps_Process] = LoadPlayMaps_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadNPCs_Fetch] = LoadNPCs_Fetch_Handler;
+            _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Fetch] = LoginRequest_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Process] = LoginRequest_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterList_Fetch] = CharacterList_Fetch_Handler;
@@ -97,6 +109,9 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.CharacterDataItems_Process] = CharacterDataItems_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterFrontierData_Process] = CharacterFrontierData_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterSkills_Process] = CharacterSkills_Process_Handler;
+            _taskHandlers[Task.TaskType.PlayerEnterMap] = PlayerEnterMap_Handler;
+            _taskHandlers[Task.TaskType.PlayerMove] = PlayerMove_Handler;
+            _taskHandlers[Task.TaskType.PlayerUpdatePosition] = PlayerUpdatePosition_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -200,6 +215,39 @@ namespace JuggleServerCore
         #endregion
 
         #region TaskHandlers
+        void LoadPlayMaps_Fetch_Handler(Task t)
+        {
+            t.Type = Task.TaskType.LoadPlayMaps_Process;
+            AddDBQuery("SELECT * FROM play_maps;", t);
+        }
+
+        void LoadPlayMaps_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                ushort mapID = (ushort)row[0];
+                _server.AddPlayMap(mapID);
+            }
+            
+            t.Type = Task.TaskType.LoadNPCs_Fetch;
+            AddTask(t);
+        }
+
+        void LoadNPCs_Fetch_Handler(Task t)
+        {
+            t.Type = Task.TaskType.LoadNPCs_Process;
+            AddDBQuery("SELECT * FROM static_npcs;", t);
+        }
+
+        void LoadNPCs_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                NPC npc = NPC.ReadFromDB(row);
+                _server.AddNPC(npc);
+            }
+        }
+
         void LoginRequest_Fetch_Handler(Task t)
         {
             LoginRequestPacket lrp = (LoginRequestPacket)t.Args;
@@ -407,35 +455,22 @@ namespace JuggleServerCore
                 t.Client.SendPacket(new MapChangePacket(ci));
             }
         }
+
+        void PlayerEnterMap_Handler(Task t)
+        {
+            _server.PlayerEnterMap(t.Client);
+        }
+
+        void PlayerMove_Handler(Task t)
+        {
+            // For now just allow the move for the client
+            _server.ProcessMoveRequest(t.Client, (CharacterPositionClass)t.Args);            
+        }
+
+        void PlayerUpdatePosition_Handler(Task t)
+        {
+            _server.UpdatePlayerPosition(t.Client, (CharacterPositionClass)t.Args);
+        }
         #endregion
     }
 }
-
-/*
-name : (S - C)  Opcode : 0015, Data : 
-                                      5069          00000: 00ED012A 00030000 000E0100 00005069   ...* .... .... ..Pi
-       6E6B0000 00000000 00000000 00000068          00010: 6E6B0000 00000000 00000000 00000000   nk.. .... .... ....
-       69206576 65727962 6F647920 3A292900          00020: 00000000 00000000 00000000 00000000   .... .... .... ....
-       00000000 00000000 00000000 00000AA1          00030: 00000000 00000000 00000000 000012A1   .... .... .... ....
-       F84E0100 00000000 00000000 01010000          00040: F84E0100 00000000 00000000 01010000   .N.. .... .... ....
-       00010000 00000000 00000700 DDBC0100          00050: 00010000 00000000 00000700 DDBC0100   .... .... .... ....
-       96000000 96000000 96000000 00C0000A          00060: 96000000 96000000 96000000 00C0000A   .... .... .... ....
-       000C0002 00050008 0A000C00 96000000          00070: 000C0002 00050008 0A000C00 96000000   .... .... .... ....
-       96000000 96000000 0D000900 0D000C00          00080: 96000000 96000000 0D000900 0D000C00   .... .... .... ....
-       0C000D00 00030000 00006400 00000000          00090: 0C000D00 00000000 00006400 00000000   .... .... ..d. ....
-       00000000 00000000 00000000 00000100          000A0: 00000000 7B000000 00000000 00000000   .... {... .... ....
-       01000003 00000101 01010101 017D0001          000B0: 00000000 00000101 01010101 01000000   .... .... .... ....
-       00000001 00647361 64617300 00000000          000C0: 00000000 00000000 00000000 00000000   .... .... .... ....
-       00000000 00000000 00000000 00000000          000D0: 00000000 00000000 00000000 00000000   .... .... .... ....
-       00000000 00000000 00000000 00000000          000E0: 000000                                ...
-       00000000 00000000 00000000 00000000 
-       00000000 00000000 00000020 07036A2B 
-       F4010000 6B2BF401 00006C2B F4010000 
-       01000000 05686969 00000000 00000000 
-       00000000 E8030000 31323334 35363738 
-       39306162 6364 
-        
-       
-
-
-*/

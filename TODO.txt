@@ -1,3 +1,6 @@
+Deploy crypto dlls properly
+Create Character cant play that character immediately
+
 CharacterListPacket - 0x1
 	Investigate 3rd slot
 

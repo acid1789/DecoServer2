@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using DecoServer2.CharacterThings;
+using DecoServer2;
 
 namespace JuggleServerCore
 {
@@ -42,6 +44,7 @@ namespace JuggleServerCore
             _lt = new ListenThread(listenPort);
             _lt.OnConnectionAccepted += _lt_OnConnectionAccepted;
 
+
             // Start input thread
             _inputThread = new InputThread();
         }
@@ -57,6 +60,8 @@ namespace JuggleServerCore
                 _taskProcessor.Database = _db;
                 _db.OnQueryComplete += new EventHandler(_taskProcessor.Database_OnQueryComplete);
             }
+
+            SetupWorld();
 
             // Process            
             _taskProcessor.Process();
@@ -74,6 +79,9 @@ namespace JuggleServerCore
             client.OnDeleteCharacter += Client_OnDeleteCharacter;
             client.OnSelectCharacter += Client_OnSelectCharacter;
             client.OnLoadSelectedCharacter += Client_OnLoadSelectedCharacter;
+            client.OnPlayerEnterMap += Client_OnPlayerEnterMap;
+            client.OnMoveTo += Client_OnMoveTo;
+            client.OnUpdatePosition += Client_OnUpdatePosition;
 
             InputThread.AddConnection(client);
         }
@@ -109,6 +117,20 @@ namespace JuggleServerCore
             TaskProcessor.AddTask(new Task(Task.TaskType.SelectedCharacter_Fetch, (Connection)sender, e));
         }
 
+        private void Client_OnPlayerEnterMap(object sender, EventArgs e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.PlayerEnterMap, (Connection)sender));
+        }
+        
+        private void Client_OnMoveTo(object sender, CharacterPositionClass e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.PlayerMove, (Connection)sender, e));
+        }
+
+        private void Client_OnUpdatePosition(object sender, CharacterPositionClass e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.PlayerUpdatePosition, (Connection)sender, e));
+        }
         #endregion
 
         public string ExpectConnection(int accountId)
@@ -142,6 +164,41 @@ namespace JuggleServerCore
             LogInterface.Log(string.Format("Got connection for account {0} with key {1}", account, authKey), LogInterface.LogMessageType.Security, false);
             return account;
         }
+
+        #region World Stuff
+        Dictionary<ushort, PlayMap> _maps;
+        void SetupWorld()
+        {
+            _maps = new Dictionary<ushort, PlayMap>();
+            TaskProcessor.AddTask(new Task(Task.TaskType.LoadPlayMaps_Fetch));
+        }
+
+        public void AddPlayMap(ushort mapID)
+        {
+            _maps[mapID] = new PlayMap(mapID);
+        }
+
+        public void AddNPC(NPC npc)
+        {
+            _maps[npc.MapID].AddNPC(npc);
+        }
+
+        public void PlayerEnterMap(Connection client)
+        {
+            CharacterInfo ci = client.Character;
+            _maps[ci.MapID].AddPlayer(client, ci);
+        }
+
+        public void ProcessMoveRequest(Connection client, CharacterPositionClass mtp)
+        {
+            _maps[client.Character.MapID].ProcessMoveRequest(client, mtp);
+        }
+
+        public void UpdatePlayerPosition(Connection client, CharacterPositionClass cpc)
+        {
+            _maps[client.Character.MapID].UpdatePlayerPosition(client, cpc);
+        }
+        #endregion
 
         #region Accessors
         public ListenThread ListenThread
