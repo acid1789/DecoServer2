@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using DecoServer2.CharacterThings;
 using DecoServer2;
+using DecoServer2.Quests;
 
 namespace JuggleServerCore
 {
@@ -167,6 +168,8 @@ namespace JuggleServerCore
 
         #region World Stuff
         Dictionary<ushort, PlayMap> _maps;
+
+
         void SetupWorld()
         {
             _maps = new Dictionary<ushort, PlayMap>();
@@ -197,6 +200,20 @@ namespace JuggleServerCore
         public void UpdatePlayerPosition(Connection client, CharacterPositionClass cpc)
         {
             _maps[client.Character.MapID].UpdatePlayerPosition(client, cpc);
+        }
+        #endregion
+
+        #region Quest Stuff
+        Dictionary<uint, Quest> _quests;
+        public void QuestsLoaded(Dictionary<uint, Quest> quests)
+        {
+            _quests = quests;
+            LogInterface.Log(string.Format("Loaded {0} quests", quests.Count), LogInterface.LogMessageType.Game, true);
+        }
+
+        public void SetQuestGiver(uint questID, uint giverID, ushort mapID)
+        {
+            _maps[mapID].SetQuestGiver(_quests[questID], giverID);
         }
         #endregion
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using DecoServer2.CharacterThings;
 using DecoServer2;
+using DecoServer2.Quests;
 
 namespace JuggleServerCore
 {    
@@ -16,6 +17,11 @@ namespace JuggleServerCore
             LoadPlayMaps_Process,
             LoadNPCs_Fetch,
             LoadNPCs_Process,
+            LoadQuestLines_Process,
+            LoadQuestSteps_Process,
+            LoadQuestRewards_Process,
+            LoadQuestInfo_Process,
+
             LoginRequest_Fetch,
             LoginRequest_Process,
             CharacterList_Fetch,
@@ -96,8 +102,13 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoadPlayMaps_Process] = LoadPlayMaps_Process_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Fetch] = LoadNPCs_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadQuestLines_Process] = LoadQuestLines_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadQuestSteps_Process] = LoadQuestSteps_Process_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Fetch] = LoginRequest_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Process] = LoginRequest_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadQuestRewards_Process] = LoadQuestRewards_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadQuestInfo_Process] = LoadQuestInfo_Process_Handler;
+
             _taskHandlers[Task.TaskType.CharacterList_Fetch] = CharacterList_Fetch_Handler;
             _taskHandlers[Task.TaskType.CharacterList_Process] = CharacterList_Process_Handler;
             _taskHandlers[Task.TaskType.CreateCharacter] = CreateCharacter_Handler;
@@ -123,7 +134,7 @@ namespace JuggleServerCore
             DBQuery q = (DBQuery)sender;
 
             _pqLock.WaitOne();
-            LogInterface.Log("Finishing Query with key: " + q.Key, LogInterface.LogMessageType.Debug, true);
+            LogInterface.Log("Finishing Query with key: " + q.Key, LogInterface.LogMessageType.Debug);
             Task task = _pendingQueries[q.Key];
             _pendingQueries.Remove(q.Key);
             _pqLock.ReleaseMutex();
@@ -214,7 +225,7 @@ namespace JuggleServerCore
         }
         #endregion
 
-        #region TaskHandlers
+        #region Data Loading Handlers
         void LoadPlayMaps_Fetch_Handler(Task t)
         {
             t.Type = Task.TaskType.LoadPlayMaps_Process;
@@ -228,7 +239,7 @@ namespace JuggleServerCore
                 ushort mapID = (ushort)row[0];
                 _server.AddPlayMap(mapID);
             }
-            
+
             t.Type = Task.TaskType.LoadNPCs_Fetch;
             AddTask(t);
         }
@@ -246,8 +257,178 @@ namespace JuggleServerCore
                 NPC npc = NPC.ReadFromDB(row);
                 _server.AddNPC(npc);
             }
+
+            t.Type = Task.TaskType.LoadQuestLines_Process;
+            AddDBQuery("SELECT * FROM quest_lines;", t);
         }
 
+        void LoadQuestLines_Process_Handler(Task t)
+        {
+            if (t.Query.Rows.Count > 0)
+            {
+                // Get the lines from the database
+                List<QuestLine> lines = new List<QuestLine>();
+                foreach (object[] row in t.Query.Rows)
+                {
+                    QuestLine line = QuestLine.ReadFromDB(row);
+                    lines.Add(line);
+                }
+
+                t.Type = Task.TaskType.LoadQuestSteps_Process;
+                t.Args = lines.ToArray();
+                AddDBQuery("SELECT * FROM quest_steps;", t);
+            }
+            else
+            {
+                LogInterface.Log("Database does not contain any quest lines. No quests will be available", LogInterface.LogMessageType.Game, true);
+            }
+        }
+
+        void LoadQuestSteps_Process_Handler(Task t)
+        {
+            if (t.Query.Rows.Count > 0)
+            {
+                Dictionary<ulong, QuestStep.Builder> steps = new Dictionary<ulong, QuestStep.Builder>();
+                foreach (object[] row in t.Query.Rows)
+                {
+                    // 0: quest_id      int(10) unsigned
+                    // 1: step          tinyint(3) unsigned
+                    // 2: type          tinyint(3) unsigned
+                    // 3: count         int(10) unsigned
+                    // 4: target_id     smallint(5) unsigned
+                    uint quest = (uint)row[0];
+                    byte step = (byte)row[1];
+                    byte type = (byte)row[2];
+                    uint count = row[3] == null ? 0 : (uint)row[3];
+                    ushort target = row[4] == null ? (ushort)0 : (ushort)row[4];
+
+                    ulong key = ((ulong)step << 32) | quest;
+                    steps[key] = new QuestStep.Builder(quest, step, (QuestStep.CompletionType)type, count, target);
+                }
+
+                // Put all the lines into the steps
+                QuestLine[] lines = (QuestLine[])t.Args;
+                foreach (QuestLine line in lines)
+                {
+                    ulong key = ((ulong)line.StepNumber << 32) | line.QuestID;
+                    steps[key].AddLine(line);
+                }
+
+                // Now go gather all the rewards
+                t.Args = steps;
+                t.Type = Task.TaskType.LoadQuestRewards_Process;
+                AddDBQuery("SELECT * FROM quest_rewards;", t);
+            }
+            else
+            {
+                LogInterface.Log("Database does not contain any quest steps. No quests will be available", LogInterface.LogMessageType.Game, true);
+            }
+        }
+
+        void LoadQuestRewards_Process_Handler(Task t)
+        {
+            if (t.Query.Rows.Count > 0)
+            {
+                // read and consolidate rewards & prewards
+                Dictionary<ulong, QuestReward.Builder> rewards = new Dictionary<ulong, QuestReward.Builder>();
+                Dictionary<ulong, QuestReward.Builder> prewards = new Dictionary<ulong, QuestReward.Builder>();
+                foreach (object[] row in t.Query.Rows)
+                {
+                    // 0: quest_id  int(10) unsigned
+                    // 1: step      tinyint(3) unsigned
+                    // 2: gold      int(10) unsigned
+                    // 3: exp       int(10) unsigned
+                    // 4: item      smallint(5) unsigned
+                    // 5: preward	tinyint(3) unsigned
+
+                    uint quest = (uint)row[0];
+                    byte step = (byte)row[1];
+                    uint gold = (uint)row[2];
+                    uint exp = (uint)row[3];
+                    ushort item = (ushort)row[4];
+                    byte preward = (byte)row[5];
+
+                    ulong key = ((ulong)step << 32) | quest;
+                    Dictionary<ulong, QuestReward.Builder> rewardDict = (preward != 0) ? prewards : rewards;
+
+                    if (!rewardDict.ContainsKey(key))
+                        rewardDict[key] = new QuestReward.Builder(0, 0);
+
+                    if (item != 0)
+                        rewardDict[key].AddItem(item);
+                    if (gold != 0)
+                        rewardDict[key].AddGold(gold);
+                    if (exp != 0)
+                        rewardDict[key].AddExp(exp);
+                }
+
+                // Put the rewards into the appropriate steps
+                Dictionary<ulong, QuestStep.Builder> steps = (Dictionary<ulong, QuestStep.Builder>)t.Args;
+                foreach (KeyValuePair<ulong, QuestReward.Builder> kvp in rewards)
+                {
+                    steps[kvp.Key].AddReward(kvp.Value.Build());
+                }
+
+                // Put the prewards into the appropriate steps
+                foreach (KeyValuePair<ulong, QuestReward.Builder> kvp in prewards)
+                {
+                    steps[kvp.Key].AddPreward(kvp.Value.Build());
+                }
+
+                // now build all the quest steps
+                Dictionary<uint, Quest.Builder> questBuilders = new Dictionary<uint, Quest.Builder>();
+                foreach (QuestStep.Builder qsb in steps.Values)
+                {
+                    QuestStep step = qsb.Build();
+                    if (!questBuilders.ContainsKey(step.QuestID))
+                        questBuilders[step.QuestID] = new Quest.Builder(step.QuestID);
+                    questBuilders[step.QuestID].AddStep(step);
+                }
+
+                // now build all the quests
+                Dictionary<uint, Quest> quests = new Dictionary<uint, Quest>();
+                foreach (KeyValuePair<uint, Quest.Builder> kvp in questBuilders)
+                {
+                    Quest q = kvp.Value.Build();
+                    quests[kvp.Key] = q;
+                }
+
+                // Give it to the server
+                _server.QuestsLoaded(quests);
+                
+                // Load the quest info
+                AddDBQuery("SELECT * FROM quest_info;", new Task(Task.TaskType.LoadQuestInfo_Process));
+            }
+            else
+            {
+                LogInterface.Log("Database does not contain any quest rewards. No quests will be available", LogInterface.LogMessageType.Game, true);
+            }
+        }
+
+        void LoadQuestInfo_Process_Handler(Task t)
+        {
+            if (t.Query.Rows.Count > 0)
+            {
+                foreach (object[] row in t.Query.Rows)
+                {
+                    // 0: quest_id      int(10) unsigned
+                    // 1: giver_id      int(10) unsigned
+                    // 2: giver_map_id  smallint(5) unsigned
+
+                    uint questID = (uint)row[0];
+                    uint giver = (uint)row[1];
+                    ushort map = (ushort)row[2];
+                    _server.SetQuestGiver(questID, giver, map);
+                }
+            }
+            else
+            {
+                LogInterface.Log("Database does not contain any quest info. No quests will be available", LogInterface.LogMessageType.Game, true);
+            }
+        }
+        #endregion
+
+        #region TaskHandlers
         void LoginRequest_Fetch_Handler(Task t)
         {
             LoginRequestPacket lrp = (LoginRequestPacket)t.Args;
@@ -272,7 +453,7 @@ namespace JuggleServerCore
                 else
                 {
                     // Login ok - TODO: Implement other server support
-                    string authKey = _server.ExpectConnection(account_id);                    
+                    string authKey = _server.ExpectConnection(account_id);
                     t.Client.SendPacket(new ServerListPacket(_server.PlayServers, authKey));
                 }
             }

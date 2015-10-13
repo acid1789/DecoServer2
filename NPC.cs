@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using JuggleServerCore;
+using DecoServer2.Quests;
 
 namespace DecoServer2
 {
@@ -16,6 +17,13 @@ namespace DecoServer2
         uint _hp;
         float _direction;
         ushort _mapID;
+
+        Dictionary<uint, Quest> _quests;
+
+        private NPC()
+        {
+            _quests = new Dictionary<uint, Quest>();
+        }
 
         public void DoDialog(Connection client)
         {
@@ -29,18 +37,21 @@ namespace DecoServer2
                     return;
                 }
             }
-
+            */
+            
             // Do I have something for the player?
-            foreach (Quest q in _quests)
-            {
+            foreach (Quest q in _quests.Values)
+            {/*
                 if (q.PlayerIsQualified(client))
                 {
                     client.RecieveQuest(q);
                     client.SendPacket(new NPCDialogPacket(q.QuestText(_mapID, _gameID), q.QuestIcon(_mapID, _gameID));
                     return;
                 }
+                */
             }
 
+            /*
             // Am I selling something?
             if (IsMerchant)
             {
@@ -53,6 +64,11 @@ namespace DecoServer2
                 client.SendPacket(new NPCDialogPacket(_defaultText, _defaultIcon));
             }
             */
+        }
+
+        public void AddQuest(Quest q)
+        {            
+            _quests[q.QuestID] = q;
         }
 
         public void Write(BinaryWriter bw)
@@ -95,6 +111,16 @@ namespace DecoServer2
         }
 
         #region Accessors
+        public uint ID
+        {
+            get { return _id; }
+        }
+
+        public ushort GameID
+        {
+            get { return _gameID; }
+        }
+
         public ushort MapID
         {
             get { return _mapID; }

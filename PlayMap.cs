@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using JuggleServerCore;
 using DecoServer2.CharacterThings;
+using DecoServer2.Quests;
 
 namespace DecoServer2
 {
     public class PlayMap
     {
         Dictionary<int, Connection> _players;
-        List<NPC> _npcs;
+        Dictionary<uint, NPC> _npcs;
 
         ushort _mapID;
         uint _worldIDs;
@@ -20,14 +21,14 @@ namespace DecoServer2
         public PlayMap(ushort mapID)
         {
             _worldIDs = 0;
-            _npcs = new List<NPC>();
+            _npcs = new Dictionary<uint, NPC>();
             _players = new Dictionary<int, Connection>();
             _mapID = mapID;
         }
 
         public void AddNPC(NPC npc)
         {
-            _npcs.Add(npc);
+            _npcs[npc.ID] = npc;
         }
 
         public void AddPlayer(Connection client, CharacterInfo ci)
@@ -37,7 +38,7 @@ namespace DecoServer2
                 ci.WorldID = _worldIDs++;
 
                 // Send NPC info to player
-                foreach (NPC npc in _npcs)
+                foreach (NPC npc in _npcs.Values)
                 {
                     client.SendPacket(new NPCInfoPacket(npc));
                 }
@@ -51,7 +52,7 @@ namespace DecoServer2
         public void ProcessMoveRequest(Connection client, CharacterPositionClass mtp)
         {
             // Check to see if we hit any npcs
-            foreach (NPC npc in _npcs)
+            foreach (NPC npc in _npcs.Values)
             {
                 if (npc.CellIndex == mtp.CellIndex)
                 {
@@ -98,6 +99,11 @@ namespace DecoServer2
                     c.SendPacket(omp);
                 }
             }
+        }
+
+        public void SetQuestGiver(Quest q, uint giverID)
+        {
+            _npcs[giverID].AddQuest(q);
         }
     }
 }
