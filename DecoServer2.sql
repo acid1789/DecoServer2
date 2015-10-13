@@ -32,6 +32,16 @@ CREATE TABLE `accounts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `accounts`
+--
+
+LOCK TABLES `accounts` WRITE;
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES (1,'a','a'),(2,'acid1789','test');
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `char_skills`
 --
 
@@ -43,6 +53,15 @@ CREATE TABLE `char_skills` (
   `skill_id` smallint(5) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `char_skills`
+--
+
+LOCK TABLES `char_skills` WRITE;
+/*!40000 ALTER TABLE `char_skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `char_skills` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `characters`
@@ -74,6 +93,16 @@ CREATE TABLE `characters` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `characters`
+--
+
+LOCK TABLES `characters` WRITE;
+/*!40000 ALTER TABLE `characters` DISABLE KEYS */;
+INSERT INTO `characters` VALUES (4,'Pink',1324917010,1,1,0,0,0,0,0,0,0,0,0,0,1),(5,'MeillenaF',1324261623,0,1,0,0,0,0,0,0,0,0,0,0,1);
+/*!40000 ALTER TABLE `characters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `characters_hv`
 --
 
@@ -94,6 +123,16 @@ CREATE TABLE `characters_hv` (
   PRIMARY KEY (`character_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `characters_hv`
+--
+
+LOCK TABLES `characters_hv` WRITE;
+/*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0),(5,5,13447,150,150,150,123,0,0,0);
+/*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `characters_lv`
@@ -134,6 +173,16 @@ CREATE TABLE `characters_lv` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `characters_lv`
+--
+
+LOCK TABLES `characters_lv` WRITE;
+/*!40000 ALTER TABLE `characters_lv` DISABLE KEYS */;
+INSERT INTO `characters_lv` VALUES (4,0,0,192,10,12,8,10,12,150,150,150,5,2,13,9,13,12,12,13,0,0,0,0,100,0),(5,0,0,192,10,12,8,10,12,150,150,150,2,5,13,9,13,12,12,13,0,0,0,0,100,0);
+/*!40000 ALTER TABLE `characters_lv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `frontiers`
 --
 
@@ -149,6 +198,15 @@ CREATE TABLE `frontiers` (
   UNIQUE KEY `frontier_id_UNIQUE` (`frontier_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `frontiers`
+--
+
+LOCK TABLES `frontiers` WRITE;
+/*!40000 ALTER TABLE `frontiers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `frontiers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `item_instances`
@@ -169,6 +227,15 @@ CREATE TABLE `item_instances` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `item_instances`
+--
+
+LOCK TABLES `item_instances` WRITE;
+/*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `play_maps`
 --
 
@@ -180,6 +247,125 @@ CREATE TABLE `play_maps` (
   PRIMARY KEY (`map_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `play_maps`
+--
+
+LOCK TABLES `play_maps` WRITE;
+/*!40000 ALTER TABLE `play_maps` DISABLE KEYS */;
+INSERT INTO `play_maps` VALUES (5),(7);
+/*!40000 ALTER TABLE `play_maps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quest_info`
+--
+
+DROP TABLE IF EXISTS `quest_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quest_info` (
+  `quest_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `giver_id` int(10) unsigned NOT NULL,
+  `giver_map_id` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`quest_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quest_info`
+--
+
+LOCK TABLES `quest_info` WRITE;
+/*!40000 ALTER TABLE `quest_info` DISABLE KEYS */;
+INSERT INTO `quest_info` VALUES (1,1,5);
+/*!40000 ALTER TABLE `quest_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quest_lines`
+--
+
+DROP TABLE IF EXISTS `quest_lines`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quest_lines` (
+  `quest_line_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quest_id` int(10) unsigned NOT NULL,
+  `step` tinyint(3) unsigned NOT NULL,
+  `line` tinyint(3) unsigned NOT NULL,
+  `icon` smallint(5) unsigned NOT NULL,
+  `static_text` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`quest_line_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quest_lines`
+--
+
+LOCK TABLES `quest_lines` WRITE;
+/*!40000 ALTER TABLE `quest_lines` DISABLE KEYS */;
+INSERT INTO `quest_lines` VALUES (1,1,0,0,2193,1184,NULL),(2,1,0,1,2193,1185,NULL),(3,1,0,2,2193,1186,NULL),(4,1,0,3,2193,1187,NULL),(5,1,0,4,2193,1188,NULL),(6,1,0,5,2193,1189,NULL),(7,1,0,6,2193,1190,NULL),(8,1,0,7,2193,1191,NULL),(9,1,0,8,2193,1192,NULL);
+/*!40000 ALTER TABLE `quest_lines` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quest_rewards`
+--
+
+DROP TABLE IF EXISTS `quest_rewards`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quest_rewards` (
+  `quest_id` int(10) unsigned NOT NULL,
+  `step` tinyint(3) unsigned NOT NULL,
+  `gold` int(10) unsigned DEFAULT '0',
+  `exp` int(10) unsigned DEFAULT '0',
+  `item` smallint(5) unsigned DEFAULT '0',
+  `preward` tinyint(3) unsigned DEFAULT '0',
+  PRIMARY KEY (`quest_id`,`step`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quest_rewards`
+--
+
+LOCK TABLES `quest_rewards` WRITE;
+/*!40000 ALTER TABLE `quest_rewards` DISABLE KEYS */;
+INSERT INTO `quest_rewards` VALUES (1,0,0,0,4,0);
+/*!40000 ALTER TABLE `quest_rewards` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `quest_steps`
+--
+
+DROP TABLE IF EXISTS `quest_steps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quest_steps` (
+  `quest_id` int(10) unsigned NOT NULL,
+  `step` tinyint(3) unsigned NOT NULL,
+  `type` tinyint(3) unsigned NOT NULL,
+  `count` int(10) unsigned DEFAULT '0',
+  `target_id` smallint(5) unsigned DEFAULT '0',
+  PRIMARY KEY (`quest_id`,`step`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quest_steps`
+--
+
+LOCK TABLES `quest_steps` WRITE;
+/*!40000 ALTER TABLE `quest_steps` DISABLE KEYS */;
+INSERT INTO `quest_steps` VALUES (1,0,3,0,2);
+/*!40000 ALTER TABLE `quest_steps` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `static_npcs`
@@ -198,8 +384,18 @@ CREATE TABLE `static_npcs` (
   `map_id` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`static_npc_id`),
   UNIQUE KEY `static_npc_id_UNIQUE` (`static_npc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `static_npcs`
+--
+
+LOCK TABLES `static_npcs` WRITE;
+/*!40000 ALTER TABLE `static_npcs` DISABLE KEYS */;
+INSERT INTO `static_npcs` VALUES (1,5027,128,60,10000,270,5),(2,5029,150,145,10000,40,5);
+/*!40000 ALTER TABLE `static_npcs` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -210,4 +406,4 @@ CREATE TABLE `static_npcs` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-12  8:11:02
+-- Dump completed on 2015-10-13  0:06:34
