@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JuggleServerCore;
 
 namespace DecoServer2.Quests
 {
@@ -22,19 +23,79 @@ namespace DecoServer2.Quests
         QuestLine[] _lines;
 
         uint _quest;
+        uint _ownerNPC;
         byte _step;
         CompletionType _completionType;
         uint _completionCount;
-        ushort _completionID;
+        uint _completionID;
 
-        private QuestStep(uint quest, byte step, CompletionType type, uint completionCount, ushort completionID)
+        private QuestStep(uint quest, byte step, CompletionType type, uint completionCount, uint completionID, uint owner)
         {
             _quest = quest;
             _step = step;
             _completionType = type;
             _completionCount = completionCount;
             _completionID = completionID;
-        }        
+            _ownerNPC = owner;
+        }
+
+        void FinishStep(Connection client)
+        {
+            // Award rewards
+            foreach (QuestReward qr in _rewards)
+            {
+                qr.Award(client, _quest);
+            }
+
+            // Is the whole quest done?
+            Quest q = Program.Server.GetQuest(_quest);
+            q.NextStep(client, this);
+        }
+
+        public QuestLine GetLine(byte index)
+        {
+            return _lines[index];
+        }
+
+        public bool IsNPCRelevent(uint npcID)
+        {
+            if( _ownerNPC == npcID )
+                return true;
+            
+            if( _completionType == CompletionType.TalkToNPC && _completionID == npcID )
+                return true;
+
+            return false;                            
+        }
+
+        public void Activate(Connection client)
+        {
+            switch (_completionType)
+            {
+                default:
+                case CompletionType.KillMonster:
+                case CompletionType.CollectItem:
+                case CompletionType.GoToLocation:
+                case CompletionType.ReachLevel:
+                    throw new NotImplementedException();
+                case CompletionType.TalkToNPC:
+                    client.OnQuestDialogFinished += Client_OnQuestDialogFinished;
+                    break;
+            }
+        }
+
+        private void Client_OnQuestDialogFinished(object sender, QuestDialogFinishedArgs e)
+        {
+            Connection client = (Connection)sender;
+            if (e.NPC == _completionID)
+            {
+                // We are all done talking to this npc. Remove the handler
+                client.OnQuestDialogFinished -= Client_OnQuestDialogFinished;
+
+                // Finish
+                FinishStep(client);
+            }
+        }
 
         #region Accessors
         public uint QuestID
@@ -46,6 +107,11 @@ namespace DecoServer2.Quests
         {
             get { return _step; }
         }
+
+        public int LineCount
+        {
+            get { return _lines.Length; }
+        }
         #endregion
 
         public class Builder
@@ -56,9 +122,9 @@ namespace DecoServer2.Quests
             byte _lastLine;
             QuestStep _step;
 
-            public Builder(uint quest, byte step, CompletionType type, uint completionCount, ushort completionID = 0)
+            public Builder(uint quest, byte step, uint owner, CompletionType type, uint completionCount, uint completionID = 0)
             {
-                _step = new QuestStep(quest, step, type, completionCount, completionID);
+                _step = new QuestStep(quest, step, type, completionCount, completionID, owner);
                 _lastLine = 0;
                 _lines = new Dictionary<int, QuestLine>();
                 _prewards = new List<QuestReward>();
@@ -99,5 +165,13 @@ namespace DecoServer2.Quests
     }
 
 
-    
+    public class QuestDialogFinishedArgs : EventArgs
+    {
+        public uint NPC;
+
+        public QuestDialogFinishedArgs(uint npc)
+        {
+            NPC = npc;
+        }
+    }    
 }

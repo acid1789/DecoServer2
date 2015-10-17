@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.IO;
 using DecoServer2.CharacterThings;
+using DecoServer2.Quests;
 
 namespace JuggleServerCore
 {
@@ -20,7 +21,7 @@ namespace JuggleServerCore
             Closed
         }
 
-        #region Events
+        #region Packet Events
         public event EventHandler<LoginRequestPacket> OnLoginRequest;
         public event EventHandler<CharacterListRequestPacket> OnCharacterListRequest;
         public event EventHandler<CreateCharacterPacket> OnCreateCharacter;
@@ -30,6 +31,11 @@ namespace JuggleServerCore
         public event EventHandler OnPlayerEnterMap;
         public event EventHandler<CharacterPositionClass> OnMoveTo;
         public event EventHandler<CharacterPositionClass> OnUpdatePosition;
+        public event EventHandler OnNPCDialogNextButton;
+        #endregion
+
+        #region Quest Events
+        public event EventHandler<QuestDialogFinishedArgs> OnQuestDialogFinished;
         #endregion
 
         Socket _socket;
@@ -68,6 +74,7 @@ namespace JuggleServerCore
             _packetHandlers[0x0121] = MoveTo_Handler;
             _packetHandlers[0x0124] = UpdatePosition_Handler;
             _packetHandlers[0x0133] = PlayerEnterMap_Handler;
+            _packetHandlers[0x0257] = NextNPCDialogButton_Handler;
             _packetHandlers[0x7FD3] = LoginRequest_Handler;
             _packetHandlers[0x7FD4] = CharacterListRequest_Handler;
         }
@@ -198,6 +205,23 @@ namespace JuggleServerCore
         }
         #endregion
 
+        #region Game State Stuff
+        uint _currentQuestNPC;
+        uint _currentQuestID;
+        byte _currentQuestLine;
+        public void SetCurrentQuest(uint npcID, uint questID, byte line)
+        {
+            _currentQuestNPC = npcID;
+            _currentQuestID = questID;
+            _currentQuestLine = line;
+        }
+
+        public void QuestDialogFinished(uint npcID)
+        {
+            if( OnQuestDialogFinished != null )
+                OnQuestDialogFinished(this, new QuestDialogFinishedArgs(npcID));
+        }
+        #endregion
 
         #region PacketHandlers
         void CreateCharacter_Handler(PacketHeader header, BinaryReader br)
@@ -245,6 +269,11 @@ namespace JuggleServerCore
         {
             OnCharacterListRequest(this, CharacterListRequestPacket.Read(header, br));
         }
+
+        void NextNPCDialogButton_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnNPCDialogNextButton(this, null);
+        }
         #endregion
 
         void DumpPacketData(PacketHeader header, BinaryReader br)
@@ -274,6 +303,21 @@ namespace JuggleServerCore
         public CharacterInfo Character
         {
             get { return _ci; }
+        }
+
+        public uint CurrentQuestNPC
+        {
+            get { return _currentQuestNPC; }
+        }
+        
+        public uint CurrentQuestID
+        {
+            get { return _currentQuestID; }
+        }
+
+        public byte CurrentQuestLine
+        {
+            get { return _currentQuestLine; }
         }
         #endregion
     }

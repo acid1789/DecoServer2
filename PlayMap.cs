@@ -105,5 +105,10 @@ namespace DecoServer2
         {
             _npcs[giverID].AddQuest(q);
         }
+
+        public void NextDialog(Connection client)
+        {
+            _npcs[client.CurrentQuestNPC].NextDialog(client);
+        }
     }
 }

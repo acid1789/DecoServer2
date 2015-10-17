@@ -141,5 +141,10 @@ namespace DecoServer2.CharacterThings
         {
             get { return Utils.NationFromModelInfo(_modelInfo); }
         }
+
+        public bool Male
+        {
+            get { return Utils.GenderFromModelInfo(_modelInfo); }
+        }
     }
 }

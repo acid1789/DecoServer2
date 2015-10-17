@@ -16,6 +16,7 @@ namespace JuggleServerCore
         ListenThread _lt;
         InputThread _inputThread;
         TaskProcessor _taskProcessor;
+        int _listenPort;
 
         List<PlayServerInfo> _playServers;
 
@@ -41,10 +42,7 @@ namespace JuggleServerCore
             if( dbConnectString != null )
                 _db = new DatabaseThread(dbConnectString);
 
-            // Start listen thread
-            _lt = new ListenThread(listenPort);
-            _lt.OnConnectionAccepted += _lt_OnConnectionAccepted;
-
+            _listenPort = listenPort;
 
             // Start input thread
             _inputThread = new InputThread();
@@ -52,9 +50,6 @@ namespace JuggleServerCore
 
         public void Run()
         {
-            // Allow connections
-            _lt.Start();
-
             // Setup db callback
             if (_db != null)
             {
@@ -70,6 +65,20 @@ namespace JuggleServerCore
             // Shutdown
         }
 
+        // Called after server data is all loaded
+        public void AllowConnections()
+        {
+            // Start listen thread
+            if (_lt == null)
+            {
+                _lt = new ListenThread(_listenPort);
+                _lt.OnConnectionAccepted += _lt_OnConnectionAccepted;
+
+                // Allow connections
+                _lt.Start();
+            }
+        }
+
         private void _lt_OnConnectionAccepted(object sender, SocketArg e)
         {
             Connection client = new Connection(e.Socket);
@@ -83,6 +92,7 @@ namespace JuggleServerCore
             client.OnPlayerEnterMap += Client_OnPlayerEnterMap;
             client.OnMoveTo += Client_OnMoveTo;
             client.OnUpdatePosition += Client_OnUpdatePosition;
+            client.OnNPCDialogNextButton += Client_OnNPCDialogNextButton;
 
             InputThread.AddConnection(client);
         }
@@ -132,6 +142,12 @@ namespace JuggleServerCore
         {
             TaskProcessor.AddTask(new Task(Task.TaskType.PlayerUpdatePosition, (Connection)sender, e));
         }
+
+        private void Client_OnNPCDialogNextButton(object sender, EventArgs e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.NPCDialogNextButton, (Connection)sender, null));
+        }
+
         #endregion
 
         public string ExpectConnection(int accountId)
@@ -203,6 +219,14 @@ namespace JuggleServerCore
         }
         #endregion
 
+        #region Item Stuff
+        public Item InstantiateItem(uint itemTemplateID)
+        {
+            throw new NotImplementedException();
+            return null;
+        }
+        #endregion
+
         #region Quest Stuff
         Dictionary<uint, Quest> _quests;
         public void QuestsLoaded(Dictionary<uint, Quest> quests)
@@ -214,6 +238,21 @@ namespace JuggleServerCore
         public void SetQuestGiver(uint questID, uint giverID, ushort mapID)
         {
             _maps[mapID].SetQuestGiver(_quests[questID], giverID);
+        }
+
+        public void AddQuestRequirement(uint questID, QuestRequirement qr)
+        {
+            _quests[questID].AddRequirement(qr);
+        }
+
+        public Quest GetQuest(uint questID)
+        {
+            return _quests[questID];
+        }
+
+        public void NextDialog(Connection client)
+        {
+            _maps[client.Character.MapID].NextDialog(client);
         }
         #endregion
 

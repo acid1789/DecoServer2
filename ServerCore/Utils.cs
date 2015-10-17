@@ -24,18 +24,23 @@ namespace JuggleServerCore
         }
 
         public static void WriteByteString(BinaryWriter bw, string str, int byteCount)
-        {            
-            byte[] encoded = Encoding.ASCII.GetBytes(str);
-            if (encoded.Length >= byteCount)
-            {
-                bw.Write(encoded, 0, byteCount - 1);
-                bw.Write((byte)0);
-            }
+        {
+            if (str == null)
+                WriteZeros(bw, byteCount);
             else
             {
-                bw.Write(encoded);
-                bw.Write((byte)0);
-                WriteZeros(bw, byteCount - (encoded.Length + 1));
+                byte[] encoded = Encoding.ASCII.GetBytes(str);
+                if (encoded.Length >= byteCount)
+                {
+                    bw.Write(encoded, 0, byteCount - 1);
+                    bw.Write((byte)0);
+                }
+                else
+                {
+                    bw.Write(encoded);
+                    bw.Write((byte)0);
+                    WriteZeros(bw, byteCount - (encoded.Length + 1));
+                }
             }
         }
 

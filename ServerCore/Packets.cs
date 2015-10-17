@@ -301,6 +301,75 @@ namespace JuggleServerCore
         }
     }
 
+    public class NPCDialogPacket : SendPacketBase                   // 0x0252     
+    {
+        ushort _npcType;
+        public NPCDialogPacket(ushort npcType)
+        {
+            _npcType = npcType;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0252;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 3;
+            header.Write(bw);
+
+            bw.Write((byte)1);
+            bw.Write(_npcType);
+        }
+    }
+
+    public class WindowSettingsPacket_NPCIcon : SendPacketBase      // 0x0255
+    {
+        ushort _icon;
+        public WindowSettingsPacket_NPCIcon(ushort icon)
+        {
+            _icon = icon;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0255;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 3;
+            header.Write(bw);
+            
+            bw.Write((byte)11);     // NPC_Icon
+            bw.Write(_icon);        // Icon texture id
+        }
+    }
+
+    public class WindowSettingsPacket_NPCDialog : SendPacketBase    // 0x0255
+    {
+        uint _staticText;
+        string _text;
+        bool _showNext;
+        public WindowSettingsPacket_NPCDialog(uint staticText, string text, bool showNextButton = true)
+        {
+            _staticText = staticText;
+            _text = text;
+            _showNext = showNextButton;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0255;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 31;
+            header.Write(bw);
+
+            bw.Write((byte)21);                     // NPC Quest Dialog Text
+            bw.Write((ushort)(_showNext ? 1 : 0));    // Should the dialog have the next button?
+            bw.Write(_staticText);
+            Utils.WriteByteString(bw, _text, 24);
+        }
+    }
+
     public class NPCInfoPacket : SendPacketBase     // 0x5002
     {
         DecoServer2.NPC _npc;

@@ -45,6 +45,12 @@ namespace DecoServer2.CharacterThings
             bw.Write(_remainingTime);
         }
 
+        public string WriteDBString(uint itemTemplate, int characterID)
+        {
+            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type{4};", itemTemplate, _durability, _remainingTime, characterID, _type);
+            return sql;
+        }
+
         public static Item ReadFromDB(object[] row)
         {
             // 0: instance_id       int(10) unsigned
@@ -79,6 +85,11 @@ namespace DecoServer2.CharacterThings
         {
             get { return _slot; }
             set { _slot = value; }
+        }
+
+        public uint Icon
+        {
+            get { return _icon; }
         }
         #endregion
     }

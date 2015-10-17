@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JuggleServerCore;
 
 namespace DecoServer2.Quests
 {
@@ -38,6 +39,15 @@ namespace DecoServer2.Quests
                 ql._text = (string)row[6];
 
             return ql;
+        }
+
+        public void SendToClient(Connection client, bool showNext = true)
+        {
+            // Send the icon packet
+            client.SendPacket(new WindowSettingsPacket_NPCIcon(_icon));             
+
+            // Send the text packet
+            client.SendPacket(new WindowSettingsPacket_NPCDialog(_staticText, _text, showNext));
         }
 
         #region Accessors

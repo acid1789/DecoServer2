@@ -20,5 +20,10 @@ namespace DecoServer2
 
             LogThread.GetLog().Shutdown();
         }
+
+        public static ServerBase Server
+        {
+            get { return _server; }
+        }
     }
 }

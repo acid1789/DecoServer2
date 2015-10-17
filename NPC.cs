@@ -27,28 +27,33 @@ namespace DecoServer2
 
         public void DoDialog(Connection client)
         {
-            /*
             // Is the player working for me?
-            foreach (Quest q in client.Quests)
+            Quest playerActiveQuest = client.Character.GetActiveQuestForNPC(_id);
+            if (playerActiveQuest != null)
             {
-                if (q.IsNPCRelevent(_mapID, _gameID))
-                {
-                    client.SendPacket(new NPCDialogPacket(q.QuestText(_mapID, _gameID), q.QuestIcon(_mapID, _gameID));
-                    return;
-                }
+                client.SetCurrentQuest(_id, playerActiveQuest.QuestID, 0);
+                QuestLine ql = playerActiveQuest.GetStep(0).GetLine(0);
+                ql.SendToClient(client);
+                client.SendPacket(new NPCDialogPacket(_gameID));
+                return;
             }
-            */
             
             // Do I have something for the player?
             foreach (Quest q in _quests.Values)
-            {/*
-                if (q.PlayerIsQualified(client))
+            {
+                if (!client.Character.HasActiveQuest(q.QuestID) && !client.Character.HasCompletedQuest(q.QuestID))
                 {
-                    client.RecieveQuest(q);
-                    client.SendPacket(new NPCDialogPacket(q.QuestText(_mapID, _gameID), q.QuestIcon(_mapID, _gameID));
-                    return;
+                    if (q.PlayerMeetsRequirements(client.Character))
+                    {
+                        client.Character.ReceiveQuest(q);
+                        client.SetCurrentQuest(_id, q.QuestID, 0);
+                        QuestStep qs = q.GetStep(0);
+                        qs.Activate(client);
+                        QuestLine ql = qs.GetLine(0);
+                        ql.SendToClient(client);
+                        client.SendPacket(new NPCDialogPacket(_gameID));
+                    }
                 }
-                */
             }
 
             /*
@@ -64,6 +69,30 @@ namespace DecoServer2
                 client.SendPacket(new NPCDialogPacket(_defaultText, _defaultIcon));
             }
             */
+        }
+
+        public void NextDialog(Connection client)
+        {
+            Quest q = Program.Server.GetQuest(client.CurrentQuestID);
+            byte step = client.Character.GetQuestStep(client.CurrentQuestID);
+            byte line = client.CurrentQuestLine;
+
+            // Next line
+            line++;
+            
+            QuestStep qs = q.GetStep(step);
+            if (line < qs.LineCount)
+            {
+                QuestLine ql = qs.GetLine(line);
+                client.SetCurrentQuest(_id, q.QuestID, line);
+                bool lastLine = (line < (qs.LineCount - 1));
+                ql.SendToClient(client, lastLine);
+
+                if( lastLine )
+                    client.QuestDialogFinished(_id);
+            }
+            else
+                client.SetCurrentQuest(_id, q.QuestID, 0);
         }
 
         public void AddQuest(Quest q)

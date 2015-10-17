@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using JuggleServerCore;
+using DecoServer2.Quests;
 
 namespace DecoServer2.CharacterThings
 {
@@ -79,6 +80,9 @@ namespace DecoServer2.CharacterThings
         bool _expectingFrontier;
         bool _expectingSkills;
 
+        Dictionary<uint, byte> _activeQuests;
+        List<uint> _completedQuests;
+
         public CharacterInfo(CharacterSelectInfo csi)
         {
             _csi = csi;
@@ -101,6 +105,7 @@ namespace DecoServer2.CharacterThings
             // 7: pvp_wins
             // 8: pvp_count
             // 9: exp
+            // 10: fame              int(10) unsigned
             object[] row = query.Rows[0];
 
             _mapID = (ushort)row[1];
@@ -112,6 +117,7 @@ namespace DecoServer2.CharacterThings
             _pvpWins = (uint)row[7];
             _pvpCount = (uint)row[8];
             _exp = (ulong)row[9];
+            _fame = (uint)row[10];
 
             _expectingHV = false;
         }
@@ -126,6 +132,7 @@ namespace DecoServer2.CharacterThings
             _gold = 123;
             _pvpWins = _pvpCount = 0;
             _exp = 0;
+            _fame = 0;
 
             _expectingHV = false;
             return HVString;
@@ -134,65 +141,62 @@ namespace DecoServer2.CharacterThings
         public void ReadLV(DBQuery query)
         {
             // 0: character_id      int(10) unsigned
-            // 1: fame              int(10) unsigned
-            // 2: nation_rate       int(10) unsigned
-            // 3: move_speed        smallint(5) unsigned
-            // 4: ability_p_min     smallint(5) unsigned
-            // 5: ability_p_max     smallint(5) unsigned
-            // 6: attack_speed      tinyint(3) unsigned
-            // 7: ability_m_min     smallint(5) unsigned
-            // 8: ability_m_max     smallint(5) unsigned
-            // 9: hp                int(10) unsigned
-            // 10: sp               int(10) unsigned
-            // 11: mp               int(10) unsigned
-            // 12: magical_def      smallint(5) unsigned
-            // 13: physical_def     smallint(5) unsigned
-            // 14: power            smallint(5) unsigned
-            // 15: vitality         smallint(5) unsigned
-            // 16: sympathy         smallint(5) unsigned
-            // 17: intelligence     smallint(5) unsigned
-            // 18: stamina          smallint(5) unsigned
-            // 19: dexterity        smallint(5) unsigned
-            // 20: charisma         smallint(5) unsigned
-            // 21: luck             tinyint(3) unsigned
-            // 22: ability_points   smallint(5) unsigned
-            // 23: left_sp          smallint(5) unsigned
-            // 24: total_sp         smallint(5) unsigned
-            // 25: frontier_id      int(10)
+            // 1: nation_rate       int(10) unsigned
+            // 2: move_speed        smallint(5) unsigned
+            // 3: ability_p_min     smallint(5) unsigned
+            // 4: ability_p_max     smallint(5) unsigned
+            // 5: attack_speed      tinyint(3) unsigned
+            // 6: ability_m_min     smallint(5) unsigned
+            // 7: ability_m_max     smallint(5) unsigned
+            // 8: hp                int(10) unsigned
+            // 9: sp               int(10) unsigned
+            // 10: mp               int(10) unsigned
+            // 11: magical_def      smallint(5) unsigned
+            // 12: physical_def     smallint(5) unsigned
+            // 13: power            smallint(5) unsigned
+            // 14: vitality         smallint(5) unsigned
+            // 15: sympathy         smallint(5) unsigned
+            // 16: intelligence     smallint(5) unsigned
+            // 17: stamina          smallint(5) unsigned
+            // 18: dexterity        smallint(5) unsigned
+            // 19: charisma         smallint(5) unsigned
+            // 20: luck             tinyint(3) unsigned
+            // 21: ability_points   smallint(5) unsigned
+            // 22: left_sp          smallint(5) unsigned
+            // 23: total_sp         smallint(5) unsigned
+            // 24: frontier_id      int(10)
 
             object[] row = query.Rows[0];
-            _fame = (uint)row[1];
-            _nationRate = (uint)row[2];
-            _moveSpeed = (ushort)row[3];
-            _abilityPMin = (ushort)row[4];
-            _abilityPMax = (ushort)row[5];
-            _attackSpeed = (byte)row[6];
-            _abilityMMin = (ushort)row[7];
-            _abilityMMax = (ushort)row[8];
-            _maxHP = (uint)row[9];
-            _maxSP = (uint)row[10];
-            _maxMP = (uint)row[11];
-            _magicalDef = (ushort)row[12];
-            _physicalDef = (ushort)row[13];
-            _power = (ushort)row[14];
-            _vitality = (ushort)row[15];
-            _sympathy = (ushort)row[16];
-            _intelligence = (ushort)row[17];
-            _stamina = (ushort)row[18];
-            _dexterity = (ushort)row[19];
-            _charisma = (byte)row[20];
-            _luck = (byte)row[21];
-            _abilityPoints = (ushort)row[22];
-            _leftSP = (ushort)row[23];
-            _totalSP = (ushort)row[24];
-            _frontierID = (int)row[25];
+            _nationRate = (uint)row[1];
+            _moveSpeed = (ushort)row[2];
+            _abilityPMin = (ushort)row[3];
+            _abilityPMax = (ushort)row[4];
+            _attackSpeed = (byte)row[5];
+            _abilityMMin = (ushort)row[6];
+            _abilityMMax = (ushort)row[7];
+            _maxHP = (uint)row[8];
+            _maxSP = (uint)row[9];
+            _maxMP = (uint)row[10];
+            _magicalDef = (ushort)row[11];
+            _physicalDef = (ushort)row[12];
+            _power = (ushort)row[13];
+            _vitality = (ushort)row[14];
+            _sympathy = (ushort)row[15];
+            _intelligence = (ushort)row[16];
+            _stamina = (ushort)row[17];
+            _dexterity = (ushort)row[18];
+            _charisma = (byte)row[19];
+            _luck = (byte)row[20];
+            _abilityPoints = (ushort)row[21];
+            _leftSP = (ushort)row[22];
+            _totalSP = (ushort)row[23];
+            _frontierID = (int)row[24];
 
             _expectingLV = false;
         }
 
         public string SetLVDefaults()
         {
-            _fame = 0;
             _nationRate = 0;
             _moveSpeed = 192;
             _abilityPMin = _abilityMMin = 10;
@@ -232,31 +236,7 @@ namespace DecoServer2.CharacterThings
             foreach (object[] row in query.Rows)
             {
                 Item item = Item.ReadFromDB(row);
-                int index = -1;
-                switch (item.ItemType)
-                {
-                    case Item.Type.Clothing:
-                        index = _clothes.Count;
-                        _clothes.Add(item);
-                        break;
-                    case Item.Type.General:
-                        index = _generalItems.Count;
-                        _generalItems.Add(item);
-                        break;
-                    case Item.Type.Item:
-                        index = _items.Count;
-                        _items.Add(item);
-                        break;
-                    case Item.Type.Quest:
-                        index = _questItems.Count;
-                        _questItems.Add(item);
-                        break;
-                    case Item.Type.Riding:
-                        index = _ridingItems.Count;
-                        _ridingItems.Add(item);
-                        break;
-                }
-                item.Slot = (byte)index;
+                AddItem(item);
             }
 
             _expectingItems = false;
@@ -290,6 +270,32 @@ namespace DecoServer2.CharacterThings
                 _skills.Add(skill);
             }
             _expectingSkills = false;
+        }
+
+        public void ReadActiveQuests(DBQuery query)
+        {   
+            _activeQuests = new Dictionary<uint, byte>();
+            foreach (object[] row in query.Rows)
+            {
+                // 0: character_id	    int(10) unsigned
+                // 1: quest_id          int(11) unsigned
+                // 2: step              tinyint(3) unsigned
+                uint quest = (uint)row[1];
+                byte step = (byte)row[2];
+                _activeQuests[quest] = step;
+            }
+        }
+
+        public void ReadCompletedQuests(DBQuery query)
+        {
+            _completedQuests = new List<uint>();
+            foreach (object[] row in query.Rows)
+            {
+                // 0: character_id      int(10) unsigned
+                // 1: quest_id          int(10) unsigned
+                uint quest = (uint)row[1];
+                _completedQuests.Add(quest);
+            }
         }
 
         public void WritePacket(BinaryWriter bw)
@@ -395,6 +401,106 @@ namespace DecoServer2.CharacterThings
             Utils.WriteZeros(bw, 14);       // Unknown 14 bytes
         }
 
+        #region Quest Area
+        public bool HasActiveQuest(uint questID)
+        {
+            return _activeQuests.ContainsKey(questID);
+        }
+
+        public bool HasCompletedQuest(uint questID)
+        {
+            return _completedQuests.Contains(questID);
+        }
+
+        public byte GetQuestStep(uint questID)
+        {
+            return _activeQuests[questID];
+        }
+
+        public Quests.Quest GetActiveQuestForNPC(uint npcID)
+        {
+            foreach (KeyValuePair<uint, byte> aq in _activeQuests)
+            {
+                Quest q = Program.Server.GetQuest(aq.Key);
+                QuestStep qs = q.GetStep(aq.Value);
+                if( qs.IsNPCRelevent(npcID) )
+                    return q;
+            }
+            return null;
+        }
+
+        public void ReceiveQuest(Quests.Quest q)
+        {
+            SetActiveQuestStep(q.QuestID, 0);
+        }
+
+        public void SetActiveQuestStep(uint questID, byte step)
+        {
+            _activeQuests[questID] = step;
+            Program.Server.TaskProcessor.AddTask(new JuggleServerCore.Task(JuggleServerCore.Task.TaskType.CharacterActiveQuest_Save, null, new ActiveQuestArgs(ID, questID, 0)));
+        }
+
+        public void CompleteQuest(uint questID)
+        {
+            _activeQuests.Remove(questID);
+            _completedQuests.Add(questID);
+            Program.Server.TaskProcessor.AddTask(new JuggleServerCore.Task(JuggleServerCore.Task.TaskType.CharacterActiveQuest_Save, null, new ActiveQuestArgs(ID, questID, 0, true, true)));
+        }
+        #endregion
+
+        public bool HasItem(uint item)
+        {
+            List<Item> allItems = new List<Item>();
+            allItems.AddRange(_clothes);
+            allItems.AddRange(_generalItems);
+            allItems.AddRange(_items);
+            allItems.AddRange(_questItems);
+            allItems.AddRange(_ridingItems);
+
+            foreach (Item i in allItems)
+            {
+                if( i.Icon == item )
+                    return true;
+            }
+
+            return false;
+        }
+
+        public void AddItem(Item item)
+        {
+            int index = -1;
+            switch (item.ItemType)
+            {
+                case Item.Type.Clothing:
+                    index = _clothes.Count;
+                    _clothes.Add(item);
+                    break;
+                case Item.Type.General:
+                    index = _generalItems.Count;
+                    _generalItems.Add(item);
+                    break;
+                case Item.Type.Item:
+                    index = _items.Count;
+                    _items.Add(item);
+                    break;
+                case Item.Type.Quest:
+                    index = _questItems.Count;
+                    _questItems.Add(item);
+                    break;
+                case Item.Type.Riding:
+                    index = _ridingItems.Count;
+                    _ridingItems.Add(item);
+                    break;
+            }
+            item.Slot = (byte)index;
+        }
+
+        public void AddGoldExpFame(uint gold, uint exp, uint fame)
+        {
+            _gold += gold;
+            _exp += exp;
+            _fame += fame;
+        }
 
         #region Accessors
         public bool LoadComplete
@@ -510,7 +616,102 @@ namespace DecoServer2.CharacterThings
             get { return _cellIndex; }
             set { _cellIndex = value; }
         }
+
+        public byte Level
+        {
+            get { return _csi.Level; }
+        }
+
+        public bool Millena
+        {
+            get { return _csi.Millena; }
+        }
+
+        public bool Male
+        {
+            get { return _csi.Male; }
+        }
+
+        public byte Job
+        {
+            get { return _csi.Job; }
+        }
+
+        public uint Fame
+        {
+            get { return _fame; }
+        }
+
+        public ulong Exp
+        {
+            get { return _exp; }
+        }
+
+        public uint Gold
+        {
+            get { return _gold; }
+        }
         #endregion
 
+    }
+    
+    public class ActiveQuestArgs
+    {
+        public int CharacterID;
+        public uint QuestID;
+        public byte Step;
+        public bool Remove;
+        public bool Finished;
+
+        public ActiveQuestArgs(int characterID, uint questID, byte step, bool remove = false, bool finished = false)
+        {
+            CharacterID = characterID;
+            QuestID = questID;
+            Step = step;
+            Remove = remove;
+            Finished = finished;
+        }
+    }
+
+    public class GiveGoldExpFameArgs
+    {
+        public enum TheReason
+        {
+            Quest
+        }
+
+        public uint Gold;
+        public uint Fame;
+        public uint Exp;
+        public TheReason Reason;
+        public uint Context;
+
+        public GiveGoldExpFameArgs(uint gold, uint exp, uint fame, TheReason reason, uint context)
+        {
+            Gold = gold;
+            Exp = exp;
+            Fame = fame;
+            Reason = reason;
+            Context = context;
+        }
+    }
+
+    public class GiveItemArgs
+    {
+        public enum TheReason
+        {
+            Quest
+        }
+
+        public uint ItemTemplateID;
+        public TheReason Reason;
+        public uint Context;
+
+        public GiveItemArgs(ushort itemTemplateID, TheReason reason, uint context)
+        {
+            ItemTemplateID = itemTemplateID;
+            Reason = reason;
+            Context = context;
+        }
     }
 }

@@ -20,7 +20,8 @@ namespace JuggleServerCore
             LoadQuestLines_Process,
             LoadQuestSteps_Process,
             LoadQuestRewards_Process,
-            LoadQuestInfo_Process,
+            LoadQuestRequirements_Process,
+            LoadQuestInfo_Process,            
 
             LoginRequest_Fetch,
             LoginRequest_Process,
@@ -35,9 +36,15 @@ namespace JuggleServerCore
             CharacterDataItems_Process,
             CharacterFrontierData_Process,
             CharacterSkills_Process,
+            CharacterActiveQuests_Process,
+            CharacterCompletedQuests_Process,
+            CharacterActiveQuest_Save,
             PlayerEnterMap,
             PlayerMove,
             PlayerUpdatePosition,
+            NPCDialogNextButton,
+            GiveGoldExpFame,
+            GiveItem,
         }
 
         public TaskType Type;
@@ -107,6 +114,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoginRequest_Fetch] = LoginRequest_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Process] = LoginRequest_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestRewards_Process] = LoadQuestRewards_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadQuestRequirements_Process] = LoadQuestRequirements_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestInfo_Process] = LoadQuestInfo_Process_Handler;
 
             _taskHandlers[Task.TaskType.CharacterList_Fetch] = CharacterList_Fetch_Handler;
@@ -120,9 +128,15 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.CharacterDataItems_Process] = CharacterDataItems_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterFrontierData_Process] = CharacterFrontierData_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterSkills_Process] = CharacterSkills_Process_Handler;
+            _taskHandlers[Task.TaskType.CharacterActiveQuests_Process] = CharacterActiveQuests_Process_Handler;
+            _taskHandlers[Task.TaskType.CharacterCompletedQuests_Process] = CharacterCompletedQuests_Process_Handler;
+            _taskHandlers[Task.TaskType.CharacterActiveQuest_Save] = CharacterActiveQuest_Save_Handler;
             _taskHandlers[Task.TaskType.PlayerEnterMap] = PlayerEnterMap_Handler;
             _taskHandlers[Task.TaskType.PlayerMove] = PlayerMove_Handler;
             _taskHandlers[Task.TaskType.PlayerUpdatePosition] = PlayerUpdatePosition_Handler;
+            _taskHandlers[Task.TaskType.NPCDialogNextButton] = NPCDialogNextButton_Handler;
+            _taskHandlers[Task.TaskType.GiveGoldExpFame] = GiveGoldExpFame_Handler;
+            _taskHandlers[Task.TaskType.GiveItem] = GiveItem_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -295,15 +309,17 @@ namespace JuggleServerCore
                     // 1: step          tinyint(3) unsigned
                     // 2: type          tinyint(3) unsigned
                     // 3: count         int(10) unsigned
-                    // 4: target_id     smallint(5) unsigned
+                    // 4: target_id     int(10) unsigned
+                    // 5: owner_id      int(10) unsigned
                     uint quest = (uint)row[0];
                     byte step = (byte)row[1];
                     byte type = (byte)row[2];
                     uint count = row[3] == null ? 0 : (uint)row[3];
-                    ushort target = row[4] == null ? (ushort)0 : (ushort)row[4];
+                    uint target = row[4] == null ? (uint)0 : (uint)row[4];
+                    uint owner = (uint)row[5];
 
                     ulong key = ((ulong)step << 32) | quest;
-                    steps[key] = new QuestStep.Builder(quest, step, (QuestStep.CompletionType)type, count, target);
+                    steps[key] = new QuestStep.Builder(quest, step, owner, (QuestStep.CompletionType)type, count, target);
                 }
 
                 // Put all the lines into the steps
@@ -340,6 +356,7 @@ namespace JuggleServerCore
                     // 3: exp       int(10) unsigned
                     // 4: item      smallint(5) unsigned
                     // 5: preward	tinyint(3) unsigned
+                    // 6: fame      int(10) unsigned
 
                     uint quest = (uint)row[0];
                     byte step = (byte)row[1];
@@ -347,12 +364,13 @@ namespace JuggleServerCore
                     uint exp = (uint)row[3];
                     ushort item = (ushort)row[4];
                     byte preward = (byte)row[5];
+                    uint fame = (uint)row[6];
 
                     ulong key = ((ulong)step << 32) | quest;
                     Dictionary<ulong, QuestReward.Builder> rewardDict = (preward != 0) ? prewards : rewards;
 
                     if (!rewardDict.ContainsKey(key))
-                        rewardDict[key] = new QuestReward.Builder(0, 0);
+                        rewardDict[key] = new QuestReward.Builder(0, 0, 0);
 
                     if (item != 0)
                         rewardDict[key].AddItem(item);
@@ -360,6 +378,8 @@ namespace JuggleServerCore
                         rewardDict[key].AddGold(gold);
                     if (exp != 0)
                         rewardDict[key].AddExp(exp);
+                    if( fame != 0 )
+                        rewardDict[key].AddFame(fame);
                 }
 
                 // Put the rewards into the appropriate steps
@@ -397,12 +417,30 @@ namespace JuggleServerCore
                 _server.QuestsLoaded(quests);
                 
                 // Load the quest info
-                AddDBQuery("SELECT * FROM quest_info;", new Task(Task.TaskType.LoadQuestInfo_Process));
+                AddDBQuery("SELECT * FROM quest_requirements;", new Task(Task.TaskType.LoadQuestRequirements_Process));
             }
             else
             {
                 LogInterface.Log("Database does not contain any quest rewards. No quests will be available", LogInterface.LogMessageType.Game, true);
             }
+        }
+
+        void LoadQuestRequirements_Process_Handler(Task t)
+        {
+            if (t.Query.Rows.Count > 0)
+            {
+                foreach (object[] row in t.Query.Rows)
+                {
+                    uint questID = (uint)row[0];
+                    _server.AddQuestRequirement(questID, QuestRequirement.LoadFromDB(row));
+                }
+            }
+            else
+            {
+            }
+
+            // Now load the quest info
+            AddDBQuery("SELECT * FROM quest_info;", new Task(Task.TaskType.LoadQuestInfo_Process));
         }
 
         void LoadQuestInfo_Process_Handler(Task t)
@@ -425,6 +463,7 @@ namespace JuggleServerCore
             {
                 LogInterface.Log("Database does not contain any quest info. No quests will be available", LogInterface.LogMessageType.Game, true);
             }
+            _server.AllowConnections();
         }
         #endregion
 
@@ -554,6 +593,12 @@ namespace JuggleServerCore
             sql = string.Format("SELECT * FROM char_skills WHERE character_id={0};", id);
             AddDBQuery(sql, new Task(Task.TaskType.CharacterSkills_Process, t.Client, ci));
             ci.ExpectingSkills = true;
+
+            sql = string.Format("SELECT * FROM active_quests WHERE character_id={0};", id);
+            AddDBQuery(sql, new Task(Task.TaskType.CharacterActiveQuests_Process, t.Client, ci));
+
+            sql = string.Format("SELECT * FROM completed_quests WHERE character_id={0};", id);
+            AddDBQuery(sql, new Task(Task.TaskType.CharacterCompletedQuests_Process, t.Client, ci));
         }
 
         void CharacterDataHV_Process_Handler(Task t)
@@ -637,6 +682,36 @@ namespace JuggleServerCore
             }
         }
 
+        void CharacterActiveQuests_Process_Handler(Task t)
+        {
+            CharacterInfo ci = (CharacterInfo)t.Args;
+            ci.ReadActiveQuests(t.Query);
+        }
+
+        void CharacterCompletedQuests_Process_Handler(Task t)
+        {
+            CharacterInfo ci = (CharacterInfo)t.Args;
+            ci.ReadCompletedQuests(t.Query);
+        }
+
+        void CharacterActiveQuest_Save_Handler(Task t)
+        {
+            ActiveQuestArgs rqa = (ActiveQuestArgs)t.Args;
+
+            string sql;
+            if (rqa.Remove)
+                sql = string.Format("DELETE FROM completed_quests WHERE character_id={0} AND quest_id={1};", rqa.CharacterID, rqa.QuestID);
+            else
+                sql = string.Format("INSERT INTO active_quests (character_id,quest_id,step) VALUES ({0},{1},{2}) ON DUPLICATE KEY UPDATE step={2};", rqa.CharacterID, rqa.QuestID, rqa.Step);
+            AddDBQuery(sql, null, false);
+
+            if (rqa.Finished)
+            {
+                sql = string.Format("INSERT_INTO completed_quests SET character_id={0},quest_id={1};", rqa.CharacterID, rqa.QuestID);
+                AddDBQuery(sql, null, false);
+            }             
+        }
+
         void PlayerEnterMap_Handler(Task t)
         {
             _server.PlayerEnterMap(t.Client);
@@ -651,6 +726,48 @@ namespace JuggleServerCore
         void PlayerUpdatePosition_Handler(Task t)
         {
             _server.UpdatePlayerPosition(t.Client, (CharacterPositionClass)t.Args);
+        }
+
+        void NPCDialogNextButton_Handler(Task t)
+        {
+            _server.NextDialog(t.Client);
+        }
+
+        void GiveGoldExpFame_Handler(Task t)
+        {
+            GiveGoldExpFameArgs args = (GiveGoldExpFameArgs)t.Args;
+            CharacterInfo ci = t.Client.Character;
+            ci.AddGoldExpFame(args.Gold, args.Exp, args.Fame);
+
+            string sql = string.Format("UPDATE characters_hv SET gold={0},exp={1},fame={2} WHERE character_id={3};", ci.Gold, ci.Exp, ci.Fame, ci.ID);
+            AddDBQuery(sql, null, false);
+
+            string log = string.Format("Giving {0} gold, {1} exp, and {2} fame to Character ID: {3}. Reason: {4}, Context: {5}", args.Gold, args.Exp, args.Fame, ci.ID, args.Reason, args.Context);
+            LogInterface.Log(log, LogInterface.LogMessageType.Game);
+
+            // TODO: Figure out how to send this to the client
+        }
+
+        void GiveItem_Handler(Task t)
+        {
+            GiveItemArgs args = (GiveItemArgs)t.Args;
+            CharacterInfo ci = t.Client.Character;
+            
+            // Instantiate the item
+            Item item = _server.InstantiateItem(args.ItemTemplateID);
+
+            // Save it in the database
+            string sql = item.WriteDBString(args.ItemTemplateID, ci.ID);
+            AddDBQuery(sql, null, false);
+
+            // Store it in the character
+            ci.AddItem(item);
+
+            // Log it
+            string log = string.Format("Giving item template({1}) to Character ID: {3}. Reason: {4}, Context: {5}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
+            LogInterface.Log(log, LogInterface.LogMessageType.Game);
+
+            // TODO: Figure out how to send this to the client
         }
         #endregion
     }

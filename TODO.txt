@@ -28,4 +28,6 @@ MapChangePacket - 0x15
 
 Skills, Buffs & Boosters
 
-	
+
+Figure out how to send gold/exp/fame updates to client
+Figure out how to send items to client
