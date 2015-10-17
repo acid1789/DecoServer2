@@ -42,6 +42,31 @@ INSERT INTO `accounts` VALUES (1,'a','a'),(2,'acid1789','test');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `active_quests`
+--
+
+DROP TABLE IF EXISTS `active_quests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `active_quests` (
+  `character_id` int(10) unsigned NOT NULL,
+  `quest_id` int(11) unsigned NOT NULL,
+  `step` tinyint(3) unsigned DEFAULT '0',
+  PRIMARY KEY (`character_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `active_quests`
+--
+
+LOCK TABLES `active_quests` WRITE;
+/*!40000 ALTER TABLE `active_quests` DISABLE KEYS */;
+INSERT INTO `active_quests` VALUES (5,1,0);
+/*!40000 ALTER TABLE `active_quests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `char_skills`
 --
 
@@ -120,6 +145,7 @@ CREATE TABLE `characters_hv` (
   `pvp_wins` int(10) unsigned DEFAULT '0',
   `pvp_count` int(10) unsigned DEFAULT '0',
   `exp` bigint(20) unsigned DEFAULT '0',
+  `fame` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`character_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -130,7 +156,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0),(5,5,13447,150,150,150,123,0,0,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,13447,150,150,150,123,0,0,0,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +169,6 @@ DROP TABLE IF EXISTS `characters_lv`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `characters_lv` (
   `character_id` int(10) unsigned NOT NULL,
-  `fame` int(10) unsigned NOT NULL,
   `nation_rate` int(10) unsigned NOT NULL,
   `move_speed` smallint(5) unsigned NOT NULL,
   `ability_p_min` smallint(5) unsigned NOT NULL,
@@ -178,8 +203,31 @@ CREATE TABLE `characters_lv` (
 
 LOCK TABLES `characters_lv` WRITE;
 /*!40000 ALTER TABLE `characters_lv` DISABLE KEYS */;
-INSERT INTO `characters_lv` VALUES (4,0,0,192,10,12,8,10,12,150,150,150,5,2,13,9,13,12,12,13,0,0,0,0,100,0),(5,0,0,192,10,12,8,10,12,150,150,150,2,5,13,9,13,12,12,13,0,0,0,0,100,0);
+INSERT INTO `characters_lv` VALUES (4,0,192,10,12,8,10,12,150,150,150,5,2,13,9,13,12,12,13,0,0,0,0,100,0),(5,0,192,10,12,8,10,12,150,150,150,2,5,13,9,13,12,12,13,0,0,0,0,100,0);
 /*!40000 ALTER TABLE `characters_lv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `completed_quests`
+--
+
+DROP TABLE IF EXISTS `completed_quests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `completed_quests` (
+  `character_id` int(10) unsigned NOT NULL,
+  `quest_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`character_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `completed_quests`
+--
+
+LOCK TABLES `completed_quests` WRITE;
+/*!40000 ALTER TABLE `completed_quests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `completed_quests` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -313,6 +361,30 @@ INSERT INTO `quest_lines` VALUES (1,1,0,0,2193,1184,NULL),(2,1,0,1,2193,1185,NUL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quest_requirements`
+--
+
+DROP TABLE IF EXISTS `quest_requirements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quest_requirements` (
+  `quest_id` int(10) unsigned NOT NULL,
+  `type` tinyint(3) unsigned NOT NULL,
+  `param` int(10) unsigned DEFAULT '0',
+  PRIMARY KEY (`quest_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quest_requirements`
+--
+
+LOCK TABLES `quest_requirements` WRITE;
+/*!40000 ALTER TABLE `quest_requirements` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quest_requirements` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `quest_rewards`
 --
 
@@ -326,6 +398,7 @@ CREATE TABLE `quest_rewards` (
   `exp` int(10) unsigned DEFAULT '0',
   `item` smallint(5) unsigned DEFAULT '0',
   `preward` tinyint(3) unsigned DEFAULT '0',
+  `fame` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`quest_id`,`step`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -336,7 +409,7 @@ CREATE TABLE `quest_rewards` (
 
 LOCK TABLES `quest_rewards` WRITE;
 /*!40000 ALTER TABLE `quest_rewards` DISABLE KEYS */;
-INSERT INTO `quest_rewards` VALUES (1,0,0,0,4,0);
+INSERT INTO `quest_rewards` VALUES (1,0,0,0,4,0,0);
 /*!40000 ALTER TABLE `quest_rewards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +425,8 @@ CREATE TABLE `quest_steps` (
   `step` tinyint(3) unsigned NOT NULL,
   `type` tinyint(3) unsigned NOT NULL,
   `count` int(10) unsigned DEFAULT '0',
-  `target_id` smallint(5) unsigned DEFAULT '0',
+  `target_id` int(10) unsigned DEFAULT '0',
+  `owner_id` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`quest_id`,`step`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -363,7 +437,7 @@ CREATE TABLE `quest_steps` (
 
 LOCK TABLES `quest_steps` WRITE;
 /*!40000 ALTER TABLE `quest_steps` DISABLE KEYS */;
-INSERT INTO `quest_steps` VALUES (1,0,3,0,2);
+INSERT INTO `quest_steps` VALUES (1,0,3,0,1,1);
 /*!40000 ALTER TABLE `quest_steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-13  0:06:34
+-- Dump completed on 2015-10-17  9:41:06
