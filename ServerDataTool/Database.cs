@@ -148,11 +148,11 @@ namespace ServerDataTool
 
         static public NPC CreateNPC(int x, int y, ushort mapId)
         {
-            string sql = string.Format("INSERT INTO static_npcs SET game_id={0},location_x={1},location_y={2},map_id={3}; SELECT LAST_INSERT_ID();", 0, x, y, mapId);
+            string sql = string.Format("INSERT INTO static_npcs SET game_id={0},location_x={1},location_y={2},map_id={3}; SELECT LAST_INSERT_ID();", 5000, x, y, mapId);
             List<object[]> rows = ExecuteQuery(sql);
             
             ulong id = (ulong)rows[0][0];
-            NPC npc = new NPC((uint)id, 0, (uint)x, (uint)y, 10000, 0);
+            NPC npc = new NPC((uint)id, 5000, (uint)x, (uint)y, 10000, 0);
             return npc;
         }
 

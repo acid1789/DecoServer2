@@ -74,6 +74,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestDialog.Designer.cs">
+      <DependentUpon>QuestDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AccountsDialog.resx">
       <DependentUpon>AccountsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +101,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuestDialog.resx">
+      <DependentUpon>QuestDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

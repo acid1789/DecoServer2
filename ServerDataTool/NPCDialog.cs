@@ -20,11 +20,17 @@ namespace ServerDataTool
         ushort _mapId;
         Point _contextClickPoint;
         PictureBox _deleteContext;
+        bool _dragging;
 
         public NPCDialog()
         {
             _mapMarkers = new List<PictureBox>();
             InitializeComponent();
+
+            foreach (NPCNameID name in Program.s_npcNameIDs.Values)
+            {                
+                cbGameID.Items.Add(name);
+            }
         }
 
         private void NPCDialog_Load(object sender, EventArgs e)
@@ -134,7 +140,6 @@ namespace ServerDataTool
             }
         }
 
-        bool dragging;
         private void Pb_MouseMove(object sender, MouseEventArgs e)
         {            
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
@@ -156,10 +161,10 @@ namespace ServerDataTool
 
                 if (lvi == _currentSelection)
                 {
-                    dragging = true;
+                    _dragging = true;
                     tbX.Text = npc.X.ToString();
                     tbY.Text = npc.Y.ToString();
-                    dragging = false;
+                    _dragging = false;
                 }
             }
         }
@@ -196,7 +201,8 @@ namespace ServerDataTool
         void AddNPC(NPC npc)
         {
             // Add npc to the list
-            ListViewItem lvi = lvNPCs.Items.Add(npc.ToString());
+            NPCNameID nameID = Program.s_npcNameIDs[npc.GameID];
+            ListViewItem lvi = lvNPCs.Items.Add(npc.ID.ToString() + ": " + nameID.ToString());
             lvi.Tag = npc;
 
             // Add npc to the map
@@ -224,7 +230,8 @@ namespace ServerDataTool
             {
                 // Set the NPC info
                 NPC npc = (NPC)lvi.Tag;
-                tbGameID.Text = npc.GameID.ToString();
+                NPCNameID nameID = Program.s_npcNameIDs[npc.GameID];
+                cbGameID.SelectedItem = nameID;
                 tbHP.Text = npc.HP.ToString();
                 tbX.Text = npc.X.ToString();
                 tbY.Text = npc.Y.ToString();
@@ -238,7 +245,7 @@ namespace ServerDataTool
             }
             else
             {
-                tbGameID.Text = "";
+                cbGameID.SelectedIndex = -1;
                 tbHP.Text = "";
                 tbX.Text = "";
                 tbY.Text = "";
@@ -284,13 +291,15 @@ namespace ServerDataTool
         {            
         }
 
-        private void tbGameID_TextChanged(object sender, EventArgs e)
+
+        private void cbGameID_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_currentSelection != null)
             {
+                NPCNameID nameID = (NPCNameID)cbGameID.SelectedItem;
                 NPC npc = (NPC)_currentSelection.Tag;
-                npc.GameID = Convert.ToUInt16(tbGameID.Text);
-                _currentSelection.Text = npc.ToString();
+                npc.GameID = nameID.ID;
+                _currentSelection.Text = npc.ID.ToString() + ": " + nameID.ToString();
                 npc.Dirty = true;
             }
         }
@@ -307,7 +316,7 @@ namespace ServerDataTool
 
         private void tbX_TextChanged(object sender, EventArgs e)
         {
-            if (_currentSelection != null && !dragging)
+            if (_currentSelection != null && !_dragging)
             {
                 NPC npc = (NPC)_currentSelection.Tag;
                 npc.X = Convert.ToUInt32(tbX.Text);
@@ -319,7 +328,7 @@ namespace ServerDataTool
 
         private void tbY_TextChanged(object sender, EventArgs e)
         {
-            if (_currentSelection != null && !dragging)
+            if (_currentSelection != null && !_dragging)
             {
                 NPC npc = (NPC)_currentSelection.Tag;
                 npc.Y = Convert.ToUInt32(tbY.Text);
@@ -430,5 +439,6 @@ namespace ServerDataTool
                 }
             }
         }
+
     }
 }

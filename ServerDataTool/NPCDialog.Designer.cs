@@ -33,19 +33,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pbMap = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbGameID = new System.Windows.Forms.ComboBox();
+            this.tbDirection = new System.Windows.Forms.TextBox();
+            this.tbY = new System.Windows.Forms.TextBox();
+            this.tbX = new System.Windows.Forms.TextBox();
+            this.tbHP = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lvNPCs = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbGameID = new System.Windows.Forms.TextBox();
-            this.tbHP = new System.Windows.Forms.TextBox();
-            this.tbX = new System.Windows.Forms.TextBox();
-            this.tbY = new System.Windows.Forms.TextBox();
-            this.tbDirection = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNPCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -89,11 +89,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbGameID);
             this.groupBox1.Controls.Add(this.tbDirection);
             this.groupBox1.Controls.Add(this.tbY);
             this.groupBox1.Controls.Add(this.tbX);
             this.groupBox1.Controls.Add(this.tbHP);
-            this.groupBox1.Controls.Add(this.tbGameID);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -106,6 +106,93 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "NPC Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // cbGameID
+            // 
+            this.cbGameID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGameID.FormattingEnabled = true;
+            this.cbGameID.Location = new System.Drawing.Point(73, 18);
+            this.cbGameID.Name = "cbGameID";
+            this.cbGameID.Size = new System.Drawing.Size(140, 21);
+            this.cbGameID.TabIndex = 10;
+            this.cbGameID.SelectedIndexChanged += new System.EventHandler(this.cbGameID_SelectedIndexChanged);
+            // 
+            // tbDirection
+            // 
+            this.tbDirection.Location = new System.Drawing.Point(73, 123);
+            this.tbDirection.Name = "tbDirection";
+            this.tbDirection.Size = new System.Drawing.Size(140, 20);
+            this.tbDirection.TabIndex = 9;
+            this.tbDirection.TextChanged += new System.EventHandler(this.tbDirection_TextChanged);
+            // 
+            // tbY
+            // 
+            this.tbY.Location = new System.Drawing.Point(73, 97);
+            this.tbY.Name = "tbY";
+            this.tbY.Size = new System.Drawing.Size(140, 20);
+            this.tbY.TabIndex = 8;
+            this.tbY.TextChanged += new System.EventHandler(this.tbY_TextChanged);
+            // 
+            // tbX
+            // 
+            this.tbX.Location = new System.Drawing.Point(73, 71);
+            this.tbX.Name = "tbX";
+            this.tbX.Size = new System.Drawing.Size(140, 20);
+            this.tbX.TabIndex = 7;
+            this.tbX.TextChanged += new System.EventHandler(this.tbX_TextChanged);
+            // 
+            // tbHP
+            // 
+            this.tbHP.Location = new System.Drawing.Point(73, 45);
+            this.tbHP.Name = "tbHP";
+            this.tbHP.Size = new System.Drawing.Size(140, 20);
+            this.tbHP.TabIndex = 6;
+            this.tbHP.TextChanged += new System.EventHandler(this.tbHP_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Direction:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(42, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(25, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "HP:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(50, 104);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Y:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(50, 78);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "X:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "GameID:";
             // 
             // lblStatus
             // 
@@ -136,91 +223,6 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "NPCs";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "GameID:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "X:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(50, 104);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Y:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(42, 52);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(25, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "HP:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Direction:";
-            // 
-            // tbGameID
-            // 
-            this.tbGameID.Location = new System.Drawing.Point(73, 19);
-            this.tbGameID.Name = "tbGameID";
-            this.tbGameID.Size = new System.Drawing.Size(140, 20);
-            this.tbGameID.TabIndex = 5;
-            this.tbGameID.TextChanged += new System.EventHandler(this.tbGameID_TextChanged);
-            // 
-            // tbHP
-            // 
-            this.tbHP.Location = new System.Drawing.Point(73, 45);
-            this.tbHP.Name = "tbHP";
-            this.tbHP.Size = new System.Drawing.Size(140, 20);
-            this.tbHP.TabIndex = 6;
-            this.tbHP.TextChanged += new System.EventHandler(this.tbHP_TextChanged);
-            // 
-            // tbX
-            // 
-            this.tbX.Location = new System.Drawing.Point(73, 71);
-            this.tbX.Name = "tbX";
-            this.tbX.Size = new System.Drawing.Size(140, 20);
-            this.tbX.TabIndex = 7;
-            this.tbX.TextChanged += new System.EventHandler(this.tbX_TextChanged);
-            // 
-            // tbY
-            // 
-            this.tbY.Location = new System.Drawing.Point(73, 97);
-            this.tbY.Name = "tbY";
-            this.tbY.Size = new System.Drawing.Size(140, 20);
-            this.tbY.TabIndex = 8;
-            this.tbY.TextChanged += new System.EventHandler(this.tbY_TextChanged);
-            // 
-            // tbDirection
-            // 
-            this.tbDirection.Location = new System.Drawing.Point(73, 123);
-            this.tbDirection.Name = "tbDirection";
-            this.tbDirection.Size = new System.Drawing.Size(140, 20);
-            this.tbDirection.TabIndex = 9;
-            this.tbDirection.TextChanged += new System.EventHandler(this.tbDirection_TextChanged);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -231,7 +233,7 @@
             // addNPCToolStripMenuItem
             // 
             this.addNPCToolStripMenuItem.Name = "addNPCToolStripMenuItem";
-            this.addNPCToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addNPCToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.addNPCToolStripMenuItem.Text = "Add NPC";
             this.addNPCToolStripMenuItem.Click += new System.EventHandler(this.addNPCToolStripMenuItem_Click);
             // 
@@ -245,7 +247,7 @@
             // deleteNPCToolStripMenuItem
             // 
             this.deleteNPCToolStripMenuItem.Name = "deleteNPCToolStripMenuItem";
-            this.deleteNPCToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteNPCToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.deleteNPCToolStripMenuItem.Text = "Delete NPC";
             this.deleteNPCToolStripMenuItem.Click += new System.EventHandler(this.deleteNPCToolStripMenuItem_Click);
             // 
@@ -295,11 +297,11 @@
         private System.Windows.Forms.TextBox tbY;
         private System.Windows.Forms.TextBox tbX;
         private System.Windows.Forms.TextBox tbHP;
-        private System.Windows.Forms.TextBox tbGameID;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem addNPCToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem deleteNPCToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbGameID;
     }
 }
