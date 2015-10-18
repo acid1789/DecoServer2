@@ -550,14 +550,14 @@ namespace DecoServer2.CharacterThings
 
         public string HVString
         {
-            get { return string.Format("INSERT INTO characters_hv SET character_id={0},map_id={1},cell_index={2},hp={3},sp={4},mp={5},gold={6},pvp_wins={7},pvp_count={8},exp={9}", _csi.ID, _mapID, _cellIndex, _curHP, _curSP, _curMP, _gold, _pvpWins, _pvpCount, _exp); }
+            get { return string.Format("INSERT INTO characters_hv SET character_id={0},map_id={1},cell_index={2},hp={3},sp={4},mp={5},gold={6},pvp_wins={7},pvp_count={8},exp={9},fame={10}", _csi.ID, _mapID, _cellIndex, _curHP, _curSP, _curMP, _gold, _pvpWins, _pvpCount, _exp, _fame); }
         }
 
         public string LVString
         {
             get
             {
-                return string.Format(@"INSERT INTO characters_lv SET character_id={0},fame={1},nation_rate={2},move_speed={3},ability_p_min={4},ability_p_max={5},attack_speed={6},ability_m_min={7},ability_m_max={8},
+                return string.Format(@"INSERT INTO characters_lv SET character_id={0},nation_rate={2},move_speed={3},ability_p_min={4},ability_p_max={5},attack_speed={6},ability_m_min={7},ability_m_max={8},
                                                                     hp={9},sp={10},mp={11},magical_def={12},physical_def={13},power={14},vitality={15},sympathy={16},intelligence={17},stamina={18},dexterity={19},charisma={20},
                                                                     luck={21},ability_points={22},left_sp={23},total_sp={24},frontier_id={25};",
                                                                     _csi.ID, _fame, _nationRate, _moveSpeed, _abilityPMin, _abilityPMax, _attackSpeed, _abilityMMin, _abilityMMax, _maxHP, _maxSP, _maxMP, _magicalDef, _physicalDef, _power, _vitality, _sympathy, _intelligence, _stamina, _dexterity, _charisma, _luck, _abilityPoints, _leftSP, _totalSP, _frontierID);
