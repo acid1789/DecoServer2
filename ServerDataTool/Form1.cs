@@ -53,5 +53,11 @@ namespace ServerDataTool
             NPCDialog dlg = new NPCDialog();
             dlg.ShowDialog();
         }
+
+        private void btnQuests_Click(object sender, EventArgs e)
+        {
+            QuestDialog dlg = new QuestDialog();
+            dlg.ShowDialog();
+        }
     }
 }

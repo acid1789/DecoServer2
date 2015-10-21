@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Threading;
+using System.Linq;
 using MySql.Data.MySqlClient;
 
 namespace ServerDataTool
@@ -131,11 +132,15 @@ namespace ServerDataTool
         {
             List<NPC> npcs = new List<NPC>();
 
-            string sql = string.Format("SELECT * FROM static_npcs WHERE map_id={0};", mapID);
+            string sql;
+            if( mapID == 0 )
+                sql = string.Format("SELECT * FROM static_npcs;");
+            else 
+                sql = string.Format("SELECT * FROM static_npcs WHERE map_id={0};", mapID);
             List<object[]> rows = ExecuteQuery(sql);
             foreach (object[] row in rows)
             {
-                npcs.Add(new NPC((uint)row[0], (ushort)row[1], (uint)row[2], (uint)row[3], (uint)row[4], (uint)row[5]));
+                npcs.Add(new NPC((uint)row[0], (ushort)row[1], (uint)row[2], (uint)row[3], (uint)row[4], (uint)row[5], (ushort)row[6]));
             }
             return npcs.ToArray();
         }
@@ -152,7 +157,7 @@ namespace ServerDataTool
             List<object[]> rows = ExecuteQuery(sql);
             
             ulong id = (ulong)rows[0][0];
-            NPC npc = new NPC((uint)id, 5000, (uint)x, (uint)y, 10000, 0);
+            NPC npc = new NPC((uint)id, 5000, (uint)x, (uint)y, 10000, 0, mapId);
             return npc;
         }
 
@@ -160,6 +165,114 @@ namespace ServerDataTool
         {
             string sql = string.Format("DELETE FROM static_npcs WHERE static_npc_id={0};", npc.ID);
             ExecuteQuery(sql);
+        }
+
+        static public Quest[] FetchQuests()
+        {
+            List<Quest> quests = new List<Quest>();
+
+            // Fetch Quests
+            List<object[]> rows = ExecuteQuery("SELECT * FROM quest_info;");
+            foreach (object[] row in rows)
+            {
+                Quest q = new Quest((uint)row[0], (uint)row[1], (ushort)row[2]);
+                quests.Add(q);
+            }
+
+            // Go get subquest data
+            foreach (Quest q in quests)
+            {
+                // Fetch Name
+                string sql = string.Format("SELECT * FROM quest_names WHERE quest_id={0};", q.ID);
+                rows = ExecuteQuery(sql);
+                if( rows.Count > 0 )
+                    q.Name = (string)rows[0][1];
+
+                // Fetch Requirements
+                sql = string.Format("SELECT * FROM quest_requirements WHERE quest_id={0};", q.ID);
+                rows = ExecuteQuery(sql);
+                foreach (object[] row in rows)
+                {
+                    byte type = (byte)row[1];
+                    QuestRequirement qr = new QuestRequirement((QuestRequirement.Type)type, (uint)row[2]);
+                    q.Requirements.Add(qr);
+                }
+
+                // Fetch Steps
+                sql = string.Format("SELECT * FROM quest_steps WHERE quest_id={0};", q.ID);
+                rows = ExecuteQuery(sql);
+                foreach( object[] row in rows )
+                {
+                    byte type = (byte)row[2];
+                    QuestStep qs = new QuestStep((byte)row[1], (QuestStep.CompletionType)type, (uint)row[3], (uint)row[4], (uint)row[5]);
+                    q.Steps.Add(qs);
+                }
+
+                // Process Steps
+                foreach (QuestStep qs in q.Steps)
+                {
+                    // Fetch Rewards
+                    sql = string.Format("SELECT * FROM quest_rewards WHERE quest_id={0} AND step={1};", q.ID, qs.Step);
+                    rows = ExecuteQuery(sql);
+                    foreach (object[] row in rows)
+                    {
+                        QuestReward qr = new QuestReward((uint)row[2], (uint)row[3], (uint)row[6], (uint)row[4]);
+                        qs.Rewards.Add(qr);
+                    }
+
+                    // Fetch Lines
+                    sql = string.Format("SELECT * FROM quest_lines WHERE quest_id={0} AND step={1};", q.ID, qs.Step);
+                    rows = ExecuteQuery(sql);
+                    foreach (object[] row in rows)
+                    {
+                        string text = null;
+                        if (row[6].GetType() != typeof(DBNull))
+                            text = (string)row[6];
+                        QuestLine ql = new QuestLine((byte)row[3], (ushort)row[4], (ushort)row[5], text);
+                        qs.Lines.Add(ql);
+                    }
+
+                    // Order Lines
+                    qs.OrderLines();                    
+                }
+
+                // Order Steps
+                q.OrderSteps();
+            }
+            return quests.ToArray();
+        }
+
+        public static Quest AddQuest(string name, uint giverID, ushort giverMap)
+        {
+            string sql = string.Format("INSERT INTO quest_info SET giver_id={0},giver_map_id={1}; SELECT LAST_INSERT_ID();", giverID, giverMap);
+            List<object[]> rows = ExecuteQuery(sql);
+
+            ulong id = (ulong)rows[0][0];
+
+            string questName = name;
+            if( name == null || name.Length < 0 )
+                questName = "unnamed";
+            sql = string.Format("INSERT INTO quest_names SET quest_id={0},name={1};", id, questName);
+            ExecuteQuery(sql);
+
+            Quest q = new Quest((uint)id, giverID, giverMap);
+            return q;
+        }
+
+        public static void DeleteQuest(Quest q)
+        {
+            string sql = "";
+            sql += string.Format("DELETE FROM quest_requirements WHERE quest_id={0};", q.ID);
+            sql += string.Format("DELETE FROM quest_steps WHERE quest_id={0};", q.ID);
+            sql += string.Format("DELETE FROM quest_rewards WHERE quest_id={0};", q.ID);
+            sql += string.Format("DELETE FROM quest_lines WHERE quest_id={0};", q.ID);
+            sql += string.Format("DELETE FROM quest_names WHERE quest_id={0};", q.ID);
+            sql += string.Format("DELETE FROM quest_info WHERE quest_id={0};", q.ID);
+            ExecuteQuery(sql); 
+        }
+
+        public static void SaveQuest(Quest q)
+        {
         }
     }
 
@@ -185,9 +298,10 @@ namespace ServerDataTool
         public uint Y;
         public uint HP;
         public uint Direction;
+        public ushort MapID;
         public bool Dirty;
 
-        public NPC(uint id, ushort gameID, uint x, uint y, uint hp, uint direction)
+        public NPC(uint id, ushort gameID, uint x, uint y, uint hp, uint direction, ushort mapID)
         {
             ID = id;
             GameID = gameID;
@@ -195,12 +309,133 @@ namespace ServerDataTool
             Y = y;
             HP = hp;
             Direction = direction;
+            MapID = mapID;
             Dirty = false;
         }
 
         public override string ToString()
         {
-            return ID.ToString() + ": " + GameID.ToString();
+            return ID.ToString() + ": " + Program.s_npcNameIDs[GameID].ToString();
+        }
+    }
+
+    public class Quest
+    {
+        public uint ID;
+        public string Name;
+        public uint GiverID;
+        public ushort GiverMapID;
+        public List<QuestRequirement> Requirements;
+        public List<QuestStep> Steps;
+        public bool Dirty;
+
+        public Quest(uint id, uint giver, ushort giverMap)
+        {
+            ID = id;
+            GiverID = giver;
+            GiverMapID = giverMap;
+            Name = "unnamed";
+            Requirements = new List<QuestRequirement>();
+            Steps = new List<QuestStep>();
+        }
+
+        public void OrderSteps()
+        {
+            List<QuestStep> ordered = Steps.OrderBy(o => o.Step).ToList();
+            Steps = ordered;
+        }
+    }
+
+    public class QuestRequirement
+    {
+        public enum Type
+        {
+            Level,
+            Race,
+            Gender,
+            Job,
+            Fame,
+            Item
+        }
+
+        public Type TheType;
+        public uint Context;
+        public bool New;
+
+        public QuestRequirement(Type type, uint context)
+        {
+            TheType = type;
+            Context = context;
+        }
+    }
+
+    public class QuestStep
+    {
+        public enum CompletionType
+        {
+            KillMonster,
+            CollectItem,
+            GoToLocation,
+            TalkToNPC,
+            ReachLevel
+        }
+
+        public byte Step;
+        public CompletionType CompType;
+        public uint CompCount;
+        public uint CompTargetID;
+        public uint OwnerID;
+        public List<QuestReward> Rewards;
+        public List<QuestLine> Lines;
+
+        public QuestStep(byte step, CompletionType type, uint compCount, uint compTarget, uint owner)
+        {
+            Step = step;
+            CompType = type;
+            CompCount = compCount;
+            CompTargetID = compTarget;
+            OwnerID = owner;
+
+            Rewards = new List<QuestReward>();
+            Lines = new List<QuestLine>();
+        }
+
+        public void OrderLines()
+        {
+            List<QuestLine> ordered = Lines.OrderBy(o => o.Line).ToList();
+            Lines = ordered;
+        }
+    }
+
+    public class QuestReward
+    {
+        public uint Gold;
+        public uint Exp;
+        public uint Fame;
+        public uint Item;
+
+        public QuestReward(uint gold, uint exp, uint fame, uint item)
+        {
+            Gold = gold;
+            Exp = exp;
+            Fame = fame;
+            Item = item;
+        }
+    }
+
+    public class QuestLine
+    {
+        public byte Line;
+        public ushort Icon;
+        public ushort StaticText;
+        public string DynaimcText;
+
+        public QuestLine(byte line, ushort icon, ushort staticText, string dynamicText)
+        {
+            Line = line;
+            Icon = icon;
+            StaticText = staticText;
+            DynaimcText = dynamicText;
         }
     }
 }

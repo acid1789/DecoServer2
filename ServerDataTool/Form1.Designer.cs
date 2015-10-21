@@ -62,6 +62,7 @@
             this.btnQuests.TabIndex = 3;
             this.btnQuests.Text = "Quests";
             this.btnQuests.UseVisualStyleBackColor = true;
+            this.btnQuests.Click += new System.EventHandler(this.btnQuests_Click);
             // 
             // btnItems
             // 
