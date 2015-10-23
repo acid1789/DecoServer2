@@ -75,7 +75,6 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -103,6 +102,9 @@
             this.btnDeleteReward = new System.Windows.Forms.Button();
             this.btnAddReward = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.cbReqParam = new System.Windows.Forms.ComboBox();
+            this.cbCompTarget = new System.Windows.Forms.ComboBox();
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -119,6 +121,7 @@
             this.columnHeader1});
             this.lvQuests.FullRowSelect = true;
             this.lvQuests.GridLines = true;
+            this.lvQuests.HideSelection = false;
             this.lvQuests.Location = new System.Drawing.Point(12, 23);
             this.lvQuests.Name = "lvQuests";
             this.lvQuests.Size = new System.Drawing.Size(382, 263);
@@ -154,13 +157,15 @@
             // lvSteps
             // 
             this.lvSteps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader15});
             this.lvSteps.FullRowSelect = true;
             this.lvSteps.GridLines = true;
+            this.lvSteps.HideSelection = false;
             this.lvSteps.Location = new System.Drawing.Point(404, 23);
             this.lvSteps.Name = "lvSteps";
-            this.lvSteps.Size = new System.Drawing.Size(214, 263);
+            this.lvSteps.Size = new System.Drawing.Size(334, 263);
             this.lvSteps.TabIndex = 2;
             this.lvSteps.UseCompatibleStateImageBehavior = false;
             this.lvSteps.View = System.Windows.Forms.View.Details;
@@ -177,6 +182,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbCompTarget);
             this.groupBox1.Controls.Add(this.cbStepOwner);
             this.groupBox1.Controls.Add(this.tbCompletionTarget);
             this.groupBox1.Controls.Add(this.tbCompletionCount);
@@ -221,7 +227,8 @@
             this.columnHeader11});
             this.lvRewards.FullRowSelect = true;
             this.lvRewards.GridLines = true;
-            this.lvRewards.Location = new System.Drawing.Point(624, 23);
+            this.lvRewards.HideSelection = false;
+            this.lvRewards.Location = new System.Drawing.Point(744, 23);
             this.lvRewards.Name = "lvRewards";
             this.lvRewards.Size = new System.Drawing.Size(257, 263);
             this.lvRewards.TabIndex = 6;
@@ -232,7 +239,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(624, 9);
+            this.label3.Location = new System.Drawing.Point(741, 7);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 7;
@@ -250,11 +257,11 @@
             // lvLines
             // 
             this.lvLines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader12,
             this.columnHeader13,
             this.columnHeader14});
             this.lvLines.FullRowSelect = true;
             this.lvLines.GridLines = true;
+            this.lvLines.HideSelection = false;
             this.lvLines.Location = new System.Drawing.Point(627, 321);
             this.lvLines.Name = "lvLines";
             this.lvLines.Size = new System.Drawing.Size(584, 172);
@@ -320,8 +327,8 @@
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Step #";
-            this.columnHeader4.Width = 44;
+            this.columnHeader4.Text = "Context";
+            this.columnHeader4.Width = 91;
             // 
             // columnHeader5
             // 
@@ -427,6 +434,7 @@
             this.columnHeader7});
             this.lvRequirements.FullRowSelect = true;
             this.lvRequirements.GridLines = true;
+            this.lvRequirements.HideSelection = false;
             this.lvRequirements.Location = new System.Drawing.Point(12, 426);
             this.lvRequirements.Name = "lvRequirements";
             this.lvRequirements.Size = new System.Drawing.Size(174, 202);
@@ -475,6 +483,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbReqParam);
             this.groupBox3.Controls.Add(this.tbRequirementParam);
             this.groupBox3.Controls.Add(this.cbRequirementType);
             this.groupBox3.Controls.Add(this.label14);
@@ -538,15 +547,10 @@
             // 
             this.columnHeader11.Text = "Item";
             // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "Line #";
-            this.columnHeader12.Width = 43;
-            // 
             // columnHeader13
             // 
             this.columnHeader13.Text = "Icon";
-            this.columnHeader13.Width = 39;
+            this.columnHeader13.Width = 90;
             // 
             // columnHeader14
             // 
@@ -694,9 +698,9 @@
             this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.label18);
             this.groupBox5.Controls.Add(this.label17);
-            this.groupBox5.Location = new System.Drawing.Point(887, 13);
+            this.groupBox5.Location = new System.Drawing.Point(1007, 13);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(318, 131);
+            this.groupBox5.Size = new System.Drawing.Size(198, 131);
             this.groupBox5.TabIndex = 17;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Reward Properties";
@@ -704,7 +708,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(16, 26);
+            this.label17.Location = new System.Drawing.Point(13, 26);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(32, 13);
             this.label17.TabIndex = 0;
@@ -713,7 +717,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(20, 52);
+            this.label18.Location = new System.Drawing.Point(17, 52);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(28, 13);
             this.label18.TabIndex = 0;
@@ -722,7 +726,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 78);
+            this.label19.Location = new System.Drawing.Point(9, 78);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(36, 13);
             this.label19.TabIndex = 0;
@@ -731,7 +735,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(20, 105);
+            this.label20.Location = new System.Drawing.Point(17, 105);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(30, 13);
             this.label20.TabIndex = 0;
@@ -741,39 +745,39 @@
             // 
             this.cbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbItem.FormattingEnabled = true;
-            this.cbItem.Location = new System.Drawing.Point(54, 97);
+            this.cbItem.Location = new System.Drawing.Point(51, 97);
             this.cbItem.Name = "cbItem";
-            this.cbItem.Size = new System.Drawing.Size(258, 21);
+            this.cbItem.Size = new System.Drawing.Size(135, 21);
             this.cbItem.TabIndex = 1;
             this.cbItem.SelectedIndexChanged += new System.EventHandler(this.cbItem_SelectedIndexChanged);
             // 
             // tbGold
             // 
-            this.tbGold.Location = new System.Drawing.Point(54, 19);
+            this.tbGold.Location = new System.Drawing.Point(51, 19);
             this.tbGold.Name = "tbGold";
-            this.tbGold.Size = new System.Drawing.Size(258, 20);
+            this.tbGold.Size = new System.Drawing.Size(135, 20);
             this.tbGold.TabIndex = 2;
             this.tbGold.TextChanged += new System.EventHandler(this.tbGold_TextChanged);
             // 
             // tbExp
             // 
-            this.tbExp.Location = new System.Drawing.Point(54, 45);
+            this.tbExp.Location = new System.Drawing.Point(51, 45);
             this.tbExp.Name = "tbExp";
-            this.tbExp.Size = new System.Drawing.Size(258, 20);
+            this.tbExp.Size = new System.Drawing.Size(135, 20);
             this.tbExp.TabIndex = 2;
             this.tbExp.TextChanged += new System.EventHandler(this.tbExp_TextChanged);
             // 
             // tbFame
             // 
-            this.tbFame.Location = new System.Drawing.Point(54, 71);
+            this.tbFame.Location = new System.Drawing.Point(51, 71);
             this.tbFame.Name = "tbFame";
-            this.tbFame.Size = new System.Drawing.Size(258, 20);
+            this.tbFame.Size = new System.Drawing.Size(135, 20);
             this.tbFame.TabIndex = 2;
             this.tbFame.TextChanged += new System.EventHandler(this.tbFame_TextChanged);
             // 
             // btnDeleteReward
             // 
-            this.btnDeleteReward.Location = new System.Drawing.Point(887, 150);
+            this.btnDeleteReward.Location = new System.Drawing.Point(1007, 150);
             this.btnDeleteReward.Name = "btnDeleteReward";
             this.btnDeleteReward.Size = new System.Drawing.Size(87, 23);
             this.btnDeleteReward.TabIndex = 18;
@@ -800,6 +804,30 @@
             this.btnSave.Text = "Save Quests";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // cbReqParam
+            // 
+            this.cbReqParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbReqParam.FormattingEnabled = true;
+            this.cbReqParam.Location = new System.Drawing.Point(52, 46);
+            this.cbReqParam.Name = "cbReqParam";
+            this.cbReqParam.Size = new System.Drawing.Size(142, 21);
+            this.cbReqParam.TabIndex = 21;
+            this.cbReqParam.SelectedIndexChanged += new System.EventHandler(this.cbReqParam_SelectedIndexChanged);
+            // 
+            // cbCompTarget
+            // 
+            this.cbCompTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCompTarget.FormattingEnabled = true;
+            this.cbCompTarget.Location = new System.Drawing.Point(106, 70);
+            this.cbCompTarget.Name = "cbCompTarget";
+            this.cbCompTarget.Size = new System.Drawing.Size(102, 21);
+            this.cbCompTarget.TabIndex = 8;
+            this.cbCompTarget.SelectedIndexChanged += new System.EventHandler(this.cbCompTarget_SelectedIndexChanged);
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Count";
             // 
             // QuestDialog
             // 
@@ -909,7 +937,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -937,5 +964,8 @@
         private System.Windows.Forms.Button btnDeleteReward;
         private System.Windows.Forms.Button btnAddReward;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ComboBox cbReqParam;
+        private System.Windows.Forms.ComboBox cbCompTarget;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
     }
 }

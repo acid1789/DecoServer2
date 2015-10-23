@@ -26,6 +26,11 @@ namespace ServerDataTool
             cbCompletionType.DataSource = Enum.GetValues(typeof(QuestStep.CompletionType));
             cbRequirementType.DataSource = Enum.GetValues(typeof(QuestRequirement.Type));
 
+            foreach (IntStrID icon in Program.s_npcIcons.Values)
+                cbIcon.Items.Add(icon);
+            foreach( IntStrID staticText in Program.s_staticText.Values )
+                cbStaticText.Items.Add(staticText);
+
             // Pull all the NPCs
             NPC[] npcs = Database.FetchNPCs(0);
             _npcs = new Dictionary<uint, NPC>();
@@ -82,6 +87,7 @@ namespace ServerDataTool
             tbCompletionCount.Text = "";
             tbCompletionTarget.Enabled = false;
             tbCompletionTarget.Text = "";
+            cbCompTarget.Visible = false;
             cbStepOwner.Enabled = false;
             cbStepOwner.SelectedItem = null;
 
@@ -91,6 +97,7 @@ namespace ServerDataTool
             cbRequirementType.SelectedItem = null;
             tbRequirementParam.Enabled = false;
             tbRequirementParam.Text = "";
+            cbReqParam.Visible = false;
             btnDeleteRequirement.Enabled = false;
             btnNewRequirement.Enabled = false;
 
@@ -126,8 +133,9 @@ namespace ServerDataTool
                 // Set steps
                 foreach (QuestStep qs in q.Steps)
                 {
-                    ListViewItem lvi = lvSteps.Items.Add(qs.Step.ToString());
-                    lvi.SubItems.Add(qs.CompType.ToString());
+                    ListViewItem lvi = lvSteps.Items.Add(qs.CompType.ToString());
+                    lvi.SubItems.Add(StepContextString(qs));
+                    lvi.SubItems.Add(qs.CompCount.ToString());
                     lvi.Tag = qs;
                 }
 
@@ -135,7 +143,7 @@ namespace ServerDataTool
                 foreach (QuestRequirement qr in q.Requirements)
                 {
                     ListViewItem lvi = lvRequirements.Items.Add(qr.TheType.ToString());
-                    lvi.SubItems.Add(qr.Context.ToString());
+                    lvi.SubItems.Add(RequirmentContext(qr));
                     lvi.Tag = qr;
                 }
 
@@ -258,25 +266,127 @@ namespace ServerDataTool
         {
             // Add a new quest to the database
             NPC giver = (NPC)cbQuestGiver.SelectedItem;
-            Quest q = Database.AddQuest(tbQuestName.Text, giver == null ? 0 : giver.ID, giver == null ? (ushort)0 : giver.MapID);
+            Quest q = new Quest(0, giver == null ? 0 : giver.ID, giver == null ? (ushort)0 : giver.MapID);
+            q.New = true;            
 
             // Put it in the display
             AddQuest(q);
+
+            SetDirty(true);
         }
         #endregion
 
         #region Steps
+        void SelectCompTarget(QuestStep qs)
+        {
+            tbCompletionTarget.Enabled = false;
+            cbCompTarget.Visible = false;
+            tbCompletionCount.Enabled = false;
+
+            tbCompletionCount.Text = qs.CompCount.ToString();
+            switch (qs.CompType)
+            {
+                case QuestStep.CompletionType.KillMonster:
+                    // TODO: Monsters
+                    tbCompletionCount.Enabled = true;
+                    tbCompletionTarget.Enabled = true;
+                    tbCompletionTarget.Text = qs.CompTargetID.ToString();
+                    break;
+                case QuestStep.CompletionType.GoToLocation:
+                    // TODO: Locations
+                    tbCompletionTarget.Enabled = true;
+                    tbCompletionTarget.Text = qs.CompTargetID.ToString();
+                    break;
+                case QuestStep.CompletionType.CollectItem:
+                    // TODO: Items
+                    tbCompletionCount.Enabled = true;
+                    tbCompletionTarget.Enabled = true;
+                    tbCompletionTarget.Text = qs.CompTargetID.ToString();
+                    break;                
+                case QuestStep.CompletionType.ReachLevel:
+                    tbCompletionCount.Enabled = true;
+                    break;
+                case QuestStep.CompletionType.TalkToNPC:
+                    cbCompTarget.Visible = true;
+                    cbCompTarget.Items.Clear();
+                    foreach (NPC npc in _npcs.Values)
+                        cbCompTarget.Items.Add(npc);
+                    cbCompTarget.SelectedItem = _npcs.ContainsKey(qs.CompTargetID) ? _npcs[qs.CompTargetID] : null;
+                    break;
+            }
+        }
+
+        string StepContextString(QuestStep qs)
+        {
+            string str = "";
+            switch (qs.CompType)
+            {
+                case QuestStep.CompletionType.KillMonster:
+                case QuestStep.CompletionType.GoToLocation:
+                case QuestStep.CompletionType.CollectItem:
+                    str = qs.CompTargetID.ToString();
+                    break;
+                case QuestStep.CompletionType.ReachLevel:                    
+                    break;  // Empty
+                case QuestStep.CompletionType.TalkToNPC:
+                    str = _npcs.ContainsKey(qs.CompTargetID) ? _npcs[qs.CompTargetID].ToString() : "Unknown";
+                    break;
+            }
+            return str;
+        }
+
+        void FixStepButtons(QuestStep qs)
+        {
+            btnStepUp.Enabled = false;
+            btnStepDown.Enabled = false;
+            int index = _selectedQuest.Steps.IndexOf(qs);
+            btnStepUp.Enabled = (index > 0);
+            btnStepDown.Enabled = (index < (_selectedQuest.Steps.Count - 1));
+        }
+
         private void lvSteps_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cbCompletionType.Enabled = false;
+            tbCompletionCount.Enabled = false;
+            tbCompletionTarget.Enabled = false;
+            cbCompTarget.Visible = false;
+            cbStepOwner.Enabled = false;
+            btnDeleteStep.Enabled = false;
+            btnStepUp.Enabled = false;
+            btnStepDown.Enabled = false;
+
             if (lvSteps.SelectedItems.Count != 0)
             {
                 ListViewItem lvi = lvSteps.SelectedItems[0];
                 QuestStep qs = (QuestStep)lvi.Tag;
                 
                 cbCompletionType.SelectedIndex = (int)qs.CompType;
-                tbCompletionCount.Text = qs.CompCount.ToString();
-                tbCompletionTarget.Text = qs.CompTargetID.ToString();
-                cbStepOwner.SelectedItem = _npcs[qs.OwnerID];
+                cbStepOwner.SelectedItem = _npcs.ContainsKey(qs.OwnerID) ? _npcs[qs.OwnerID] : null;
+
+                cbCompletionType.Enabled = true;
+                tbCompletionCount.Enabled = true;
+                cbStepOwner.Enabled = true;
+                btnDeleteStep.Enabled = true;
+                FixStepButtons(qs);
+                SelectCompTarget(qs);
+
+                // Populate Rewards
+                lvRewards.Enabled = true;
+                lvRewards.Items.Clear();
+                btnAddReward.Enabled = true;
+                foreach (QuestReward qr in qs.Rewards)
+                {
+                    AddRewardToDisplay(qr);
+                }
+
+                // Populate Lines
+                lvLines.Enabled = true;
+                lvLines.Items.Clear();
+                btnNewLine.Enabled = true;
+                foreach (QuestLine ql in qs.Lines)
+                {
+                    AddLineToDisplay(ql);
+                }
             }
         }
 
@@ -288,7 +398,10 @@ namespace ServerDataTool
                 QuestStep qs = (QuestStep)lvi.Tag;
 
                 qs.CompType = (QuestStep.CompletionType)cbCompletionType.SelectedIndex;
-                lvi.SubItems[1].Text = qs.CompType.ToString();
+                lvi.Text = qs.CompType.ToString();
+                lvi.SubItems[1].Text = StepContextString(qs);
+                SelectCompTarget(qs);
+
 
                 SetDirty(true);
             }
@@ -332,9 +445,32 @@ namespace ServerDataTool
             }
         }
 
+        private void cbCompTarget_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCompTarget.SelectedItem != null)
+            {
+                ListViewItem lvi = lvSteps.SelectedItems[0];
+                QuestStep qs = (QuestStep)lvi.Tag;
+
+                switch (qs.CompType)
+                {
+                    case QuestStep.CompletionType.KillMonster:
+                    case QuestStep.CompletionType.GoToLocation:
+                    case QuestStep.CompletionType.CollectItem:
+                    case QuestStep.CompletionType.ReachLevel:
+                        break;
+                    case QuestStep.CompletionType.TalkToNPC:
+                        NPC npc = (NPC)cbCompTarget.SelectedItem;
+                        qs.CompTargetID = npc.ID;
+                        SetDirty(true);
+                        break;
+                }
+            }
+        }
+
         private void cbStepOwner_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvSteps.SelectedItems.Count != 0)
+            if (cbStepOwner.SelectedItem != null && lvSteps.SelectedItems.Count != 0)
             {
                 ListViewItem lvi = lvSteps.SelectedItems[0];
                 QuestStep qs = (QuestStep)lvi.Tag;
@@ -342,41 +478,170 @@ namespace ServerDataTool
                 NPC owner = (NPC)cbStepOwner.SelectedItem;
                 qs.OwnerID = owner.ID;
 
-                _selectedQuest.Dirty = true;
+                SetDirty(true);
             }
         }
 
         private void btnDeleteStep_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to delete this step?", "Delete Step", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // Get the step and display
+                ListViewItem lvi = lvSteps.SelectedItems[0];
+                QuestStep qs = (QuestStep)lvi.Tag;
 
+                // Deselect
+                lvi.Selected = false;
+
+                // Remove the step from the quest
+                _selectedQuest.DeleteStep(qs);
+
+                // Remove the step from the display
+                lvSteps.Items.Remove(lvi);
+            }
         }
 
         private void btnStepUp_Click(object sender, EventArgs e)
         {
+            ListViewItem lvi = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvi.Tag;
 
+            // Reorder in the array
+            int stepIndex = _selectedQuest.Steps.IndexOf(qs);
+            _selectedQuest.Steps.RemoveAt(stepIndex);
+            _selectedQuest.Steps.Insert(stepIndex - 1, qs);
+
+            // Reorder in the list view
+            stepIndex = lvSteps.Items.IndexOf(lvi);
+            lvSteps.Items.Remove(lvi);
+            lvSteps.Items.Insert(stepIndex - 1, lvi);
+            
+            // mark the quest dirty
+            SetDirty(true);
+
+            // Fix the buttons
+            FixStepButtons(qs);
         }
 
         private void btnStepDown_Click(object sender, EventArgs e)
         {
+            ListViewItem lvi = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvi.Tag;
 
+            // Reorder in the array
+            int stepIndex = _selectedQuest.Steps.IndexOf(qs);
+            _selectedQuest.Steps.RemoveAt(stepIndex);
+            _selectedQuest.Steps.Insert(stepIndex + 1, qs);
+
+            // Reorder in the list view
+            stepIndex = lvSteps.Items.IndexOf(lvi);
+            lvSteps.Items.Remove(lvi);
+            lvSteps.Items.Insert(stepIndex + 1, lvi);
+
+            // mark the quest dirty
+            SetDirty(true);
+
+            // Fix the buttons
+            FixStepButtons(qs);
         }
 
         private void btnNewStep_Click(object sender, EventArgs e)
         {
+            // Create a new step
+            QuestStep step = new QuestStep((byte)_selectedQuest.Steps.Count, QuestStep.CompletionType.TalkToNPC, 0, 0, 0);
+            step.New = true;
 
+            // Add it to the quest
+            _selectedQuest.Steps.Add(step);
+            
+            // Add it to the display
+            SelectQuest(_selectedQuest);
         }
         #endregion
 
         #region Requirements
+        string RequirmentContext(QuestRequirement qr)
+        {
+            string str = "";
+            switch (qr.TheType)
+            {
+                case QuestRequirement.Type.Level:
+                case QuestRequirement.Type.Fame:
+                case QuestRequirement.Type.Item:
+                    str = qr.Context.ToString();
+                    break;
+                case QuestRequirement.Type.Race:
+                    str = qr.Context == 0 ? "Millena" : "Rain";
+                    break;
+                case QuestRequirement.Type.Gender:
+                    str = qr.Context == 0 ? "Male" : "Female";
+                    break;
+                case QuestRequirement.Type.Job:
+                    str = Program.s_jobs.ContainsKey((int)qr.Context) ?  Program.s_jobs[(int)qr.Context].ToString() : "unknown";
+                    break;
+            }
+            return str;
+        }
+
+        void SelectContext(QuestRequirement qr)
+        {
+            tbRequirementParam.Enabled = false;
+            cbReqParam.Visible = false;
+            switch (qr.TheType)
+            {
+                case QuestRequirement.Type.Level:
+                    tbRequirementParam.Text = qr.Context.ToString();
+                    tbRequirementParam.Enabled = true;
+                    break;
+                case QuestRequirement.Type.Race:
+                    cbReqParam.Visible = true;
+                    cbReqParam.Items.Clear();
+                    cbReqParam.Items.Add("Millena");
+                    cbReqParam.Items.Add("Rain");
+                    cbReqParam.SelectedIndex = (int)qr.Context;
+                    break;
+                case QuestRequirement.Type.Gender:
+                    cbReqParam.Visible = true;
+                    cbReqParam.Items.Clear();
+                    cbReqParam.Items.Add("Male");
+                    cbReqParam.Items.Add("Female");
+                    cbReqParam.SelectedIndex = (int)qr.Context;
+                    break;
+                case QuestRequirement.Type.Job:
+                    cbReqParam.Visible = true;
+                    cbReqParam.Items.Clear();
+                    foreach (IntStrID job in Program.s_jobs.Values)
+                        cbReqParam.Items.Add(job);
+                    cbReqParam.SelectedIndex = (int)qr.Context;
+                    break;
+                case QuestRequirement.Type.Fame:
+                    tbRequirementParam.Text = qr.Context.ToString();
+                    tbRequirementParam.Enabled = true;
+                    break;
+                case QuestRequirement.Type.Item:
+                    tbRequirementParam.Text = qr.Context.ToString();
+                    tbRequirementParam.Enabled = true;
+                    break;
+            }
+        }
+
         private void lvRequirements_SelectedIndexChanged(object sender, EventArgs e)
         {
+            tbRequirementParam.Enabled = false;
+            cbRequirementType.Enabled = false;
+            btnDeleteQuest.Enabled = false;
+            cbReqParam.Visible = false;
+
             if (lvRequirements.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvRequirements.SelectedItems[0];
                 QuestRequirement qr = (QuestRequirement)lvi.Tag;
 
                 cbRequirementType.SelectedIndex = (int)qr.TheType;
-                tbRequirementParam.Text = qr.Context.ToString();
+                cbRequirementType.Enabled = true;
+                btnDeleteQuest.Enabled = true;
+
+                SelectContext(qr);
             }
         }
 
@@ -388,7 +653,33 @@ namespace ServerDataTool
                 QuestRequirement qr = (QuestRequirement)lvi.Tag;
 
                 qr.TheType = (QuestRequirement.Type)cbRequirementType.SelectedIndex;
-                _selectedQuest.Dirty = true;
+                lvi.SubItems[1].Text = RequirmentContext(qr);
+                lvi.Text = qr.TheType.ToString();
+                SelectContext(qr);
+                SetDirty(true);
+            }
+        }
+
+        private void cbReqParam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvRequirements.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRequirements.SelectedItems[0];
+                QuestRequirement qr = (QuestRequirement)lvi.Tag;
+
+                switch ( qr.TheType )
+                {
+                    case QuestRequirement.Type.Gender:
+                    case QuestRequirement.Type.Race:
+                        qr.Context = (uint)cbReqParam.SelectedIndex;
+                        break;
+                    case QuestRequirement.Type.Job:
+                        IntStrID job = (IntStrID)cbReqParam.SelectedItem;
+                        qr.Context = (uint)job.ID;
+                        break;
+                }
+                lvi.SubItems[1].Text = RequirmentContext(qr);
+                SetDirty(true);
             }
         }
 
@@ -403,7 +694,8 @@ namespace ServerDataTool
                 {
                     uint param = Convert.ToUInt32(tbRequirementParam.Text);
                     qr.Context = param;
-                    _selectedQuest.Dirty = true;
+                    lvi.SubItems[1].Text = RequirmentContext(qr);
+                    SetDirty(true);
                 }
                 catch (Exception) { }
             }
@@ -411,7 +703,22 @@ namespace ServerDataTool
 
         private void btnDeleteRequirement_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to delete this requirement?", "Delete Requirement", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                ListViewItem lvi = lvRequirements.SelectedItems[0];
+                QuestRequirement qr = (QuestRequirement)lvi.Tag;
 
+                // Deselect
+                lvi.Selected = false;
+
+                // Remove from the quest
+                _selectedQuest.DeleteRequirement(qr);
+
+                // Remove from the list view
+                lvRequirements.Items.Remove(lvi);
+
+                SetDirty(true);
+            }
         }
 
         private void btnNewRequirement_Click(object sender, EventArgs e)
@@ -419,7 +726,7 @@ namespace ServerDataTool
             if (_selectedQuest != null)
             {
                 // Create the requirement
-                QuestRequirement qr = new QuestRequirement(QuestRequirement.Type.Level, 0);
+                QuestRequirement qr = new QuestRequirement(0, QuestRequirement.Type.Level, 0);
                 qr.New = true;
 
                 // Add it to the quest
@@ -435,81 +742,309 @@ namespace ServerDataTool
         #endregion
 
         #region Rewards
+        void AddRewardToDisplay(QuestReward qr)
+        {
+            ListViewItem rvi = lvRewards.Items.Add(qr.Gold.ToString());
+            rvi.SubItems.Add(qr.Exp.ToString());
+            rvi.SubItems.Add(qr.Fame.ToString());
+            rvi.SubItems.Add(qr.Item.ToString());
+            rvi.Tag = qr;
+        }
+
         private void lvRewards_SelectedIndexChanged(object sender, EventArgs e)
         {
+            tbGold.Text = "";
+            tbExp.Text = "";
+            tbFame.Text = "";
+            cbItem.SelectedItem = null;
+            tbGold.Enabled = false;
+            tbExp.Enabled = false;
+            tbFame.Enabled = false;
+            cbItem.Enabled = false;
+            btnDeleteReward.Enabled = false;
 
+            if (lvRewards.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
+
+                tbGold.Text = qr.Gold.ToString();
+                tbExp.Text = qr.Exp.ToString();
+                tbFame.Text = qr.Fame.ToString();
+                // TODO: implement items
+
+                tbGold.Enabled = true;
+                tbExp.Enabled = true;
+                tbFame.Enabled = true;
+                cbItem.Enabled = true;
+                btnDeleteReward.Enabled = true;
+            }
         }
 
         private void tbGold_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
 
+                qr.Gold = Convert.ToUInt32(tbGold.Text);
+                lvi.Text = tbGold.Text;
+                SetDirty(true);
+            }
+            catch (Exception) { }
         }
 
         private void tbExp_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
 
+                qr.Exp = Convert.ToUInt32(tbExp.Text);
+                lvi.SubItems[1].Text = tbExp.Text;
+                SetDirty(true);
+            }
+            catch (Exception) { }
         }
 
         private void tbFame_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
 
+                qr.Fame = Convert.ToUInt32(tbFame.Text);
+                lvi.SubItems[2].Text = tbFame.Text;
+                SetDirty(true);
+            }
+            catch (Exception) { }
         }
 
         private void cbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            // TODO: Implement items
         }
 
         private void btnDeleteReward_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to delete this reward?", "Delete Reward", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // Get the reward
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
 
+                // Deselect
+                lvi.Selected = false;
+                                
+                // Remove from the quest step
+                ListViewItem lvs = lvSteps.SelectedItems[0];
+                QuestStep qs = (QuestStep)lvs.Tag;
+                qs.DeleteReward(qr);                
+
+                // Remove from the display
+                lvRewards.Items.Remove(lvi);
+
+                SetDirty(true);
+            }
         }
 
         private void btnAddReward_Click(object sender, EventArgs e)
         {
+            ListViewItem lvi = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvi.Tag;
 
+            // Create reward
+            QuestReward qr = new QuestReward(0, 0, 0, 0);
+            qr.New = true;
+
+            // Add to the step
+            qs.Rewards.Add(qr);
+
+            // Add to the display
+            AddRewardToDisplay(qr);
+
+            SetDirty(true);
         }
         #endregion
 
         #region Lines
+        void AddLineToDisplay(QuestLine ql)
+        {
+            string icon = Program.s_npcIcons.ContainsKey(ql.Icon) ? Program.s_npcIcons[ql.Icon].ToString() : "None";
+            string text = Program.s_staticText.ContainsKey(ql.StaticText) ? Program.s_staticText[ql.StaticText].ToString() : ql.DynamicText;
+            ListViewItem lvl = lvLines.Items.Add(icon);
+            lvl.SubItems.Add(text);
+            lvl.Tag = ql;
+        }
+
+        void FixLineButtons(QuestLine ql)
+        {
+            btnLineUp.Enabled = false;
+            btnLineDown.Enabled = false;
+            ListViewItem lvs = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvs.Tag;
+            int index = qs.Lines.IndexOf(ql);
+            btnLineUp.Enabled = (index > 0);
+            btnLineDown.Enabled = (index < (qs.Lines.Count - 1));
+        }
+
         private void lvLines_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cbIcon.Enabled = false;
+            cbStaticText.Enabled = false;
+            tbDynamicText.Enabled = false;
+            btnDeleteLine.Enabled = false;
+            btnLineUp.Enabled = false;
+            btnLineDown.Enabled = false;
 
+            if (lvLines.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvLines.SelectedItems[0];
+                QuestLine ql = (QuestLine)lvi.Tag;
+
+                cbIcon.Enabled = true;
+                cbStaticText.Enabled = true;
+                tbDynamicText.Enabled = true;
+
+                cbIcon.SelectedItem = Program.s_npcIcons.ContainsKey(ql.Icon) ? Program.s_npcIcons[ql.Icon] : null;
+                cbStaticText.SelectedItem = Program.s_staticText.ContainsKey(ql.StaticText) ? Program.s_staticText[ql.StaticText] : null;
+                tbDynamicText.Text = ql.DynamicText;
+
+                FixLineButtons(ql);
+                btnDeleteLine.Enabled = true;
+            }
         }
 
         private void btnDeleteLine_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to delete this line?", "Delete Line", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                ListViewItem lvi = lvLines.SelectedItems[0];
+                QuestLine ql = (QuestLine)lvi.Tag;
+                
+                // Deselect
+                lvi.Selected = false;
 
+                // Delete from step
+                ListViewItem lvs = lvSteps.SelectedItems[0];
+                QuestStep qs = (QuestStep)lvs.Tag;
+                qs.DeleteLine(ql);
+
+                // Delete from display
+                lvLines.Items.Remove(lvi);    
+                
+                SetDirty(true);                           
+            }
         }
 
         private void btnLineUp_Click(object sender, EventArgs e)
         {
+            ListViewItem lvi = lvLines.SelectedItems[0];
+            QuestLine ql = (QuestLine)lvi.Tag;
 
+            ListViewItem lvs = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvs.Tag;
+
+            // Reorder in the array
+            int index = qs.Lines.IndexOf(ql);
+            qs.Lines.RemoveAt(index);
+            qs.Lines.Insert(index - 1, ql);
+
+            // Reorder in the list view
+            index = lvLines.Items.IndexOf(lvi);
+            lvLines.Items.Remove(lvi);
+            lvLines.Items.Insert(index - 1, lvi);
+
+            // mark the quest dirty
+            SetDirty(true);
+
+            // Fix the buttons
+            FixLineButtons(ql);
         }
 
         private void btnLineDown_Click(object sender, EventArgs e)
         {
 
+            ListViewItem lvi = lvLines.SelectedItems[0];
+            QuestLine ql = (QuestLine)lvi.Tag;
+
+            ListViewItem lvs = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvs.Tag;
+
+            // Reorder in the array
+            int index = qs.Lines.IndexOf(ql);
+            qs.Lines.RemoveAt(index);
+            qs.Lines.Insert(index + 1, ql);
+
+            // Reorder in the list view
+            index = lvLines.Items.IndexOf(lvi);
+            lvLines.Items.Remove(lvi);
+            lvLines.Items.Insert(index + 1, lvi);
+
+            // mark the quest dirty
+            SetDirty(true);
+
+            // Fix the buttons
+            FixLineButtons(ql);
         }
 
         private void btnNewLine_Click(object sender, EventArgs e)
         {
+            // Create a quest line
+            QuestLine ql = new QuestLine(0, 0, 0, "");
+            ql.New = true;
 
+            // Add it to the step
+            ListViewItem lvs = lvSteps.SelectedItems[0];
+            QuestStep qs = (QuestStep)lvs.Tag;
+            qs.Lines.Add(ql);
+
+            // Add it to the display
+            AddLineToDisplay(ql);
+
+            // Mark quest dirty
+            SetDirty(true);
         }
 
         private void cbIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbIcon.SelectedItem != null)
+            {
+                ListViewItem lvi = lvLines.SelectedItems[0];
+                QuestLine ql = (QuestLine)lvi.Tag;
 
+                IntStrID icon = (IntStrID)cbIcon.SelectedItem;
+                ql.Icon = (ushort)icon.ID;
+                lvi.Text = Program.s_npcIcons.ContainsKey(ql.Icon) ? Program.s_npcIcons[ql.Icon].ToString() : "None";
+
+                SetDirty(true);
+            }
         }
 
         private void cbStaticText_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ListViewItem lvi = lvLines.SelectedItems[0];
+            QuestLine ql = (QuestLine)lvi.Tag;
 
+            IntStrID staticText = (IntStrID)cbStaticText.SelectedItem;
+            ql.StaticText = (ushort)staticText.ID;
+            lvi.SubItems[1].Text = Program.s_staticText.ContainsKey(ql.StaticText) ? Program.s_staticText[ql.StaticText].ToString() : ql.DynamicText;
+
+            SetDirty(true);
         }
 
         private void tbDynamicText_TextChanged(object sender, EventArgs e)
         {
+            ListViewItem lvi = lvLines.SelectedItems[0];
+            QuestLine ql = (QuestLine)lvi.Tag;
+            
+            ql.DynamicText = tbDynamicText.Text;
+            lvi.SubItems[1].Text = Program.s_staticText.ContainsKey(ql.StaticText) ? Program.s_staticText[ql.StaticText].ToString() : ql.DynamicText;
 
+            SetDirty(true);
         }
         #endregion
 

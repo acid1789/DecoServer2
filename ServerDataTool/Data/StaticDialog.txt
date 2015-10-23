@@ -1,0 +1,3288 @@
+0:Hi there. How can i help you?
+1:Recommendation Letter from [Old Man].	Learn skill.	I have nothing to ask.
+2:Learn skill.	I want to know about [Frontiers].	I have nothing to ask.
+3:(Reading Recommendation Letter) hmm ...
+4:I have been expecting you` %UserName%. I hope you did not get lost while looking for me.
+5:Let's begin...
+6:Millena is always in need of soldiers to prepare ourselves not only against the threat of Rain...
+7:...but also against the threat of monsters living in [Lette Plane].
+8:I am glad that you have come to answer [Millena's] call and serve her as a loyal soldier..
+9:You need to train hard in order to become a good soldier.
+10:The best way for you to train now` considering your level of experience` would be at [Twinible Forest]...
+11:..which can be found just east of our town.
+12:When you level up` you will be given a skill point which you can accumulate and use to increase the level of your preferred skills.
+13:Every skill that you level up will be able to increase your fighting ability...
+14:... and also determine your fighting style. ##So use your skill points wisely.
+15:Well` you better get started then.
+16:Use the [Portal] east of our town to go to [Twinible forest]
+17:Look for [Bart] next to the [Portal] of [Twinible Forest].
+18:Good luck %UserName%. Before you go` this is my gift to you. Hopefully it can help you.
+19:Good bye.
+20: 
+21:Which skill would you like to learn?
+22:Goodbye.
+23:Frontier? What would you like to know?
+24:Tell me more about [Frontiers].	I wish to form a [Frontier].	I wish to buy a [Frontier Guardian]	I want to buy [Supplements] for [Frontier Guardian].
+25:What would you like to know?
+26:What is a [Frontier]?	What do I have to do to create a [Frontier]?	What is a [Frontier Guardian]?	Goodbye.
+27:A [Frontier] is an ordinary organization structure formed by young soldiers of Millena to adventure together...
+28:...and explore the vast lands of our kindom and beyond.
+29:Everyone in Millena can join or create their own [Frontier].
+30:You can also face a [Frontier] from Rain during special events.
+31:Any other questions?
+32:How do I create or join a [Frontier]?	What is a [Frontier Guardian]?	No. Thank you. Goodbye.
+33:To create a [Frontier] you must first create a [League (Pre-Frontier)].
+34:A [League] is an early form of organization.
+35:To form a [League (Pre-Frontier)] you will need at least 4 members.
+36:The founder of the [League (Pre-Frontier)] should have a second job and will be given the status [Master]...
+37:... and the other 3 members will each be called a [Major].
+38:After forming the [League]` members of the league can invite others...
+39:... before going for a confession to become a [Frontier] with at least 10 members.
+40:Functions like nickname` [Frontier Guardian]` Frontier logo` and such cannot be used until a [Frontier] is formed.
+41:There are 4 levels of position in a [League/Frontier]. [Master]` [Major]` [Assist] and [Cadet].
+42:Only the [Master] and [Major] can invite new members.
+43:If you wish to join a [League/Frontier]` look for the [Master] or [Major] of the [Frontier].
+44:Are there any other questions?
+45:What is a [Frontier]?	What is a [Frontier Guardian]?	No more questions. Goodbye.
+46:[Frontier Guardians] come from the [Lah Continent] which is full of mysteries.
+47:They generally live in another dimension` but will emerge if the [Frontier Master] calls them.
+48:A [Frontier Guardian] releases an aura which regenerate or improve the ability of all [Frontier] members in a certain area.
+49:As they reside in our dimension` they will grow and will evolve into an amazing form.
+50:A [Frontier Guardian] is not only a loyal companion but also will become a symbol of your [Frontier].
+51:Take note however` every time a [Frontier Guardian] appears in our dimension`...
+52:...it needs a lot of energy. So do not forget to feed it with [Supplements] in order to keep it in our dimension.
+53:Are there any other questions?
+54:What is a [Frontier]?	How do I create or join a [Frontier]?	No more questions. Goodbye.
+55:Hmm... you wish to create a [Frontier]?
+56:Create a [League (Pre-Frontier)]	Request confession to make a [Frontier].
+57:To create a [League (Pre-Frontier)]` you need 4 members.
+58:The founder of the [League (Pre-Frontier)] should have a second job and will be given the status [Master]...
+59:...and the other 3 members will each be called a [Major].
+60:After this you have to look for at least 6 more members to get a total of 10 members before going for a confession.
+61:Would you like to create a [Frontier] now?
+62:Yes` I want to create a [Frontier]	No` not yet
+63:To create a [Frontier] you must at least have 10 members to get a confession.
+64:And the fee is 100 thousand Elds.
+65:Get a confession now?
+66:Yes` I would like to get a confession now!	No` not yet.
+67:Only a [Frontier Master] can do it.
+68: 
+69:You need 100 thousand Elds to get a [Frontier] confession.
+70: 
+71:To create a [Frontier] you must at least have 10 members to get a confession.
+72: 
+73:Only a [Frontier Master] can do it.
+74: 
+75:A [Frontier Guardian] brings blessing to the [Frontier]. Treat it wisely.
+76:exit
+77:You can buy [Supplements] for your [Frontier Guardian] at the price of 500 Elds each.
+78:Would you like to buy some [Supplements] now?
+79:Yes` of course.	No` not now.
+80:Hi buddy! Welcome to [Blodger's] shop.
+81:Make a Purchase.	Repair.	Goodbye.
+82:I only have the finest weapons in my shop! Feel free to look around!
+83:GoodBye
+84:Weapons require care to get the maximum results.
+85:GoodBye
+86:GoodBye 
+87: 
+88:Welcome` what brings you here?
+89:Make a Purchase	Repair	Goodbye
+90:Strong armor is your best friend!
+91:Leave
+92:Take care of your armor to get maximum results.
+93:Leave
+94:Goodbye 
+95: 
+96:Isn't it a nice day today?
+97: 
+98:Have a pleasant day ahead.
+99: 
+100:Hi %UserName%` I am [Arabeth Wallen]. Nice to meet you.
+101: 
+102:Wow? is that flower for me?
+103:Thank you' this really a surprise.
+104:I'll give you a present. This is for you.
+105:(get a [Chocolate].)
+106: 
+107:Ah are this really for me? [her face is turning red] *^^*
+108:I cannot accept it without giving you something. here take this .
+109:But don't get too serious` OK?
+110:(get a[Chocolate].)
+111: 
+112:Hello` %UserName%.
+113:Collect Hat for [Old Man].	Make a purchase.	Place items into Locker.	Leave.
+114:Make a purchase.	Place items in Locker.	Leave.
+115:What would you like to keep in the locker.. remember no quest items.
+116:Make a purchase.	Leave.
+117:What would you like to buy?
+118:Place items into Locker.	Leave.
+119:Hello` %UserName%.
+120:Collect Hat for [Old Man].	Make a purchase.	Place items into Locker.	Leave.
+121:Oh dear` I forgot to send him the hat!
+122:So he has sent you to collect the hat on his behalf?
+123:(accepts a small box.)
+124:By the way` this is Millena's [Business Area].
+125:All the Merchants here sell different items which may be of some use to you.
+126:Alright now` please pass the hat to [Old man] for me and send my apologies.
+127: 
+128:Isn't it a nice day today?
+129: 
+130:Have a pleasant day ahead.
+131: 
+132:Hi %UserName%. Nice to meet you.
+133: 
+134:Hi there %UserName%!
+135:Make a Purchase.	Goodbye.
+136:Take a look around. I have potions and scripts that may be of some use to you.
+137:Leave
+138:Coolu beach is a fantastic place for a vacation.
+139:That is the place to meet anyone from everywhere.
+140:But it is not easy to get there.
+141:How can I get there?	Leave
+142:Everyone wants to go there` but it is a very exclusive beach. Not everyone will be able to get there.
+143:If you really want to go there` you need a ticket` but the ticket is not free.
+144:Kill as many monsters as possible and collect the application forms that drop from them.
+145:Bring 10 [Application for Coolu Beach] and I will give you an [Admission Ticket to Coolu Beach].
+146:Understand? 
+147: 
+148: Coolu Beach is very popular. You cannot go there without 10 [Application for Coolu Beach].
+149: 
+150:(Get an [Admission Ticket to Coolu Beach].)
+151:Congratulations` have a nice day!!
+152: 
+153:You are the bravest of the brave.. Here is my reward to you.
+154: 
+155:Thank you.
+156: 
+157:You will be the future of Millena if you continue heroic deeds such as this.
+158: 
+159:Skull Bein killed Macnir` and he was blocked portal by Dark charm.\This portal is move Cursed land to Holy land of Seal.\I have to find weak point about Dark charm. Please help me.\If you kill Skull Bein` you will be given preferential treatment\as best warrior` and I will qualify you for move to Holy land of Seal.\Do you challenge?
+160:Yes I do.	No.
+161:Be careful. Skull bein is very dangerous.
+162:Exit.
+163:Oh~ Best warrior!!\If you move to Holy land of Seal follow [Mystic Stone]` \please kill all monster and Jyanade. \And you must survive for future of Millena. \Keep in mind!
+164:Exit
+165: You already know this mission is very hard... !
+166:Exit.
+167:Jynade??s power is growing up. Hurry Up!
+168:I lost [Mystic Stone].	Exit
+169: You are out of mind...-.- \You already have Mystic stone~! \Tut` tut! Find your inventory again!
+170:Exit
+171:Are you crazy? Did you really lose [Mystic Stone]? \I don`t believe you are best warrior. \[Mystic Stone] is 50`000`000 Elds.
+172:Buy now	Exit
+173:Never make mistake! Here is it.
+174:Exit
+175:[Mystic Stone] is 50`000`000 Elds. \If you raise money` come on again.
+176:Exit
+177:quietly...\(Mysterious energy seems to be flowing...)
+178:About Holy land of Seal...	Exit.
+179: Skull Bein killed Macnir` and he was blocked portal by Dark charm.\This portal is move Cursed land to Holy land of Seal.\I have to find weak point about Dark charm. Please help me.\If you kill Skull Bein` you will be given preferential treatment\as best warrior` and I will qualify you for move to Holy land of Seal.\Do you challenge?
+180:Exit
+181:Hello Young Warrior\You must be the one [Supreme Heart] told me about.\Well` before we go any further` I need you to run an errand for me.
+182:Sure` tell me.	No I am not going to do any errand.
+183:I ordered a hat from [Ms. Arebeth Wallen]. She has a shop located at the Southeast of the [Business Area]\I think she has been very busy and has not brought the hat to me yet...\Can you bring me the hat?
+184:Ok I will get the hat for you.	Sorry` I have something to do.
+185:Thank you very much. [Ms. Arebeth Wallen] can be found in the [Business Area].\If you are unable to find her` open your map and you will be able to see the small red dots.\These dots are the NPCs and when you place the curser on the dot` the NPC's name will appear.
+186:Unable to find [Ms. Arebeth Wallen]?\Open the map and look for the red dot that has a blue ring blinking around it.\That is [Ms. Arebeth Wallen].
+187: 
+188:[Ms. Arebeth Wallen] is good at what she does. Thank you for bringing me the hat.\Here is a thank you present from me.\I hope this can help you.\hmm....%UserName%` you think you can help me again?\It is a very simple task.
+189:Ok` tell me what is it.	Oh no` I am too tired.
+190:Could you pass this message to [Nanna Millenas] in the [Army base]\The [Army base] is located at the west.
+191:Ok` I will do it.	Sorry` I'm so tired.
+192:Thank you` But just a caution to you' [Nanna Millenas] is not as friendly as the others...\([Old man] Gives message with a cunning look)\Thanks once again..
+193:Oh` you have not delievered the message I gave you earlier?\(Please find [Nanna Millenas] and deliver the message.
+194: 
+195:She replied my message?\This is so exciting... oh did she bother you in any way?\(Keeps message away)...\Well` the place that you just visited is where you need to go when you reach level 30.\There are 4 Generals there who can assist you to obtain your next job.\Hope this information assists you...heres a present for you.\(The old man gives a [Millena Gauntlet].)
+196:Take this letter to [Supreme Heart] at the [Army Base].\She will have further instructions for you.\When you reach level 24` come back to me....\I will have more information for you.
+197:Bring the letter to [Supreme Heart] at the [Army Base].\She will have further instructions for you.
+198:Hello` what can I do for you?
+199:Make a Purchase.	Repair.	Goodbye.
+200:Strong armor is your best friend!
+201:Goodbye.
+202:Our boutique can also repair your armor.
+203:Goodbye.
+204:Goodbye 
+205: 
+206:Welcome` what brings you here?
+207:Make a Purchase.	Repair.	Goodbye.
+208:Welcome 
+209:Leave
+210:Weapons require care to get maximum result.
+211:Leave
+212:Exit 
+213:I wonder who is going to bring glory to Rain....
+214: 
+215:It must be nice to lead a carefree life of an adventurer.
+216: 
+217:Hi` I am [Tris Temple].
+218: 
+219:How are you today` %UserName%?
+220:Make a Purchase.	Goodbye.
+221:Take a break and see what my shop has got to offer you.
+222:Goodbye.
+223:Coolu beach is a fantastic place for a vacation.
+224:This is the place to meet anyone from everywhere.
+225:But it is not easy to get there.
+226:How can I get there?	Leave
+227:Everyone wants to go there` but it is a very exclusive beach. Not everyone will be able to get there.
+228:If you really want to go there` you need a ticket` but the ticket is not free.
+229:Kill as many monsters as possible and collect the application forms that drop from them.
+230:Bring 10 [Application for Coolu Beach] and I will give you an [Admission Ticket to Coolu Beach].
+231:Understand? 
+232: 
+233: Coolu Beach is very popular. You cannot go there without 10 [Application for Coolu Beach].
+234: 
+235:(Get an [Admission Ticket to Coolu Beach].)
+236:Congratulations` have a nice day!!
+237: 
+238:I wonder who is going to bring glory to Rain....
+239: 
+240:It must be nice to lead a carefree life of an adventurer.
+241: 
+242:Hi` I am [Nanaa Paras].
+243: 
+244:Wow? is that flower for me?
+245:Thank you' this is really a surprise.
+246:I'll give you a present. This is for you.
+247:(get a [Chocolate].)
+248: 
+249:Ah is this really for me? [her face is turning red] *^^*
+250:I cannot accept it without giving you something. here take this .
+251:But don't get too serious` OK?
+252:(get a[Chocolate].)
+253: 
+254:Hello %UserName%. What can I do for you today?
+255:Make a purchase.	Place items in Locker.	Leave.
+256:What would you like to keep in the locker?...remember no quest items.
+257:Make a purchase.	Leave.
+258:What would you like to buy?
+259:Place items in Locker.	Leave.
+260:%UserName%` what can I do for you?
+261:Collect Luimi's book.	Make a purchase.	Place items in Locker.	Leave.
+262:Oh my...I totally forgot all about it.
+263:[Luimi] must have been waiting for it since last week.
+264:(Accept the book.)
+265:Please tell her that I am extremely sorry.
+266:By the way` this is Rain's [Business Area].
+267:All the Merchants here sell different items which may be of some use to you.
+268:If you don't mind` please hurry back to [Luimi] and return the book.
+269:Thank you.
+270: 
+271:Isn't it a nice day today?
+272: 
+273:Have a pleasant day ahead.
+274: 
+275:Hi %UserName%. Nice to meet you.
+276: 
+277:How can I help you?
+278:I have one question!	Nothing much` have a good day.
+279:I will do my best to clarify your doubts.
+280:What is the duty of a [Mission Messenger]?	How do I get priority to a monster?	Leave
+281:A [Mission Messenger] assists a beginner like you.
+282:You can buy a [Mission Scroll] from a [Mission Messenger].
+283:Once you right click on the [Mission Scroll] the quest will be activiated.
+284:You can view the activated quests in your Quest Log by pressing the letter 'Q' on the keyboard.
+285:When you have fulfilled the quest conditions` return to the [Mission Messenger] to complete the quest.
+286:Are there any other questions?
+287:How do I get priority to a monster?	Leave
+288:The first person to hit the monster up to a certain amount of damage...
+289:.. is entitled to the experience and the drop from the monster.
+290:Note that when a monster is marked in Gray` it belongs to another player.
+291:If you attack that monster' you will not get anything from it.
+292:Are there any other questions?
+293:What is the duty of [Mission Messengger]?	Leave
+294:Hmm.. A new face.
+295:For your level` you better hunt [Kirakas] or [Garon] in the forest.
+296:The [Mission Messenger] will be able to aid you in your training.
+297:So train hard.
+298: 
+299:Question.....I have a question!!!
+300:(He refused to talk to me` do i need a recommendation letter?)
+301: 
+302:You are the bravest of the brave.. Here is my reward to you.
+303: 
+304:Thank you.
+305: 
+306:You will be the future of Millena if you continue heroic deeds such as this.
+307: 
+308:What are you doing with my chocolate? Go and give him my chocolate!
+309: 
+310:You telling me the truth right?
+311:Its not right ! I don't belief you that his love belongs to somebody else besides me.
+312:But never mind I will not stop until i have his love.
+313:Anyway Sorry to bother you` but I will give you a potion of love as a token of my appreciation. ##because i don't need them anymore.
+314:This potion of love can help you to express your feeling to the one who you really like.
+315: 
+316:Thank you and Happy Valentine's Day %UserName%.
+317: 
+318:In fact it has been long enough that i kept my feelings from Kurio Kahn. I want him to know how i feel.
+319:Since the first time i met him I know there's something more about him.
+320:Although he has a mark on his face` to me he is a handsome guy and i like that.
+321:Because of that i want to give him my home-made chocolate to reveal my feelings.
+322:But it is not easy to make chocolate` and i need cocolate seeds. And it is not easy to gahter up the seeds.
+323:Because the monsters damaged all the cocoa trees.
+324:And You know that i am too busy` because i have to keep an eye on the Rain army. So i have no time searching the cocoa seeds.
+325:Can you help me to gather 30 cocoa seeds?
+326:I will immediately look for it .	Here i have brought 30 cocoa seeds.	Sorry there are more important business to attend to.
+327:Thank you so much. I don't have much time` so you must hurry.
+328: 
+329:If you have ever been in love with somebody` you will understand.
+330: 
+331:Wow !!! thank you.... thank you . \(She give a chocolate that have been made.).
+332:Honestly i can't cook` but i have already prepared a delicious chocolate for him.
+333:And i also have a poem of love for him to read.
+334:So would you help me one more time to give this chocolate to him.. will you?
+335:Ok I will do'it for the name of love.	Sorry you better give him yourself.
+336:The seed is less than 30. Please search for more!
+337: 
+338:(She give a ready made chocolate.) \please help me give this to general Kurio Kahn.
+339:Ah` good. [Detruit Blodger] is an expert at what he does.
+340:Now it is time to prove your worth in battle.
+341:A [Mercenary] is a killing machine who knows no fear...
+342:We delve into the darkest reaches of our souls and draw forth our power...
+343:No foe is too tough for a [Mercenary] to handle...not even Demons.
+344:Are you willing to face your fears and conquer the darkness?
+345:I eat demons for breakfast! Just bring it!	De..De...Demons?!! Mommy!!!
+346:I hope you are not all talk.
+347:At the [Tough Wind Deserted Area]` there are creatures called [Kayrons] which are half demon...
+348:...and they have been terrorizing the villagers of [Haku Village] lately.
+349:Show these [Kayrons] the true meaning of fear. Kill them and bring back to me proof of your deeds.
+350:Only then will you be officially accepted into [Red Race].
+351:In the meantime` I will hold on to your new sword. You will get it back once you have accomplished this task.
+352:Goodbye and good luck.
+353: 
+354:Have you defeated the [Kayrons] at [Tough Wind Deserted Area] yet?
+355: 
+356:(Checking the [Kayron Horn])...
+357:Excellent work. Those [Kayrons] got what they deserved.
+358:You have shown true courage and have convinced me that you are worthy to join us.
+359:With the power vested in me by [King Lamu] you may now call yourself a [Mercenary]...
+360:... and I welcome you into our organization the [Red Race].
+361:I will now teach you the skill [Movement Speed Lvl 1]. You can use it to move faster for a short duration of time.
+362:And here's the sword i promised you.
+363:If you wish to learn another skill` just talk to me again.
+364:And lastly` remember my words carefully...
+365:[Mercenaries] straddle the thin fine line between darkness and light... 
+366:Lose yourself in the darkness and you will go down the path of self-destruction...
+367: 
+368:WHAT?! You are backing out NOW?! We don't need cowards in [Red Race]!
+369: Get out of my sight!
+370: 
+371:(Looking at her fierce red eyes makes my hair stand up!)
+372:WHAT DO YOU WANT?
+373:'I wish to be a member of [Red Race]!	Erm..sorry... I must have mistaken you for someone else..
+374:WHAT?! Do not take me for a fool!
+375:(Gives an angry look).
+376:You already are a member of another organization.. Begone!
+377: 
+378:HAHA! Are you kidding me?!
+379:We don't just accept any weaklings into [Red Race]!
+380:Come back when you're level 30 and THEN I will see for myself if you're strong enough to join us or not.
+381: 
+382:(Raises her eyebrows.)
+383:(Smirks.) An [Archer] wants to join us? Do you even know how to wield a sword? Haha..
+384:Stop joking around and go talk to [Nanna Millenas] instead.
+385: 
+386:Hmm..That's a BIG sword you have there...
+387:Bah! The bigger the sword..the slower your attack is... We don't want slowpokes in [Red Race].
+388:See that big guy over there? He's [Gabriel Heart]. Talk to him and join his group of slowpokes!
+389: 
+390:(She looks at me from head to toe.. Her red eyes are so scary!)
+391:Well well... You seem strong enough to join us...
+392:But before I can accept you into [Red Race]` there are some conditions which you have to fulfill.
+393:Conditions? What do you require?	I think I need more time to consider this...
+394:Well` let's begin with that scrappy piece of metal that you're holding in your hand now..
+395:You can't face the enemy with a weapon like that.
+396:What you need is a finely crafted sword worthy of a [Red Race] [Mercenary]...
+397:Where can i find such a sword?	You called my sword scrappy?!No Way!
+398:(Hands over a hastily written note.)
+399:Take this message to [Detruit Blodger] in [Haku Village].
+400:[Detruit Blodger] often travels to [Haku Village] to visit his clients from time to time...
+401:He will be able to help you craft a fine sword worthy of a [Red Race] member.
+402:Return to me once you have it in your possession.
+403: 
+404:Where is the sword from [Detruit Blodger]?
+405:Stop wasting time and go to [Haku Village] to get your new sword.
+406: 
+407:Which skill do you wish learn?
+408:Leave.
+409:Isn't it a nice day today?
+410: 
+411:Have a pleasant day ahead.
+412: 
+413:Hi %UserName%` I am [Arabeth Wallen]. Nice to meet you.
+414: 
+415:Hello` I am [Lainmint] from Rain.
+416:You are %UserName% right? [Illena] told me about you.
+417:Hmmm...You definitely look ready to face the challenges ahead of you...but..
+418:... I don't think you are ready for the [PvP Room] just yet.
+419:When you reach level 21` come back to me and I will tell you all about the [PvP Room].
+420:Goodbye. 
+421: 
+422:Hi %UserName%? Have you got a lot of victories?
+423:I am looking for [Illena]. Did you see her?
+424:If you see her tell her that I am looking for her.
+425:Goodbye. 
+426: 
+427:Hello` I am [Lainmint] from Rain.
+428:I've heard that Millena has a very strong army..but..
+429:... I have yet to meet a true hero from Millena. Besides` I think Rain's soldiers are better off using [Proima] to help them in battle..
+430:...unless you want to prove me wrong of course.. Hehe..
+431:Why don't you try going to the [PvP Room] and show me what the Millena army is really made of?
+432:In the [PvP Room]` you can battle with or against anyone` it doesn't matter if they are from Rain or Millena. 
+433:It is a good place to practice your skills against other players.
+434:Take note that you do not get any fame points from participating in [PvP Room] battles though.
+435:So how about it` %UserName%? Do you wish to take up my challenge and show me your ability?
+436:It is not good to underestimate someone. I will show you the strength of Millena!	Why should I let someone from Rain see my moves?! I'm not interested.
+437:Hello` I am [Lainmint] from Rain.
+438:Have you ever fought and lost a fight?
+439:I have come from afar to see the people in Millena fight...
+440:Come on %UserName%` show me your ability.
+441:OK. I will show you my fighting ability but don't say I didn't warn you!	Why should I let someone from Rain see my moves?! I'm not interested.
+442:Ah! Finally someone willing and brave enough to take up my challenge!
+443:Click on the 'M' next to your avatar` and then click on the 'PvP Room' option to enter the [PvP Room].
+444:[Illena] and I can move from one dimension to another easily` and we can see you from anywhere %UserName%.
+445:Put up a good fight' and then come talk to me again.
+446:All the best!
+447: 
+448:Oh well... I can't help it if you feel that way.
+449:It is not as if I am a spy or anything...
+450:[Illena] and I` we come from different nations but we are both very close!
+451:If you ever change your mind and improve on your manners` come talk to me again.
+452: 
+453:Click on the 'M' next to your avatar` and then click on the 'PvP Room' option to enter the [PvP Room].
+454:Put up a good fight and come back to me.
+455:I'll be watching you
+456: 
+457:I am very impressed! You fought very well` %UserName%.
+458:Regardless of whether you won or lost... you fought very well.
+459:Remember` this is not the actual victory... 
+460:Millena and [Rain] will battle each other one day.
+461:That is the moment of truth because that will be the biggest battle and the outcome of that battle will change everything. 
+462:Nevermind` I will tell you more later. For now I hope you get stronger and be a role model for all aspiring Rain adventurers.
+463:Remember` [Illena] and I` we are good friends despite our heritage and we hope for only the best for the future. 
+464:This is a small present from me. Goodbye.
+465:(Get 100 Fame points.)
+466: 
+467:Ok.\Thank you.
+468: 
+469:Hello Young Apprentice...\You must be the one [Nad Luas] told me about.\Well` before we go any further` I need you to run an errand for me.
+470:Sure` tell me.	No I am not going to do any errand.
+471:[Nanaa Paras] borrowed a book from me which she was suppose to return last week.\She is always so busy with her shop that it must have slipped her mind.\Look for her in the [Business Area] and retrieve the book for me.
+472: 
+473:Unable to find [Nanaa Paras]?\Open the map and look for the red dot that has a blue ring blinking around it. That is [Nanaa Paras].
+474: 
+475:Thank you for bringing me my book.Here is a thank you present from me.\I hope this can help you.hmm....%UserName%` you think you can help me again?\It is a very simple task.
+476:Yes` Of course.	I'm too tired.
+477:(Her face is red). Could you give this message to [Elpid Sheiat].\He is just outside the goverment building at the back of town.
+478:OK.	I'm sorry` I think I do not want to get myself involved in this.
+479:[Elpid Sheiat] usually stands outside the goverment building at the back of town.
+480: 
+481:You have not given the messsage to him yet...\Please give it to him as soon as you can.
+482: 
+483:[Elpid Sheiat] replied?(She blushes)...hehehe...Thank you.\(Takes the message)[Elpid Sheiat] is the best [Priest] in Rain...\[Elpid Sheiat] is really....hmm...nevermind forget it.\Anyway you will probably meet him again when you reach level 30.\Here is a small gift for helping me.
+484: 
+485:Take this letter to [Nad Luas]. He will have further instructions for you.
+486: 
+487:Take this letter to [Nad Luas]. He will have further instructions for you.
+488: 
+489:(Luimi is reading...)
+490:About Holy Land of Seal...	Exit.
+491:Do you know how difficult it is to make Clean Water of Flame?
+492:If you can bring me 15 pieces of Illas's flame tails from [Frozen Lake] I will help you to make Clean Water of Flame.
+493: 
+494:Ok.	No.
+495:Thank you taking the trouble. Here it is... Be careful. 
+496: 
+497:Too difficult for you?...Ah` it's just one of those things huh? Well` Come back to me if you change your mind.
+498: 
+499:Skull Bein killed Macnir` and he was blocked portal by Dark charm.\This portal is move Cursed land to Holy land of Seal.\I have to find weak point about Dark charm. Please help me.\If you kill Skull Bein` you will be given preferential treatment\as best warrior` and I will qualify you for move to Holy land of Seal.\Do you challenge?
+500:Exit	Back
+501:Skull Bein killed Macnir` and he was blocked portal by Dark charm.\This portal is move Cursed land to Holy land of Seal.\I have to find weak point about Dark charm. Please help me.\If you kill Skull Bein` you will be given preferential treatment\as best warrior` and I will qualify you for move to Holy land of Seal.\Do you challenge?
+502:Yes` I do.	No.
+503:Be careful. Skull Bein is very dangerous.
+504: 
+505:Oh~ Best warrior!!\If you move to Holy land of Seal follow [Mystic Stone]` \please kill all monster and Jyanade. \And you must survive for future of Millena. \Keep in mind!
+506:Exit
+507:You already know this mission is very hard... !
+508: 
+509:Jynade??s power is growing up. Hurry Up!
+510:I lost [Mystic Stone].	Exit
+511:You are out of mind...-.- \You already have Mystic stone~! \Tut` tut! Find your inventory again!
+512:Exit
+513:Are you crazy? Did you really lose [Mystic Stone]? \I don`t believe you are best warrior. \[Mystic Stone] is 50`000`000 Elds.
+514:Buy Now	Exit
+515:Never make mistake! Here is it.
+516:Exit
+517:[Mystic Stone] is 50`000`000 Elds. \If you raise money` come on again.
+518:Exit
+519:I wonder who is going to bring glory to Rain....
+520: 
+521:It must be nice to lead a carefree life of an adventurer.
+522: 
+523:Hi` I am [Ciel].
+524: 
+525:How can I help you?
+526:I have one question!	Nothing much` have a good day.
+527:I will do my best to clarify your doubts.
+528:What is the duty of a [Mission Messenger]?	How do I get priority to a monster?	Leave
+529:A [Mission Messenger] assists a beginner like you.
+530:You can buy a [Mission Scroll] from a [Mission Messenger].
+531:Once you right click on the [Mission Scroll] the quest will be activiated.
+532:You can view the activated quests in your Quest Log by pressing the letter 'Q' on the keyboard.
+533:When you have fulfilled the quest conditions` return to the [Mission Messenger] to complete the quest.
+534:Are there any other questions?
+535:How do I get priority to a monster?	Leave
+536:The first person to hit the monster up to a certain amount of damage...
+537:.. is entitled to the experience and the drop from the monster.
+538:Note that when a monster is marked in Gray` it belongs to another player.
+539:If you attack that monster' you will not get anything from it.
+540:Are there any other questions?
+541:What is the duty of [Mission Messengger]?	Leave
+542:Hmm.. A new face.
+543:For your level` you better hunt [Lupus] or [Maron] in the valley.
+544:The [Mission Messenger] will be able to aid you in your training.
+545:So do your best.
+546: 
+547:Question.....I have a question!!!
+548:(She refused to talk to me` do i need a recommendation letter?)
+549: 
+550:You are the bravest of the brave.. Here is my reward to you.
+551: 
+552:Thank you.
+553: 
+554:You will be the future of Rain if you continue heroic deeds such as this.
+555: 
+556:What are you doing with my chocolate? Go and give him my chocolate!
+557:You telling me the truth right?
+558:Really ! I don't belief you that he also love me.
+559:I'm very very happy that he are accept my love.
+560:Anyway Sorry to bother you but I will give you a potion of love as a token of my appreciation` ##because i don't need them anymore.
+561:This potion of love can help you to express your feeling to the one who you really like.
+562: 
+563:Thank you and Happy Valentine's Day %UserName%
+564: 
+565:I have recognize Elpid Sheiat since we meet for the first time in training room.
+566:Later`Then I fall in love with him` because he is very nice and handsome.
+567:But i haven't any self confident to express my feelings.
+568:He is Very popular and a lot of girl like him.
+569:Therefore i want to give him my home-made chocolate to reveal my feelings.
+570:But it is not easy to make chocolate` and i need cocolate seeds. And it is not easy to gahter up the seeds.
+571:Because the monsters damaged all the cocoa trees.
+572:And You know that i am too busy` because i have to keep an eye on the Millena army. So i have no time searching the cocoa seeds.
+573:Can you help me to gather 30 cocoa seeds?
+574:I will immediately look for it .	Here i have brought 30 cocoa seeds.	Sorry there are more important business to attend to.
+575:Thank you so much. I don't have much time` so you must hurry.
+576: 
+577:If you have ever been in love with somebody` you will understand.
+578: 
+579:Wow !!! thank you.... thank you . \(She give a chocolate that have been made.).
+580:Honestly i can't cook` but i have already prepared a delicious chocolate for him.
+581:And i also have a poem of love for him to read.
+582:So would you help me one more time to give this chocolate to him.. will you?
+583:Ok I will do'it for the name of love.	Sorry you better give him yourself.
+584:The seed is less than 30. Please search for more!
+585: 
+586:(She give a ready made chocolate.) \please help me give this to general Elpid Sheiat.
+587:Hmm ... 
+588:Now it is time to prove your worth.
+589:The ability of a [Prominas] is to interact with the [Upper Proimas].
+590:If you do not have the knowledge and skill to interact and control the [Upper Proimas] effectively...
+591:...they will control you instead and the consequences are disastrous.
+592:Are you sure you want to own this knowledge??
+593:Yes!!	Nope` I don't think so...
+594:Ok. 
+595:Go to [Esan Snow Area] near [Jede Village] and defeat [Male Picos]...
+596:..but you must complete this task alone.
+597:Return only when you have some proof of your deed.
+598:Meanwhile` I will keep this [Magical Script] with me until you return.
+599: 
+600:Go to [Esan Snow Area] near [Jede Village] and defeat [Male Picos]...
+601:You have to do it alone.
+602:Return only when you have some proof of your deed.
+603: 
+604:(Carefully checking the [Pico Tail])... Nice work.
+605:You have proven yourself worthy of becoming a part of [IOLOS].
+606:With the authority given by the people of Rain you are now a [Prominas].
+607:This [Magical Script] is now yours.
+608:If you would like to learn another skill` come back to me.
+609: 
+610:When you feel you are ready to control [Upper Proimas]` come back to me.
+611: 
+612:(Her face is so smooth and rosy..)
+613: Yes?...
+614:I want to become a member of [IOLOS]!	Um..Sorry.. I'll be on my way.
+615:(Cynically) You follow a different path from me...
+616: 
+617:(Cynically) Please don't waste my time...
+618:...you are not skilled enough to control [Upper Proimas].
+619: 
+620:You are a [Shaman].
+621:Look for [Ka Lubleton].
+622: 
+623:You would like to become a [Prominas]?
+624:Yes.	No.
+625:To become a [Prominas] is quite difficult.
+626:First` you must have already collected all the powers of [Upper Proimas] and [Magical Script] ...
+627:[Magical Script] meaning ...?	I don't think I want to become a [Prominas] anymore..
+628:(Hands over a neatly folded note).
+629:Give this message to [Luel] in [Jede Village].
+630:She goes to [Jede] village often to see her regular clients.
+631:If you fulfill her conditions` you will be given a [Magical Script].
+632:After you get the [Magical Script]` come back to me.
+633: 
+634:After you get the [Magical Script] from [Luel] in [Jede Village]` come back to me.
+635: 
+636:You want to learn more skills?
+637:Goodbye.
+638:Hmm... This plan will be very useful. Deliver this confirmation note to Larke...
+639:...and tell him that we will need some time to get ready for a large-scale attack.
+640: 
+641:Hi there. What do you need?
+642:Recommendation letter from [Luimi].	Learn skill.	Goodbye.
+643:Learn skill.	I want to know about [Frontiers].	Goodbye.
+644:(Reading letter of recommendation) hmm ...
+645:I have been expecting you` %UserName%. I hope it was not too hard to find me in town.
+646:Well then` let's begin...
+647:We need a lot of [Proima] to prepare ourselves for battle against Millena and the ugly monsters living in [Lette Plane].
+648:To receive the blessings of [Proima]` what you need it is a good self development.
+649:%UserName%` the most ideal place for you to improve your skills now is at [Gaia valley]` north of town.
+650:Once you have mastered your skills and gained enough experience` come back and I will teach you more skills.
+651:When you level up` you will be given a skill point which you can accumulate and use to increase the level of your preferred skills.
+652:Every skill that you level up will be able to increase your fighting ability...
+653:... and also determine your fighting style. ##So use your skill points wisely.
+654:well` you better get started then.
+655:Use the [Portal] which can be found north of town to go to [Gaia Valley].
+656:Look for [Ciel]` She can help you` %UserName%.
+657:Good luck` %UserName%. Before you go` I have a gift for you. Hopefully it can help you.
+658:Good bye.
+659: 
+660:Which skill would you like to learn?
+661:Goodbye.
+662:Frontier? What would you like to know?
+663:Tell me more about [Frontiers].	I wish to form a [Frontier].	I wish to buy a [Frontier Guardian]	I want to buy [Supplements] for [Frontier Guardian].
+664:What would you like to know?
+665:What is a [Frontier]?	What do I have to do to create a [Frontier]?	What is a [Frontier Guardian]?	Goodbye.
+666:A [Frontier] is an ordinary organization structure formed by young adventures of Rain to adventure together...
+667:...and explore the vast lands of our kindom and beyond.
+668:Everyone in Rain can join or create their own [Frontier].
+669:You can face a [Frontier] from Millena during special events.
+670:Any other questions?
+671:How do I create or join a [Frontier]?	What is a [Frontier Guardian]?	No. Thank you. Goodbye.
+672:To create a [Frontier] you must first create a [League (Pre-Frontier)].
+673:A [League] is an early form of organization.
+674:To form a [League (Pre-Frontier)] you will need at least 4 members.
+675:The founder of the [League (Pre-Frontier)] should have a second job and will be given the status [Master]...
+676:... and the other 3 members will each be called a [Major].
+677:After forming the [League]` members of the league can invite others...
+678:... before going for a confession to become a [Frontier] with at least 10 members.
+679:Functions like nickname` [Frontier Guardian]` Frontier logo` and such cannot be used until a [Frontier] is formed.
+680:There are 4 levels of position in a [League/Frontier]. [Master]` [Major]` [Assist] and [Cadet].
+681:Only the [Master] and [Major] can invite new members.
+682:If you wish to join a [League/Frontier]` look for the [Master] or [Major] of the [Frontier].
+683:Are there any other questions?
+684:What is a [Frontier]?	What is a [Frontier Guardian]?	No more questions. Goodbye.
+685:[Frontier Guardians] come from the [Lah Continent] which is full of mysteries.
+686:They generally live in another dimension` but will emerge if the [Frontier Master] calls them.
+687:A [Frontier Guardian] releases an aura which regenerate or improve the ability of all [Frontier] members in a certain area.
+688:As they reside in our dimension` they will grow and will evolve into an amazing form.
+689:A [Frontier Guardian] is not only a loyal companion but also will become a symbol of your [Frontier].
+690:Take note however` every time a [Frontier Guardian] appears in our dimension`...
+691:...it needs a lot of energy. So do not forget to feed it with [Supplements] in order to keep it in our dimension.
+692:Are there any other questions?
+693:What is a [Frontier]?	How do I create or join a [Frontier]?	No more questions. Goodbye.
+694:Hmm... you wish to create a [Frontier]?
+695:Create a [League (Pre-Frontier)]	Request confession to make a [Frontier].
+696:To create a [League (Pre-Frontier)]` you need 4 members.
+697:The founder of the [League (Pre-Frontier)] should have a second job and will be given the status [Master]...
+698:...and the other 3 members will each be called a [Major].
+699:After this you have to look for at least 6 more members to get a total of 10 members before going for a confession.
+700:Would you like to create a [Frontier] now?
+701:Yes` I want to create a [Frontier]	No` not yet
+702:To create a [Frontier] you must at least have 10 members to get a confession.
+703:And the fee is 100 thousand Elds.
+704:Get a confession now?
+705:Yes` I would like to get a confession now!	No` not yet.
+706:Only a [Frontier Master] can do it.
+707: 
+708:You need 100 thousand Elds to get a [Frontier] confession.
+709: 
+710:To create a [Frontier] you must at least have 10 members to get a confession.
+711: 
+712:Only a [Frontier Master] can do it.
+713: 
+714:A [Frontier Guardian] brings blessing to the [Frontier]. Treat it wisely.
+715:exit
+716:You can buy [Supplements] for your [Frontier Guardian] at the price of 500 Elds each.
+717:Would you like to buy some [Supplements] now?
+718:Yes` of course.	No` not now.
+719:You are the bravest of the brave.. Here is my reward to you.
+720: 
+721:Thank you.
+722: 
+723:You will be the future of Rain if you continue heroic deeds such as this.
+724: 
+725:Oh Oh.. What's this?
+726:Chocolate from Saiki Rugart for me?
+727:(Elpid Seiat reads the love poem sent with the chocolate)
+728:Hahaha.. really so all this time she has fancied me.
+729:I also fancied her secretly but I was not sure if she liked me.
+730:Would you help me to give this flower to her and tell her that I like her too.
+731:Will you help me ^^?
+732:Ok` I will send this' in the name of love.	Sorry` Please give it directly to her.
+733:This flower cannot hold on till later. Quickly you have to hurry.
+734: 
+735:What does the note say?
+736: 
+737:Thank you. Have a nice day.
+738: 
+739:[Luimi] gave this to me?
+740:(reads message) um... oh... ... 
+741:(seems a little surprised)
+742:Hmm` wait ... (Takes out a piece of paper and writes a message.)
+743:Forgive me` but can you bring this message back to her? I can't leave my post..
+744:..so I'd appreciate it if you could help me deliver my reply to her.
+745: Oh` where are my manners... My name is [Elpid Sheiat].
+746:Nice to meet you` %UserName%. Thank you once again for helping me.
+747:(Bows courteously.)
+748: 
+749:Good. I hope [Luel] did not put you through too much trouble in getting the [Staff].
+750:Now it's time for you to show me your ability as a [Priest].
+751:A [Priest] plays a very important role in parties.
+752:We provide other party members with excellent healing and recovery assists especially when facing stronger opponents.
+753:So how about it? Are you ready to assist a party?
+754:Yes!	Hmm ...Give me more time to think about it.
+755:Allright` now you need to prove yourself worthy of being a member of [Laina Cross].
+756:Gather some friends and join forces as a party to defeat a [Female Urak] at [Esan Snow Area]. 
+757:Remember that you have to be in a party to complete this test.
+758:Bring me some proof that you have been successful in defeating a [Female Urak].. 
+759:...and I will give you this [Staff] in return so you can join us officially as a member.
+760: 
+761:Have you joined a party yet to defeat a [Female Urak]?
+762:Return to me once you have done so.
+763: 
+764:(Looking at [Urak Nail]) Impressive.
+765:You have passed my test with flying colours.
+766:Well done` [Priest]. Welcome to [Laina Cross].
+767:We will teach you [Healing] which is the most important spell for a [Priest].
+768:All your previous skills will be gone and you will have access to new skills that only [Priests] can learn...
+769:If you wish to learn more skills` come back to me again.
+770: 
+771:How can I help you?
+772:I want to be a member of [Laina Cross]!	Goodbye.
+773:You already are a member of another organization.
+774: 
+775:You have yet to fully understand the power that is [Proima]..
+776:You need more practice. Return to me when you are level 30.
+777: 
+778:I'm sorry` but you are a [Shaman]. We only accept [Magicians].
+779:Talk to [Ka Lubleton] instead. She will be able to help you.
+780: 
+781:You want to join us as a [Priest]?
+782:A [Priest] is someone who wields a [Staff] and uses [Proima] to heal and protect others.
+783:But if you become a [Priest]` most of your other skills will be lost.
+784:However` all your used skill points will be returned to you.
+785:Do you still want to become a [Priest]?
+786:Yes.	I'm sorry` I think I need more time to think this over.
+787:To choose the path of a [Priest] is to choose the path of a martyr. Always remember this` %UserName%.
+788:Now` the first step to becoming a [Priest] is to obtain a [Staff] to control the power of [Proima].
+789:Staff?	I think I'm not suited to be a [Priest] after all.
+790:(Hands over a neatly folded piece of paper.)
+791:Take this message to [Luel] in [Jede Village].
+792:She goes to [Jede Village] to visit her clients from time to time ...
+793:Show her my message and she will help to create a [Staff] for you.
+794:Return to me once you have obtained the [Staff].
+795: 
+796:You have yet to obtain the [Staff] from [Luel]. Return to me once you have it in your possession.
+797: 
+798:Which skill do you want to learn?
+799:Goodbye.
+800:Hi` I am Princess Nanna Millenas and I am the best archer in [Millena].
+801:Are you looking for me?
+802:Pass message from the [Old man]'	No sorry` I think I got the wrong person.
+803:I want to become a member of [Free Cats](Sniper)...	Bye
+804:Hmm.. the [Old man] asked you to deliver this .....
+805:(With an annoyed look` she writes a note)
+806:(Witn an angry look on her face)
+807:Give this back to the [Old man]!
+808:Ok` I will bring this to him	Sorry I have to be on my way now.
+809:And you! Don't bother looking for me with this again.
+810: 
+811:You are already a member of another group.
+812:Don't waste my time.
+813: 
+814:You are still an amateur....
+815:return to me when you are Level 30.
+816: 
+817:You are not an Archer.
+818:Go bother someone else...
+819: 
+820:So` you want to become a [Sniper] and join the [Free Cats]?
+821:Looks like you need a better weapon.
+822:What do you mean?	Cancel Job transfer.
+823:You cannot do much with the [Bow] you have.
+824:What do I need to do now to become a [Sniper]?	Cancel Job transfer.
+825:(Takes a piece of paper and writes a note.)
+826:Give this memo to [Detruit Boldger] in [Haku village].
+827:[Detruit Boldger] often travels between [Millena Town] and [Haku village] to sell weapons...
+828:He will probably ask you to get him some materials to make you a better [Bow].
+829:Once he gives you the new [Bow]` bring that back to me.
+830: 
+831:After you get the [Bow] from [Detruit Boldger]` Come back to me.
+832: 
+833:So you managed to get [Detruit Boldger] to make you a new [Bow].
+834:I am impressed!
+835:A [Sniper] plays an important role in the battlefield....
+836:..and provide crucial offensive and defensive support to the soldiers in the frontline.
+837:Do you think you have what it takes to be a [Sniper]?
+838:You have to be able to think and move quickly.
+839:Of Course!	I do not think so...
+840:Go to [Plains of Memory] and follow the road to [Tough Wind Deserted Area].
+841:Find and defeat [Kayron Magician].
+842:Remember' you have to do this alone' and bring me a piece of evidence to prove you have defeated [Kayron Magician].
+843:If you return to me with the evidence` you will be accepted as a member of the [Free Cats].
+844:But I will keep this [Bow] for you until you return.
+845: 
+846:Have you not succeeded in defeating [Kayron Magician]?
+847: 
+848:Well then probably you are not ready to join [Free Cats].
+849: 
+850:(Looking at the [Kayron Horn])
+851:(winking) Great work!!!
+852:I am convinced that you are fit to be a member of the [Free Cats].
+853:You are now officially a member of the [Free Cats].
+854:And here's the [Bow] that you brought from [Detruit Boldger].
+855:You can return to me to learn more skills...
+856: 
+857:Which skill would you like to learn?
+858:Bye.
+859:Now that you have a [Staff]` you will have to prove your ability if you want to become a [Holy Avenger].
+860:A [Holy Avenger] uses [Proima] just like a [Priest]...
+861:but instead of using [Proima] for healing....
+862:[Holy Avengers] use it to protect and strengthen others as well as a destructive tool to defeat their foes.
+863:We have to have strong instincts....do you have that?
+864:Yes! I have that!	Okay..I think I don't want to be a [Holy Avenger] anymore..
+865:Go to [Esan Snow Area] near [Jede Village] and defeat [Male Picos] with the help of a party.
+866:You have to complete this task with a party.
+867:Bring me proof of your deed and only then will I accept you as a member of [Bengens].
+868:I will keep this [Staff] with me until you return.
+869: 
+870:Go to [Esan Snow Area] and defeat [Male Picos] with the help of a party.
+871:Return to me with proof of your deed and you will officially be part of us [Bengens].
+872: 
+873:(Carefully checking the [Pico Tail]) Good!
+874:You have proven that you are worthy to become part of [Bengens].
+875:With the authority given by the people of Rain you are now a [Holy Avenger] and a proud member of [Bengens].
+876:This [Staff] is now yours..
+877:From now on you cannot use [Magical Script] and any other weapon... ...
+878:If you would like know more skills of a [Holy Avenger]` come talk to me again.
+879: 
+880:What do you need from me?
+881:I want to become a member of [Bengens]!	Good bye.
+882:You already belong to another organization.
+883: 
+884:You have yet to master the use of [Proima].
+885:Talk to me again when you reach level 30.
+886: 
+887:We don't accept [Shamans]...
+888:[Ka Lubleton] may be able to help you instead.
+889: 
+890:So you want to become a [Holy Avenger]?
+891:A [Holy Avenger] wields a [Staff] and uses [Proima] to protect and strengthen others.
+892:But` by becoming a [Holy Avenger]` you will lose all of your previous [Magician] skills.
+893:Do not worry though` you will get all of your used skill points back.
+894:Do you still want to become a [Holy Avenger]?
+895:Yes!	I may need more time to think about it.
+896:Well` if you insist ... 
+897:First` you need a [Staff] to release the power of [Proima]. 
+898:A [Staff]?	I think I've changed my mind...
+899:(Hands over a neatly folded piece of paper.)
+900:Bring this memo to [Luel] in [Jede Village].
+901:She often goes to [Jede Village] to sell weapons to buyers...
+902:If you fulfill her conditions` she can create a [Staff] for you.
+903:Return to me once you have the [Staff] in your possession.
+904: 
+905:Go to [Jede Village] and talk to [Luel] to get a [Staff].
+906:Return to me once you have the [Staff] in your possession.
+907: 
+908:Which skill do you want to learn?
+909:Leave.
+910:You are the bravest of the brave.. Here is my reward to you.
+911: 
+912:Thank you.
+913: 
+914:You will be the future of Rain if you continue heroic deeds such as this.
+915: 
+916:(Hmmm....) 
+917:(Before you can become a [Psyche]` you will have to go through a ritual...)
+918:(...that will detach your mind and soul from your physical body...)
+919:(This ritual will require some feathers from the creature [Pico]..)
+920:Go on..
+921:(You can find plenty of [Picos] at [Esan Snow Area] ...)
+922:(We need 5 [Pico Feathers] to commence the ritual.)
+923:(Return to me once you have found 5 [Pico Feathers]...)
+924:(...and I will give you this [Crystal Ball] after the ritual.)
+925: 
+926:(You can find plenty of [Picos] at [Esan Snow Area] ...)
+927:(Return to me once you have found 5 [Pico Feathers]...)
+928: 
+929:((Staring at the 5 feathers) We are ready now.)
+930:(Just a moment... ... ..
+931:(She burns the feathers.)
+932:(Throws the ash in the air) In the name of [Proima Tesarat] from the [Great Dimension]' this small body will own two characteristics.
+933:Relax...and calm yourself...
+934:Your mind will now enter another plane consolidate your will and [Proima] will guide you to your destiny.
+935:[Erekte Secrate Flamine Tesarate].
+936:Ptttuii. (spit).
+937:(There's light around me ... ...)
+938:(You have now become a member of [Arkanas]...)
+939:(Now you can learn [Multiple Characteristic (Arack)].)
+940:([Arck] will improve your fighting ability ...)
+941:(...and if you wish to learn another skill` come back to me.")
+942: 
+943:(Wow..She looks scary..)
+944:Who are you calling 'scary'?!! ....
+945:Cool..you can read my mind! I want to be a member of [Arkanas]!	!!!.. Stop reading my mind! Goodbye!
+946:You already belong to another organization.
+947: 
+948:You are still not good enough to be a [Psyche]. Talk to me again when you are stronger.
+949: 
+950:(You are not a [Shaman]... Don't waste my time..)
+951: 
+952:(So you want to become a [Psyche] huh?...)
+953:Of course!	Uhm..Maybe this is not such a good idea..
+954:( ... ... ... )
+955:(To become a [Psyche]` you need a [Crystal Ball].. a really big one.)
+956:[Crystal Ball]?	Cancel Job transfer.
+957:Bring this message to [Luel] in [Jede Village].
+958:She often goes to [Jede Village] to sell weapons to her regular clients...
+959:If you fulfill her conditions` she will give a [Crystall Ball].
+960:Bring the [Crystal Ball] back to me.
+961: 
+962:After getting the [Crystal Ball] from [Luel] in [Jede Village]` come back to me.
+963: 
+964:What skill do you want to learn?
+965:Leave.
+966:Finally...this is it! Well` deliver this confirmation note back to Larke.
+967: 
+968:Isn't it a nice day today?
+969: 
+970:Have a pleasant day ahead.
+971: 
+972:Hi %UserName%. Nice to meet you.
+973: 
+974:(A middle aged man is standing wearing a battle armor.)
+975:(He seems very strong.)
+976:You are?
+977:I want to be a member of [Twinible Balkan]!	Goodbye.
+978:You already belong to another organization.
+979: 
+980:(He smiles warmly)...
+981:Enthusiasm is a young person's blessing...
+982:...but it seems to me that you are not ready yet.
+983:You need more training. Come talk to me again when you reach level 30.
+984: 
+985:Ah` but you are an [Archer].
+986:I'm sorry but I can't help you. Talk to [Princess Nanna]` she is able to help you. 
+987: 
+988:To be a member of [Twinible Balkan]` you must be able to use a [Big Sword].
+989:Maybe you should talk to either [Kurio Khan] or [Reishana Cube].
+990:I'm sure they will be able to help someone like you.
+991: 
+992:Oh`... you must be the one [Supreme Heart] was talking about.
+993:So you have decided to become a [Slayer]?
+994:[Supreme Heart] told you about me?	No. I don't think I want to be a [Slayer].
+995:Haha.. Small world isn't it?
+996:[Supreme Heart] is my daughter of course! Haha!
+997:She's a wonderful girl isn't she? Haha! That's because she is MY daughter! Haha!
+998:... Erm... Okay... ...	...I think I don't want to become a [Slayer] anymore...
+999:Hahaha! Oh' So you were saying you wanted to be a member of [Twinible Balkan]?
+1000:Okay` before that you have to past 2 tests.
+1001:This is an old tradition ... 
+1002:People call this the [Trial of the sword and madness] 
+1003:First you need a new [Big Sword].
+1004:(Hands over a hastily written message.)
+1005:Bring this message to [Detruit Blodger] at [Haku Village].
+1006:[Detruit Blodger] often travels between [Millena Town] and [Haku Village] selling weapons to buyers...
+1007:If you fulfill his conditions` he will give you a [Big Sword].
+1008:Bring that [Big Sword] to me.
+1009: 
+1010:Look for [Detruit Blodger] at [Haku Village]. He will be able to help you get a new [Big Sword].
+1011:Return to me with the [Big Sword] in your possession.
+1012: 
+1013:Ah` you managed to get [Detruit Blodger] to give you a new [Big Sword].
+1014:Seems like [Supreme Heart] was right about you after all. That you indeed have talent.
+1015:Now for the next test....[Trial of the sword and madness]....
+1016:A [Slayer] is crucial in deciding the outcome of a battle.
+1017:Because we can dish out a huge amount of damage' we usually end up being the main damage dealers in parties.
+1018:[Slayers] are known to have this thing called [Madness] coursing through our veins and burning in our spirit!
+1019:Do you have the [Madness] in you?!!
+1020:Grr!!!Of course!!	Uhm..I'm not mad..
+1021:Hahaha! I can already sense some [Madness] in you! Hahaha! Good Good!
+1022:Now` travel alone to [Tough Wind Deserted Area]` the area just outside [Haku Village] and defeat [Kayron Warriors].
+1023:[Kayron Warriors] may be a little dificult for you at this time` but try to release the [Madness] in yourself.
+1024:(whispers in my eear) If you really have difficulties` you can ask your friends to help out...
+1025:...but remember to bring some proof of your deed. But don't tell this to anyone allright?
+1026:Defeat [Kayron Warriors] and prove to me that you have [Madness] in you!!
+1027: 
+1028:Defeat [Kayron Warriors] and prove to me that you have [Madness] in you!!
+1029: 
+1030:Ah? You changed your mind? If you still want to become a [Slayer]` talk to me again.
+1031: 
+1032:(Looking at the [Kayron Horn]) Hahaha! Excellent work!!
+1033:You can now become a member of [Slayer] and not another soul can say otherwise!!Haha!
+1034:With the authority vested in me by [King Lamu]` I will now promote you to be a [Slayer].
+1035:And now` I will give you your first skill.
+1036:If you would like to learn more [Slayer] skills` talk to me again.
+1037:Oh` before I forget...
+1038:...the [Big Sword] is now yours.Haha! Show your enemies the might of [Slayers]!!
+1039: 
+1040:Which skill do you want to learn?
+1041:Leave.
+1042:You are the bravest of the brave.. Here is my reward to you.
+1043: 
+1044:Thank you.
+1045: 
+1046:You will be the future of Millena if you continue heroic deeds such as this.
+1047: 
+1048:Oh Oh.. What's this?
+1049:Chocolate from Reishana Cube for me?
+1050:(Kurio Kahn reads the love poem sent with the chocolate)
+1051:Aha.. really she likes me.
+1052:She is really a cool woman and is nice.
+1053:Yes its true that I too love her' but have never told her my love.
+1054:Can you help me to bring this flower to her and thank her for loving me.
+1055:(He gives you a flower)\You will deliver this flower for me won't you?
+1056:Alright` I hope she is not disappointed.	Sorry` Please give her yourself....
+1057:This flower cannot hold on till later. Quickly you have to hurry.
+1058: 
+1059:What does the note say?
+1060: 
+1061:Thank you. Have a nice day.
+1062: 
+1063:(That's a very nice shield he has on his back..)
+1064:(He looks extremely strong.)
+1065:I want to be a member of [Silver Shield]!	Goodbye.
+1066:You already belong to another organization.
+1067: 
+1068:(Eyes Glowing.)
+1069:Are you even strong enough to wield both a shield and a sword?
+1070: 
+1071:(Eyes Glowing.)
+1072:Do you see me wielding a [Bow]? NO? Then go bother someone else. 
+1073: 
+1074:(Eyes Glowing.)
+1075:You cannot use a [Shield] if you use a [Big Sword].
+1076:Talk to [Gabriel Heart]. He can help you.
+1077: 
+1078:(Eyes Glowing.)
+1079:Hmm... A [Knight] is a soldier who wields a [Shield] and wears [Heavy Armor]...
+1080:...so you need a lot of physical strength and stamina to become one.
+1081:You think you have what it takes to become a [Knight]?
+1082:Of course!	[Shield]? [Heavy Armor]? Sorry` I don't think I want to be a [Knight].
+1083:The power of a [Knight] lies in his [Shield] and his belief in his own strength.
+1084:First` bring me a [Shield].
+1085:What?! From where?.	Sorry` I don't think I want to be a [Knight].
+1086:(Hands over a neatly folded piece of paper.)
+1087:Take this message to [Detruit Blodger] at [Haku Village].
+1088:[Detruit Blodger] often travels between [Millena Town] and [Haku Village] selling weapons to buyers...
+1089:If you fulfill his conditions` he will give you a [Shield].
+1090:Bring that [Shield] to me.
+1091: 
+1092:Look for [Detruit Blodger] at [Haku Village]. He will be able to help you get a [Shield].
+1093:Bring the [Shield] to me.
+1094: 
+1095:Good. That looks like a solid [Shield] ...
+1096:As [Knights]` we will be fighting at the frontline to protect others with our [Shields] from the enemy.
+1097:The most important thing is to believe in yourself...
+1098:...and have the confidence that you will be able to protect your friends and allies.
+1099:Do you have friends who trust in your strength to protect them?
+1100:Of course!!	Oh` (Sigh) I don't have any friends.
+1101:Talk is cheap. I want you to prove it.
+1102:Go to the [Tough Wind Deserted Area] which is just outside [Haku Village] with a friend...
+1103:...and defeat a [Kayron Warrior].
+1104:I will keep this [Shield] until you bring me proof of your deed.
+1105: 
+1106:Go to the [Tough Wind Deserted Area] which is just outside [Haku Village] with a friend..
+1107:...and defeat a [Kayron Warrior]. Bring back some proof of your deed.
+1108: 
+1109:Well... when you have a friend who trusts you` then come back to me.
+1110: 
+1111:(Looking at the [Kayron horn] )... Excellent work!
+1112:It seems like you are ready to become a [Knight].
+1113:With the authority vested in me by [King Lamu]` you are now officially a member of the [Silver Shield].
+1114:I will teach you your first skill.
+1115:%UserName%` You are now a guardian of [Millena]` and the [Shield] that you carry is the [Shield of Belief].
+1116:If you wish to learn more skills` talk to me again.
+1117:You can use a [Sword] together with this [Shield]. Take this [Shield] and be proud of being a [Knight]!
+1118: 
+1119:Which skill do you want to learn?
+1120:Leave.
+1121:I wonder who is going to bring glory to Rain....
+1122: 
+1123:It must be nice to lead a carefree life of an adventurer.
+1124: 
+1125:Hi` I am [Illena].
+1126: 
+1127:Hi` I'm [Illena] from Millena.
+1128:You are %UserName% right? [Lainmint] told me about you.
+1129:Hmmm...You definitely look ready to face the challenges ahead of you...but..
+1130:... I don't think you are ready for the [PvP Room] just yet.
+1131:When you reach level 21` come back to me and I will tell you all about the [PvP Room].
+1132:Goodbye. 
+1133: 
+1134:Hi %UserName%' have you won enough battles?
+1135:I am looking for [Lainmint]. Have you seen her??
+1136:If you meet her' tell her that I am looking for her.
+1137:Goodbye. 
+1138: 
+1139:Hi` I'm [Illena] from Millena.
+1140:I've heard that Rain has a formidable army..but..
+1141:... I have yet to meet a true hero from Rain. Besides` I think Millena's soldiers are much tougher because we train so hard..
+1142:...unless you want to prove me wrong of course.. Hehe..
+1143:Why don't you try going to the [PvP Room] and show me what the Rain army is really made of?
+1144:In the [PvP Room]` you can battle with or against anyone` it doesn't matter if they are from Rain or Millena. 
+1145:It is a good place to practice your skills against other players.
+1146:Take note that you do not get any fame points from participating in [PvP Room] battles though.
+1147:So how about it` %UserName%? Do you wish to take up my challenge and show me your ability?
+1148:Of course! I'll show you that you should never underestimate my ability!	Why should I let someone from Millena see my moves?! I'm not interested.
+1149:Hi` I'm [Illena] from Millena.
+1150:Have you ever fought and lost a fight?
+1151:I have come from afar to see the people in Rain fight...
+1152:Come on %UserName%` show me your ability.
+1153:OK. I will show you my fighting ability but don't say I didn't warn you!	Why should I let someone from Millena see my moves?! I'm not interested.
+1154:Ah! Finally someone willing and brave enough to take up my challenge!
+1155:Click on the 'M' next to your avatar` and then click on the 'PvP Room' option to enter the [PvP Room].
+1156:[Lainmint] and I can move from one dimension to another easily` and we can see you from anywhere %UserName%.
+1157:Put up a good fight' and then come talk to me again.
+1158:All the best!
+1159: 
+1160:Oh well... I can't help it if you feel that way.
+1161:It is not as if I am a spy or anything...
+1162:[Lainmint] and I` we come from different nations but we are both very close!
+1163:If you ever change your mind and improve on your manners` come talk to me again.
+1164: 
+1165:Click on the 'M' next to your avatar` and then click on the 'PvP Room' option to enter the [PvP Room].
+1166:Put up a good fight and come back to me.
+1167:I'll be watching you
+1168: 
+1169:I am very impressed! You fought very well` %UserName%.
+1170:Regardless of whether you won or lost... you fought very well.
+1171:Remember` this is not the actual victory... 
+1172:Millena and Rain will battle each other again one day.
+1173:That is the moment of truth because that will be the biggest battle and the outcome of that battle will change everything. 
+1174:Nevermind` I will tell you more later. For now I hope you get stronger and be a role model for all aspiring Rain adventurers.
+1175:Remember` [Lainmint] and I` we are good friends despite our heritage and we hope for only the best for the future. 
+1176:This is a small present from me. Goodbye.
+1177:(Get 100 Fame points.)
+1178: 
+1179:Is that really you %UserName%?
+1180:You have changed so much from the last time I saw you. I could hardly recognize you.
+1181:You are now ready for [Millena Town].
+1182:Do you want to leave now?
+1183:Yes` I would like to go now	No I am not ready yet..
+1184:Welcome to the World of Deco Online!
+1185:I see that you have chosen the power of strength over the drudgery of the arcane arts.
+1186:We in Millena are the best fighters that you can find in this land.
+1187:To begin your training as a Millena fighter` follow the road north and speak to Supreme Heart
+1188:To find your way around` look at the mini-map on the top right hand corner of the screen or ...
+1189:press the letter 'M' on your keyboard to enlarge or minimize the map.
+1190:Please show this item to Supreme Heart to begin your training.
+1191:(Received a Elda Stone)
+1192:Be on your way
+1193: 
+1194:When you arrive in the town` look for the [Old Man]
+1195:He will explain to you more about Millena.
+1196:Until destiny brings us to meet again take care.
+1197:Here is 1000 Eld. Make the best use of your money for growth.
+1198: 
+1199:Good Day to you.
+1200: 
+1201:Is that really you %UserName%?
+1202:You have changed so much from the last time I saw you. I could hardly recognize you.
+1203:You are now ready for [Rain Town].
+1204:Do you want to leave now?
+1205:Yes` I would like to go now	No I am not ready yet..
+1206:When you arrive in town` look for the [Luimi].
+1207:She will explain to you more about Rain.
+1208:Until destiny brings us to meet again take care.
+1209:Here is 1000 Eld. Make the best use of your money for growth.
+1210: 
+1211:Welcome to the World of Deco Online!
+1212:It is good to see that you appreciate the wonders of the arcane arts rather than just relying on brute strength.
+1213:We in Rain are the best spell casters that you can find in this land.
+1214:To begin your apprenticeship as a Rain spell caster` go speak to Nad Luas.
+1215:To find your way around` look at the mini-map on the top right hand corner of the screen or ...
+1216:press the letter 'M' on your keyboard to enlarge or minimize the map.
+1217:Please show this item to Nad Luas to begin your apprenticeship.
+1218:(Received a Elda Stone)
+1219:Be on your way.
+1220: 
+1221:Have a Good Day.
+1222: 
+1223:You can look for me in [Millena Town] where you can learn more from me
+1224:[Illena] will tell you the way to go to [Millena Town].
+1225:I do expect alot from you.
+1226: 
+1227:Talk to [Illena] and then come back to me.
+1228: 
+1229:How can I help you?
+1230:Tell me more about the job of a [Swordsman].	Tell me more about the job of an [Archer].	Transfer job.	Go to [Training Room].
+1231:So you have completed your basic training and..
+1232:it is time for me to teach you the different [Jobs] in [Millena].
+1233:The [Jobs] in [Millena] are [Swordsman] and [Archer].
+1234:You can try out both [Jobs] in the training room first before making your decision.
+1235:Tell me more about the job of a [Swordsman].	Tell me more about the job of a [Archer].	Transfer Job.	Go to [Training Room].
+1236:%UserName% you are now ready for a [Job] transfer.
+1237:In [Millena]` you can either choose to become a [Swordsman] or an [Archer].
+1238:Please consider carefully before making your decision.
+1239:Now make your selection
+1240:I want to be a [Swordsman].	I want to be an [Archer].
+1241:As a [Swordsman] you have to choose between using a [Sinlge handed sword]` or a [Double handed sword].
+1242:If you choose to use the [Single handed Sword]` at level 30 you will be able choose the path of a [Knight] or a [Mercenary].
+1243:A [Knight] will be able to use a shield` wheras a [Mercenary] is able to attack quickly.
+1244:And if you choose the [Double handed Sword]' at level 30 you can a [Slayer] who is much stronger in attack.
+1245:Do you wish to continue the path of a [Swordsman]?
+1246:Yes.	No.. I am still unsure..
+1247:An [Archer] uses a [Bow] from a distance. He also has a skill that can assst a party member to recover HP.
+1248:The most popular skill used by an [Archer] is [Focus Shot].
+1249:At level 30` you will be able to become a [Sniper].Do you wish to continue the path of an [Archer]?
+1250:Yes.	No..I am still unsure..
+1251:Now that you have chosen to become a [Swordsman].....
+1252:you have to choose whether you want to use a single handed sword or a double handed sword.
+1253:In both instances you will encounter your enemy in close proximity.
+1254:As a single handed [Swordsman] you will be able to be quick but you will not be able to deal much damage.
+1255:As a double handed [Swordsman] you will be slower in attack but you will be able to deal more damage.
+1256:So which type of a [Swordsman] would you like to become?
+1257:Single Handed	Double Handed
+1258:Alright %UserName% I will now give you your [Sword] level 1 and you can use this [Light Armor] to protect yourself.
+1259:Here is one the most popular skill that you will use` [Staring Cut] level 1.
+1260:You can come and look for me in [Millena Military Base] to learn more skills as you level up.
+1261:[Illena] will show you the way to town.
+1262:And heres a gift from me` a [Long Sword].
+1263:All the best.
+1264: 
+1265:Alright %UserName% I will now give you your [Big Sword] level 1 and you can use this [Light Armor] to protect yourself.
+1266:Here is one the most popular skill that you will use` [Staring Cut] level 1.
+1267:You can come and look for me in [Millena Military Base] to learn more skills as you level up.
+1268:[Illena] will show you the way to town.
+1269:And heres a gift from me` a [Big Sword].
+1270:All the best.
+1271: 
+1272:Alright %UserName% I will now give you your [Bow] level 1 and you can use this [Light Armor] to protect yourself.
+1273:Here is one the most popular skill that you will use` [Focus Shot] level 1.
+1274:You can come and look for me in [Millena Military Base] to learn more skills as you level up.
+1275:[Illena] will show you the way to town.
+1276:And here is a gift from me` a [Bow].
+1277:All the best.
+1278: 
+1279:To change job` you must be at least level 10.
+1280:Go back to [Training Room]~
+1281:Go to [Training Room]~	Nah I shall stay around here a while
+1282:As a [Swordsman] you can either use a [Sinlge handed sword] or a [Double handed sword].
+1283:If you choose to use the [Single handed Sword]` at level 30 you will be able choose the path of a [Knight] or a [Mercenary].
+1284:A [Knight] will be able to use a shield` wheras a [Mercenary] is able to attack quickly.
+1285:And if you choose the [Double handed Sword]' at level 30 you can a [Slayer] who is much stronger in attack.
+1286:The combo used for a Single handed [Swordsman] and the double handed [Swordsman] varies.
+1287:The Basic combo sequence for a Single handed [Swordsman] is c` z` x` x` and for a Double handed [Swordsman] is x` x` z` x.
+1288:You will need to go and experiment for yourself in the [Training Room] to see which type suits you best.
+1289: 
+1290:An [Archer] uses a [Bow] from a distance. He also has a skill that can assst a party member to recover HP.
+1291:The most popular skill used by an [Archer] is [Focus Shot].
+1292:At level 30` you will be able to become a [Sniper].
+1293:Use the [Bow] and experiment for yourself in the [Training Room].
+1294: 
+1295:Did you have enough practice?
+1296:If it is enough` I will now transfer you to the training room to apply what you have learnt.
+1297:Do you want to go now?
+1298:Yes.	No...I need more practice...
+1299:I will transfer you now.
+1300: 
+1301:Have you mastered your combo attacks?
+1302:Now let us learn to use the [Combo Gauge].
+1303:Once the [Combo Gauge] is full` you can use a higher skill.
+1304:Now I will teach you how to combine a basic combo and a higher skill..
+1305:.. execute your basic combo attack [c`z`x`x] followed by [Staring cut].
+1306:For easy access to your higher skills place the skill in the quick slot at the bottom right corner of the screen.
+1307:To see the list of the skills' press the letter 'S' on your keyboard.
+1308:(She teaches you [Staring Cut].)
+1309: 
+1310:Hi...Nice to meet you
+1311:You look a bit lost but do not worry` I am here to help you
+1312:My job is to make you stronger and to groom you to be a good fighter.
+1313:No time to chit chat..In [Millena] everyone starts with a sword.
+1314:Press the letter 'I' on your keyboard to open up the Inventory window. You will see all the items that you have.
+1315:Look for the [Wanderer Sword] and right click on it to equip the sword.
+1316:Return to me once you have armed yourself.
+1317: 
+1318:You have not armed yourself yet.
+1319:Press the letter 'I' on your keyboard to open up the Inventory window. You will see all the items that you have.
+1320:Look for the [Wanderer Sword] and right click on it to equip the sword.
+1321:Return to me once you have armed yourself.
+1322: 
+1323:Now` you are ready for your training...
+1324:%UserName% I will transfer you to the [Training Room] .
+1325:Listen carefully to your Instructor.
+1326: 
+1327:Now` you are ready for your training...
+1328:%UserName% I will transfer you to the [Training Room] .
+1329:Listen carefully to your Instructor.
+1330: 
+1331:You are ready to train again...
+1332: 
+1333:You can look for me in [Rain Town] where you can learn more from me.
+1334:[Lainmint] will tell you the way to go to [Rain Town].
+1335:I do expect alot from you.
+1336: 
+1337:Talk to [Lainmint] and then come back to me.
+1338: 
+1339:How can I help you?
+1340:Tell me more about the job of a [Magician].	Tell me more about the job of a [Shaman].	Transfer job.	Go to Training room.
+1341:So you have completed your basic training and..
+1342:its time for me to teach you the different [Jobs] in [Rain].
+1343:The [Jobs] in [Rain] are [Magician] and [Shaman].
+1344:You can try out both [Jobs] in the training room first before making your decision.
+1345:Tell me more about the job of a [Magician].	Tell me more about the job of a [Shaman].	Job transfer.	Go to [Training Room].
+1346:%UserName% you are now ready for a [Job] transfer.
+1347:In [Rain]` you can either choose to become a [Magician] or a [Shaman].
+1348:Please consider carefully before making your decision.
+1349:Now make your selection.
+1350:I want to be a [Magician].	I want to be a [Shaman].
+1351:[Magician] is one who co-relate indirectly with [Proima].
+1352:[Proima] is the inner strength that can be found in every Rain citizen.
+1353:[Magician] relates to fire` water` and other elements of nature.
+1354:And at level 30 you can either become a [Prominas]' a [Priest]` ...
+1355:or a [Holy Avenger].
+1356:So do you still wish to become a [Magician]?
+1357:Yes!	No` let me think about it.
+1358:[Shaman] is someone who is capable to use a lot of skills` including the skill called [Multiple Characteristic].
+1359:When a [Shaman] Uses his skill` he is able to show remarkable strength according to his [Proima].
+1360:[Proima] is the inner strength that can be found in every Rain citizen.
+1361:When you reach Level 30 you will become a [Psyche].
+1362:Do you wish to become a [Shaman]?
+1363:Yes!	No` let me think about it
+1364:OK. Now i shall empower you with the ability to use [Magical Cloths] and [Magical Script].
+1365:Besides your [Meditation] skill` in future you will learn another healing skill called [Panic Dust].
+1366:Your offensive spell is called [Fireball]... 
+1367:and your defensive skill is called [Rock Sheild].
+1368:and skill to stun your enemy is called [Rock Press].
+1369:You can come and look for me in [Rain Town] to learn more skills as you level up.
+1370:[Lainmint] will show you the way.
+1371:And heres a gift from me` [Ele Script].
+1372:All the best.
+1373: 
+1374:OK. Now i shall empower you with the ability to use [Shaman Cloths] and [Crystal Ball]...
+1375:The common skill used by [Shaman] is [Duel Characteristic].
+1376:You have to be equipped with a [Crystal Ball] before using [Multiple Characteristic] skill.
+1377:After you become a [Shaman] you always need to check the status of yourself whether you are in [Multiple Characteristic] mode or not..
+1378:The chances of a [Shaman] winning a battle is low if you do not engage [Multiple Characteristic].
+1379:You can come and look for me in [Rain Town] to learn more skills as you level up.
+1380:[Lainmint] will show you the way.
+1381:And here is a gift from me` [Black Arth].
+1382:All the best.
+1383: 
+1384:To change job` you must be level 10.
+1385:Go to [Training Room].
+1386:Go to [Training Room].	Leave
+1387:[Magician] is one who co-relate indirectly with [Proima].
+1388:[Proima] is the inner strength that can be found in every Rain citizen.
+1389:[Magician] relates to fire` water` and other elements of nature.
+1390:Go to the [Training Room] and try the [Magician] skills.
+1391: 
+1392:The fighting ablility of a [Shaman] is very different as you engage [Multiple Characteristic] before entering battle.
+1393:I will explain in detail some other time.
+1394:To use combo press button [x`x`z`c]` and after the Combo finish off with a higher skill.
+1395:Use the skill by using combo [x`x`z`c] + [Flame repeated hit Lvl 1].
+1396:Go to the [Training Room] and try the [Shaman] skills.
+1397: 
+1398:Did you have enough practice?
+1399:If it is enough` I will now transfer you to the [Training Room] to apply what you have learnt.
+1400:Do you want to go now?
+1401:Yes.	No` I need more practice...
+1402:I will bring you now.
+1403: 
+1404:Have you mastered your combo attacks?
+1405:Now let us learn to use the [Proima Gauge].
+1406:Once the [Proima Gauge] is full` you can use a higher skill.
+1407:Now I will teach you how to combine a basic combo and a higher skill..
+1408:.. execute your basic combo attack [z`x`z`c] followed by [Basic Multiple flame].
+1409:For easy access to your higher skills place the skill in the quick slot at the bottom right corner of the screen.
+1410:To see the list of the skills' press the letter 'S' on your keyboard.
+1411:(She teaches you [Basic Multiple flame].)
+1412: 
+1413:Hi...Nice to meet you.
+1414:You look a bit lost but do not worry` I am here to help you.
+1415:My job is to help you to unlease your true potential as a spell caster.
+1416:No time to chit chat..lets begin now.
+1417:Press the letter 'I' on your keyboard to open up the Inventory window. You will see all the items that you have.
+1418:Look for the [Rameses] and right click on it to equip the script.
+1419:Return to me once you have equipped yourself.
+1420: 
+1421:You have not equipped yourself yet.
+1422:Press the letter 'I' on your keyboard to open up the Inventory window. You will see all the items that you have.
+1423:Look for the [Rameses] and right click on it to equip the script.
+1424:Return to me once you have equipped yourself.
+1425: 
+1426:You are ready for practise...
+1427:%UserName% Go to the [Training Room] .
+1428:Go and listen to your instructor.
+1429:Leave! 
+1430: 
+1431:Yes` you are ready now..
+1432:%UserName%` I will transfer you to the [Training Room] .
+1433:Listen carefully to your Instructor.
+1434: 
+1435:You are ready to train again...
+1436: 
+1437: ... ... ... 
+1438:Alright trainee` I'm your [Instructor] and I am responsible for your training
+1439:You may call me Instructor.
+1440:Enough chit chat' lets begin training.
+1441:Do you see the monster called [Popoi]` attack them and bring to me 2 [tail].
+1442:To attack` either double click on the monster or click on the monster once and then right click to use a skill.
+1443:And if your HP is low` use this. Register the potion to a quick slot. The quick slot can be found at the bottom left corner of your screen.
+1444:Drag the potion from your Inventory and drop it at the quick slot. To use the potion` just right click on it.
+1445:However if you have a job` there will be other ways to regenerate your HP. You will learn in due time.
+1446:Now return with 2 [tail].
+1447: 
+1448:You have not brought the 2 [tail]. Let me repeat the instructions.
+1449:Do you see the monster called [Popoi]` attack them and bring to me 2 [tail].
+1450:To attack` either double click on the monster or click on the monster once and then right click to use a skill.
+1451:And if your HP is low` use this. Register the potion to a quick slot. The quick slot can be found at the bottom left corner of your screen.
+1452:Drag the potion from your Inventory and drop it at the quick slot. To use the potion` just right click on it.
+1453:However if you have a job` there will be other ways to regenerate your HP. You will learn in due time.
+1454:Now return with 2 [tail].
+1455: 
+1456:Now I shall teach you how to use basic combo.
+1457:This is very important and you have to carefully follow my instructions from the start to the end.
+1458:After you have double clicked on the monster you are going to attack` after the first hit...
+1459:you have to press the letters on the keyboard according to what is shown on the screen eg [c`z`x`x]...
+1460:if you time it right` you will be able to chain your attacks continuously without any delay. This is called a [Combo Attack].
+1461:This combo sequence is only applicable to the Swordsman.
+1462:Why do we want a Combo attack?
+1463:It is to increase the [Combo Gauge] and to stun the monster for a while...
+1464:To use Combo attack you will need a weapon and a skill called [Basic Martial Arts]. I will now teach you that skill.
+1465:If you complete your combo attacks the Combo bar and Combo gauge will fill up.
+1466:The Combo bar is below your SP bar on the top left corner of the screen.
+1467:One thing to take note is that you need SP in order to execute a Combo attack.
+1468:If your SP bar is empty` you will not be able to execute a combo attack.
+1469:This means that you will have to be careful as to when you are using combo attacks.
+1470:Now go and practise what I have taught you and get me 3 [tails] from the monster [Elda popoi].
+1471:I will wait for you here.
+1472: 
+1473:This is very important and you have to carefully follow my instructions from the start to the end.
+1474:After you have double clicked on the monster you are going to attack` after the first hit...
+1475:you have to press the letters on the keyboard according to what is shown on the screen eg [c`z`x`x]...
+1476:if you time it right` you will be able to chain your attacks continuously without any delay. This is called a [Combo Attack].
+1477:This combo sequence is only applicable to the Swordsman.
+1478:Why do we want a Combo attack?
+1479:It is to increase the [Combo Gauge] and to stun the monster for a while...
+1480:To use Combo attack you will need a weapon and a skill called [Basic Martial Arts]. I will now teach you that skill.
+1481:If you complete your combo attacks the Combo bar will fill up.
+1482:The Combo bar is below your SP bar on the top left corner of the screen.
+1483:One thing to take note is that you need SP in order to execute a Combo attack.
+1484:If your SP bar is empty` you will not be able to execute a combo attack.
+1485:This means that you will have to be careful as to when you are using combo attacks.
+1486:Now go and practise what I have taught you and get me 3 [tails] from the monster [Elda popoi].
+1487:I will wait for you here.
+1488: 
+1489:Use combo attacks and get me 3 [tails] from the monster [Elda popoi].
+1490:Return to me when you are done.
+1491: 
+1492:The [Combo gauge] is the one that curves around your Avatar. It is the one that fills up in red
+1493:This is important as you will need this to be able to use your higher skills.
+1494:In order to fill up your [Combo Gauge]' you will need to successfully complete your combo attacks.
+1495:Now ... you can return to [Supreme Heart].
+1496:[Supreme Heart] will teach you other skills.
+1497:Let me know when you are ready to go.
+1498: 
+1499:The [Combo gauge] is the one that curves around your Avatar. It is the one that fills up in red
+1500:This is important as you will need this to be able to use your higher skills.
+1501:In order to fill up your [Combo Gauge]' you will need to successfully complete your combo attacks.
+1502:Now ... you can return to [Supreme Heart].
+1503:[Supreme Heart] will teach you other skills.
+1504:Let me know when you are ready to go.
+1505: 
+1506:Ready to return?
+1507:Yes	No
+1508:You are back...Did [Supreme Heart] teach you how to use your higher skills?
+1509:Now go get me 4 [Petals] from the monster [Ofla] Using your combo attack and [Staring Cut].
+1510:If your HP is low` use [Breath Control Lvl 1].
+1511:When you use this skill` you will regenerate your HP and SP.
+1512:(He teaches [Breath Control Lvl 1].)
+1513: 
+1514:Get me 4 [Petals] from the monster [Ofla] Using your combo attack and [Staring Cut]
+1515: 
+1516:Good job.
+1517:Now go and try to defeat the monster [Posnofla] there.
+1518:[Posnofla] is stronger than [Ofla]. It may be a difficult fight.
+1519:Create a party and take them down together.
+1520:To create a party' click on the person you want to party with` and click on the letter 'M' shown below your name.
+1521:Return with 5 [petals] from [Posnofla].
+1522: 
+1523:Good job.
+1524:Now go and try to defeat the monster [Posnofla] there.
+1525:[Posnofla] is stronger than [Ofla]. It may be a difficult fight.
+1526:Create a party and take them down together.
+1527:To create a party' click on the person you want to party with` and click on the letter 'M' shown below your name.
+1528:Return with 5 [petals] from [Posnofla].
+1529: 
+1530:Good job.
+1531:Now go and try to defeat the monster [Posnofla] there.
+1532:[Posnofla] is stronger than [Ofla]. It may be a difficult fight.
+1533:Create a party and take them down together.
+1534:To create a party' click on the person you want to party with` and click on the letter 'M' shown below your name.
+1535:Return with 5 [petals] from [Posnofla].
+1536: 
+1537:You have now mastered the basics of combat.
+1538:You can return to [Supreme Heart] whenever you are ready.
+1539: 
+1540:Ready to return?
+1541:Yes	No
+1542: ... ... ... 
+1543:Alright apprentice` I'm your [Instructor] and I am responsible for your training
+1544:You may call me Instructor.
+1545:Enough chit chat' lets begin training.
+1546:Do you see the monster called [Eggvill]` attack them and bring to me 2 [tooth].
+1547:To attack` either double click on the monster or click on the monster once and then right click to use a skill.
+1548:And if your HP is low` use this. Register the potion to a quick slot. The quick slot can be found at the bottom left corner of your screen.
+1549:Drag the potion from your Inventory and drop it at the quick slot. To use the potion` just right click on it.
+1550:However if you have a job` there will be other ways to regenerate your HP. You will learn in due time.
+1551:Now return with 2 [tooth].
+1552: 
+1553:You have not brought the 2 [tooth]. Let me repeat the instructions.
+1554:Do you see the monster called [Eggvill]` attack them and bring to me 2 [tooth].
+1555:To attack` either double click on the monster or click on the monster once and then right click to use a skill.
+1556:And if your HP is low` use this. Register the potion to a quick slot. The quick slot can be found at the bottom left corner of your screen.
+1557:Drag the potion from your Inventory and drop it at the quick slot. To use the potion` just right click on it.
+1558:However if you have a job` there will be other ways to regenerate your HP. You will learn in due time.
+1559:Now return with 2 [tooth].
+1560: 
+1561:Now I shall teach you how to use basic combo.
+1562:This is very important and you have to carefully follow my instructions from the start to the end.
+1563:After you have double clicked on the monster you are going to attack` after the first hit...
+1564:you have to press the letters on the keyboard according to what is shown on the screen eg [x`x`z`c]...
+1565:if you time it right` you will be able to chain your attacks continuously without any delay. This is called a [Combo Attack].
+1566:Why do we want a Combo attack?
+1567:It is to increase the [Proima Gauge] and to stun the monster for a while...
+1568:To use Combo attack you will need a weapon and a skill called [Stranger Script]. I will now teach you that skill.
+1569:If you complete your combo attacks the Combo bar and Proima gauge will fill up.
+1570:The Combo bar is below your MP bar on the top left corner of the screen.
+1571:One thing to take note is that you need MP in order to execute a Combo attack.
+1572:If your MP bar is empty` you will not be able to execute a combo attack.
+1573:This means that you will have to be careful as to when you are using combo attacks.
+1574:Now go and practise what I have taught you and get me 3 [toe nail] from the monster [Sal-Eggvill].
+1575:I will wait for you here.
+1576: 
+1577:This is very important and you have to carefully follow my instructions from the start to the end.
+1578:After you have double clicked on the monster you are going to attack` after the first hit...
+1579:you have to press the letters on the keyboard according to what is shown on the screen eg [x`x`z`c]...
+1580:if you time it right` you will be able to chain your attacks continuously without any delay. This is called a [Combo Attack].
+1581:Why do we want a Combo attack?
+1582:It is to increase the [Proima Gauge] and to stun the monster for a while...
+1583:To use Combo attack you will need a weapon and a skill called [Stranger Script]. I will now teach you that skill.
+1584:If you complete your combo attacks the Combo bar and Proima gauge will fill up.
+1585:The Combo bar is below your MP bar on the top left corner of the screen.
+1586:One thing to take note is that you need MP in order to execute a Combo attack.
+1587:If your MP bar is empty` you will not be able to execute a combo attack.
+1588:This means that you will have to be careful as to when you are using combo attacks.
+1589:Now go and practise what I have taught you and get me 3 [toe nail] from the monster [Sal-Eggvill].
+1590:I will wait for you here.
+1591: 
+1592:Use combo attacks and get me 3 [toe nail] from the monster [Sal-Eggvill].
+1593:Return to me when you are done.
+1594: 
+1595:The [Proima gauge] is the one that curves around your Avatar. It is the one that fills up in red
+1596:This is important as you will need this to be able to use your higher skills.
+1597:In order to fill up your [Proima Gauge]' you will need to successfully complete your combo attacks.
+1598:Now ... you can return to [Nad Luas].
+1599:[Nad Luas] will teach you other skills.
+1600:Let me know when you are ready to go.
+1601: 
+1602:The [Proima gauge] is the one that curves around your Avatar. It is the one that fills up in red
+1603:This is important as you will need this to be able to use your higher skills.
+1604:In order to fill up your [Proima Gauge]' you will need to successfully complete your combo attacks.
+1605:Now ... you can return to [Nad Luas].
+1606:[Nad Luas] will teach you other skills.
+1607:Let me know when you are ready to go.
+1608: 
+1609:Ready to return?
+1610:Yes	No` I am going to train more.
+1611:You are back...Did [Nad Luas] teach you how to use your higher skills?
+1612:Now go get me 4 [Pvi Charm] from the monster [Pvi] Using your combo attack and [Basic Multiple flame].
+1613:If your HP is low` use [Meditation Lvl 1].
+1614:When you use this skill` you will regenerate your HP and MP.
+1615:(She teaches [Meditation Lvl 1].)
+1616: 
+1617:Now go get me 4 [Pvi Charm] from the monster [Pvi] Using your combo attack and [Basic Multiple flame].
+1618: 
+1619:Good job.
+1620:Now go and try to defeat the monster [Svi] there.
+1621:[Svi] is stronger than [Pvi]. It may be a difficult fight.
+1622:Create a party and take them down together.
+1623:To create a party' click on the person you want to party with` and click on the letter 'M' shown below your name.
+1624:Return with 5[Svi Charm] from [Svi].
+1625: 
+1626:Good job.
+1627:Now go and try to defeat the monster [Svi] there.
+1628:[Svi] is stronger than [Pvi]. It may be a difficult fight.
+1629:Create a party and take them down together.
+1630:To create a party' click on the person you want to party with` and click on the letter 'M' shown below your name.
+1631:Return with 5[Svi Charm] from [Svi].
+1632: 
+1633:Now go and try to defeat the monster [Svi] there.
+1634:[Svi] is stronger than [Pvi]. It may be a difficult fight.
+1635:Create a party and take them down together.
+1636:To create a party' click on the person you want to party with` and click on the letter 'M' shown below your name.
+1637:Return with 5[Svi Charm] from [Svi].
+1638: 
+1639:You have now mastered the basics of combat.
+1640:You can return to [Nad Luas] whenever you are ready.
+1641: 
+1642:Ready to return?
+1643:Yes	No
+1644:You are a brave warrior..I will award a prize to you.
+1645: 
+1646:Thank you.
+1647: 
+1648:You're a great! You will be a good worker for Millena
+1649: 
+1650:My name is Leggie. I undertake to safeguard the Deserted Area Outpost.
+1651:The Deserted Area Outpost is connecting passage to move safely the people Millena Village or Haku Village 
+1652:And it is an important base In the front supply the material needed to the Millena unit.
+1653:But Lately we can not perform our role properly because of the kayron damage.
+1654:Can you help to be safe from kayron?
+1655:Yes.	No.
+1656:I want you to help me buy the scroll.. 
+1657:You are a brave warrior..I will award a prize to you.
+1658: 
+1659:Thank you.
+1660: 
+1661:You're a great! You will be a good worker for Millena
+1662: 
+1663:My name is Milton. As I quartermaster supply armor for the troops at the front Millena main.
+1664:Armor used by the milrena forces at the front because the high-end is very difficult to create.
+1665:And armor must be produced on an ongoing basis because of the low durability than the best.
+1666:But these days with Rain and the war is long-term as well as
+1667:the difficulties of the war are more competitive because it is insufficient products and parts.
+1668:Can you gather the material For Millena?
+1669:Yes.	No.
+1670:I want you to help me buy the scroll.. 
+1671:You are a brave warrior..I will award a prize to you.
+1672: 
+1673:Thank you.
+1674: 
+1675:You're a great! You will be a good worker for Millena
+1676: 
+1677:My name is Agnon. As I quartermaster supply of weapons production for the troops at the front Millena main.
+1678:Weapon used by the milrena forces at the front because the high-end is very difficult to create.
+1679:And weapon must be produced on an ongoing basis because of the low durability than the best.
+1680:But these days with Rain and the war is long-term as well as
+1681:the difficulties of the war are more competitive because it is insufficient products and parts.
+1682:Can you gather the material For Millena?
+1683:Yes.	No.
+1684:I want you to help me buy the scroll.. 
+1685:You are a brave warrior..I will award a prize to you.
+1686: 
+1687:Thank you.
+1688: 
+1689:You're a great! You will be a good worker for Millena
+1690: 
+1691:My name is Leaman. I am being transported supplies to troops at the front Millena main.
+1692:My mission safely transported to the Haku village produced weapon and Armor in Deserted Area Outpost.
+1693:But now very difficult the supply situation alone because the security not safe in Deserted Area Outpost
+1694:Get transported safely item
+1695:Exit.
+1696:You are a brave warrior..I will award a prize to you.
+1697: 
+1698:Thank you.
+1699: 
+1700:You're a great! You will be a good worker for Millena
+1701: 
+1702:My name is Brant. I'm here to a combination of the adventurer in Deserted Area Outpost is a member.
+1703:This is a place for a long time ago milrena adventurer was traincenter.
+1704:But more than the past people who want to support the adventurer 
+1705:and the reduction of the forces bolrak and felix training too fast and now it is impossible.
+1706:So now the adventurer a lot of the training center to develop plans to create a new group of adventurers.
+1707:Can you help me??.
+1708:Yes.	No.
+1709:I want you to help me buy the scroll.. 
+1710:You are a brave warrior.. I will award a prize to you.
+1711: 
+1712:Thank you.
+1713: 
+1714:You're a great! You will be a good worker for Millena
+1715: 
+1716:I supply all combat thing for Millena military.
+1717:And I train combatants starter is a combat commander .
+1718:First introduce my military unit to you.
+1719:Go to Leggi Milton Brant and Agnon in Advance Base.
+1720:Then they will tell your mission.
+1721:Buy items.	Reward of Advance Base exchange Gratitude of Advance Base.	What's mean Reward of Advance Base and Gratitude of Advance Base?	Exit.
+1722:Come with learning scroll quest to acquire item... 
+1723:My unit Leggi Milton Brant Agnon When you complete a mission they will be awarded to you Reward Of Advance Base.
+1724:If you have 5 Reward Of Advance Bases and come to me I'll give 1 Gratitude of Advance Bases to you.
+1725:Can buy S weapon armor potion mask and hat that Millena unit is used by the Gratitude of Advance Base
+1726:Complete mission in a hurry and receive acquire Reward Of Advance Base.
+1727:Are you the other questions??
+1728:Buy items.	Reward of Advance Base to Gratitude of Advance Base exchange.	Exit.
+1729:If exchange by Reward of Advance Base to Gratitude of Advance Base need expense.
+1730:Expense is 10 000Eld.
+1731:I pay and will exchange expense.	Buy items.	What's mean Reward of Advance Base and Gratitude of Advance Base?	Exit.
+1732:This is Gratitude of Advance Base.
+1733:Exit.
+1734:Expense is 10 000eld. Eld is not enough.
+1735:Exit.
+1736:Need 5 Reward Of Advance Base.
+1737:Exit.
+1738:You are a brave warrior.. I will award a prize to you.
+1739: 
+1740:Thank you.
+1741: 
+1742:You're a great! You will be a good worker for Millena
+1743: 
+1744:My name is Koro.I investigate Cave of Exile's situation here and reporting to the Deserted Area.
+1745:Once upon a time Kis and Grizul lived in Tough Wind Deserted Area.
+1746:But they very violent after incantation in spell that is strange.
+1747:And they was threatening Tough Wind Deserted Area and Haku Village.
+1748:So had tried to banish them but had hidden by Cave of Exile.
+1749:But they are going to menace again Tough Wind Deserted Area and Haku Village.
+1750:Go to the Cave Of Exile and get rid of the dangerous forces.
+1751:exit.
+1752:You are a brave warrior.. I will award a prize to you.
+1753: 
+1754:Thank you.
+1755: 
+1756:You're a great! You will be a good worker for Millena
+1757: 
+1758:Oh! Long time no see.
+1759:Nice to meet you. I heard from Brant that you have quality as adventurer in Tough Wind Deserted Area.
+1760:As I see you do not seem to have such ability...
+1761:But do to trust him and do genuine adventurer training to you because Brant sent.
+1762:Take a real adventurer training
+1763:exit.
+1764:I wonder who is going to bring glory to Rain....
+1765: 
+1766:It must be nice to lead a carefree life of an adventurer.
+1767: 
+1768:Hi` I am [Larke].
+1769: 
+1770:You can learn [Meditation Lvl 2]` if your level is higher than 22.
+1771:You can learn [Meditation Lvl 3]` if your level is higher than 51.
+1772:You can learn [Meditation Lvl 4]` if your level is higher than 64.
+1773:You can learn [Meditation Lvl 5]` if your level is higher than 80.
+1774:What?! What?! Just don't bother me!Go back to your portals!
+1775: 
+1776:Hey! Thank you for the favor but could you cut me some slack please?
+1777:Although....hmm..I may need some help with something...
+1778:..but..come back and talk to me when I'm in a better mood.
+1779:In the meantime` continue your studies of the Proima and return to me when you are stronger
+1780: 
+1781:You are much better than I expected.
+1782:But did not you feel drawn more to magic than the sword?
+1783:Of course` I had no choice....
+1784:It is probable that there is more to his story...
+1785: 
+1786:I have always pictured the world as a beautiful place without any problems...
+1787:Silly beginners are going in and out through the portals every day..
+1788:They make this place look terrible with their fighting and they are always so noisy...
+1789:They look like fools` always trying to communicate with Proima and trying to master things they do not fully understand...
+1790:Hmmm.. But I feel there is something different about you....Hmmmm.....##( He seems to be thinking about something...)
+1791:Do you think you are strong enough to handle a little problem of mine?
+1792:Of course! What is it?	Erm..Sorry` I'm busy .(...strange man.)
+1793:Hmm... There is a group of Marons...
+1794:...who annoyed and disturbed me when I was reading a book...
+1795:They suddenly attacked me and caught me off guard!!!
+1796:I could have defeated them with a single blow' but I can't stand their smell..especially not when they are together!!
+1797:Because of that` I had to get away from them and in so doing` I forgot all about my book.
+1798:I went back to my reading spot after they left but couldn't find my book...
+1799:Those Maron rascals must have taken it...
+1800:So can you help me retrieve my book back from Chief Maron?
+1801:Of course! I hate it when someone disturbs me when I am reading too!	Sorry! I'm really too busy for this.
+1802:Haha! Thank you. I will wait for you here.
+1803:Please be quick!
+1804:Hmmm... I feel a lot better now..
+1805: 
+1806:Bah! You are also like the others!!!
+1807:And here I was thinking of teaching you a new skill if you helped me....
+1808: 
+1809:What is taking you so long to get my book back from Chief Maron?
+1810:Is it because those Marons stink...??
+1811:Please hurry!
+1812: 
+1813:Hmmm... My book seems damaged...but I can accept that.
+1814:You look tired.
+1815:It must have been tough having to fight them with their awful stench..
+1816:Why don't you sit down and take a rest?...
+1817:..and I will teach you an advanced meditation skill. If you get into trouble and your HP is low' use it as often as possible!
+1818:(Learned skill [Meditation Lvl 2]')
+1819: 
+1820:Long time no see.. It seems like you have wasted alot of energy the last time...
+1821:...and so your ability to use Proima magic now is very low.
+1822:That is why to get your strength and energy back to normal` you must have great mental power which is beyond your current ability.
+1823:I have a secret book which tells about Proima....
+1824:..but I cannot read it as it is written in an ancient language. I heard that Onylis is the only one who can translate it.
+1825:Can you meet Onylis and translate this book?
+1826:Yes.	No.
+1827:Thank you so much...this does seem to be the Secret Book of Proima.
+1828:Now` I will teach you [Meditation Lvl 3].
+1829:I need not say more about the usefulness of the skill!
+1830: 
+1831:The book is not translated yet. Please take it to Onylis in [Rain Town] to have it translated.
+1832:Alright` if you translate the book for me` I will share with you the secrets of its content.
+1833: 
+1834:Are you satisfied with your mental power now?
+1835:Visit Luimi and bring me a sample of Clean Water of Flame and I will tell you how to get more out of your mental power.
+1836: 
+1837:Sure` I want to learn more about harnessing my mental power.	No` sorry. I'm busy with other things.
+1838:You have yet to bring me the Clean Water of Flame.
+1839:I will teach you [Meditation Lvl 4] once you get it for me.
+1840: 
+1841:Where is the Clean Water of Flame?
+1842: 
+1843:That's the right attitude. Since you are from Rain` you must learn to utilize all of your mental power.
+1844: 
+1845:I have a plan to turn all of Millena to ruins.
+1846:Please deliver this plan to Saiki Rugart and bring the confirmation to Ka Lubleton! Hurry up!
+1847: 
+1848:Finally! I can't wait to attack Millena!	No. I don't believe in this senseless war business.
+1849:We have been waiting for the day when we can attack Millena to come. Get everything ready for the attack!
+1850: 
+1851:Bring the plan to both of them!!! At this rate` we will miss a good opportunity!
+1852: 
+1853:YES! I am already excited thinking about defeating those Millena scoundrels. Hurry up!
+1854: 
+1855:Isn't it a nice day today?
+1856: 
+1857:Have a pleasant day ahead.
+1858: 
+1859:Hi %UserName%. Nice to meet you.
+1860: 
+1861:You can learn [Breath Control Lvl 2]` if your level is higher than 22.
+1862:You can learn [Breath Control Lvl 3]` if your level is higher than 51.
+1863:You can learn [Breath Control Lvl 4]` if your level is higher than 64.
+1864:You can learn [Breath Control Lvl 5]` if your level is higher than 80.
+1865:(The girl seems to be lost in her dancing...)
+1866:(She is ignoring me.)
+1867:Thank you for the medicine.
+1868:I will train hard.
+1869:(Great) 
+1870:Why are you being mean to me....
+1871:Is it because of the battle? My dance does not mean anything to you?
+1872:I am so tired...
+1873:(I don't know what to say.)
+1874:(Will it help if I experience something else....?)
+1875: 
+1876:hu.. hu..... huh....pheeeeww... (She pauses to catch her breath.)
+1877:(She suddenly stands up and dances again.)
+1878:What's wrong?	(What the... What a strange girl..Best to leave her alone.)
+1879:I am here to practice my singing and dancing without being seen by others.
+1880:One day` I hope to send a peace message through singing and dancing.
+1881:I want become a famous singer!
+1882:Okay.. but you look exhausted..
+1883:Well.... The fact is...
+1884:(Her stomach suddenly started to give out a strange grumbling..)
+1885:...(She blushes)I am starving..Do you have any food???
+1886:(...) 
+1887:If you do not have any food...do you at least have [HP Treatment Lvl 1]?
+1888:I do not have any food but i have some [HP Treatment] here if you want...	Hey` You should go home and have a proper meal!
+1889:Oh` I'm sorry... I do not have anything.(Even if I had one` I am not giving it to you..)
+1890:Ohh...Thank you very much.
+1891:[HP Treatment Lvl 1] should at least give me a bit more energy to continue practising...
+1892: 
+1893:Thank you for your [HP Treatment Lvl 1]` but I do not think it is enough...
+1894:I am sorry but can you help me get a [HP Treatment Lvl 3] instead..? I think you can buy it at the nearest town.
+1895:OK. I will buy it for you.	(This is way too troublesome...) I'm sorry but I have other matters to attend to.
+1896:(She looks disappointed.)
+1897:(She tries her best to stand up again...)
+1898:(Maybe I should bring her some [HP Treatment Lvl 1]...)
+1899: 
+1900:(She looks dissapointed.)
+1901:(Should I help her?...)
+1902: 
+1903:Thank you very much.
+1904:I will take a rest here while I wait for you.
+1905: 
+1906:You still don't have it yet...? I am so tired.
+1907:Are you getting me the [HP Treatment Lvl 3]? You can buy it from [Millena Town] in case you didn't know..
+1908: 
+1909:Wow! Thank you very much! I appreciate it!
+1910:I truly appreciate what you have done very much.
+1911:Let me give you some tips about [Breath Control]. It should help you a lot.
+1912:(Learned skill [Breath Control Lvl 2])
+1913: 
+1914:(Boha is practicing very hard today.)
+1915:Hi Boha! Long time no see!	(Good for her. I should leave her alone.)
+1916:Hello %UserName%! It's been a while hasn't it? You look well today.
+1917:I have been practicing everyday but I don't think that I have improved that much. Anyway` I think I need a better treatment potion.
+1918:I heard rumors that [Auhigen Routs] of [Haku Village] is able to make a 'High Quality Potion'.
+1919:I would very much like to try his 'High Quality Potion' so that I can practice my dancing even longer.
+1920:Can you bring me that 'High Quality Potion' please?
+1921:For you Boha` of course I will.	[Haku Village]?! That's quite out of the way...
+1922:Thank you so much for your help!
+1923:Thank you. Not only can I practice longer` I think this potion will help me dance more gracefully! Hurray!
+1924:Thank you for your trouble` %UserName%. In return` I will now teach you [Breath Control Lvl 3]!!
+1925:See you later. Goodbye!!
+1926:You have not gotten the'the High Quality Potion' yet?
+1927:You can get it from [Auhigen Routs] in [Haku Village]. Thank you for helping me %UserName%.
+1928:(Boha's dance seems to be much better than before!WOW!) 
+1929:Hi Boha! Smooth moves!	(Erm..I really should be on my way..)
+1930:Hello` %UserName%. You look a lot stronger than the last time we met!Hehe..
+1931:Hmm..You know.. After I drank the 'High Quality Potion'` I think I have also improved for the better!
+1932:I feel that I am ready for my audition...
+1933:...but now something else is bothering me...
+1934:I need a nice outfit for the audition!
+1935:I hear that [Codilia] of [Millena Town] can make really cool-looking dresses. Will you help me get a dress from her?
+1936:Yes` I will.	Sorry` not at this time..
+1937:YAY! %UserName% ` You are so nice!! *^^*
+1938:Oh my! It is such a beautiful dress! Codilia's sewing ability is so good!
+1939:Thank you once again for your help! For that` I will now teach you [Breath Control Lvl 4].
+1940:See you later! Goodbye! *^^*
+1941:Have you talked to [Codilia] in [Millena Town] about my dress yet?
+1942:(Boha is very engrossed in her practice today.)
+1943:(Her dancing has improved tremendously! She look like a pro!)
+1944:Hello again` Boha! Congratulations! I hear you are making your debut soon!	Hmm.. I am supposed to be doing something else now...
+1945:Hi %UserName%! I really have to thank you for your help. 
+1946:Everyone helped me to make my dream come true. So` I must send them invitation cards to attend my debut concert...
+1947:...but I do not have enough time to send them out myself.
+1948:Can you help me and give [Auhigen Routs] and [Codilia] in [Millena Town] my invitation cards?
+1949:Can you also give me their confirmations? 
+1950:Sure` no problem!	Oh` I'm so sorry Boha. I'm pretty busy myself...
+1951:Thank you. I will practice even harder so that everyone can enjoy my show.
+1952:Oh! I am so excited that everyone is coming!
+1953:%UserName% ` Thank you so much! Without your help` my dream would never have come true.
+1954:Come closer.. let me teach you [Breath Control Lvl 5] as a gesture of my appreciation!
+1955:Have you passed my invitation cards to [Auhigen Routs] and [Codilia] yet? 
+1956:Isn't it a nice day today?
+1957: 
+1958:Have a pleasant day ahead.
+1959: 
+1960:Hi %UserName%. Nice to meet you.
+1961: 
+1962:You remind me of myself when I was young...
+1963:Maybe you just see me as an old man... but even though I am retired...my former subordinates still respect me.
+1964:I have important information but you are still not ready to receive that information.
+1965:I am sorry but you have to come back to me after you have reached level 24...
+1966:Do you want to master your new attack?
+1967:Ah...this old body never gets enough rest. Hur hur hur..
+1968:You seem to have a lot of energy` young one.Ah..What I'd give to feel young again...
+1969:Did you encounter any [Garons] at [Twinible Forest]?? They look a little like humans' but are actually a vicious bunch of monsters.
+1970:Right after my retirement...someone told me that...
+1971:...those monsters are planning to attack [Millena Town] again...
+1972:My scouts reported that [Chief Garon] documents a plan from time to time but ...
+1973:...we have not been able to fully understand their language...
+1974:I think that they will try to invade [Millena Town] soon.
+1975:The problem is that most of our soldiers are at the frontline facing the battle with [Rain]...
+1976:I would have no problem taking care of this myself if I was still young......
+1977:Maybe you can help me` %UserName%.
+1978:Defeat [Chief Garon] and bring to me their plans.
+1979:This may be difficult but i will give you a handsome reward.
+1980:OK! I will do it!	Sorry` I don't think I'm strong enough to do this.
+1981:Thank you. This will be difficult` so you better ask some of your friends to help.
+1982:I have faith in your abilities...
+1983: 
+1984:Oh' that is disappointing to hear indeed...
+1985:So you think it is alright for the [Garons] to attack out beloved town? You are not running away' are you?
+1986:Sigh.. Nowadays youngsters care only for themselves...
+1987: 
+1988:You will find [Chief Garon] in [Twinible Forest].
+1989:Defeat him and bring me his plan.
+1990: 
+1991:Excellent! You actually managed to do it.
+1992:(He reads the document seriously.)
+1993:Oh` Ouch!! What is this?!!!!
+1994:(What is it?)
+1995:I do not understand what is written. I think it is better if we just burn it##(Burns document )
+1996:I am satisfied. Now I will make you`%UserName%` my follower.
+1997:Here's your reward!!
+1998:(Received [Combo Secret Script])
+1999:... 
+2000:You cannot help me!!!
+2001:Keep at training!!!
+2002: 
+2003:Let's play!
+2004:I am so happy!
+2005:My brother` Xloth` will be so angry if he finds out.
+2006:There are many places to hide here.
+2007:Let's play Hide-n-Seek.
+2008:Xloth always bosses me around...
+2009:I hope he does not find me.
+2010:You are the bravest of the brave.. Here is my reward to you.
+2011: 
+2012:Thank you.
+2013: 
+2014:You will be the future of Millena if you continue heroic deeds such as this.
+2015: 
+2016:Minerals are so hard to find nowadays...\I can't find anyone who manufactures mineral items these days...\Anyway try buying a mineral pack from me. Maybe if you are lucky you can get something amazing.
+2017:Make a purchase.	I want to make Clean water or Pearl.	Exit
+2018:Minerals are so hard to find nowadays...\I can't find anyone who manufactures mineral items these days...\Anyway try buying a mineral pack from me. Maybe if you are lucky you can get something amazing.
+2019:Make a purchase.	I want to make Clean water or Pearl.	Exit
+2020:Yes? Do you need anything?
+2021:I need your help to translate this script for me.
+2022:Huh? Can't you see I am very busy now?
+2023: 
+2024:Secret of Ancient Script? Interesting... Interesting... But it's not easy to..... ([Jimur] mumbles something under his breath.)
+2025:Hmmm..` fine. I will try. But I'm not doing it manually!
+2026:I am developing an Interpreter Machine that utilises the power of Elda Stones.
+2027:The machine requires a lot of energy to translate extremely rare and difficult languages.
+2028:Can you help me collect a rare mineral that can run the machine for me?
+2029:The mineral is said to be found in a [Jewelry Box] at [Cave for purgees].
+2030:Good luck!
+2031: 
+2032:Ah` you have brought me the mineral.
+2033:Give me a moment as I translate the script for you.
+2034:..... 
+2035:..... 
+2036:There` it is done. Bring this to [Detruit Blodger] at [Haku Village]. He will know how to use it.
+2037: 
+2038:Ah` you have brought me the mineral.
+2039:Give me a moment as I translate the script for you.
+2040:..... 
+2041:..... 
+2042:There` it is done. Bring this to [Flora Aramis] at [Haku Village]. She will know how to use it.
+2043: 
+2044:Find the [Jewelry Box] at [Cave for purgees]. It has the mineral that my Interpreter Machine needs to translate the script.
+2045: 
+2046:Bring the translated script to [Detruit Blodger] at [Haku Village]. He will know how to use it.
+2047: 
+2048:Bring the translated script to to [Flora Aramis] at [Haku Village]. She will know how use it.
+2049: 
+2050:Isn't it a nice day today?
+2051: 
+2052:Have a pleasant day ahead.
+2053: 
+2054:Hi %UserName%. Nice to meet you.
+2055: 
+2056:My parents were murdered by Rain soldiers.
+2057:I will avenge them when I grow up....
+2058:At the back of the castel in the town` there is very big tree.
+2059:Some say that you can find a lot of [Elda stones] there.
+2060:What a waste...they are just lying there unused.
+2061:Did you see my sister?
+2062:Her name is [Photeras].
+2063:If you meet her` please tell me.
+2064:Isn't it a nice day today?
+2065: 
+2066:Have a pleasant day ahead.
+2067: 
+2068:Hi %UserName%. Nice to meet you.
+2069: 
+2070:You still have Boha's dress!!! Doesn't Boha need the dress?
+2071: 
+2072:Boha's debut?? Can she do it? She loses her balance and tumbles ever so often.
+2073:Anyway` I will go because she has invited me. Here is my confirmation.
+2074:I got it already.. what happened?
+2075: 
+2076:War... why do people ever bother going to war...
+2077:It is just meaningless...
+2078:Completely useless...
+2079:Where is my knight in shining armor?
+2080:You think I will ever find him?
+2081:Oh Boha has an audition? She failed her audition before. Hmm.. Will she do well this time?
+2082:I am actually busy now` but if it's for Boha` I do not mind. Although... I think I need more materials.
+2083:I need 15 yellow scale of mgarath to make a dress for her...
+2084:..but`...I can't go to [Forgotten Sea] and get yellow scale of mgarath now..
+2085:Hmm.. would you be able to get them for me so that I can make Boha a beautiful dress?
+2086:I would be glad to help.	Erm...I'm..busy. Yeah..busy...
+2087:Great! Now I am able to make the dress. Please wait a moment.
+2088:(She is swift with her needle.
+2089:Well How is it? Please send my regards to Boha. I hope that she will pass the audition.'
+2090:To make Boha's dress` I need at least 15 yellow scale of mgarath from [Forgotten Sea].
+2091: 
+2092:I will wait for you to get me the materials. Hurry up!.
+2093: 
+2094:Merry Christmas~ and Happy new year!!!\Santa Claus has no money. In the past he gave gift to children for nothing.\He said to me?? ??From now on Don??t give a gift to children for nothing!!!??\No matter how can I give money! So I am ready for event.\Go to field and hunt snowmen. So you can get Rice cake and Stamp.\Collect it so I will give a gift.\There is no such thing as a free lunch! Hahaha!
+2095:Rice Cake 50` I want Skin Ticket!.	Rice Cake 100` I want faster more!.	Rice Cake 200 ` I want get more EXP!	Stamp` I want new arrival!!!	Snowball` I hunt Big Snowman!!!	No thanks!
+2096:Take your choice! I am angel only today. Hehehe!
+2097:SKIN A Helmet	SKIN B Suit	SKIN C Wing
+2098: There is no such thing as a free lunch!\If you give rice cakes to me I will give stamp to you.\You can exchange stamp for big gift.
+2099:Exit
+2100:Are you kidding? Don??t lift a hand!
+2101:Exit
+2102: There is no such thing as a free lunch!\If you give rice cakes to me I will give stamp to you.\You can exchange stamp for big gift.
+2103:Exit
+2104:Are you kidding? Don??t lift a hand!
+2105:Exit
+2106: There is no such thing as a free lunch!\If you give rice cakes to me I will give stamp to you.\You can exchange stamp for big gift.
+2107:Exit
+2108:Are you kidding? Don??t lift a hand!
+2109:Exit
+2110: There is no such thing as a free lunch!\If you give rice cakes to me I will give stamp to you.\You can exchange stamp for big gift.
+2111:Exit
+2112:Please come to me again after end of your buffer.
+2113:Exit
+2114:Are you kidding? Don??t lift a hand!
+2115:Exit
+2116: There is no such thing as a free lunch!\If you give rice cakes to me I will give stamp to you.\You can exchange stamp for big gift.
+2117:Exit
+2118:Please come to me again after end of your buffer.
+2119:Exit
+2120:Are you kidding? Don??t lift a hand!
+2121:Exit
+2122:I will give big present for %UserName%.
+2123:Stamp 10` New Arrival Helmet	Stamp 15` New Arrival Suit A	Stamp 15` New Arrival Suit B	Stamp 20` New Arrival Wing
+2124:Merry Christmas~ and Happy new year!!!
+2125:Exit
+2126:Short of Stamp. I don??t give present for nothing!!
+2127:Exit
+2128:Merry Christmas~ and Happy new year!!!
+2129:Exit
+2130:Short of Stamp. I don??t give present for nothing!!
+2131:Exit
+2132:Merry Christmas~ and Happy new year!!!
+2133:Exit
+2134:Short of Stamp. I don??t give present for nothing!!
+2135:Exit
+2136:Merry Christmas~ and Happy new year!!!
+2137:Exit
+2138:Short of Stamp. I don??t give present for nothing!!
+2139:Exit
+2140:Wow! Did you hunt Big snowman? I will give special present for %UserName%.
+2141:Exit
+2142:Short of Snowball. More try!
+2143:Exit
+2144:I wonder who is going to bring glory to Rain....
+2145: 
+2146:It must be nice to lead a carefree life of an adventurer.
+2147: 
+2148:Hi` I am [Groondalpe].
+2149: 
+2150:Hmmm ...This is a big problem!! Big` big problem!!!## So hard to build a house........
+2151:(What is this old man rambling about?...)
+2152:Ah` Can you help me?
+2153:But... You are still a beginner....you cannot defeat the enemy..
+2154:I'm sorry` but talk to me again after you are level 24...
+2155:Do you want to learn the secret skill of our family?
+2156:We Old man can live until today because of youngsters like you...
+2157:Oh!It is you!! ...Big problem..very big....big BIG!!!
+2158:I live in a small house in [Gaia Valley].
+2159:It used to be very peaceful and I was happy learning new magic... but one day....
+2160:...my house was attacked by the [Marons].
+2161:It is not my house that is important. The important thing is the document [Vision Paper] which is my family's secret.
+2162:In my haste to escape` I forgot to bring the [Vision Paper] with me..
+2163:That document is very important to me...
+2164:Please... get the document from the the [Maron]'s leader called [Berun]...
+2165:As a token of my gratitude' I will give you the [Combo Secret Script]...
+2166:Ok` I will help you	Sorry but I am not interested in your problem
+2167:Thank you. This will be difficult` so you better ask some of your friends to help.
+2168:I have faith in your abilities...
+2169: 
+2170:Why not?!!...
+2171:Why would you not want to help an old man like me?!!....
+2172:...if you ever change your mind...aarrgh...BIG PROBLEM! BIG BIG!!
+2173: 
+2174:The leader of the [Marons]` [Berun]` stole the [Vision Paper] that belongs to me... He is at [Gaia Valley].
+2175:Help me get back my [vision Paper]!!
+2176: 
+2177:AH!! AH!!! I don't believe it!! You have returned!! ##(He touches his book like it was his own son.)
+2178:...Eh....what's this?.. ... ...##aarrgh!!! Someone spilled something on it!! Why those @#$@ [Marons]!
+2179:Ok` Ok ... This [Vision Paper] also contains texts that will teach you a new attack!
+2180:(Hastily copies some parts of the document.)
+2181:Here's your reward!!
+2182:(Received [Combo Secret Script])
+2183: 
+2184:You cannot help me!!!
+2185:Keep at training!!!.
+2186: 
+2187:Did you come across a boy looking for me?
+2188:He is my big brother. He is very annoyed.
+2189:Please do not tell him that you saw me.
+2190:Do you want to play?
+2191:Wooslan never plays with me....
+2192:Did you know that there used to be a big mountain.?
+2193:My father said that a very big [Elda Stone] made the mountain float.
+2194:But` the mountain collapsed and possibly destroyed the [Elda Stone].
+2195:I wonder who is going to bring glory to Rain....
+2196: 
+2197:It must be nice to lead a carefree life of an adventurer.
+2198: 
+2199:Hi. I am Wooslan.
+2200: 
+2201:Did you see my little sister? Where is she?
+2202:Her name is [Raida]. If you see her please tell me where she is.
+2203:People seem so busy... is there a problem?
+2204:It is nice if we look like we are busy.
+2205:Someone said that it is very difficult to master combo. Is it truly complicated?
+2206:I think it is easy...
+2207:Oops` My father told me not to talk with a [Magician]. Are you a [Magician]?
+2208:I wonder who is going to bring glory to Rain....
+2209: 
+2210:It must be nice to lead a carefree life of an adventurer.
+2211: 
+2212:Hi` I am [Buiske].
+2213: 
+2214:I am so sleepy...
+2215:...(yawning).. 
+2216:Have you seen how the people of Millena look like?
+2217:They are short and ugly...
+2218:People in Rain are good-looking.
+2219:People in Millena should learn to be more like us.
+2220:You are the bravest of the brave.. Here is my reward to you.
+2221:Thank you.
+2222:You will be the future of Rain if you continue heroic deeds such as this.
+2223:Minerals are so hard to find nowadays...\I can't find anyone who manufactures mineral items these days...\Anyway try buying a mineral pack from me. Maybe if you are lucky you can get something amazing.
+2224:Make a purchase.	I want to make Clean water or Pearl.	Exit
+2225:Minerals are so hard to find nowadays...\I can't find anyone who manufactures mineral items these days...\Anyway try buying a mineral pack from me. Maybe if you are lucky you can get something amazing.
+2226:Make a purchase.	I want to make Clean water or Pearl.	Exit
+2227:Hmm..So` It's a secret book in an ancient language....\this must be the secret book about Proima isn't it?\I need a magic pen in order to translate this.\To make the magic pen` I need some feathers from felix of [Illecian Deserted Area].\I need 10 felix red feathers` 10 felix white feathers and 10 felix black feathers.\ould you get them for me?
+2228:Yes` I will.	No` I have other things to do.
+2229:That's good. Wait a moment please. I will finish this translation for you once I make the magic pen.\Here it is. Give this back to Larke. He may be a bit arrogant...\but because Proima is his specialty` he can help you learn more about the Proima.
+2230:I need 10 of each... felix red feather` felix white feather` and felix black feather.\I cannot make the magic pen without those items.
+2231:Ok! I will wait here while you get the feathers for me. 
+2232: 
+2233:Are you sure?.. There is much to learn from this book..\You may regret this decision one day...
+2234:Have you been to [Plains of Memory]? 
+2235:No one catches [Kerupus] nowadays...it's skin is quite valuable.. 
+2236:what do you think of the war between Rain and Millena?
+2237:...hmm...I do not even think I want to comment about it..
+2238:We are strong...
+2239:if I was in Rain...
+2240:[Elda Stone]...
+2241:What do you need to know?
+2242:Don't you know that we need [Elda Stones] for many reasons.
+2243:Well go find out more about it.
+2244:Have you seen the big tree behind the castle?
+2245:I hear that you can find a lot of [Elda Stones] around that tree.
+2246:Have you seen the dancing girl...
+2247:She is so pretty..huhuhu!!
+2248:Being a [Sniper] is not easy.
+2249:You have to be accurate.
+2250:They are important in our Millena army.
+2251: Oh! I can sense a great Proima in you. ## You seem to have great power.. ## You may become famous one day! 
+2252: Well hello there my.....!!! 
+2253: Oops!.. I am sorry... ## I mistook you for someone else.. ## Forgive me.
+2254: The people of Millena are not so clever and are barbaric..... ## They live in deep in the forests... ## ...making them seem like animals!
+2255: Help spread our culture and knowledge to the people of Millena so that they will not be so barbaric!! 
+2256: Do you know the job called [Psyche]?? 
+2257: Long before [Psyche] job can make me crazy.. ## I never knew which is the right one...arrgg... 
+2258: But [Psyche] is a very important soldier in Rain City` Don't you agree?? 
+2259:Do you know anything about [Rain Town]?
+2260:When our ancestors were here' there was a big mountain.
+2261:A very big [Elda Stone] made the mountain float...
+2262:But` the mountain collapsed and possibly destroyed the [Elda Stone].
+2263:Sigh..I..do not have any [Elda Stone]..
+2264:[Elda Stone] is very important to us in Rain.. ##Especially people like you with proima should not ignore the power of [Elda Stone]... 
+2265:in any case we must have [Elda Stone].. 
+2266:...for many reasons...
+2267:The flowers have bloomed' but we do not have enough to collect [Flower Leaf] for life energy.
+2268:What is [Flower Leaf] for life energy?	Here i brought some [Flower Leaf].
+2269:I am a Flower Fairy. Flower Fairy's job is to take care of a flower and help to bring fruits.
+2270:To do this' we need a lot of life energy from [Flower Leaf] when the flowers bloom.
+2271:Unfortunately' we can only collect some [Flower Leaf] for life energy this year becasue there are alot of evil monsters out there.
+2272:If we cannot have enough life energy for us` we... we... will vanish. Huaaaaaaa
+2273:So please help us to get [Flower Leaf] from all the evil monsters and bring it to us. I will give you reward. Please help us pleaseeeeeeeee.
+2274:OK! You can count on me.
+2275:You are very kinds. If you bring the [Flower Leaf]` I will give you the [Flower Potion] which only fairies can make.
+2276:Be quick.
+2277: 
+2278:You are done? Thank you very much. I can only take 3.
+2279:I Have [Pink Flower Leaf].	I Have [White Flower Leaf].	Leave.
+2280:oh... You do not have at least 3 [Pink Flower Leaf]. I can only change 3 [Flower Leaf] to make 1 [flower Potion].
+2281:Please bring more.
+2282: 
+2283:( You have a [Pink Flower Potion]. )
+2284:I have [White Flower Leaf].	Leave.
+2285:oh... You do not have at least 3 [White Flower Leaf]. I can only change 3 [Flower Leaf] with 1 [flower Potion].
+2286:Please bring more.
+2287: 
+2288:( You have a [Blue Flower Potion]. )
+2289:I have [Pink Flower Leaf].	Leave.
+2290: Thank you. If you have enough time please come back to taste Sorbet.
+2291: 
+2292:Cold Sorbet is the best thing in the hot summer.
+2293: 
+2294:Now I can make tasty Sorbet.
+2295: 
+2296:This hot summer is the first time in my life. It's also hot in here Coolu beach.\Cold Sorbet is the best thing in the hot summer.\Sorbet that I make is more tasty because of watermelon pieces.\But nasty little witch cursed to the watermelon pieces.\Oh my god! Watermelon pieces got feet and ran away.\Customers are coming and i got no watermelon pieces...it's terrible.\Could you please get the cursed watermelon pieces for me?\I will repay you enough.
+2297:Yes.	No.
+2298:I need many watermelon pieces. Please hurry!!
+2299:Hi! How are you?
+2300:Oh! Tell me more about pets!	Hmm` I want to know more about horses!
+2301:I breed horses and sell them to those who need them. Horses enable you to move around faster.
+2302:Ok` Anything else that I should know about?	Wow! I want one!
+2303:A horse helps you to move around faster than if you were to just walk or run.
+2304:To ride it` you have to select it in your inventory and then press 'Ctrl + R' on your keyboard.
+2305:If you ride your horse for too long` you will wear out its horse-shoe and this will influence its speed.
+2306:If that happens` you have to get replace its horse shoe.
+2307:You can also decorate your horse with all kinds of accessories` but...
+2308:...those are only available on the Item Mall.
+2309:Hmm.. Seems that a lot more people are interested in getting pets nowadays..
+2310:Yes` I am interested in getting one. May I know more?	Hmm... I wish to get my own pet!	Sobz~..My pet died` I wish to bury it.Sobz~!	I hear you can babysit my pet for me?
+2311:Yes` I can take care of your pet if you wish. It will cost you 3 Elds per minute and you can pay for it when you return.
+2312:Ok! I will entrust my pet to you. Please take good care of it.	Oh` I wish to check out my pet.	Another time perhaps..
+2313:Which pet do you want to entrust to me?
+2314:[1] %PET0_NAME%	[2] %PET1_NAME%	[3] %PET2_NAME%
+2315:Ok` I will take care of it. You can trust me. ^^
+2316:Entrust Pet/Check Out Pet	GoodBye!
+2317:Which pet do you want to check out?
+2318:[1] %PET0_NAME%	[2] %PET1_NAME%	[3] %PET2_NAME%
+2319:Ooohhh! Remember` I charge 3 Elds per minute. 
+2320:Entrust Pet/Check Out Pet	Goodbye.
+2321:Thank you for using our services.
+2322:Entrust Pet/Check Out Pet	Goodbye.
+2323:Please` take good care of your pet...
+2324:Happy New year.
+2325:Oh` What happened? You ought to give it more attention.
+2326:Poor thing... Rest in Peace...
+2327:[1] %PET0_NAME%	[2] %PET1_NAME%	[3] %PET2_NAME%
+2328:The funeral expense is 10000 Elds.
+2329: 
+2330:Are you mad?! Your pet is still alive!!
+2331: 
+2332:The funeral expense is 10000 Elds.
+2333: 
+2334:Are you mad?! Your pet is still alive!!
+2335: 
+2336:The funeral expense 10000 Elds.
+2337: 
+2338:Are you mad?! Your pet is still alive!!
+2339: 
+2340:Ok` What do you want to know?
+2341:What is a pet?	How do I summon a pet?	About Pet Health Point (HP)?	Oh` I don't need to know anything else.
+2342:I catch wild monsters and tame them so that they are domesticated and can help us humans with many things.
+2343:If a pet is fed constantly` it will grow better. Do you know that you can raise 3 pets concurrently?
+2344:There are generally 2 types of pets. The first type will attack enemies and the other type will protect you againt enemy attacks.
+2345:A pet will be summoned when you call for it. Its ability will increase according to its level.
+2346:I have more questions.	Ok` I think that's all I need to know.
+2347:A pet's health gets weaker and weaker all the time` even when you are asleep and not playing. (in real time not in game time).
+2348:So be careful if you plan to travel for a long time and will be away from the world of DECO Online.
+2349:A pet learns to eat its food directly from the pet inventory. So` remember to stock up food in your pet inventory every now and then.
+2350:A pet with very low Health Points (HP) can lead to a disastrous end for the pet...
+2351:...as if your pet dies` you have to arrange a funeral for it with my help.
+2352:I have more questions.	I think I have learnt enough.
+2353:Your pet grows each time you summon it. However` I have heard that there is a special item that can help your pet to grow faster.
+2354:When your pet has been actively summoned` it will help you to attack the enemy or protect you using its CP (Concentrating Point).
+2355:If your pet runs out of CP` it cannot help you so you need to give your pet a rest.
+2356:I have more questions.	That's all I need to know.
+2357:Hello. 
+2358:Sometimes change your face and hair.
+2359:I like beautiful things. How about you? 
+2360:Change your appearance. You will feel better.
+2361:Hello. My name is Cuty. 
+2362:I like beautiful things. How about you? 
+2363:Change your appearance. You will feel better.
+2364:Haloo. Apa kabar\Namaku Kabayan
+2365:Aku hanya disini selama Event Lebaran jadi sering-seringlah mengunjungiku ^^
+2366:ada yang kamu ingin tanyakan?
+2367:Ada yang bisa saya bantu?	Ini Janur dan Ketupat heart nya.
+2368:akhir-akhir ini di negara Rain sedang diserang oleh monster-monster Ketupasaurus mereka menyerang penduduk setempat.
+2369:Menurut Legenda penduduk setempat. monster tersebut adalah hasil kutukan para penyihir-penyihir jahat.
+2370:ketupaSaurus hanya dapat di kalahkan jika kamu berhasil mengambil [Ketupat Heart] dan [Janur].
+2371:Kumpulkan 5 buah [Ketupat Heart] dan 10 [Janur] sehingga aku bisa membuat ramuan untuk melepaskan kutukan tersebut.
+2372:Mari kita bikin hari raya lebaran ini lebih hangat.
+2373:Minal Aidin Wal Faidzin.
+2374:mohon maaf lahir dan batin ^_^.
+2375:akhir-akhir ini di negara Millena sedang diserang oleh monster-monster Ketupasaurus mereka menyerang penduduk setempat.
+2376:Menurut Legenda penduduk setempat. monster tersebut adalah hasil kutukan para penyihir-penyihir jahat.
+2377:ketupaSaurus hanya dapat di kalahkan jika kamu berhasil mengambil [Ketupat Heart] dan [Janur].
+2378:Kumpulkan 5 buah [Ketupat Heart] dan 10 [Janur] sehingga aku bisa membuat ramuan untuk melepaskan kutukan tersebut.
+2379:Mari kita bikin hari raya lebaran ini lebih hangat.
+2380:Minal Aidin Wal Faidzin.
+2381:mohon maaf lahir dan batin ^_^.
+2382:Baiklah aku akan membantumu.
+2383:Terima Kasih karena mau membantu saya melepaskan kutukan para penyihir-penyihir jahat itu` jika berhasil aku akan memberikan kamu hadiah yang bagus.
+2384: 
+2385:Ah... Aku membutuhkan lebih banyak [Janur] dan [Ketupat Heart].
+2386:Ayo kumpulkan lebih banyak lagi.
+2387: 
+2388:Terima Kasih telah membantu saya melepaskan kutukan para penyihir-penyihir jahat itu.
+2389:sebagai tanda terima kasihku.
+2390:aku berikan 2 buah item.
+2391:aku berharap kamu memakainya.
+2392:supaya suasana di hari lebaran ini lebih meriah ^_^.
+2393: 
+2394:I have been researched eldastone's origin with my twin brother for many years.
+2395:Finally we found how to synthesize eldastone. But my brother thought this research must be used for Rain and I am on the opposite side
+2396:We fighted by the ideological difference and he has gone to Rain.
+2397:So I often could be a spy by someone who doesn??t know this story.
+2398:Woops I was very talkative. ## Do you try hyper stone with faith in me ?
+2399:What is the hyper stone?.	Hyper stone	Bye.
+2400:We developed skills to cut off the connection with the core and the energy source between eldastones by many tries.
+2401:And we found the phenomenon when the connection with the core and the energy source is cut off the core to destroy polygon object.
+2402:that is wrapped the energy source this is made the energy of polygon object.
+2403:And we found this phenomenon make a new eldastone more powerful and solid.
+2404:This is the Hyper stone. 
+2405:Hyper stone	OK. I see. Bye.
+2406:Well if you give me the resource and cost it I'll make the hyper stone. 
+2407:But this skill is very dangerous. So I warn the possibility of failure and broken eldastones while synthesizing.
+2408:Hyper stone for Weapon.	Hyper stone for Armor.	Quit.
+2409:I have been researched eldastone's origin with my twin brother for many years.
+2410:Finally we found how to synthesize eldastone. But my brother thought this research must be used for Rain and I am on the opposite side
+2411:We fighted by the ideological difference and he has gone to Rain.
+2412:So I often could be a spy by someone who doesn??t know this story.
+2413:Woops I was very talkative. ## Do you try hyper stone with faith in me ?
+2414:What is the hyper stone?.	Hyper stone	Bye.
+2415:We developed skills to cut off the connection with the core and the energy source between eldastones by many tries.
+2416:And we found the phenomenon when the connection with the core and the energy source is cut off the core to destroy polygon object.
+2417:that is wrapped the energy source this is made the energy of polygon object.
+2418:And we found this phenomenon make a new eldastone more powerful and solid.
+2419:This is the Hyper stone. 
+2420:Hyper stone	OK. I see. Bye.
+2421:Well if you give me the resource and cost it I'll make the hyper stone. 
+2422:But this skill is very dangerous. So I warn the possibility of failure and broken eldastones while synthesizing.
+2423:Hyper stone for Weapon.	Hyper stone for Armor.	Quit.
+2424:Hello.\ Holy land of Seal is divided [Sorrow Swamp] and [Flame Ravine].\[Sorrow Swamp] is divided into three dungeons.\Hell of Pain` Hell of Silence` and Hell of Fire...\[Flame Ravine] is divided into two dungeon.\Hell of Ruin` and Hell of seal... those are very dangerous \and terrible for Jynade??s power. \For evade the dark proima of Jynade` you have to use holy proima. \All dungeons have need of own key. \These key can be use continuously. But enter the dungeon` you must have key. \If you are ready materials` I will make the key.
+2425:[Sorrow Swamp]	[Flame Ravine]	Exit
+2426:You are not best warrior. Now Jynade??s power is growing up in Holy land of Seal.\Here is very dangerous. Go back!!!
+2427:Go back village.
+2428:[Sorrow Swamp] is divided into three dungeons.\What kind of key do you need?\If you have never been here before` you have to make [The key for Hell of Pain].\For enter the higher dungeon` you have to need the key of lower dungeon.
+2429:(Hell of Pain)	(Hell of Silence)	(Hell of Fire)	First
+2430:[Flame Ravine] is divided into two dungeons.\What kind of key do you need?\If you have never been here before` you have to make [The key for Hell of Pain].\For enter the higher dungeon` you have to need the key of lower dungeon.
+2431:Hell of Ruin	Hell of Seal	First
+2432: Hell of Pain! Many warriors fought to the last.\If their souls are remained yet` they will take care of you surely.\For make [The Key for Hell of Pain]` \you need 2 Holy proimas and 1000000 elds.
+2433:I am ready.	First	Exit
+2434:I got [The Key for Hell of Pain]
+2435: 
+2436:Material is not enough.
+2437:Back	First	Exit
+2438:Hell of Silence! \Many warriors fought to the last.\If their souls are remained yet` they will take care of you surely.\For make The Key for Hell of silence` you need [The Key for Hell of Pain]` \[The Magic Stone of Pain]` 4 Holy proimas` and 2000000 elds. \You can get [The Magic stone of Pain] from Boss Monster in Hell of Pain.
+2439:I am ready.	Exit
+2440:I got [The Key for Hell of Silence].
+2441: 
+2442:Materials is not enough.
+2443:Back	First	Exit
+2444:Hell of Fire!\Many warriors fought to the last.\If their souls are remained yet` they will take care of you surely.\For make [The key for Hell of Fire]` you need [The Key for Hell of Silence]` \[The magic stone of Silence]` 6 Holy proimas` and 3000000 elds. \You can get [The magic stone of Silence] from Boss monster in Hell of Silence.
+2445:I am ready.	First	Exit
+2446:I got [The key for Hell of Fire].
+2447: 
+2448:Materials is not enough.
+2449:Back.	First	Exit
+2450:Hell of Ruin!\Many warriors fought to the last. If their souls are remained yet` they will take care of you surely.\For make [The key for Hell of Ruin]` you need [The key for Hell of Fire]` \[The magic stone of Fire]` 8 Holy proimas and 4000000 elds.\You can get [The magic stone of Fire] form Boss Monster in Hell of Fire.
+2451:I am ready.	First	Exit
+2452:I got [The Key for Hell of Ruin].
+2453: 
+2454:Materials is not enough.
+2455:First	Back.	Exit
+2456:Hell of Seal!\Many warriors fought to the last.\If their souls are remained yet` they will take care of you surely.\For?????? make [The Key for Hell of Seal]` you need [The Key for Hell of Ruin]` \[The magic stone of Ruin]` 10 Holy proimas` and 5000000 elds.\You can get [The magic stone of Ruin] from Boss monster in Hell of Ruin.
+2457:I am ready.	First	Exit
+2458:I got [The Key For Hell of Seal].
+2459: 
+2460:Materials is not enough.
+2461:First	Back.	Exit
+2462:Hello.\Our things grew worse with each passing day.\Becuase of Jynade is keeping all peoples and monsters under his control.\Dark proima is root of all evil. Jynade is growing up power through Dark proima.\If we can cleanup dark proima` we will get the Holy power!\Holy proima will be helpful to us.\Please get the dark proima. I will cleanup it!\[20 Dark proimas+100000 elds] = [1 Holy Proima and 1 Fame point]\Follow this formula I will reward for your labor.
+2463:Cleanup	Exit
+2464:You are not best warrior.\Now Jynade is growing up power.\Here is dangerous. Go back!!!
+2465:Go to village
+2466:Do you cleanup proima?\Proima power will be helpful to you.\[20 Dark Proimas + 100000 elds] = [1 Holy proima` and Fame point+1]\ How many dark proimas do you clean up?
+2467:Clean up = 20 dark proima	Clean up = 40 dark proima	Clean up = 60 dark proima	Exit
+2468:Get 1 Fame point` and 1 Holy Proima.
+2469: 
+2470:Get 2 Fame point` and 2 Holy proimas.
+2471: 
+2472:Get 3 Fame point` and 3 Holy proimas.
+2473: 
+2474:Dark proimas or elds are not enough.\Please check your inventory.
+2475:Back	Exit
+2476:Hello.\I expect you will become to grow up best warrior.\It is not easy` but you can do it!\This suit is ancient warriors had been used.\Heroic suit is the highest grade.\For cancel darkness power` you have to persevere in your efforts.\Of course` it is your shares.\Buy suit of sealing! To wear suit you have to make use of emblems and other materials and cancel seal.\You can get emblems from Boss monster by low rate.
+2477:Buy now!	Combination suit	Cancel Seal	Exit
+2478:You are not best warrior.\Now Jynade is growing up power in Holy land of Seal.\Here is very dangerous. Go Back!!! 
+2479:GO to village.
+2480:Of course you can buy heroic suit of sealing. But it is not available before cancel seal.\For cancel seal` you have?????? to ready Emblems ` Holy proimas` and Elds. 
+2481:Buy Now!	Cancel seal	Exit
+2482:Select kind of suit.\Suit is divided into two type.\[Valor] and [Rage].
+2483:The suite of Ruin	The suit of Seal	First
+2484:You select [The suit of Ruin].\Please select type now.\[Valor] and [Rage].
+2485:Magician Garb	Shaman Garb	Priest Garb	Back
+2486:You select [The suit of Ruin].\Please select type now.\[Valor] and [Rage].
+2487:Light Armor	Middle Armor	Heavy Armor	Back
+2488:You select [The suit of Seal].\Please select type now.\[Valor] and [Rage].
+2489:Magician Garb	Shaman Garb	Priest Garb	Back
+2490:You select [The suit of Seal].\Please select type now.\[Valor] and [Rage].
+2491:Light Armor	Middle Armor	Heavy Armor	Back
+2492: Select kind of suit.\Suit is divided into two type.\[Valor] and [Rage].
+2493:Cancel The suit of Ruin [Valor]	Cancel The suit of Ruin [Rage]	Cancel The suit of Seal [Valor]	Cancel The suit of Seal [Rage]	First	Exit
+2494:Exit
+2495:Exit
+2496:Exit
+2497:Exit
+2498:Are you ready?! For combination` need canceled Top` Bottom` Gauntlet` and Boots. \Find Kelen Talk in Dasrinen. He will help to you.
+2499:Exit
+2500:Exit
+2501:Exit
+2502:Exit
+2503:Exit
+2504:Exit
+2505:Exit
+2506:Exit
+2507:Exit
+2508:Exit
+2509:Exit
+2510:Exit
+2511:Exit
+2512:Do you hear?\I am afraid because of their mad crying.\Please...( Aran Mogos shivered with fear.)
+2513:About Eldastone powder	About Holy bible of Seal
+2514:You are not a best warrior.\Now Jynade is growing up power in Holy land of Seal.\Here is very dangerous. Go back!
+2515:Go to Village.
+2516:Eldastone powders is broken by power of Dark proima.\Of course` if we can use power of Holy proima` we will get back the old life.\For change powder` need some materials.\1 Holy proima` 10 Eldastone powder of same color` and 1000000 elds.\Are you ready now?\For making Holy proima` find Sibanon Aran.
+2517:I am ready.	First	Exit
+2518:1 Holy proima` 10 Eldastone powder of same color` and 1000000 elds.
+2519:First	Exit
+2520:The Holy Bible!\You can be learn SM Skill through The Holy Bible.\It has been sealed for a long time. So I cannot be sure where it is.\Maybe you get from Boss monsters in Holy land of Seal. Of course` you would not often get it.\After you cancel seal` go to Village. If you give it to Transfer NPC or SKill NPC` they will teach SM Skill to you.\Check your Skill Level. To learn SM Skill` all skills have to be Master Level.
+2521:Cancel Seal.	First	Exit
+2522:Material is The holy bible of Seal` 100000000 elds` and 50 Holy proimas.\Check your inventory. Are you ready now? \If you need Holy proima` please find Sibanon Aran.
+2523:Select Level of Holy bible.	Back	Exit
+2524:Are you ready?.
+2525:Cancel Seal Lv1.	Cancel Seal Lv2.	Cancel Seal Lv3.	Cancel Seal Lv4.	Cancel Seal Lv5.	Exit
+2526:Complete to cancel seal!
+2527: 
+2528:Material is The holy bible of Seal` 100000000 elds` and 50 Holy proimas.\Check your inventory.
+2529:Back	Exit
+2530: Complete to cancel seal!
+2531: 
+2532: Material is The holy bible of Seal` 100000000 elds` and 50 Holy proimas.\Check your inventory.
+2533:Back	Exit
+2534:Complete to cancel seal!
+2535: 
+2536:Material is The holy bible of Seal` 100000000 elds` and 50 Holy proimas.\Check your inventory.
+2537:Back	Exit
+2538:Complete to cancel seal!
+2539: 
+2540:Material is The holy bible of Seal` 100000000 elds` and 50 Holy proimas.\Check your inventory.
+2541:Back	Exit
+2542:Complete to cancel seal!
+2543: 
+2544:Material is The holy bible of Seal` 100000000 elds` and 50 Holy proimas.\Check your inventory.
+2545:Back	Exit
+2546:Hello~` What can I do for you?
+2547:Make a purchase	Repair	Suit Combination	Exit
+2548:You are not best warrior.\Now` Jynade is growing up power in Holy land of Seal. \Go back! Here is very dangerous.
+2549:Go back village.
+2550:Suit combination?\First of all` you have to read notice about Suit. \You have to be all aware of this! 
+2551:Read	Complete	Back	Exit
+2552:Please select combination suit.
+2553:The suit of Ruin	The suit of Seal	Danaria Suit	Terobe Suit	Timbernoth Suit	Flame Suit R	Back
+2554: Please select combination suit.
+2555:The suit of Ruin	The suit of Seal	Arado Suit	Barosroad Suit	Magnoth Suit	Flame Suit M	Back
+2556:Back	Exit
+2557:Back	Exit
+2558:Back	Exit
+2559:Back	Exit
+2560:Back	Exit
+2561:Back	Exit
+2562:Back	Exit
+2563:Back	Exit
+2564:Back	Exit
+2565:Back	Exit
+2566:Back	Exit
+2567:Back	Exit
+2568:Complete Suit combination. \From now on` I will expect your growth.\\"GO!~GO!~
+2569:Exit
+2570:You have to check notice about suit.
+2571:Check Notice	Exit
+2572:Exit
+2573:Exit
+2574:Nadron was scientist in Rain but he was always second than Arckbond.\So Nadron stolen design of Arcbot was exiled in Millena.\This is my birth story.. hahaha!\Not to brag but I have variety knowledge and ability.\At fist teach [Item processing and Enhancement] to you.\Item processing] is grown ability of armor and weapon to use Eldastone.\And [Item Enhancement] is upgrade ability of armor and weapon to use Order-Stone.\For reference if you process your items you have to make Order-Stone at first. Let??s do it!
+2575:Item processing.	Item Enhancement	Make Order-Stone	Exit
+2576:Back...
+2577:Back...
+2578:The kind of Order-Stone is two types.\Dilrun Stone is only for weapon.\Elrun Stone is only for armor. Let??s choice~!
+2579:Back...
+2580:Nadron was scientist in Rain but he was always second than Arckbond.\So Nadron stolen design of Arcbot was exiled in Millena.\This is my birth story.. hahaha!\Not to brag but I have variety knowledge and ability.\At fist teach [Item processing and Enhancement] to you.\Item processing] is grown ability of armor and weapon to use Eldastone.\And [Item Enhancement] is upgrade ability of armor and weapon to use Order-Stone.\For reference if you process your items you have to make Order-Stone at first. Let??s do it!
+2581:Item processing.	Item Enhancement	Make Order-Stone	Exit
+2582:Arckbond was scientist in Rain.\He compiled all the knowledge in this district into Arcbot. Not to brag but I have variety knowledge and ability.\At fist teach [Item processing and Enhancement] to you.\Item processing] is grown ability of armor and weapon to use Eldastone.\And [Item Enhancement] is upgrade ability of armor and weapon to use Order-Stone.\For reference if you process your items you have to make Order-Stone at first. Let??s do it!
+2583:Item processing.	Item Enhancement	Make Order-Stone	Exit
+2584:Back...
+2585:Back...
+2586:The kind of Order-Stone is two types.\Dilrun Stone is only for weapon.\Elrun Stone is only for armor. Let??s choice~!
+2587:Back...
+2588:Arckbond was scientist in Rain.\He compiled all the knowledge in this district into Arcbot. Not to brag but I have variety knowledge and ability.\At fist teach [Item processing and Enhancement] to you.\Item processing] is grown ability of armor and weapon to use Eldastone.\And [Item Enhancement] is upgrade ability of armor and weapon to use Order-Stone.\For reference if you process your items you have to make Order-Stone at first. Let??s do it!
+2589:Item processing.	Item Enhancement	Make Order-Stone	Exit
+2590:OH~ My son is troublemaker.\He is snatching a gift from another children \and then trades waste for item.\He is my headache!!!\%UserName%! Please forgive him. My son is just child.\Maybe he will be very happy for festival mood.\anyway it's my fault.\So I will pay for damage.\What do you want?
+2591:BOOM 50` I want special imotion weapon.	BOOM 100` I want to get more EXP.	EXIT
+2592:Select Type!
+2593:Pointing stick	Fish	Bat Stick	Candy Stick	Back
+2594:Have a good sence!\I apologize instead of my son.
+2595:EXIT
+2596:Are you kidding? Not enough BOOM!
+2597:EXIT
+2598:Have a good sence!\I apologize instead of my son.
+2599:EXIT
+2600:Are you kidding? Not enough BOOM!
+2601:EXIT
+2602:Have a good sence!\I apologize instead of my son.
+2603:EXIT
+2604:Are you kidding? Not enough BOOM!
+2605:EXIT
+2606:Have a good sence!\I apologize instead of my son.
+2607:EXIT
+2608:Are you kidding? Not enough BOOM!
+2609:EXIT
+2610:I apologize instead of my son.\You can get more EXP for 1 hour.
+2611:EXIT
+2612:Please come to me again after end of your buffer.
+2613:EXIT
+2614:Are you kidding? Not enough BOOM!
+2615:EXIT
+2616:Good Work!
+2617: 
+2618:Train hard and I am sure that you will be a great warrior one day....
+2619: 
+2620:Great! %UserName%! Glory to Millena.
+2621: 
+2622:Very good! You remind me of myself when I was young..
+2623: 
+2624:You may return any time to get more quests.
+2625: 
+2626:Is your training going well?
+2627:Buy a [Mission Scroll].	I have a few questions.
+2628:These [Mission Scrolls] are for [Twinible Forest].
+2629:Goodbye.
+2630:%UserName%` I will teach you what I can. What would you like to know?
+2631:What is the monster which is marked (s)?	What do I do with items like [HP Treatment]?	How do I get a Skill Point?	Goodbye.
+2632:Oh you have already seen that?
+2633:In this forest` you will see such monsters.
+2634:Those monsters usually give you better drops compared to the other monsters not marked (s).
+2635:So if you kill them' there is a good chance that you may obtain a good item.
+2636:Do you wish to know anything else?
+2637:What do I do with items like [HP Treatment]?	How do I get a Skill Point?	Goodbye.
+2638:[HP Treatment] is used for recovery of HP.
+2639:There are other treatments also available for you to use.
+2640:It is a good idea to keep these items in your inventory so that you can use them when you are in a pinch.
+2641:Do you wish to know anything else?
+2642:What is the monster which is marked (s)?	How do I get a Skill Point?	Goodbye.
+2643:You can earn a skill point each time you increase your level.
+2644:After Level 21` you can also earn a skill point by increasing your fame points.
+2645:Fame points are accumulated when you take part in PvP battles.
+2646:You cannot increase your skill level` if you do not have a skill point.
+2647:Do you wish to know anything else?
+2648:What is the monster which is marked (s)?	What do I do with items like [HP Treatment]?	Goodbye.
+2649:Thank you. This is my compensation!
+2650: 
+2651:Train hard and I am sure that you will be a great warrior one day....
+2652: 
+2653:Great job! Glory to Millena.
+2654: 
+2655:very Good! You remind me of myself when I was young..
+2656: 
+2657:You may return any time to get more quests.
+2658: 
+2659:Is your training going well? Millena is counting on you...
+2660:Buy a [Mission Scroll].	I have a few questions.
+2661:These [Mission Scrolls] are for [Plains of Memory].
+2662:Goodbye.
+2663:You probably want to know many things' but I can only give you some information.
+2664:What does [Breath Control] do?	What is a Combo Attack?	Who is the [Old Man]?
+2665:As you know` when you focus your mind and breathe` your HP and MP will start recovering ...
+2666:Did you also know that you can recover your HP and SP faster by getting a more advanced level of [Breath Control]?
+2667:But` you can only learn this skill from one person only.
+2668:I have heard of a rumour that there is a girl who can cure herself very fast at the [Plains of Memory] ...
+2669:Try looking around the [Plains of Memory] to find her.
+2670:Would you like to ask any more questions?
+2671:What is a Combo Attack?	Who is the [Old Man]?	Goodbye.
+2672:A Combo Attack is a chain of attacks that are executed continously without any delay.
+2673:There are many different types of Combo variations...
+2674:..some combo attacks can give special effects once completed.
+2675:You can learn a Combo Attack through a [Combo Script] or from a great warrior.
+2676:Would you like to ask any more questions?
+2677:What does [Breath Control] do?	Who is the [Old Man]?	Goodbye.
+2678:(Gives an astonished look) I can't believe you asked this question.
+2679:I have heard many stories about him....
+2680:but he does not disclose about himself to anyone...
+2681:Would you like to ask any more questions?
+2682:What does [Breath Control] do?	What is a Combo Attack?	Goodbye.
+2683:Good work!
+2684: 
+2685:Your grasp of the arcane arts is improving. Keep it up!
+2686: 
+2687:Glory to Rain.
+2688: 
+2689:You remind me of myself when I was young..
+2690: 
+2691:You may return any time to get more quests.
+2692: 
+2693:Is your practice going well?
+2694:Buy a [Mission Scroll].	I have a few questions.
+2695:These [Mission Scrolls] are for [Gaia valley].
+2696:Goodbye.
+2697:%UserName%` I will teach you what I can. What would you like to know?
+2698:What is the monster which is marked (s)?	What do I do with items like [Red Potion]?	How do I get a Skill Point?	Goodbye.
+2699:Oh you have already seen that?
+2700:In this forest` you will see such monsters.
+2701:Those monsters usually give you better drops compared to the other monsters not marked (s).
+2702:So if you kill them' there is a good chance that you may obtain a good item.
+2703:Do you wish to know anything else?
+2704:What do I do with items like [Red Potion]?	How do I get a Skill Point?	Goodbye.
+2705:[Red Potion] is used for recovery of HP.
+2706:There are other treatments also available for you to use.
+2707:It is a good idea to keep these items in your inventory so that you can use them when you are in a pinch.
+2708:Do you wish to know anything else?
+2709:What is the monster which is marked (s)?	How do I get a Skill Point?	Goodbye.
+2710:You can earn a skill point each time you increase your level.
+2711:After Level 21` you can also earn a skill point by increasing your fame points.
+2712:Fame points are accumulated when you take part in PvP battles.
+2713:You cannot increase your skill level` if you do not have a skill point.
+2714:Do you wish to know anything else?
+2715:What is the monster which is marked (s)?	What do I do with items like [Red Potion]?	Goodbye.
+2716:Thank you. This is my compensation!
+2717: 
+2718:May Proima be with you.
+2719: 
+2720:I like your style!
+2721: 
+2722:Great job! %UserName% someday you will be a hero of [Rain].
+2723: 
+2724:You remind me of my younger days.
+2725: 
+2726:You may return any time to get more quests.
+2727: 
+2728:Is your practice going well? Rain is counting on you...
+2729:Buy a [Mission Scroll].	I have a few questions.
+2730:These [Mission Scrolls] are for [Gold Hill].
+2731:Goodbye.
+2732:%UserName%` you want to know about many things' but I can only give you some information.
+2733:What does [Meditation] do?	What is a Combo Attack?	Who is [Luimi]?
+2734:As you know` when you focus your mind and meditate` your HP and MP will start recovering ...
+2735:Did you also know that you can recover your HP and SP faster by getting a more advanced level of [Meditation]?
+2736:But` you can only learn this skill from one person only.
+2737:I have heard of a rumour that there is someone who is an expert in [Meditation] at the [Gaia Valley]...
+2738:Try looking around the [Gaia Valley] to find her.
+2739:Would you like to ask any more questions?
+2740:What is a Combo Attack?	Who is [Luimi]?	Leave.
+2741:A Combo Attack is a chain of attacks that are executed continously without any delay.
+2742:There are many different types of Combo variations...
+2743:..some combo attacks can give special effects once completed.
+2744:In Rain` only Shamans are able to execute a Combo Attack.
+2745:Would you like to ask any more questions?
+2746:What does [Meditation] do?	Who is [Luimi]?	Leave.
+2747:(Smiling) So you too would like to know more about her...
+2748:Well..don't tell anyone that I told you so but [Luimi] is the daughter of the keeper of Rain.
+2749:Honestly Luimi's love story is more interesting....
+2750:...but thats her personal information... I have to be more careful about what I say....
+2751:Anyway it is better for you to talk to [Luimi] herself.
+2752:Anything else that I can help you with?
+2753:What does [Meditation] do?	What is a Combo Attack?	Leave.
+2754:Thank you. This is my compensation!
+2755: 
+2756:Great job!
+2757: 
+2758:I like your style!
+2759: 
+2760:%UserName%! Glory to Millena.
+2761: 
+2762:Wonderful! You may just be the one to lead Millena to greater heights.
+2763: 
+2764:You may return any time to get more quests.
+2765: 
+2766:Is your training going well? I see alot of potential in you.
+2767:Buy a [Mission Scroll]
+2768:These [Mission Scrolls] are for [Tough Wind Deserted Area].
+2769:Goodbye.
+2770:Thank you. This is my compensation!
+2771: 
+2772:Good work! May Proima always be with you.
+2773: 
+2774:I see alot of potential in you.
+2775: 
+2776:Glory to Rain.
+2777: 
+2778:Wonderful! You may just be the one to lead Rain to greater heights.
+2779: 
+2780:You may return any time to get more quests.
+2781: 
+2782:Is your training going well? I see alot of potential in you.
+2783:Buy a [Mission Scroll]
+2784:These [Mission Scrolls] are for [Esan Snow Field].
+2785:Goodbye.
+2786:Thank you. This is my compensation!
+2787: 
+2788:Good Work!
+2789: 
+2790:Train hard and I am sure that you will be a great warrior one day....
+2791: 
+2792:Great job! Glory to Millena.
+2793: 
+2794:very Good! You remind me of myself when I was young..
+2795: 
+2796:You may return any time to get more quests.
+2797: 
+2798:Is your training going well? Millena is counting on you...
+2799:Buy a [Mission Scroll].	I have a few questions.
+2800:These [Mission Scrolls] are for [Plains of Memory].
+2801:Goodbye.
+2802:You probably want to know many things' but I can only give you some information.
+2803:What does [Breath Control] do?	What is a Combo Attack?	Who is the [Old Man]?
+2804:As you know` when you focus your mind and breathe` your HP and MP will start recovering ...
+2805:Did you also know that you can recover your HP and SP faster by getting a more advanced level of [Breath Control]?
+2806:But` you can only learn this skill from one person only.
+2807:I have heard of a rumour that there is a girl who can cure herself very fast at the [Plains of Memory] ...
+2808:Try looking around the [Plains of Memory] to find her.
+2809:Would you like to ask any more questions?
+2810:What is a Combo Attack?	Who is the [Old Man]?	Goodbye.
+2811:A Combo Attack is a chain of attacks that are executed continously without any delay.
+2812:There are many different types of Combo variations...
+2813:..some combo attacks can give special effects once completed.
+2814:You can learn a Combo Attack through a [Combo Script] or from a great warrior.
+2815:Would you like to ask any more questions?
+2816:What does [Breath Control] do?	Who is the [Old Man]?	Goodbye.
+2817:(Gives an astonished look) I can't believe you asked this question.
+2818:I have heard many stories about him....
+2819:but he does not disclose about himself to anyone...
+2820:Would you like to ask any more questions?
+2821:What does [Breath Control] do?	What is a Combo Attack?	Goodbye.
+2822:Good work!
+2823: 
+2824:Your grasp of the arcane arts is improving. Keep it up!
+2825: 
+2826:Glory to Rain.
+2827: 
+2828:You remind me of myself when I was young..
+2829: 
+2830:You may return any time to get more quests.
+2831: 
+2832:Is your practice going well?
+2833:Buy a [Mission Scroll].	I have a few questions.
+2834:These [Mission Scrolls] are for [Gaia valley].
+2835:Goodbye.
+2836:%UserName%` I will teach you what I can. What would you like to know?
+2837:What is the monster which is marked (s)?	What do I do with items like [Red Potion]?	How do I get a Skill Point?	Goodbye.
+2838:Oh you have already seen that?
+2839:In this forest` you will see such monsters.
+2840:Those monsters usually give you better drops compared to the other monsters not marked (s).
+2841:So if you kill them' there is a good chance that you may obtain a good item.
+2842:Do you wish to know anything else?
+2843:What do I do with items like [Red Potion]?	How do I get a Skill Point?	Goodbye.
+2844:[Red Potion] is used for recovery of HP.
+2845:There are other treatments also available for you to use.
+2846:It is a good idea to keep these items in your inventory so that you can use them when you are in a pinch.
+2847:Do you wish to know anything else?
+2848:What is the monster which is marked (s)?	How do I get a Skill Point?	Goodbye.
+2849:You can earn a skill point each time you increase your level.
+2850:After Level 21` you can also earn a skill point by increasing your fame points.
+2851:Fame points are accumulated when you take part in PvP battles.
+2852:You cannot increase your skill level` if you do not have a skill point.
+2853:Do you wish to know anything else?
+2854:What is the monster which is marked (s)?	What do I do with items like [Red Potion]?	Goodbye.
+2855:Thank you. This is my compensation!
+2856: 
+2857:Good Work!
+2858: 
+2859:Train hard and I am sure that you will be a great warrior one day....
+2860: 
+2861:Great job! Glory to Millena.
+2862: 
+2863:very Good! You remind me of myself when I was young..
+2864: 
+2865:You may return any time to get more quests.
+2866: 
+2867:Is your training going well? Millena is counting on you...
+2868:Buy a [Mission Scroll].	I have a few questions.
+2869:These [Mission Scrolls] are for [Plains of Memory].
+2870:Goodbye.
+2871:You probably want to know many things' but I can only give you some information.
+2872:What does [Breath Control] do?	What is a Combo Attack?	Who is the [Old Man]?
+2873:As you know` when you focus your mind and breathe` your HP and MP will start recovering ...
+2874:Did you also know that you can recover your HP and SP faster by getting a more advanced level of [Breath Control]?
+2875:But` you can only learn this skill from one person only.
+2876:I have heard of a rumour that there is a girl who can cure herself very fast at the [Plains of Memory] ...
+2877:Try looking around the [Plains of Memory] to find her.
+2878:Would you like to ask any more questions?
+2879:What is a Combo Attack?	Who is the [Old Man]?	Goodbye.
+2880:A Combo Attack is a chain of attacks that are executed continously without any delay.
+2881:There are many different types of Combo variations...
+2882:..some combo attacks can give special effects once completed.
+2883:You can learn a Combo Attack through a [Combo Script] or from a great warrior.
+2884:Would you like to ask any more questions?
+2885:What does [Breath Control] do?	Who is the [Old Man]?	Goodbye.
+2886:(Gives an astonished look) I can't believe you asked this question.
+2887:I have heard many stories about him....
+2888:but he does not disclose about himself to anyone...
+2889:Would you like to ask any more questions?
+2890:What does [Breath Control] do?	What is a Combo Attack?	Goodbye.
+2891:Thank you. This is my compensation!
+2892: 
+2893:May Proima be with you.
+2894: 
+2895:I like your style!
+2896: 
+2897:Great job! %UserName%` someday you will be a hero of [Rain].
+2898: 
+2899:You remind me of my younger days.
+2900: 
+2901:You may return any time to get more quests.
+2902: 
+2903:Is your practice going well? Rain is counting on you...
+2904:Buy a [Mission Scroll].	I have a few questions.
+2905:These [Mission Scrolls] are for [Gold Hill].
+2906:Goodbye.
+2907:%UserName%` you want to know about many things' but I can only give you some information.
+2908:What does [Meditation] do?	What is a Combo Attack?	Who is [Luimi]?
+2909:As you know` when you focus your mind and meditate` your HP and MP will start recovering ...
+2910:Did you also know that you can recover your HP and SP faster by getting a more advanced level of [Meditation]?
+2911:But` you can only learn this skill from one person only.
+2912:I have heard of a rumour that there is someone who is an expert in [Meditation] at the [Gaia Valley]...
+2913:Try looking around the [Gaia Valley] to find her.
+2914:Would you like to ask any more questions?
+2915:What is a Combo Attack?	Who is [Luimi]?	Leave.
+2916:A Combo Attack is a chain of attacks that are executed continously without any delay.
+2917:There are many different types of Combo variations...
+2918:..some combo attacks can give special effects once completed.
+2919:In Rain` only Shamans are able to execute a Combo Attack.
+2920:Would you like to ask any more questions?
+2921:What does [Meditation] do?	Who is [Luimi]?	Leave.
+2922:(Smiling) So you too would like to know more about her...
+2923:Well..don't tell anyone that I told you so but [Luimi] is the daughter of the keeper of Rain.
+2924:Honestly Luimi's love story is more interesting....
+2925:...but thats her personal information... I have to be more careful about what I say....
+2926:Anyway it is better for you to talk to [Luimi] herself.
+2927:Anything else that I can help you with?
+2928:What does [Meditation] do?	What is a Combo Attack?	Leave.
+2929:Thank you. This is my compesation!
+2930:Thank you.
+2931:You will be the future of Millena if you continue heroic deeds such as this.
+2932:Thank you. This is my compesation.
+2933:Hello friend. Is there a problem?
+2934:Memo from [Nanna Millenas].	Make a Purchase.	Repair.	Goodbye.
+2935:Uhmm ... Ok` So you need a [Bow] for [Trial of Wit] test.\To get the [Bow]` you need 3 items. ...\10 [tail] from [Apoi]` 8 [Petal] from [Elder Dofla]`...\And lastly I need a [Petal] from [Kingfla].\You really think those items are required to make bow? Hahahahahahaha~!\It is only to test your ability...This is an old tradition of [Millena].\You can find these items in the [Forest of Resentment]` east of [Twinible forest].\Come back to me when you have them all.
+2936: 
+2937:Hello friend. Is there a problem?
+2938:Message from [Gabriel Heart].	Make a Purchase.	Repair.	Goodbye.
+2939:Hmmm ... You need a [Big Sword] for [Trial of Madness].\First I need you to get me 3 items...\10 [tail] from [Apoi]` 8 [Petal] from [Elder Dofla]` ...\And lastly a [Petal] from [Kingfla].\You really think these are the items needed to make a [Big Sword]? Hahahahahahaha~!\Its only to test your ability... This is an old tradition of [Millena].\It is only to test your ability... This is an old tradition of [Millena].\You can find these items in the [Forest of Resentment]` east of [Twinible forest].\Come back to me when you have them all.
+2940: 
+2941:Hello friend. Is there a problem?
+2942:Take order from [Kurio Kahn]	Make a Purchase.	Repair.	Goodbye.
+2943:Uhmm ... You need a [Shield] for [Trial of Reliance].\Before I can give you the [Shield]` I need you to get me 3 items...\10 [tail] from [Apoi]` and 8 [Petal] from [Elder Dofla]` ...\And lastly I need a [Petal] from [Kingfla].\You really think these are the items required to make a [Shield]? Hahahahahahaha~!\It is only to test your ability... This is an old tradition of [Millena].\You can find these items in the [Forest of Resentment]` east of [Twinible forest].\Come back to me when you have them all.
+2944: 
+2945:Hello friend. Is there a problem?
+2946:Orders from [Reishana Cube]	Make a Purchase.	Repair.	Goodbye.
+2947:Uhmm ... You need a [Sword] for [Trial of Courage].\ First I need you to get me 3 items...\ 10 [tail] from [Apoi]` 8 [Petal] from [Elder Dofla]` ...\And lastly a [Petal] from [Kingfla].\You really think these are the items to make a [Sword]? Hahahahahahaha~!\Its only to test your ability... This is an old tradition of [Millena].\It is only to test your ability... This is an old tradition of [Millena].\You can find these items in the [Forest of Resentment]` east of [Twinible forest].\Come back to me when you have them all.
+2948: 
+2949:Hmm ... One` Two ... (Checking the items...)\Ok` it's correct. Here is the [Sword] you require.\You know many people change their jobs...\I used to have a [Sword] just like this back in my adventuring days a long time ago..\However` this is your [Sword] now. Bring it back to [Reishana Cube].
+2950: 
+2951:Hmm ... One` Two ... (Checking the items...)\Ok` it's correct. Here is the [Shield] you require.\You know many people change their jobs...\I used to have a [Shield] just like this back in my adventuring days a long time ago..\However` this is your [Shield] now. Bring it back to [Kurio Kahn].
+2952: 
+2953:Hmm ... One` Two ... (Checking the items...)\Ok` it's correct. Here is the [Sword] you require.\You know many people change their jobs...\I used to have a [Shield] just like this back in my adventuring days a long time ago..\However` this is your [Shield] now. Bring it back to [Kurio Kahn].
+2954: 
+2955:Hmm ... One` Two ... (Checking the items...)\Ok` it's correct. Here is the [Bow] you require.\You know many people change their jobs...\I used to have a [Shield] just like this back in my adventuring days a long time ago..\However` this is your [Shield] now. Bring it back to [Kurio Kahn].
+2956: 
+2957:[Forest of Resentment] is east of [Twinible Forest].\Come back when you have all the items I require.
+2958:Make a Purchase.	Repair.	Goodbye.
+2959:Hello friend. Is there a problem?
+2960:Make a Purchase.	Repair.	Goodbye.
+2961:I only have the finest weapons in my shop!
+2962:Goodbye.
+2963:You have to keep your equipment in tip top condition all the time. I can help you repair any faulty equipment!
+2964:Goodbye.
+2965:You are a brave warrior..I will award a prize to you.
+2966:Thank you.
+2967:You're a great! You will be a good worker for Millena
+2968:Welcome. 
+2969:Make a Purchase.	Repair.	Goodbye.
+2970:A strong armor makes all the difference in the battlefield.
+2971:Goodbye.
+2972:A broken armor is a useless armor. Let me help you repair your broken armor.
+2973:Goodbye.
+2974:Millena is depending on you` %UserName%!
+2975: 
+2976:I see alot of potential in you` %UserName%!
+2977: 
+2978:You must enjoy adventuring a lot!
+2979: 
+2980:Wow? You brought a flower. Is it for me?
+2981:Thank you. This is a surprise.
+2982:I should give you a present. Here` I give this with my heart.
+2983:(Get [Chocolate].)
+2984: 
+2985:Kyaaaa >.< Is it for me. (shame) ^^
+2986:I cannot take this. I should give you a present too.
+2987:But do not take it too serious ok?
+2988:(Get [Chocolate].)
+2989: 
+2990:What do you require today?
+2991:Make a purchase.	Place items in Locker.	Goodbye.
+2992:What would you like to keep in the locker?...remember no quest items.
+2993:Make a purchase.	Goodbye.
+2994:What would you like to buy?
+2995:Place items in Locker.	Goodbye.
+2996:Finally she will be able to make her debut. Thank you for your help.\Of course I will go! She invited me! Here it is. This is so exciting!
+2997:I already accept her invitation.
+2998:Hello there. How can I help you?
+2999:Make a Purchase.	Goodbye.
+3000:Welcome to my shop.
+3001:Goodbye.
+3002:Boha is looking for 'High Quality Potion'? \Hmm.. Then I need some materials to make 'High Quality Potion'.\You think you can help me? 
+3003:Well` I've gone this far` why not?..	Hmm..I think I have other things to attend to.
+3004:That's very nice of you. You can find the materials by killing Trent of Induf Divided Area.\I need 10 of each items: Rotten tree root` red tree root and white tree root.\I will wait here for you.
+3005:That's great! You have gotten all the items. Now please wait...\Here you go. I have made more than what she needs. Give this to her. She will jump for joy!
+3006:What are you doing? You have not given Boha the 'High Quality Potion'? Go on` pass it to her quickly!
+3007:Without the items I told you` I cannot make the 'High Quality Potion'.
+3008:What do you have to do?...When you are done with that` talk to me again.
+3009:You are a brave warrior..I will award a prize to you.
+3010:Thank you.
+3011:You're a great! You will be a good worker for Rain
+3012:Welcome. 
+3013:Make a Purchase.	Repair.	Goodbye.
+3014:I only have the finest garbs in all of [Rain] in my shop.
+3015:Goodbye.
+3016:Let us alter your garbs to suit you better.
+3017:Goodbye.
+3018:Thank you. This is my compesation!
+3019:Thank you.
+3020:You're a great! You will be a good worker for Rain.
+3021:Thank you. This is my compesation!
+3022: ... ... ... 
+3023:Message from [Ka Lubleton]	Make a Purchase.	Repair.	Goodbye.
+3024:So you need a [Crystal Ball] huh?\You seriouly think that I will make a [Crystall Ball] for you?\Fine. First you need to get me 3 items ...\10 [Kis's Tooth]` 8 [Ooop's Tail]` ...\And lastly 1 [Uramp Skin].\You can find these objects in [Cave Of The Begining]` north of [Gaia Valley].\Come back to me when you have them all.
+3025: ... ... ... 
+3026:Message from [Arahs Shake]	Make a Purchase.	Repair.	Goodbye.
+3027:So you need a [Staff]. Hmm\You seriouly think that I will make a [Staff] for you\"Fine. First you need to get me 3 items \10 [Kis's Tooth]` 8 [Ooop's Tail]\And lastly 1 [Uramp Skin\You can find these objects in [Cave Of The Begining]` north of [Gaia Valley]\Come back to me when you have them all. 
+3028: ... ... ... 
+3029:Message from [Elpid Sheiat]	Make a Purchase.	Repair.	Goodbye.
+3030:So you need a [Staff]?\You seriouly think that I will make a [Staff] for you\Fine. First you need to get me 3 items.\10 [Kis's Tooth]` 8 [Ooop's Tail]` \And lastly 1 [Uramp Skin\You can find these objects in [Cave Of The Begining]` north of [Gaia Valley\Come back to me when you have them all. 
+3031: ... ... ... 
+3032:Note from [Saiki Rugart]	Make a Purchase.	Repair.	Goodbye.
+3033:So you need a [Agma Script]?\You seriouly think that I will make a [Agma Script] for you\Fine. First you need to get me 3 items ...\10 [Kis's Tooth]` 8 [Ooop's Tail]` ...\And lastly 1 [Uramp Skin].\You can find these objects in [Cave Of The Begining]` north of [Gaia Valley]\Come back to me when you have them all.
+3034:Hum ... One` Two ... \(Checking the items.)\Ok` they are all here.\(Hands over [Agma Script].) Here.\What?? What now??\You think I have nothing else to do?\Do not waste both our time...go back to [Saiki Rugart] NOW.
+3035:Hum ... One` Two ... \(Checking items.) Ok` they are all here.\(Hands over [Staff]) Here. What? What now?!\You think I have nothing else to do?\Do not waste both our time...go and return to [Elpid Sheiat] NOW.
+3036:Hum ... One` Two ... \(Checking items.) Ok` they are all here.\(Hands over [Staff]) Here. What? What now?!\You think I have nothing else to do?\Do not waste both our time...go and return to [Elpid Sheiat] NOW.
+3037:Hum ... One` Two ... \(Checking items.) Ok` they are all here.\(Hands over [Crystal Ball]) Here. What? What now?!\You think I have nothing else to do?\Do not waste both our time...go and return to [Elpid Sheiat] NOW.
+3038: 
+3039:[Cave of the Begining] can be found north of [Gaia Valley].\Come back when you have found everything.
+3040:Make a Purchase.	Repair.	Goodbye.
+3041:..Yes??.. 
+3042:Make a Purchase.	Repair.	Goodbye.
+3043:I'm so tired... I need an assistant to help me take care of this shop!!
+3044:Exit
+3045:Well..a broken weapon is a useless one. I can help you get it back to tip top condition...at a price.
+3046:Exit
+3047:Hi there` %UserName%. How can I help you today?
+3048:Make a Purchase.	Goodbye.
+3049:Welcome to my shop. I have good potions and scripts in stock.
+3050:Goodbye.
+3051:I see alot of potential in you` %UserName%!
+3052: 
+3053:You must enjoy adventuring a lot!
+3054: 
+3055:Rain is depending on you` %UserName%!
+3056: 
+3057:Wew? is that flower for me?
+3058:Thank you` I am very suprised.
+3059:I should give you a present. This is for you.
+3060:(Get Chocolate.)
+3061: 
+3062:Ah is this realy for me? [Shy] *^^*
+3063:I cannot take this unless I give you something. Here` take this.
+3064:But do not take too serious` OK?
+3065:(Get Chocolate.)
+3066: 
+3067:What do you require today?
+3068:Make a purchase.	Place items in Locker.	Goodbye.
+3069:What would you like to keep in the locker?...remember no quest items.
+3070:Make a purchase.	Goodbye.
+3071:What would you like to buy?
+3072:Place items in Locker.	Goodbye.
+3073:We only make contact with the more prominent humans.
+3074:You have to at least have 3000 fame points.
+3075:Do you feel the blessings of nature?
+3076:I hope we find peace in nature.
+3077:Make a purchase.	I want to make Unique Potions.	Goodbye.
+3078:What potions do you need?
+3079:Goodbye.
+3080:To make a Unique potion you have to provide me with the required materials...
+3081:...and a fee of 10 Thousand Elds.
+3082:Make a purchase.	Goodbye.
+3083:We always try to harmonise with all creatures of nature.\I do understand that there are many differences in beliefs and culture with you` humans.
+3084:We are depending on you` %UserName%!
+3085: 
+3086:You humans do not take enough care for nature...\...your ego is destroying our planet...
+3087:You look very tired...you should stop for a moment and enjoy the nature around you.
+3088:Enjoy the serenity around you.
+3089:I need some repairs to be done on my equipment.	I need to purchase some weapons.
+3090:Sure` what do you need?
+3091:I need some repairs to be done on my equipment.	Goodbye.
+3092:I will use the power of nature to repair your broken equipment.
+3093:I need to purchase some weapons.	Goodbye.
+3094:hmm....Nature is unable to recognise one such as you...
+3095:...as such I cannot adhere to your request.
+3096:You should accumulate more fame points in order to complete such transaction.
+3097:You are a brave warrior..I will award a prize to you.
+3098: 
+3099:Thank you.
+3100: 
+3101:You're a great! You will be a good worker for Rain
+3102: 
+3103:My name is Ceigen. I undertake to safeguard Esan Snow Area's Ingarden.
+3104:This place is connecting passage to move safely the people Rain Village or Jede Village.
+3105:And it is an important base In the front supply the material needed to the Rain unit.
+3106:But Lately we can not perform our role properly because of the colos damage.
+3107:Can you help to be safe from colos??.
+3108:Yes.	No.
+3109:I want you to help me buy the scroll.. 
+3110:You are a brave warrior..I will award a prize to you.
+3111: 
+3112:Thank you.
+3113: 
+3114:You're a great! You will be a good worker for Rain
+3115: 
+3116:My name is Logan. As I quartermaster supply armor for the troops at the front Rain main.
+3117:Armor used by the Rain forces at the front because the high-end is very difficult to create.
+3118:And armor must be produced on an ongoing basis because of the low durability than the best.
+3119:But these days with Millena and the war is long-term as well as
+3120:the difficulties of the war are more competitive because it is insufficient products and parts.
+3121:Can you gather the material For Rain.. 
+3122:Yes.	No.
+3123:I want you to help me buy the scroll.. 
+3124:You are a brave warrior..I will award a prize to you.
+3125: 
+3126:Thank you.
+3127: 
+3128:You're a great! You will be a good worker for Rain
+3129: 
+3130:My name is Logan. As I quartermaster supply of weapons production for the troops at the front Rain main.
+3131:Weapon used by the Rain forces at the front because the high-end is very difficult to create.
+3132:And weapon must be produced on an ongoing basis because of the low durability than the best.
+3133:But these days with Millena and the war is long-term as well as
+3134:the difficulties of the war are more competitive because it is insufficient products and parts.
+3135:Can you gather the material For Millena?
+3136:Yes.	No.
+3137:I want you to help me buy the scroll.. 
+3138:You are a brave warrior..I will award a prize to you.
+3139: 
+3140:Thank you.
+3141: 
+3142:You're a great! You will be a good worker for Rain
+3143: 
+3144:My name is Garan. I am being transported supplies to troops at the front Rain main.
+3145:"My mission safely transported to the Jede Village produced weapon and Armor in Esan Snow Area's Ingarden.
+3146:But now very difficult the supply situation alone because the security not safe in Esan Snow Area's Ingarden
+3147:Get transported safely item
+3148:exit.
+3149:You are a brave warrior..I will award a prize to you.
+3150: 
+3151:Thank you.
+3152: 
+3153:You're a great! You will be a good worker for Rain
+3154: 
+3155:My name is Vesi. I'm here to a combination of the adventurer in Esan Snow Area's Ingarden is a member.
+3156:This is a place for a long time ago Rain adventurer was traincenter.
+3157:But more than the past people who want to support the adventurer 
+3158:and the reduction of the forces pico and urake training too fast and now it is impossible.
+3159:So now the adventurer a lot of the training center to develop plans to create a new group of adventurers.
+3160:Can you help me??.
+3161:Yes.	No.
+3162:I want you to help me buy the scroll.. 
+3163:You are a brave warrior.. I will award a prize to you.
+3164: 
+3165:Thank you.
+3166: 
+3167:You're a great! You will be a good worker for Rain
+3168: 
+3169:I supply all combat thing for Rain military.
+3170:And I train combatants starter is a combat commander.
+3171:First introduce my military unit to you.
+3172:Go to Ceigen Logan Vesi and Mosien in Ingarden.
+3173:Then they will tell your mission..
+3174:Buy items.	Reward of Ingarden exchange Gratitude of Ingarden.	What's mean Reward of Ingarden and Gratitude of Ingarden?	Exit.
+3175:Come with learning scroll quest to acquire item... 
+3176:My unit Ceigen Logan Vesi Mosien When you complete a mission they will be awarded to you Reward Of Ingarden.
+3177:If you have 5 Reward Of Ingarden and come to me I'll give 1 Gratitude of Ingarden to you.
+3178:Can buy S weapon armor potion mask and hat that Rain unit is used by the Gratitude of Ingarden.
+3179:Complete mission in a hurry and receive acquire Reward of Ingarden.
+3180:Are you the other questions?
+3181:Buy items.	Reward of Ingarden to Gratitude of Ingarden exchange .	Exit.
+3182:If exchange by Reward Of Ingarden to Gratitude of Ingarden need expense.
+3183:Expense is 10 000Eld.
+3184:I pay and will exchange expense.	Buy items.	What's mean Reward Of Ingarden and Gratitude of Ingarden?	Exit.
+3185:This is Gratitude of Ingarden.
+3186:Exit.
+3187:Expense is 10 000eld. Eld is not enough.
+3188:Exit.
+3189:Need 5 Reward Of Ingarden.
+3190:Exit.
+3191:You are a brave warrior.. I will award a prize to you.
+3192: 
+3193:Thank you.
+3194: 
+3195:You're a great! You will be a good worker for Rain
+3196: 
+3197:My name is Dalin.I investigate Maze of Armis situation here and reporting to the Ingarden.
+3198:Once upon a time Apoi and Dofla lived in Esan Snow Area.
+3199:But they very violent after incantation in spell that is strange.
+3200:And they was threatening Esan Snow Area and Jede Village.
+3201:So had tried to banish them but had hidden by Maze of Armis.
+3202:But they are going to menace again Esan Snow Area and Jede Village.
+3203:Go to the Maze of Armis and get rid of the dangerous forces.
+3204:exit.
+3205:You are a brave warrior.. I will award a prize to you.
+3206: 
+3207:Thank you.
+3208: 
+3209:You're a great! You will be a good worker for Rain
+3210: 
+3211:Oh! Long time no see.
+3212:Nice to meet you. I heard from Vesi that you have quality as adventurer in Esan Snow Area.
+3213:As I see you do not seem to have such ability...
+3214:But do to trust him and do genuine adventurer training to you because Vesi sent.
+3215:Take a real adventurer training
+3216:exit.
+3217:(A Giant Tree ...)
+3218: ... ...
+3219:(A Giant Tree. Its a tree which is a thousand years old just like [Auhigen] says` there is no fruit.)
+3220:(Checking for a few minutes I only see one fruit.)
+3221:(After taking 3 fruits` See [Kerupus] fiddling around with the fruit.)
+3222:(Catch the [Kerupus] and get another 19 fruits.)
+3223: ... ...
+3224:(mysterious atmosphere in springtime ...)
+3225: ... ...
+3226:(mysterious atmosphere in springtime ...)
+3227:(Let us take thhe vernal water ...)
+3228:(Taking a bowl of vernal water ...)
+3229:(Taking a bowl of vernal water ....)
+3230:(Taking a bowl of vernal water .....)
+3231:(Taking a bowl of vernal water ......)
+3232:(Taking a bowl of vernal water .......)
+3233:(Taking a bowl of vernal water ........)
+3234:(You have to get vernal water from feary.)
+3235:. 
+3236:Don't make relax! 
+3237:Rent Soldier.	Exchange processing Piece for processing script.	Processing item.	Exit.
+3238:According to your level you can rent soldier` 
+3239:they are different in price.. 
+3240:Need fee for exchange.
+3241:The fee is 100`000eld.
+3242:OK I will do it.	Exit.
+3243:Here is Processing Script.
+3244:The fee is 100`000eld. Eld is short.
+3245:For making processing script` I need 10 pieces. Processing piece is short.
+3246:The processing script is able to invest additional peculiarity with item.
+3247:Additional peculiarity is made up Resistance of Paralysis and Resistance of Dispell.
+3248:Warnning! If you fail processing` your item is broken!
+3249:Don't make relax! 
+3250:Rent Soldier.	Exchange processing Piece for processing script.	Processing item.	Exit.
+3251:According to your level you can rent soldier` 
+3252:they are different in price.. 
+3253:Need fee for exchange.
+3254:The fee is 100`000eld.
+3255:OK I will do it.	Exit.
+3256:Here is Processing Script.
+3257:The fee is 100`000eld. Eld is short.
+3258:For making processing script` I need 10 pieces. Processing piece is short.
+3259:The processing script is able to invest additional peculiarity with item.
+3260:Additional peculiarity is made up Resistance of Paralysis and Resistance of Dispell.
+3261:Warnning! If you fail processing` your item is broken!
+3262:Don't make relax! 
+3263:Rent Soldier.	Exchange processing Piece for processing script.	Processing item.	Exit.
+3264:According to your level you can rent soldier` 
+3265:they are different in price.. 
+3266:Need fee for exchange.
+3267:The fee is 100`000eld.
+3268:OK I will do it.	Exit.
+3269:Here is Processing Script.
+3270:The fee is 100`000eld. Eld is short.
+3271:For making processing script` I need 10 pieces. Processing piece is short.
+3272:The processing script is able to invest additional peculiarity with item.
+3273:Additional peculiarity is made up Resistance of Paralysis and Resistance of Dispell.
+3274:Warnning! If you fail processing` your item is broken!
+3275:Don't make relax! 
+3276:Rent Soldier.	Exchange processing Piece for processing script.	Processing item.	Exit.
+3277:According to your level you can rent soldier` 
+3278:they are different in price.. 
+3279:Need fee for exchange.
+3280:The fee is 100`000eld.
+3281:OK I will do it.	Exit.
+3282:Here is Processing Script.
+3283:The fee is 100`000eld. Eld is short.
+3284:For making processing script` I need 10 pieces. Processing piece is short.
+3285:The processing script is able to invest additional peculiarity with item.
+3286:Additional peculiarity is made up Resistance of Paralysis and Resistance of Dispell.
+3287:Warnning! If you fail processing` your item is broken!

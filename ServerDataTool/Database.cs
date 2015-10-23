@@ -193,8 +193,9 @@ namespace ServerDataTool
                 rows = ExecuteQuery(sql);
                 foreach (object[] row in rows)
                 {
-                    byte type = (byte)row[1];
-                    QuestRequirement qr = new QuestRequirement((QuestRequirement.Type)type, (uint)row[2]);
+                    uint id = (uint)row[0];
+                    byte type = (byte)row[2];
+                    QuestRequirement qr = new QuestRequirement(id, (QuestRequirement.Type)type, (uint)row[3]);
                     q.Requirements.Add(qr);
                 }
 
@@ -328,6 +329,10 @@ namespace ServerDataTool
         public List<QuestRequirement> Requirements;
         public List<QuestStep> Steps;
         public bool Dirty;
+        public bool New;
+
+        List<QuestRequirement> DeletedReqs;
+        List<QuestStep> DeletedSteps;
 
         public Quest(uint id, uint giver, ushort giverMap)
         {
@@ -337,6 +342,23 @@ namespace ServerDataTool
             Name = "unnamed";
             Requirements = new List<QuestRequirement>();
             Steps = new List<QuestStep>();
+
+            DeletedReqs = new List<QuestRequirement>();
+            DeletedSteps = new List<QuestStep>();
+        }
+
+        public void DeleteStep(QuestStep qs)
+        {
+            Steps.Remove(qs);
+            if( !qs.New )
+                DeletedSteps.Add(qs);
+        }
+
+        public void DeleteRequirement(QuestRequirement qr)
+        {
+            Requirements.Remove(qr);
+            if( !qr.New )
+                DeletedReqs.Add(qr);
         }
 
         public void OrderSteps()
@@ -358,12 +380,14 @@ namespace ServerDataTool
             Item
         }
 
+        public uint ID;
         public Type TheType;
         public uint Context;
         public bool New;
 
-        public QuestRequirement(Type type, uint context)
+        public QuestRequirement(uint id, Type type, uint context)
         {
+            ID = id;
             TheType = type;
             Context = context;
         }
@@ -387,9 +411,16 @@ namespace ServerDataTool
         public uint OwnerID;
         public List<QuestReward> Rewards;
         public List<QuestLine> Lines;
+        public bool New;
+
+        List<QuestReward> DeletedRewards;
+        List<QuestLine> DeletedLines;
 
         public QuestStep(byte step, CompletionType type, uint compCount, uint compTarget, uint owner)
         {
+            DeletedLines = new List<QuestLine>();
+            DeletedRewards = new List<QuestReward>();
+
             Step = step;
             CompType = type;
             CompCount = compCount;
@@ -398,6 +429,20 @@ namespace ServerDataTool
 
             Rewards = new List<QuestReward>();
             Lines = new List<QuestLine>();
+        }
+
+        public void DeleteReward(QuestReward qr)
+        {
+            Rewards.Remove(qr);
+            if( !qr.New )
+                DeletedRewards.Add(qr);
+        }
+
+        public void DeleteLine(QuestLine ql)
+        {
+            Lines.Remove(ql);
+            if (!ql.New)
+                DeletedLines.Add(ql);
         }
 
         public void OrderLines()
@@ -413,6 +458,7 @@ namespace ServerDataTool
         public uint Exp;
         public uint Fame;
         public uint Item;
+        public bool New;
 
         public QuestReward(uint gold, uint exp, uint fame, uint item)
         {
@@ -428,14 +474,15 @@ namespace ServerDataTool
         public byte Line;
         public ushort Icon;
         public ushort StaticText;
-        public string DynaimcText;
+        public string DynamicText;
+        public bool New;
 
         public QuestLine(byte line, ushort icon, ushort staticText, string dynamicText)
         {
             Line = line;
             Icon = icon;
             StaticText = staticText;
-            DynaimcText = dynamicText;
+            DynamicText = dynamicText;
         }
     }
 }

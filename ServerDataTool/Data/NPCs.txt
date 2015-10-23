@@ -1,0 +1,150 @@
+5000,Supreme Heart
+5001,Detruit Blodger
+5002,Flora Aramis
+5003,Arebeth Wallen
+5004,Auhigen Routs
+5005,An Old man
+5006,Louise Grace
+5007,Luel
+5008,Tiris Taemple
+5009,Nanaa Paras
+5010,Bart
+5011,Reishana Cube
+5012,Lainmint
+5013,Luimi
+5014,Ciel
+5015,magic researcher
+5016,Saiki Rugart
+5017,Nad Luas
+5018,Elpid Sheiat
+5019,Nanna Millenas
+5020,Keeper of Eingarden
+5021,Gatt Shake
+5022,Arahs Shake
+5023,Ka Lubleton
+5024,Gabriel Heart
+5025,Kurio Kahn
+5026,Illena
+5027,Illena
+5028,Lainmint
+5029,Supreme Heart(S)
+5030,Nad Luas(S)
+5031,Instructor
+5032,Instructor
+5033,Instructor
+5034,Instructor
+5035,Detruit Blodger
+5036,Auhigen Routs
+5037,Louise Grace
+5038,Nanaa Paras
+5039,Leggi
+5040,Milton
+5041,Agnon
+5042,Leaman
+5043,Brant
+5044,Geren
+5045,Koro
+5046,Pisaro
+5047,Gaybel
+5048,Amelli
+5049,Larke
+5050,Boha
+5051,An officer, Sore
+5052,Wilson
+5053,Roren Maltonis
+5054,Photeras
+5055,Jimur
+5056,Xloth
+5057,Codilia
+5058,Chapina
+5059,Snowman
+5061,Groondalpe
+5062,Raida
+5063,Wooslan
+5064,Buiske
+5065,Onylis
+5066,Millena patrol
+5067,Rain Prominas
+5068,Flower Fairy
+5069,Merchant on beach
+5070,Pet manager
+5071,Clerk of café
+5072,Clerk of café
+5073,Clerk of café
+5074,Kabayan
+5075,Elbonseutom
+5076,Eljaseura
+5077,Cateon Anos 
+5078,Sibanon Aran
+5079,Asron Ker
+5080,Aran Mogos
+5081,Kelen Talk
+5082,Flower Fairy
+5083,Event NPC M
+5084,Event NPC R
+5085,Arcbot
+5086,Arcbot
+5087,Mrs. Corn
+5090,Mission messenger
+5091,Mission messenger
+5092,Mission messenger
+5093,Mission messenger
+5094,Mission messenger
+5095,Mission messenger
+5096,Mission messenger M
+5097,Mission messenger R
+5098,Mission messenger M
+5099,Mission messenger R
+5101,Detruit Blodger
+5102,Flora Aramis
+5103,Arebeth Wallen
+5104,Auhigen Routs
+5201,Louise Grace
+5202,Luel
+5203,Tiris Taemple
+5204,Nanaa Paras
+5205,TentroBium
+5206,Lide
+5207,Rantana
+5208,Lodante
+5209,Ceigen
+5210,Logan
+5211,Mosien
+5212,Garan
+5213,Vesi
+5214,Coodalran
+5215,Dalin
+5216,Savie
+5217,Esien
+5218,Narien
+5300,Anate Rain Tower
+5301,A thousand year old tree
+5302,A fountain of fairy
+5303,Original stone of Shikrine
+5304,Grave of Miate Paras
+5305,Camelmo
+7079,Rain Suit (Ruin)
+7080,Rain Suit (Seal)
+7081,Millena Suit (Ruin)
+7082,Millena Suit (Seal)
+7083,Magician Garb (Ruin)
+7084,Shaman Garb (Ruin)
+7085,Priest Garb (Ruin)
+7086,Light Armor (Ruin)
+7087,Middle Armor (Ruin)
+7088,Heavy Armor (Ruin)
+7089,Magician Garb (Seal)
+7090,Shaman Garb (Seal)
+7091,Priest Garb (Seal)
+7092,Light Armor (Seal)
+7093,Middle Armor (Seal)
+7094,Heavy Armor (Seal)
+7095,Danaria
+7096,Terobe
+7097,Timbernoth
+7098,Flame R
+7099,Arado
+7100,Baros
+7101,Magnoth
+7102,Flame M
+6168,Camelmo
