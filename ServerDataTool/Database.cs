@@ -205,7 +205,7 @@ namespace ServerDataTool
                 foreach( object[] row in rows )
                 {
                     byte type = (byte)row[2];
-                    QuestStep qs = new QuestStep((byte)row[1], (QuestStep.CompletionType)type, (uint)row[3], (uint)row[4], (uint)row[5]);
+                    QuestStep qs = new QuestStep((byte)row[1], (QuestStep.CompletionType)type, (uint)row[3], (uint)row[4], (uint)row[5], (uint)row[6]);
                     q.Steps.Add(qs);
                 }
 
@@ -229,7 +229,7 @@ namespace ServerDataTool
                         string text = null;
                         if (row[6].GetType() != typeof(DBNull))
                             text = (string)row[6];
-                        QuestLine ql = new QuestLine((byte)row[3], (ushort)row[4], (ushort)row[5], text);
+                        QuestLine ql = new QuestLine((byte)row[3], (ushort)row[4], (ushort)row[5], text, (uint)row[0]);
                         qs.Lines.Add(ql);
                     }
 
@@ -243,7 +243,7 @@ namespace ServerDataTool
             return quests.ToArray();
         }
 
-        public static Quest AddQuest(string name, uint giverID, ushort giverMap)
+        static ulong AddQuest(string name, uint giverID, ushort giverMap)
         {
             string sql = string.Format("INSERT INTO quest_info SET giver_id={0},giver_map_id={1}; SELECT LAST_INSERT_ID();", giverID, giverMap);
             List<object[]> rows = ExecuteQuery(sql);
@@ -256,8 +256,7 @@ namespace ServerDataTool
             sql = string.Format("INSERT INTO quest_names SET quest_id={0},name={1};", id, questName);
             ExecuteQuery(sql);
 
-            Quest q = new Quest((uint)id, giverID, giverMap);
-            return q;
+            return id;
         }
 
         public static void DeleteQuest(Quest q)
@@ -274,6 +273,104 @@ namespace ServerDataTool
 
         public static void SaveQuest(Quest q)
         {
+            if (q.New)
+            {
+                // New quest, add it to the database now
+                q.ID = (uint)AddQuest(q.Name, q.GiverID, q.GiverMapID);
+            }
+            else
+            {
+                // Update info
+                ExecuteQuery(string.Format("UPDATE quest_info SET giver_id={0},giver_map_id={1} WHERE quest_id={2};", q.GiverID, q.GiverMapID, q.ID));
+
+                // Update name
+                ExecuteQuery(string.Format("UPDATE quest_names SET name=\"{0}\" QHERE quest_id={1};", q.Name, q.ID));
+            }
+
+            // Delete all the rewards for this quest
+            ExecuteQuery(string.Format("DELETE FROM quest_rewards WHERE quest_id={0}", q.ID));
+
+            // Finalize step order
+            for ( int i = 0; i < q.Steps.Count; i++ )
+            {
+                QuestStep qs = q.Steps[i];            
+                string sql;
+                if( qs.New )
+                    sql = string.Format("INSERT INTO quest_steps SET step={0},type={1},count={2},target_id={3},owner_id={4},quest_id={5} WHERE quest_step_id={6}; SELECT LAST_INSERT_ID();", i, qs.CompType, qs.CompCount, qs.CompTargetID, qs.OwnerID, q.ID, qs.ID);
+                else
+                    sql = string.Format("UPDATE quest_steps SET step={0},type={1},count={2},target_id={3},owner_id={4} WHERE quest_step_id={5};", i, qs.CompType, qs.CompCount, qs.CompTargetID, qs.OwnerID, qs.ID);
+                List<object[]> rows = ExecuteQuery(sql);
+                if (rows.Count > 0)
+                {
+                    ulong id = (ulong)rows[0][0];
+                    qs.ID = (uint)id;
+                }
+                qs.New = false;
+
+                // Do Rewards
+                foreach (QuestReward qr in qs.Rewards)
+                {
+                    sql = string.Format("INSERT INTO quest_rewards SET step={0},gold={1},exp={2},item={3},fame={4},quest_id={5};", i, qr.Gold, qr.Exp, qr.Item, qr.Fame, q.ID);
+                    ExecuteQuery(sql);
+                }
+
+                // Do Lines
+                for (int j = 0; j < qs.Lines.Count; j++)
+                {
+                    QuestLine ql = qs.Lines[j];
+                    ql.Line = (byte)j;
+                    if( ql.New )
+                        sql = string.Format("INSERT INTO quest_lines SET quest_id={0},step={1},line={2},icon={3},static_text={4},text=\"{5}\"; SELECT LAST_INSERT_ID();", q.ID, i, ql.Line, ql.Icon, ql.StaticText, ql.DynamicText);
+                    else
+                        sql = string.Format("UPDATE quest_lines SET step={1},line={2},icon={3},static_text={4},text=\"{5}\" WHERE quest_line_id={0};", ql.ID, i, ql.Line, ql.Icon, ql.StaticText, ql.DynamicText);
+                    if (rows.Count > 0)
+                    {
+                        ulong id = (ulong)rows[0][0];
+                        ql.ID = (uint)id;
+                    }
+                    ql.New = false;
+                }
+            }
+
+            // Kill any steps marked for deletion
+            foreach (QuestStep qs in q.DeletedSteps)
+            {
+                if (!qs.New)
+                {
+                    string sql = string.Format("DELETE FROM quest_steps WHERE quest_step_id={0};", qs.ID);
+                    ExecuteQuery(sql);
+                }
+            }
+
+            // Save requirements
+            foreach (QuestRequirement qr in q.Requirements)
+            {
+                string sql;
+                if (qr.New)
+                    sql = string.Format("INSERT INTO quest_requirements SET quest_id={0},type={1},param={2}; SELECT LAST_INSERT_ID();", q.ID, qr.TheType, qr.Context);
+                else
+                    sql = string.Format("UPDATE quest_requirements SET type={0},param={1} WHERE quest_requirement_id={2};", qr.TheType, qr.Context, qr.ID);
+                List<object[]> rows = ExecuteQuery(sql);
+                if (rows.Count > 0)
+                {
+                    ulong id = (ulong)rows[0][0];
+                    qr.ID = (uint)id;
+                }
+                qr.New = false;
+            }
+
+            // Kill any requirements marked for deletion
+            foreach (QuestRequirement qr in q.DeletedReqs)
+            {
+                if (!qr.New)
+                {
+                    string sql = string.Format("DELETE FROM quest_requirements WHERE quest_requirement_id={0};", qr.ID);
+                    ExecuteQuery(sql);
+                }
+            }
+
+            // Clear dirty flag
+            q.Dirty = false;
         }
     }
 
@@ -331,8 +428,8 @@ namespace ServerDataTool
         public bool Dirty;
         public bool New;
 
-        List<QuestRequirement> DeletedReqs;
-        List<QuestStep> DeletedSteps;
+        public List<QuestRequirement> DeletedReqs;
+        public List<QuestStep> DeletedSteps;
 
         public Quest(uint id, uint giver, ushort giverMap)
         {
@@ -409,6 +506,7 @@ namespace ServerDataTool
         public uint CompCount;
         public uint CompTargetID;
         public uint OwnerID;
+        public uint ID;
         public List<QuestReward> Rewards;
         public List<QuestLine> Lines;
         public bool New;
@@ -416,7 +514,7 @@ namespace ServerDataTool
         List<QuestReward> DeletedRewards;
         List<QuestLine> DeletedLines;
 
-        public QuestStep(byte step, CompletionType type, uint compCount, uint compTarget, uint owner)
+        public QuestStep(byte step, CompletionType type, uint compCount, uint compTarget, uint owner, uint id)
         {
             DeletedLines = new List<QuestLine>();
             DeletedRewards = new List<QuestReward>();
@@ -426,6 +524,7 @@ namespace ServerDataTool
             CompCount = compCount;
             CompTargetID = compTarget;
             OwnerID = owner;
+            ID = id;
 
             Rewards = new List<QuestReward>();
             Lines = new List<QuestLine>();
@@ -476,13 +575,15 @@ namespace ServerDataTool
         public ushort StaticText;
         public string DynamicText;
         public bool New;
+        public uint ID;
 
-        public QuestLine(byte line, ushort icon, ushort staticText, string dynamicText)
+        public QuestLine(byte line, ushort icon, ushort staticText, string dynamicText, uint id)
         {
             Line = line;
             Icon = icon;
             StaticText = staticText;
             DynamicText = dynamicText;
+            ID = id;
         }
     }
 }

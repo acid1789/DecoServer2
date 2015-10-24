@@ -156,6 +156,19 @@ namespace ServerDataTool
             _selectingQuest = false;
         }
 
+        bool CheckForDirtyQuests()
+        {
+            foreach (ListViewItem lvi in lvQuests.Items)
+            {
+                Quest lvq = (Quest)lvi.Tag;
+                if (lvq.Dirty)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         void SetDirty(bool dirty)
         {
             if(_selectingQuest )
@@ -164,16 +177,7 @@ namespace ServerDataTool
             if( _selectedQuest != null )
                 _selectedQuest.Dirty = dirty;
             
-            bool anyQuestsDirty = false;
-            foreach (ListViewItem lvi in lvQuests.Items)
-            {
-                Quest lvq = (Quest)lvi.Tag;
-                if (lvq.Dirty)
-                {
-                    anyQuestsDirty = true;
-                    break;
-                }
-            }
+            bool anyQuestsDirty = CheckForDirtyQuests();
             
             Text = "Quest Dialog";
             if( anyQuestsDirty )
@@ -200,6 +204,19 @@ namespace ServerDataTool
                     lvq.Dirty = false;
                 }
             }
+        }
+
+        private void QuestDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CheckForDirtyQuests())
+            {
+                DialogResult res = MessageBox.Show("There are unsaved changes. Would you like to save them now?", "Close Quests", MessageBoxButtons.YesNoCancel);
+                if( res == DialogResult.Yes )
+                    SaveDirtyQuests();
+                if( res == DialogResult.Cancel )
+                    e.Cancel = true;
+            }
+
         }
 
         #region Quest
@@ -548,7 +565,7 @@ namespace ServerDataTool
         private void btnNewStep_Click(object sender, EventArgs e)
         {
             // Create a new step
-            QuestStep step = new QuestStep((byte)_selectedQuest.Steps.Count, QuestStep.CompletionType.TalkToNPC, 0, 0, 0);
+            QuestStep step = new QuestStep((byte)_selectedQuest.Steps.Count, QuestStep.CompletionType.TalkToNPC, 0, 0, 0, 0);
             step.New = true;
 
             // Add it to the quest
@@ -994,7 +1011,7 @@ namespace ServerDataTool
         private void btnNewLine_Click(object sender, EventArgs e)
         {
             // Create a quest line
-            QuestLine ql = new QuestLine(0, 0, 0, "");
+            QuestLine ql = new QuestLine(0, 0, 0, "", 0);
             ql.New = true;
 
             // Add it to the step
@@ -1047,6 +1064,5 @@ namespace ServerDataTool
             SetDirty(true);
         }
         #endregion
-
     }
 }
