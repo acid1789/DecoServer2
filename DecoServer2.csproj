@@ -50,6 +50,7 @@
     <Compile Include="CharacterThings\CharacterInfo.cs" />
     <Compile Include="CharacterThings\CharacterSelectInfo.cs" />
     <Compile Include="CharacterThings\Item.cs" />
+    <Compile Include="CharacterThings\ItemTemplate.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="PlayMap.cs" />
     <Compile Include="Program.cs" />

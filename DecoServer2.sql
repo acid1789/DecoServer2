@@ -28,7 +28,7 @@ CREATE TABLE `accounts` (
   `password` varchar(64) NOT NULL,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `account_id_UNIQUE` (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'a','a'),(2,'acid1789','test');
+INSERT INTO `accounts` VALUES (1,'a','a'),(2,'acid1789','test'),(3,'test','test'),(4,'test2','test2');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +284,35 @@ LOCK TABLES `item_instances` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `item_templates`
+--
+
+DROP TABLE IF EXISTS `item_templates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_templates` (
+  `item_template_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `icon` int(10) unsigned NOT NULL,
+  `model` smallint(5) unsigned NOT NULL,
+  `type` int(10) unsigned NOT NULL,
+  `durability_min` smallint(5) unsigned DEFAULT '0',
+  `durability_max` smallint(5) unsigned DEFAULT '0',
+  `duration_min` smallint(5) unsigned DEFAULT '0',
+  `duration_max` smallint(5) unsigned DEFAULT '0',
+  PRIMARY KEY (`item_template_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_templates`
+--
+
+LOCK TABLES `item_templates` WRITE;
+/*!40000 ALTER TABLE `item_templates` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_templates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `play_maps`
 --
 
@@ -302,7 +331,7 @@ CREATE TABLE `play_maps` (
 
 LOCK TABLES `play_maps` WRITE;
 /*!40000 ALTER TABLE `play_maps` DISABLE KEYS */;
-INSERT INTO `play_maps` VALUES (5),(7);
+INSERT INTO `play_maps` VALUES (2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(27),(28),(29),(30),(33),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(56),(57),(58),(59),(60),(61),(62),(63),(66),(67),(68),(69),(70),(71),(72),(73),(74),(75),(76),(77),(78);
 /*!40000 ALTER TABLE `play_maps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,10 +344,10 @@ DROP TABLE IF EXISTS `quest_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `quest_info` (
   `quest_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `giver_id` int(10) unsigned NOT NULL,
-  `giver_map_id` smallint(5) unsigned NOT NULL,
+  `giver_id` int(10) unsigned DEFAULT '5000',
+  `giver_map_id` smallint(5) unsigned DEFAULT '2',
   PRIMARY KEY (`quest_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,7 +356,7 @@ CREATE TABLE `quest_info` (
 
 LOCK TABLES `quest_info` WRITE;
 /*!40000 ALTER TABLE `quest_info` DISABLE KEYS */;
-INSERT INTO `quest_info` VALUES (1,1,5);
+INSERT INTO `quest_info` VALUES (1,1,5),(2,0,0);
 /*!40000 ALTER TABLE `quest_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,6 +390,30 @@ INSERT INTO `quest_lines` VALUES (1,1,0,0,2193,1184,NULL),(2,1,0,1,2193,1185,NUL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quest_names`
+--
+
+DROP TABLE IF EXISTS `quest_names`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `quest_names` (
+  `quest_id` int(10) unsigned NOT NULL,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`quest_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quest_names`
+--
+
+LOCK TABLES `quest_names` WRITE;
+/*!40000 ALTER TABLE `quest_names` DISABLE KEYS */;
+INSERT INTO `quest_names` VALUES (1,'First Illena Quest');
+/*!40000 ALTER TABLE `quest_names` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `quest_requirements`
 --
 
@@ -368,10 +421,11 @@ DROP TABLE IF EXISTS `quest_requirements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `quest_requirements` (
+  `quest_requirement_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `quest_id` int(10) unsigned NOT NULL,
   `type` tinyint(3) unsigned NOT NULL,
   `param` int(10) unsigned DEFAULT '0',
-  PRIMARY KEY (`quest_id`)
+  PRIMARY KEY (`quest_requirement_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -396,7 +450,7 @@ CREATE TABLE `quest_rewards` (
   `step` tinyint(3) unsigned NOT NULL,
   `gold` int(10) unsigned DEFAULT '0',
   `exp` int(10) unsigned DEFAULT '0',
-  `item` smallint(5) unsigned DEFAULT '0',
+  `item` int(10) unsigned DEFAULT '0',
   `preward` tinyint(3) unsigned DEFAULT '0',
   `fame` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`quest_id`,`step`)
@@ -427,8 +481,9 @@ CREATE TABLE `quest_steps` (
   `count` int(10) unsigned DEFAULT '0',
   `target_id` int(10) unsigned DEFAULT '0',
   `owner_id` int(10) unsigned DEFAULT '0',
-  PRIMARY KEY (`quest_id`,`step`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `quest_step_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`quest_step_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,7 +492,7 @@ CREATE TABLE `quest_steps` (
 
 LOCK TABLES `quest_steps` WRITE;
 /*!40000 ALTER TABLE `quest_steps` DISABLE KEYS */;
-INSERT INTO `quest_steps` VALUES (1,0,3,0,1,1);
+INSERT INTO `quest_steps` VALUES (1,0,3,0,1,1,1);
 /*!40000 ALTER TABLE `quest_steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,7 +513,7 @@ CREATE TABLE `static_npcs` (
   `map_id` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`static_npc_id`),
   UNIQUE KEY `static_npc_id_UNIQUE` (`static_npc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -467,7 +522,7 @@ CREATE TABLE `static_npcs` (
 
 LOCK TABLES `static_npcs` WRITE;
 /*!40000 ALTER TABLE `static_npcs` DISABLE KEYS */;
-INSERT INTO `static_npcs` VALUES (1,5027,128,60,10000,270,5),(2,5029,150,145,10000,40,5);
+INSERT INTO `static_npcs` VALUES (1,5027,126,60,10000,0,5),(2,5029,150,145,10000,40,5),(13,5026,167,107,10000,0,5),(16,5014,299,267,10000,0,2),(17,5021,220,250,10000,0,2);
 /*!40000 ALTER TABLE `static_npcs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -480,4 +535,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-17  9:41:06
+-- Dump completed on 2015-10-25  2:14:26

@@ -17,6 +17,7 @@ namespace JuggleServerCore
             LoadPlayMaps_Process,
             LoadNPCs_Fetch,
             LoadNPCs_Process,
+            LoadItems_Process,
             LoadQuestLines_Process,
             LoadQuestSteps_Process,
             LoadQuestRewards_Process,
@@ -109,6 +110,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoadPlayMaps_Process] = LoadPlayMaps_Process_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Fetch] = LoadNPCs_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadItems_Process] = LoadItems_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestLines_Process] = LoadQuestLines_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestSteps_Process] = LoadQuestSteps_Process_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Fetch] = LoginRequest_Fetch_Handler;
@@ -270,6 +272,18 @@ namespace JuggleServerCore
             {
                 NPC npc = NPC.ReadFromDB(row);
                 _server.AddNPC(npc);
+            }
+
+            t.Type = Task.TaskType.LoadItems_Process;
+            AddDBQuery("SELECT * FROM item_templates;", t);
+        }
+
+        void LoadItems_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                ItemTemplate template = ItemTemplate.ReadFromDB(row);
+                _server.AddItemTemplate(template);
             }
 
             t.Type = Task.TaskType.LoadQuestLines_Process;

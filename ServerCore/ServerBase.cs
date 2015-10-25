@@ -184,11 +184,12 @@ namespace JuggleServerCore
 
         #region World Stuff
         Dictionary<ushort, PlayMap> _maps;
-
+        Dictionary<uint, ItemTemplate> _itemTemplates;
 
         void SetupWorld()
         {
             _maps = new Dictionary<ushort, PlayMap>();
+            _itemTemplates = new Dictionary<uint, ItemTemplate>();
             TaskProcessor.AddTask(new Task(Task.TaskType.LoadPlayMaps_Fetch));
         }
 
@@ -220,10 +221,19 @@ namespace JuggleServerCore
         #endregion
 
         #region Item Stuff
+        public void AddItemTemplate(ItemTemplate it)
+        {
+            _itemTemplates[it.ID] = it;
+        }
+
+        public ItemTemplate GetItemTemplate(uint itemTemplateID)
+        {
+            return _itemTemplates[itemTemplateID];
+        }
+
         public Item InstantiateItem(uint itemTemplateID)
         {
-            throw new NotImplementedException();
-            return null;
+            return _itemTemplates[itemTemplateID].Instantiate();
         }
         #endregion
 

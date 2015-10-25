@@ -7,12 +7,6 @@ using System.IO;
 
 namespace DecoServer2.CharacterThings
 {
-    public class ItemTemplate
-    {
-        public uint Icon;
-        public ushort Model;
-    }
-
     public class Item
     {
         public enum Type
@@ -23,8 +17,6 @@ namespace DecoServer2.CharacterThings
             Quest,
             Riding
         }
-
-        static ItemTemplate[] s_ItemTemplates;
 
         uint _id;
         uint _icon;
@@ -67,11 +59,24 @@ namespace DecoServer2.CharacterThings
             i._remainingTime = (ushort)row[3];
             i._type = (Type)((uint)row[5]);
 
-            ItemTemplate t = s_ItemTemplates[template];
+            ItemTemplate t = Program.Server.GetItemTemplate(template);
             i._icon = t.Icon;
             i._model = t.Model;
 
             return i;
+        }
+
+        public static Item Instantiate(ItemTemplate it)
+        {
+            // Setup the item
+            Item item = new Item();
+            item._icon = it.Icon;
+            item._model = it.Model;
+            item._durability = it.GenerateDurability();
+            item._remainingTime = it.GenerateDuration();
+            item._type = (Type)it.Type;
+            
+            return item;
         }
 
 
