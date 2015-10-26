@@ -13,6 +13,7 @@ namespace ServerDataTool
         public static Dictionary<int, IntStrID> s_jobs;
         public static Dictionary<int, IntStrID> s_staticText;
         public static Dictionary<int, IntStrID> s_npcIcons;
+        public static Dictionary<int, IntStrID> s_items;
 
         /// <summary>
         /// The main entry point for the application.
@@ -44,6 +45,7 @@ namespace ServerDataTool
             InitJobs(dataDir);
             InitStaticText(dataDir);
             InitNPCIcons(dataDir);
+            InitItems(dataDir);
         }
 
         static void InitNPCs(string dataDir)
@@ -145,6 +147,33 @@ namespace ServerDataTool
                     string[] pieces = line.Split(':');
                     int id = Convert.ToInt32(pieces[0]);
                     s_staticText[id] = new IntStrID(pieces[1], id);
+
+                    line = sr.ReadLine();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to read " + filename + "\n" + ex.ToString());
+            }
+        }
+
+        static void InitItems(string dataDir)
+        {
+            string filename = dataDir + "Items.txt";
+            s_items = new Dictionary<int, IntStrID>();
+
+            try
+            {
+                FileStream fs = File.OpenRead(filename);
+                StreamReader sr = new StreamReader(fs);
+
+                string line = sr.ReadLine();
+                while (line != null)
+                {
+                    string[] pieces = line.Split(':');
+                    int id = Convert.ToInt32(pieces[0]);
+                    s_items[id] = new IntStrID(pieces[1], id);
 
                     line = sr.ReadLine();
                 }

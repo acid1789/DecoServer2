@@ -59,5 +59,11 @@ namespace ServerDataTool
             QuestDialog dlg = new QuestDialog();
             dlg.ShowDialog();
         }
+
+        private void btnItems_Click(object sender, EventArgs e)
+        {
+            ItemsDialog dlg = new ItemsDialog();
+            dlg.ShowDialog();
+        }
     }
 }

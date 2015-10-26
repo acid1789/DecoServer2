@@ -372,6 +372,56 @@ namespace ServerDataTool
             // Clear dirty flag
             q.Dirty = false;
         }
+
+        public static ItemTemplate[] FetchItems()
+        {
+            string sql = string.Format("SELECT * FROM item_templates;");
+            List<object[]> rows = ExecuteQuery(sql);
+
+            List<ItemTemplate> templates = new List<ItemTemplate>();
+            foreach (object[] row in rows)
+            {
+                ItemTemplate it = new ItemTemplate((uint)row[0], (ushort)row[1], (uint)row[2], (ushort)row[3], (ushort)row[4], (ushort)row[5], (ushort)row[6]);
+                templates.Add(it);
+            }
+
+            return templates.ToArray();
+        }
+
+        public static void SaveItem(ItemTemplate it)
+        {
+            // 0: item_template_id int(10) unsigned
+            // 1: model   smallint(5) unsigned
+            // 2: type int(10) unsigned
+            // 3: durability_min smallint(5) unsigned
+            // 4: durability_max smallint(5) unsigned
+            // 5: duration_min smallint(5) unsigned
+            // 6: duration_max smallint(5) unsigned
+
+            string sql;
+            if( it.New )
+                sql = string.Format("INSERT INTO item_templates SET model={0},type={1},durability_min={2},durability_max={3},duration_min={4},duration_max={5}; SELECT LAST_INSERT_ID();", it.Model, (int)it.Type, it.DurabilityMin, it.DurabilityMax, it.DurationMin, it.DurationMax);
+            else
+                sql = string.Format("UPDATE item_templates SET model={0},type={1},durability_min={2},durability_max={3},duration_min={4},duration_max={5} WHERE item_template_id={6};", it.Model, (int)it.Type, it.DurabilityMin, it.DurabilityMax, it.DurationMin, it.DurationMax, it.ID);
+            List<object[]> rows = ExecuteQuery(sql);
+            if (rows.Count > 0)
+            {
+                ulong id = (ulong)rows[0][0];
+                it.ID = (uint)id;
+            }
+
+            it.New = false;
+            it.Dirty = false;
+        }
+
+        public static void DeleteItem(ItemTemplate it)
+        {
+            if (!it.New)
+            {
+                string sql = string.Format("DELETE FROM item_templates WHERE item_template_id={0};", it.ID);
+                ExecuteQuery(sql);
+            }
+        }
     }
 
     public class DBAccountRow
@@ -414,6 +464,40 @@ namespace ServerDataTool
         public override string ToString()
         {
             return ID.ToString() + ": " + Program.s_npcNameIDs[GameID].ToString();
+        }
+    }
+
+    public class ItemTemplate
+    {
+        public enum ItemType
+        {
+            Clothing,
+            General,
+            Item,
+            Quest,
+            Riding
+        }
+
+
+        public uint ID;
+        public ushort Model;
+        public ItemType Type;
+        public ushort DurabilityMin;
+        public ushort DurabilityMax;
+        public ushort DurationMin;
+        public ushort DurationMax;
+        public bool New;
+        public bool Dirty;
+
+        public ItemTemplate(uint id, ushort model, uint type, ushort durabilityMin, ushort durabilityMax, ushort durationMin, ushort durationMax)
+        {
+            ID = id;
+            Model = model;
+            Type = (ItemType)type;
+            DurabilityMin = durabilityMin;
+            DurabilityMax = durabilityMax;
+            DurationMin = durationMin;
+            DurationMax = durationMax;
         }
     }
 

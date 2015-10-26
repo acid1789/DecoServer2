@@ -13,6 +13,7 @@ namespace ServerDataTool
     public partial class QuestDialog : Form
     {
         Dictionary<uint, NPC> _npcs;
+        Dictionary<uint, ItemTemplate> _items;
         Quest _selectedQuest;
         bool _selectingQuest;
 
@@ -30,6 +31,16 @@ namespace ServerDataTool
                 cbIcon.Items.Add(icon);
             foreach( IntStrID staticText in Program.s_staticText.Values )
                 cbStaticText.Items.Add(staticText);
+
+            _items = new Dictionary<uint, ItemTemplate>();
+            ItemTemplate[] items = Database.FetchItems();
+            foreach (ItemTemplate it in items)
+            {
+                _items[it.ID] = it;
+                IntStrID itemID = Program.s_items.ContainsKey((int)it.ID) ? Program.s_items[(int)it.ID] : new IntStrID("Unknown", (int)it.ID);
+                cbItem.Items.Add(itemID);
+            }
+
 
             // Pull all the NPCs
             NPC[] npcs = Database.FetchNPCs(0);
@@ -787,8 +798,29 @@ namespace ServerDataTool
 
                 tbGold.Text = qr.Gold.ToString();
                 tbExp.Text = qr.Exp.ToString();
-                tbFame.Text = qr.Fame.ToString();
-                // TODO: implement items
+                tbFame.Text = qr.Fame.ToString();               
+                                
+                if (_items.ContainsKey(qr.Item))
+                {
+                    ItemTemplate item = _items[qr.Item];
+                    if (Program.s_items.ContainsKey((int)item.ID))
+                        cbItem.SelectedItem = Program.s_items[(int)item.ID];
+                    else
+                    {
+                        cbItem.SelectedItem = null;
+                        foreach (object obj in cbItem.Items)
+                        {
+                            IntStrID id = (IntStrID)obj;
+                            if (id != null && id.ID == item.ID)
+                            {
+                                cbItem.SelectedItem = obj;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                    cbItem.SelectedItem = null;
 
                 tbGold.Enabled = true;
                 tbExp.Enabled = true;
