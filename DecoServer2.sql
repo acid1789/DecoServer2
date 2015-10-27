@@ -292,7 +292,6 @@ DROP TABLE IF EXISTS `item_templates`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item_templates` (
   `item_template_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `icon` int(10) unsigned NOT NULL,
   `model` smallint(5) unsigned NOT NULL,
   `type` int(10) unsigned NOT NULL,
   `durability_min` smallint(5) unsigned DEFAULT '0',
@@ -300,7 +299,7 @@ CREATE TABLE `item_templates` (
   `duration_min` smallint(5) unsigned DEFAULT '0',
   `duration_max` smallint(5) unsigned DEFAULT '0',
   PRIMARY KEY (`item_template_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,6 +308,7 @@ CREATE TABLE `item_templates` (
 
 LOCK TABLES `item_templates` WRITE;
 /*!40000 ALTER TABLE `item_templates` DISABLE KEYS */;
+INSERT INTO `item_templates` VALUES (1,1,1,50,50,0,0);
 /*!40000 ALTER TABLE `item_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,7 +356,7 @@ CREATE TABLE `quest_info` (
 
 LOCK TABLES `quest_info` WRITE;
 /*!40000 ALTER TABLE `quest_info` DISABLE KEYS */;
-INSERT INTO `quest_info` VALUES (1,1,5),(2,0,0);
+INSERT INTO `quest_info` VALUES (1,1,5);
 /*!40000 ALTER TABLE `quest_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,4 +535,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-25  2:14:26
+-- Dump completed on 2015-10-26 23:59:54

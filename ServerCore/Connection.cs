@@ -17,7 +17,6 @@ namespace JuggleServerCore
             New,
             Connecting,
             Connected,
-            Disconnected,
             Closed
         }
 
@@ -71,6 +70,7 @@ namespace JuggleServerCore
             _packetHandlers[0x0004] = DeleteCharacter_Handler;
             _packetHandlers[0x0010] = SelectCharacter_Handler;
             _packetHandlers[0x0014] = LoadSelectedCharacter_Handler;
+            _packetHandlers[0x0020] = CloseConnection_Handler;
             _packetHandlers[0x0121] = MoveTo_Handler;
             _packetHandlers[0x0124] = UpdatePosition_Handler;
             _packetHandlers[0x0133] = PlayerEnterMap_Handler;
@@ -85,7 +85,7 @@ namespace JuggleServerCore
             {
                 _socket.Close();                
             }
-            _conStatus = ConnStatus.Disconnected;
+            _conStatus = ConnStatus.Closed;
         }
 
         public void Update()
@@ -139,7 +139,7 @@ namespace JuggleServerCore
         {
             if (!_socket.Connected)
             {
-                _conStatus = ConnStatus.Disconnected;
+                _conStatus = ConnStatus.Closed;
                 return;
             }
             MemoryStream ms = new MemoryStream();
@@ -242,6 +242,11 @@ namespace JuggleServerCore
         void LoadSelectedCharacter_Handler(PacketHeader header, BinaryReader br)
         {
             OnLoadSelectedCharacter(this, null);
+        }
+
+        void CloseConnection_Handler(PacketHeader header, BinaryReader br)
+        {
+            Disconnect();
         }
 
         void PlayerEnterMap_Handler(PacketHeader header, BinaryReader br)

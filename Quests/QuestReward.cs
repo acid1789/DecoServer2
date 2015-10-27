@@ -9,7 +9,7 @@ namespace DecoServer2.Quests
 {
     public class QuestReward
     {
-        ushort[] _items;
+        uint[] _items;
         uint _gold;
         uint _exp;
         uint _fame;
@@ -25,7 +25,7 @@ namespace DecoServer2.Quests
         {
             Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.GiveGoldExpFame, client, new GiveGoldExpFameArgs(_gold, _exp, _fame, GiveGoldExpFameArgs.TheReason.Quest, questID)));
 
-            foreach (ushort id in _items)
+            foreach (uint id in _items)
             {
                 Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.GiveItem, client, new GiveItemArgs(id, GiveItemArgs.TheReason.Quest, questID)));
             }
@@ -33,16 +33,16 @@ namespace DecoServer2.Quests
 
         public class Builder
         {
-            List<ushort> _items;
+            List<uint> _items;
             QuestReward _qr;
 
             public Builder(uint gold, uint exp, uint fame)
             {
                 _qr = new QuestReward(gold, exp, fame);
-                _items = new List<ushort>();
+                _items = new List<uint>();
             }
 
-            public void AddItem(ushort item)
+            public void AddItem(uint item)
             {
                 _items.Add(item);
             }

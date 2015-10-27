@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading;
+using DecoServer2;
 
 namespace JuggleServerCore
 {
@@ -46,7 +47,10 @@ namespace JuggleServerCore
                     {
                         c.Update();
                         if (c.Status == Connection.ConnStatus.Closed)
+                        {
+                            Program.Server.RemoveCharacter(c.Character);
                             removeList.Add(c);
+                        } 
                     }
 
                     _connectionsLock.WaitOne();

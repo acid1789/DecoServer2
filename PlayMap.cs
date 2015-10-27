@@ -44,9 +44,22 @@ namespace DecoServer2
                 }
 
                 // Send player character info to all other players
+                // TODO
             }
 
             _players[ci.ID] = client;            
+        }
+
+        public void RemovePlayer(CharacterInfo ci)
+        {
+            if (_players.ContainsKey(ci.ID))
+            {
+                // Tell all other players that this one is gone
+                // TODO
+
+                // Remove the player
+                _players.Remove(ci.ID);
+            }
         }
 
         public void ProcessMoveRequest(Connection client, CharacterPositionClass mtp)

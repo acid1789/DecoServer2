@@ -707,7 +707,7 @@ namespace DecoServer2.CharacterThings
         public TheReason Reason;
         public uint Context;
 
-        public GiveItemArgs(ushort itemTemplateID, TheReason reason, uint context)
+        public GiveItemArgs(uint itemTemplateID, TheReason reason, uint context)
         {
             ItemTemplateID = itemTemplateID;
             Reason = reason;

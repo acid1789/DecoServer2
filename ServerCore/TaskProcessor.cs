@@ -46,6 +46,7 @@ namespace JuggleServerCore
             NPCDialogNextButton,
             GiveGoldExpFame,
             GiveItem,
+            RemoveCharacter,
         }
 
         public TaskType Type;
@@ -139,6 +140,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.NPCDialogNextButton] = NPCDialogNextButton_Handler;
             _taskHandlers[Task.TaskType.GiveGoldExpFame] = GiveGoldExpFame_Handler;
             _taskHandlers[Task.TaskType.GiveItem] = GiveItem_Handler;
+            _taskHandlers[Task.TaskType.RemoveCharacter] = RemoveCharacter_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -364,19 +366,19 @@ namespace JuggleServerCore
                 Dictionary<ulong, QuestReward.Builder> prewards = new Dictionary<ulong, QuestReward.Builder>();
                 foreach (object[] row in t.Query.Rows)
                 {
-                    // 0: quest_id  int(10) unsigned
-                    // 1: step      tinyint(3) unsigned
-                    // 2: gold      int(10) unsigned
-                    // 3: exp       int(10) unsigned
-                    // 4: item      smallint(5) unsigned
-                    // 5: preward	tinyint(3) unsigned
-                    // 6: fame      int(10) unsigned
+                    // 0: quest_id    int(10) unsigned
+                    // 1: step    tinyint(3) unsigned
+                    // 2: gold    int(10) unsigned
+                    // 3: exp int(10) unsigned
+                    // 4: item    int(10) unsigned
+                    // 5: preward tinyint(3) unsigned
+                    // 6: fame    int(10) unsigned
 
                     uint quest = (uint)row[0];
                     byte step = (byte)row[1];
                     uint gold = (uint)row[2];
                     uint exp = (uint)row[3];
-                    ushort item = (ushort)row[4];
+                    uint item = (uint)row[4];
                     byte preward = (byte)row[5];
                     uint fame = (uint)row[6];
 
@@ -782,6 +784,12 @@ namespace JuggleServerCore
             LogInterface.Log(log, LogInterface.LogMessageType.Game);
 
             // TODO: Figure out how to send this to the client
+        }
+
+        void RemoveCharacter_Handler(Task t)
+        {
+            CharacterInfo ci = (CharacterInfo)t.Args;
+            _server.RemoveCharacterFromMap(ci);
         }
         #endregion
     }

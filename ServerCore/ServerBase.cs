@@ -150,6 +150,11 @@ namespace JuggleServerCore
 
         #endregion
 
+        public void RemoveCharacter(CharacterInfo ci)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.RemoveCharacter, null, ci));
+        }
+
         public string ExpectConnection(int accountId)
         {
             Int64 code = accountId * DateTime.Now.Ticks;
@@ -217,6 +222,11 @@ namespace JuggleServerCore
         public void UpdatePlayerPosition(Connection client, CharacterPositionClass cpc)
         {
             _maps[client.Character.MapID].UpdatePlayerPosition(client, cpc);
+        }
+
+        public void RemoveCharacterFromMap(CharacterInfo ci)
+        {
+            _maps[ci.MapID].RemovePlayer(ci);
         }
         #endregion
 

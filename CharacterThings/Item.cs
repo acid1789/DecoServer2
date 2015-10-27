@@ -60,7 +60,7 @@ namespace DecoServer2.CharacterThings
             i._type = (Type)((uint)row[5]);
 
             ItemTemplate t = Program.Server.GetItemTemplate(template);
-            i._icon = t.Icon;
+            i._icon = t.ID;
             i._model = t.Model;
 
             return i;
@@ -70,7 +70,7 @@ namespace DecoServer2.CharacterThings
         {
             // Setup the item
             Item item = new Item();
-            item._icon = it.Icon;
+            item._icon = it.ID;
             item._model = it.Model;
             item._durability = it.GenerateDurability();
             item._remainingTime = it.GenerateDuration();
