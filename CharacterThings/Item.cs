@@ -19,16 +19,16 @@ namespace DecoServer2.CharacterThings
         }
 
         uint _id;
-        uint _icon;
         ushort _model;
         byte _slot;
         ushort _durability;
         ushort _remainingTime;
         Type _type;
+        uint _template;
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(_icon);
+            bw.Write(_id);
             bw.Write(_model);
             bw.Write((byte)1);      // Unknown byte
             bw.Write(_slot);
@@ -54,13 +54,12 @@ namespace DecoServer2.CharacterThings
 
             Item i = new Item();
             i._id = (uint)row[0];
-            uint template = (uint)row[1];
+            i._template = (uint)row[1];
             i._durability = (ushort)row[2];
             i._remainingTime = (ushort)row[3];
             i._type = (Type)((uint)row[5]);
 
-            ItemTemplate t = Program.Server.GetItemTemplate(template);
-            i._icon = t.ID;
+            ItemTemplate t = Program.Server.GetItemTemplate(i._template);
             i._model = t.Model;
 
             return i;
@@ -70,7 +69,7 @@ namespace DecoServer2.CharacterThings
         {
             // Setup the item
             Item item = new Item();
-            item._icon = it.ID;
+            item._id = it.ID;
             item._model = it.Model;
             item._durability = it.GenerateDurability();
             item._remainingTime = it.GenerateDuration();
@@ -92,9 +91,29 @@ namespace DecoServer2.CharacterThings
             set { _slot = value; }
         }
 
-        public uint Icon
+        public uint ID
         {
-            get { return _icon; }
+            get { return _id; }
+        }
+
+        public ushort Model
+        {
+            get { return _model; }
+        }
+
+        public ushort Durability
+        {
+            get { return _durability; }
+        }
+
+        public ushort RemainingTime
+        {
+            get { return _remainingTime; }
+        }
+
+        public uint TemplateID
+        {
+            get { return _template; }
         }
         #endregion
     }

@@ -459,7 +459,7 @@ namespace DecoServer2.CharacterThings
 
             foreach (Item i in allItems)
             {
-                if( i.Icon == item )
+                if( i.TemplateID == item )
                     return true;
             }
 

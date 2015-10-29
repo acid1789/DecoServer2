@@ -723,7 +723,7 @@ namespace JuggleServerCore
 
             if (rqa.Finished)
             {
-                sql = string.Format("INSERT_INTO completed_quests SET character_id={0},quest_id={1};", rqa.CharacterID, rqa.QuestID);
+                sql = string.Format("INSERT INTO completed_quests SET character_id={0},quest_id={1};", rqa.CharacterID, rqa.QuestID);
                 AddDBQuery(sql, null, false);
             }             
         }
@@ -783,7 +783,7 @@ namespace JuggleServerCore
             string log = string.Format("Giving item template({1}) to Character ID: {3}. Reason: {4}, Context: {5}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
             LogInterface.Log(log, LogInterface.LogMessageType.Game);
 
-            // TODO: Figure out how to send this to the client
+            t.Client.SendPacket(new GiveItemPacket(item));
         }
 
         void RemoveCharacter_Handler(Task t)

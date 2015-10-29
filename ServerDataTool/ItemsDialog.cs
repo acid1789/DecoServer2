@@ -64,7 +64,16 @@ namespace ServerDataTool
 
         private void btnNewItem_Click(object sender, EventArgs e)
         {
-            ItemTemplate it = new ItemTemplate(0, 0, 0, 0, 0, 0, 0);
+            ushort durability_min = 0;
+            ushort durability_max = 0;
+            ushort duration_min = 0;
+            ushort duration_max = 0;
+            try { durability_min = Convert.ToUInt16(tbDurabilityMin.Text); } catch (Exception) { }
+            try { durability_max = Convert.ToUInt16(tbDurabilityMax.Text); } catch (Exception) { }
+            try { duration_min = Convert.ToUInt16(tbDurationMin.Text); } catch (Exception) { }
+            try { duration_max = Convert.ToUInt16(tbDurationMax.Text); } catch (Exception) { }
+
+            ItemTemplate it = new ItemTemplate(0, (ushort)Math.Max(cbModel.SelectedIndex, 0), (uint)Math.Max(cbType.SelectedIndex, 0), durability_min, durability_max, duration_min, duration_max);
             it.New = true;
             AddItem(it);
         }

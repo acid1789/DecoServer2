@@ -32,79 +32,79 @@
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.lvSteps = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCompTarget = new System.Windows.Forms.ComboBox();
+            this.cbStepOwner = new System.Windows.Forms.ComboBox();
+            this.tbCompletionTarget = new System.Windows.Forms.TextBox();
+            this.tbCompletionCount = new System.Windows.Forms.TextBox();
+            this.cbCompletionType = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnNewQuest = new System.Windows.Forms.Button();
             this.btnDeleteQuest = new System.Windows.Forms.Button();
             this.lvRewards = new System.Windows.Forms.ListView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lvLines = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbQuestName = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbQuestGiver = new System.Windows.Forms.ComboBox();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cbCompletionType = new System.Windows.Forms.ComboBox();
-            this.tbCompletionCount = new System.Windows.Forms.TextBox();
-            this.tbCompletionTarget = new System.Windows.Forms.TextBox();
-            this.cbStepOwner = new System.Windows.Forms.ComboBox();
-            this.btnNewStep = new System.Windows.Forms.Button();
-            this.btnDeleteStep = new System.Windows.Forms.Button();
-            this.lvRequirements = new System.Windows.Forms.ListView();
-            this.label12 = new System.Windows.Forms.Label();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnDeleteRequirement = new System.Windows.Forms.Button();
-            this.btnNewRequirement = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cbRequirementType = new System.Windows.Forms.ComboBox();
-            this.tbRequirementParam = new System.Windows.Forms.TextBox();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lvLines = new System.Windows.Forms.ListView();
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbQuestGiver = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbQuestName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnNewStep = new System.Windows.Forms.Button();
+            this.btnDeleteStep = new System.Windows.Forms.Button();
+            this.lvRequirements = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnDeleteRequirement = new System.Windows.Forms.Button();
+            this.btnNewRequirement = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbReqParam = new System.Windows.Forms.ComboBox();
+            this.tbRequirementParam = new System.Windows.Forms.TextBox();
+            this.cbRequirementType = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tbDynamicText = new System.Windows.Forms.TextBox();
+            this.cbStaticText = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cbIcon = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnDeleteLine = new System.Windows.Forms.Button();
             this.btnNewLine = new System.Windows.Forms.Button();
             this.btnStepUp = new System.Windows.Forms.Button();
             this.btnStepDown = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbIcon = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.cbStaticText = new System.Windows.Forms.ComboBox();
-            this.tbDynamicText = new System.Windows.Forms.TextBox();
             this.btnLineUp = new System.Windows.Forms.Button();
             this.btnLineDown = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.cbItem = new System.Windows.Forms.ComboBox();
-            this.tbGold = new System.Windows.Forms.TextBox();
-            this.tbExp = new System.Windows.Forms.TextBox();
             this.tbFame = new System.Windows.Forms.TextBox();
+            this.tbExp = new System.Windows.Forms.TextBox();
+            this.tbGold = new System.Windows.Forms.TextBox();
+            this.cbItem = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.btnDeleteReward = new System.Windows.Forms.Button();
             this.btnAddReward = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.cbReqParam = new System.Windows.Forms.ComboBox();
-            this.cbCompTarget = new System.Windows.Forms.ComboBox();
-            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -145,6 +145,11 @@
             this.columnHeader3.Text = "Giver";
             this.columnHeader3.Width = 119;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Map";
+            this.columnHeader1.Width = 39;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -170,6 +175,20 @@
             this.lvSteps.UseCompatibleStateImageBehavior = false;
             this.lvSteps.View = System.Windows.Forms.View.Details;
             this.lvSteps.SelectedIndexChanged += new System.EventHandler(this.lvSteps_SelectedIndexChanged);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Comp. Type";
+            this.columnHeader5.Width = 151;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Context";
+            this.columnHeader4.Width = 91;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Count";
             // 
             // label2
             // 
@@ -197,6 +216,88 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Step Properties";
+            // 
+            // cbCompTarget
+            // 
+            this.cbCompTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCompTarget.FormattingEnabled = true;
+            this.cbCompTarget.Location = new System.Drawing.Point(106, 70);
+            this.cbCompTarget.Name = "cbCompTarget";
+            this.cbCompTarget.Size = new System.Drawing.Size(102, 21);
+            this.cbCompTarget.TabIndex = 8;
+            this.cbCompTarget.SelectedIndexChanged += new System.EventHandler(this.cbCompTarget_SelectedIndexChanged);
+            // 
+            // cbStepOwner
+            // 
+            this.cbStepOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStepOwner.FormattingEnabled = true;
+            this.cbStepOwner.Location = new System.Drawing.Point(106, 97);
+            this.cbStepOwner.Name = "cbStepOwner";
+            this.cbStepOwner.Size = new System.Drawing.Size(102, 21);
+            this.cbStepOwner.TabIndex = 8;
+            this.cbStepOwner.SelectedIndexChanged += new System.EventHandler(this.cbStepOwner_SelectedIndexChanged);
+            // 
+            // tbCompletionTarget
+            // 
+            this.tbCompletionTarget.Location = new System.Drawing.Point(106, 71);
+            this.tbCompletionTarget.Name = "tbCompletionTarget";
+            this.tbCompletionTarget.Size = new System.Drawing.Size(102, 20);
+            this.tbCompletionTarget.TabIndex = 7;
+            this.tbCompletionTarget.TextChanged += new System.EventHandler(this.tbCompletionTarget_TextChanged);
+            // 
+            // tbCompletionCount
+            // 
+            this.tbCompletionCount.Location = new System.Drawing.Point(106, 45);
+            this.tbCompletionCount.Name = "tbCompletionCount";
+            this.tbCompletionCount.Size = new System.Drawing.Size(102, 20);
+            this.tbCompletionCount.TabIndex = 6;
+            this.tbCompletionCount.TextChanged += new System.EventHandler(this.tbCompletionCount_TextChanged);
+            // 
+            // cbCompletionType
+            // 
+            this.cbCompletionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCompletionType.FormattingEnabled = true;
+            this.cbCompletionType.Location = new System.Drawing.Point(106, 18);
+            this.cbCompletionType.Name = "cbCompletionType";
+            this.cbCompletionType.Size = new System.Drawing.Size(102, 21);
+            this.cbCompletionType.TabIndex = 5;
+            this.cbCompletionType.SelectedIndexChanged += new System.EventHandler(this.cbCompletionType_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(34, 104);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(66, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Step Owner:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 78);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(96, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Completion Target:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 52);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(93, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Completion Count:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 26);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Completion Type:";
             // 
             // btnNewQuest
             // 
@@ -236,6 +337,26 @@
             this.lvRewards.View = System.Windows.Forms.View.Details;
             this.lvRewards.SelectedIndexChanged += new System.EventHandler(this.lvRewards_SelectedIndexChanged);
             // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Gold";
+            this.columnHeader8.Width = 34;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Exp";
+            this.columnHeader9.Width = 34;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Fame";
+            this.columnHeader10.Width = 38;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Item";
+            this.columnHeader11.Width = 125;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -270,10 +391,15 @@
             this.lvLines.View = System.Windows.Forms.View.Details;
             this.lvLines.SelectedIndexChanged += new System.EventHandler(this.lvLines_SelectedIndexChanged);
             // 
-            // columnHeader1
+            // columnHeader13
             // 
-            this.columnHeader1.Text = "Map";
-            this.columnHeader1.Width = 39;
+            this.columnHeader13.Text = "Icon";
+            this.columnHeader13.Width = 90;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Text";
+            this.columnHeader14.Width = 466;
             // 
             // groupBox2
             // 
@@ -288,32 +414,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Quest Properties";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Name:";
-            // 
-            // tbQuestName
-            // 
-            this.tbQuestName.Location = new System.Drawing.Point(53, 19);
-            this.tbQuestName.Name = "tbQuestName";
-            this.tbQuestName.Size = new System.Drawing.Size(323, 20);
-            this.tbQuestName.TabIndex = 1;
-            this.tbQuestName.TextChanged += new System.EventHandler(this.tbQuestName_TextChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 52);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Giver:";
-            // 
             // cbQuestGiver
             // 
             this.cbQuestGiver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -325,87 +425,31 @@
             this.cbQuestGiver.TabIndex = 3;
             this.cbQuestGiver.SelectedIndexChanged += new System.EventHandler(this.cbQuestGiver_SelectedIndexChanged);
             // 
-            // columnHeader4
+            // label6
             // 
-            this.columnHeader4.Text = "Context";
-            this.columnHeader4.Width = 91;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Giver:";
             // 
-            // columnHeader5
+            // tbQuestName
             // 
-            this.columnHeader5.Text = "Comp. Type";
-            this.columnHeader5.Width = 151;
+            this.tbQuestName.Location = new System.Drawing.Point(53, 19);
+            this.tbQuestName.Name = "tbQuestName";
+            this.tbQuestName.Size = new System.Drawing.Size(323, 20);
+            this.tbQuestName.TabIndex = 1;
+            this.tbQuestName.TextChanged += new System.EventHandler(this.tbQuestName_TextChanged);
             // 
-            // label8
+            // label5
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Completion Type:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 52);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(93, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Completion Count:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 78);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(96, 13);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Completion Target:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(34, 104);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Step Owner:";
-            // 
-            // cbCompletionType
-            // 
-            this.cbCompletionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCompletionType.FormattingEnabled = true;
-            this.cbCompletionType.Location = new System.Drawing.Point(106, 18);
-            this.cbCompletionType.Name = "cbCompletionType";
-            this.cbCompletionType.Size = new System.Drawing.Size(102, 21);
-            this.cbCompletionType.TabIndex = 5;
-            this.cbCompletionType.SelectedIndexChanged += new System.EventHandler(this.cbCompletionType_SelectedIndexChanged);
-            // 
-            // tbCompletionCount
-            // 
-            this.tbCompletionCount.Location = new System.Drawing.Point(106, 45);
-            this.tbCompletionCount.Name = "tbCompletionCount";
-            this.tbCompletionCount.Size = new System.Drawing.Size(102, 20);
-            this.tbCompletionCount.TabIndex = 6;
-            this.tbCompletionCount.TextChanged += new System.EventHandler(this.tbCompletionCount_TextChanged);
-            // 
-            // tbCompletionTarget
-            // 
-            this.tbCompletionTarget.Location = new System.Drawing.Point(106, 71);
-            this.tbCompletionTarget.Name = "tbCompletionTarget";
-            this.tbCompletionTarget.Size = new System.Drawing.Size(102, 20);
-            this.tbCompletionTarget.TabIndex = 7;
-            this.tbCompletionTarget.TextChanged += new System.EventHandler(this.tbCompletionTarget_TextChanged);
-            // 
-            // cbStepOwner
-            // 
-            this.cbStepOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbStepOwner.FormattingEnabled = true;
-            this.cbStepOwner.Location = new System.Drawing.Point(106, 97);
-            this.cbStepOwner.Name = "cbStepOwner";
-            this.cbStepOwner.Size = new System.Drawing.Size(102, 21);
-            this.cbStepOwner.TabIndex = 8;
-            this.cbStepOwner.SelectedIndexChanged += new System.EventHandler(this.cbStepOwner_SelectedIndexChanged);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name:";
             // 
             // btnNewStep
             // 
@@ -443,15 +487,6 @@
             this.lvRequirements.View = System.Windows.Forms.View.Details;
             this.lvRequirements.SelectedIndexChanged += new System.EventHandler(this.lvRequirements_SelectedIndexChanged);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 410);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(72, 13);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "Requirements";
-            // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Type";
@@ -460,6 +495,15 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "Param";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 410);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(72, 13);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Requirements";
             // 
             // btnDeleteRequirement
             // 
@@ -495,23 +539,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Requirements Properties";
             // 
-            // label13
+            // cbReqParam
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(34, 13);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Type:";
+            this.cbReqParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbReqParam.FormattingEnabled = true;
+            this.cbReqParam.Location = new System.Drawing.Point(52, 46);
+            this.cbReqParam.Name = "cbReqParam";
+            this.cbReqParam.Size = new System.Drawing.Size(142, 21);
+            this.cbReqParam.TabIndex = 21;
+            this.cbReqParam.SelectedIndexChanged += new System.EventHandler(this.cbReqParam_SelectedIndexChanged);
             // 
-            // label14
+            // tbRequirementParam
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 53);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(40, 13);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Param:";
+            this.tbRequirementParam.Location = new System.Drawing.Point(52, 46);
+            this.tbRequirementParam.Name = "tbRequirementParam";
+            this.tbRequirementParam.Size = new System.Drawing.Size(142, 20);
+            this.tbRequirementParam.TabIndex = 2;
+            this.tbRequirementParam.TextChanged += new System.EventHandler(this.tbRequirementParam_TextChanged);
             // 
             // cbRequirementType
             // 
@@ -523,39 +567,23 @@
             this.cbRequirementType.TabIndex = 1;
             this.cbRequirementType.SelectedIndexChanged += new System.EventHandler(this.cbRequirementType_SelectedIndexChanged);
             // 
-            // tbRequirementParam
+            // label14
             // 
-            this.tbRequirementParam.Location = new System.Drawing.Point(52, 46);
-            this.tbRequirementParam.Name = "tbRequirementParam";
-            this.tbRequirementParam.Size = new System.Drawing.Size(142, 20);
-            this.tbRequirementParam.TabIndex = 2;
-            this.tbRequirementParam.TextChanged += new System.EventHandler(this.tbRequirementParam_TextChanged);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 53);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(40, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Param:";
             // 
-            // columnHeader8
+            // label13
             // 
-            this.columnHeader8.Text = "Gold";
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "Exp";
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Fame";
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Item";
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "Icon";
-            this.columnHeader13.Width = 90;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "Text";
-            this.columnHeader14.Width = 466;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Type:";
             // 
             // groupBox4
             // 
@@ -571,6 +599,62 @@
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Line Properties";
+            // 
+            // tbDynamicText
+            // 
+            this.tbDynamicText.Enabled = false;
+            this.tbDynamicText.Location = new System.Drawing.Point(60, 73);
+            this.tbDynamicText.Name = "tbDynamicText";
+            this.tbDynamicText.Size = new System.Drawing.Size(518, 20);
+            this.tbDynamicText.TabIndex = 5;
+            this.tbDynamicText.TextChanged += new System.EventHandler(this.tbDynamicText_TextChanged);
+            // 
+            // cbStaticText
+            // 
+            this.cbStaticText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStaticText.FormattingEnabled = true;
+            this.cbStaticText.Location = new System.Drawing.Point(60, 46);
+            this.cbStaticText.Name = "cbStaticText";
+            this.cbStaticText.Size = new System.Drawing.Size(518, 21);
+            this.cbStaticText.TabIndex = 4;
+            this.cbStaticText.SelectedIndexChanged += new System.EventHandler(this.cbStaticText_SelectedIndexChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(23, 80);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(31, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Text:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 54);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(45, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Text ID:";
+            // 
+            // cbIcon
+            // 
+            this.cbIcon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIcon.FormattingEnabled = true;
+            this.cbIcon.Location = new System.Drawing.Point(60, 19);
+            this.cbIcon.Name = "cbIcon";
+            this.cbIcon.Size = new System.Drawing.Size(129, 21);
+            this.cbIcon.TabIndex = 1;
+            this.cbIcon.SelectedIndexChanged += new System.EventHandler(this.cbIcon_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(23, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(31, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Icon:";
             // 
             // btnDeleteLine
             // 
@@ -612,62 +696,6 @@
             this.btnStepDown.UseVisualStyleBackColor = true;
             this.btnStepDown.Click += new System.EventHandler(this.btnStepDown_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(31, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Icon:";
-            // 
-            // cbIcon
-            // 
-            this.cbIcon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbIcon.FormattingEnabled = true;
-            this.cbIcon.Location = new System.Drawing.Point(60, 19);
-            this.cbIcon.Name = "cbIcon";
-            this.cbIcon.Size = new System.Drawing.Size(129, 21);
-            this.cbIcon.TabIndex = 1;
-            this.cbIcon.SelectedIndexChanged += new System.EventHandler(this.cbIcon_SelectedIndexChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 54);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(45, 13);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "Text ID:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(23, 80);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(31, 13);
-            this.label16.TabIndex = 3;
-            this.label16.Text = "Text:";
-            // 
-            // cbStaticText
-            // 
-            this.cbStaticText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbStaticText.FormattingEnabled = true;
-            this.cbStaticText.Location = new System.Drawing.Point(60, 46);
-            this.cbStaticText.Name = "cbStaticText";
-            this.cbStaticText.Size = new System.Drawing.Size(518, 21);
-            this.cbStaticText.TabIndex = 4;
-            this.cbStaticText.SelectedIndexChanged += new System.EventHandler(this.cbStaticText_SelectedIndexChanged);
-            // 
-            // tbDynamicText
-            // 
-            this.tbDynamicText.Enabled = false;
-            this.tbDynamicText.Location = new System.Drawing.Point(60, 73);
-            this.tbDynamicText.Name = "tbDynamicText";
-            this.tbDynamicText.Size = new System.Drawing.Size(518, 20);
-            this.tbDynamicText.TabIndex = 5;
-            this.tbDynamicText.TextChanged += new System.EventHandler(this.tbDynamicText_TextChanged);
-            // 
             // btnLineUp
             // 
             this.btnLineUp.Location = new System.Drawing.Point(893, 499);
@@ -705,41 +733,29 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Reward Properties";
             // 
-            // label17
+            // tbFame
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 26);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(32, 13);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Gold:";
+            this.tbFame.Location = new System.Drawing.Point(51, 71);
+            this.tbFame.Name = "tbFame";
+            this.tbFame.Size = new System.Drawing.Size(135, 20);
+            this.tbFame.TabIndex = 2;
+            this.tbFame.TextChanged += new System.EventHandler(this.tbFame_TextChanged);
             // 
-            // label18
+            // tbExp
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(17, 52);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(28, 13);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Exp:";
+            this.tbExp.Location = new System.Drawing.Point(51, 45);
+            this.tbExp.Name = "tbExp";
+            this.tbExp.Size = new System.Drawing.Size(135, 20);
+            this.tbExp.TabIndex = 2;
+            this.tbExp.TextChanged += new System.EventHandler(this.tbExp_TextChanged);
             // 
-            // label19
+            // tbGold
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(9, 78);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(36, 13);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "Fame:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(17, 105);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(30, 13);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Item:";
+            this.tbGold.Location = new System.Drawing.Point(51, 19);
+            this.tbGold.Name = "tbGold";
+            this.tbGold.Size = new System.Drawing.Size(135, 20);
+            this.tbGold.TabIndex = 2;
+            this.tbGold.TextChanged += new System.EventHandler(this.tbGold_TextChanged);
             // 
             // cbItem
             // 
@@ -751,29 +767,41 @@
             this.cbItem.TabIndex = 1;
             this.cbItem.SelectedIndexChanged += new System.EventHandler(this.cbItem_SelectedIndexChanged);
             // 
-            // tbGold
+            // label20
             // 
-            this.tbGold.Location = new System.Drawing.Point(51, 19);
-            this.tbGold.Name = "tbGold";
-            this.tbGold.Size = new System.Drawing.Size(135, 20);
-            this.tbGold.TabIndex = 2;
-            this.tbGold.TextChanged += new System.EventHandler(this.tbGold_TextChanged);
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(17, 105);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(30, 13);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Item:";
             // 
-            // tbExp
+            // label19
             // 
-            this.tbExp.Location = new System.Drawing.Point(51, 45);
-            this.tbExp.Name = "tbExp";
-            this.tbExp.Size = new System.Drawing.Size(135, 20);
-            this.tbExp.TabIndex = 2;
-            this.tbExp.TextChanged += new System.EventHandler(this.tbExp_TextChanged);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 78);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(36, 13);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "Fame:";
             // 
-            // tbFame
+            // label18
             // 
-            this.tbFame.Location = new System.Drawing.Point(51, 71);
-            this.tbFame.Name = "tbFame";
-            this.tbFame.Size = new System.Drawing.Size(135, 20);
-            this.tbFame.TabIndex = 2;
-            this.tbFame.TextChanged += new System.EventHandler(this.tbFame_TextChanged);
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(17, 52);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(28, 13);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Exp:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 26);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Gold:";
             // 
             // btnDeleteReward
             // 
@@ -804,30 +832,6 @@
             this.btnSave.Text = "Save Quests";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // cbReqParam
-            // 
-            this.cbReqParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbReqParam.FormattingEnabled = true;
-            this.cbReqParam.Location = new System.Drawing.Point(52, 46);
-            this.cbReqParam.Name = "cbReqParam";
-            this.cbReqParam.Size = new System.Drawing.Size(142, 21);
-            this.cbReqParam.TabIndex = 21;
-            this.cbReqParam.SelectedIndexChanged += new System.EventHandler(this.cbReqParam_SelectedIndexChanged);
-            // 
-            // cbCompTarget
-            // 
-            this.cbCompTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCompTarget.FormattingEnabled = true;
-            this.cbCompTarget.Location = new System.Drawing.Point(106, 70);
-            this.cbCompTarget.Name = "cbCompTarget";
-            this.cbCompTarget.Size = new System.Drawing.Size(102, 21);
-            this.cbCompTarget.TabIndex = 8;
-            this.cbCompTarget.SelectedIndexChanged += new System.EventHandler(this.cbCompTarget_SelectedIndexChanged);
-            // 
-            // columnHeader15
-            // 
-            this.columnHeader15.Text = "Count";
             // 
             // QuestDialog
             // 

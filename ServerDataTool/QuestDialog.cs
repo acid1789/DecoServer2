@@ -37,7 +37,7 @@ namespace ServerDataTool
             foreach (ItemTemplate it in items)
             {
                 _items[it.ID] = it;
-                IntStrID itemID = Program.s_items.ContainsKey((int)it.ID) ? Program.s_items[(int)it.ID] : new IntStrID("Unknown", (int)it.ID);
+                IntStrID itemID = Program.s_items.ContainsKey(it.Model) ? Program.s_items[it.Model] : new IntStrID("Unknown", it.Model);
                 cbItem.Items.Add(itemID);
             }
 
@@ -259,10 +259,10 @@ namespace ServerDataTool
             {
                 ListViewItem lvi = lvQuests.SelectedItems[0];
                 Quest q = (Quest)lvi.Tag;
-                NPC giver = (NPC)cbQuestGiver.SelectedItem;
-                q.GiverID = giver.ID;
-                q.GiverMapID = giver.MapID;
-                lvi.SubItems[2].Text = giver.ToString();
+                NPC giver = (NPC)cbQuestGiver.SelectedItem;                
+                q.GiverID = giver == null ? 0 : giver.ID;
+                q.GiverMapID = giver == null ? (ushort)2 : giver.MapID;
+                lvi.SubItems[2].Text = giver == null ? "" : giver.ToString();
                 lvi.SubItems[3].Text = q.GiverMapID.ToString();
                 SetDirty(true);
             }
@@ -341,6 +341,21 @@ namespace ServerDataTool
                         cbCompTarget.Items.Add(npc);
                     cbCompTarget.SelectedItem = _npcs.ContainsKey(qs.CompTargetID) ? _npcs[qs.CompTargetID] : null;
                     break;
+                case QuestStep.CompletionType.WearItem:
+                    cbCompTarget.Visible = true;
+                    cbCompTarget.Items.Clear();
+                    foreach (ItemTemplate it in _items.Values)
+                    {
+                        cbCompTarget.Items.Add(Program.s_items[it.Model]);
+                    }
+                    cbCompTarget.SelectedItem = null;
+                    if (_items.ContainsKey(qs.CompTargetID))
+                    {
+                        ItemTemplate it = _items[qs.CompTargetID];
+                        IntStrID itemStr = Program.s_items[it.Model];
+                        cbCompTarget.SelectedItem = itemStr;
+                    }
+                    break;
             }
         }
 
@@ -358,6 +373,16 @@ namespace ServerDataTool
                     break;  // Empty
                 case QuestStep.CompletionType.TalkToNPC:
                     str = _npcs.ContainsKey(qs.CompTargetID) ? _npcs[qs.CompTargetID].ToString() : "Unknown";
+                    break;
+                case QuestStep.CompletionType.WearItem:
+                    if (_items.ContainsKey(qs.CompTargetID))
+                    {
+                        ItemTemplate it = _items[qs.CompTargetID];
+                        IntStrID itemStr = Program.s_items[it.Model];
+                        cbCompTarget.SelectedItem = itemStr;
+                    }
+                    else
+                        str = qs.CompTargetID.ToString();
                     break;
             }
             return str;
@@ -385,6 +410,7 @@ namespace ServerDataTool
 
             if (lvSteps.SelectedItems.Count != 0)
             {
+                _selectingQuest = true;
                 ListViewItem lvi = lvSteps.SelectedItems[0];
                 QuestStep qs = (QuestStep)lvi.Tag;
                 
@@ -415,6 +441,7 @@ namespace ServerDataTool
                 {
                     AddLineToDisplay(ql);
                 }
+                _selectingQuest = false;
             }
         }
 
@@ -492,6 +519,11 @@ namespace ServerDataTool
                         qs.CompTargetID = npc.ID;
                         SetDirty(true);
                         break;
+                    case QuestStep.CompletionType.WearItem:
+
+                        break;
+                    default:
+                        throw new NotImplementedException();
                 }
             }
         }
@@ -770,12 +802,29 @@ namespace ServerDataTool
         #endregion
 
         #region Rewards
+        string RewardItemString(QuestReward qr)
+        {
+            string itemStr = qr.Item.ToString();
+            if (_items.ContainsKey(qr.Item))
+            {
+                ItemTemplate it = _items[qr.Item];
+                if (it != null && Program.s_items.ContainsKey((int)it.Model))
+                {
+                    itemStr = Program.s_items[(int)it.Model].ToIDString();
+                }
+            }
+            return itemStr;
+        }
+
         void AddRewardToDisplay(QuestReward qr)
         {
             ListViewItem rvi = lvRewards.Items.Add(qr.Gold.ToString());
             rvi.SubItems.Add(qr.Exp.ToString());
             rvi.SubItems.Add(qr.Fame.ToString());
-            rvi.SubItems.Add(qr.Item.ToString());
+
+
+                           
+            rvi.SubItems.Add(RewardItemString(qr));
             rvi.Tag = qr;
         }
 
@@ -793,6 +842,7 @@ namespace ServerDataTool
 
             if (lvRewards.SelectedItems.Count > 0)
             {
+                _selectingQuest = true;
                 ListViewItem lvi = lvRewards.SelectedItems[0];
                 QuestReward qr = (QuestReward)lvi.Tag;
 
@@ -803,8 +853,8 @@ namespace ServerDataTool
                 if (_items.ContainsKey(qr.Item))
                 {
                     ItemTemplate item = _items[qr.Item];
-                    if (Program.s_items.ContainsKey((int)item.ID))
-                        cbItem.SelectedItem = Program.s_items[(int)item.ID];
+                    if (Program.s_items.ContainsKey(item.Model))
+                        cbItem.SelectedItem = Program.s_items[item.Model];
                     else
                     {
                         cbItem.SelectedItem = null;
@@ -827,6 +877,8 @@ namespace ServerDataTool
                 tbFame.Enabled = true;
                 cbItem.Enabled = true;
                 btnDeleteReward.Enabled = true;
+
+                _selectingQuest = false;
             }
         }
 
@@ -874,7 +926,15 @@ namespace ServerDataTool
 
         private void cbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO: Implement items
+            if (cbItem.SelectedItem != null)
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
+
+                qr.Item = (uint)cbItem.SelectedIndex + 1;
+                lvi.SubItems[3].Text = RewardItemString(qr);
+                SetDirty(true);
+            }
         }
 
         private void btnDeleteReward_Click(object sender, EventArgs e)
@@ -951,6 +1011,7 @@ namespace ServerDataTool
 
             if (lvLines.SelectedItems.Count > 0)
             {
+                _selectingQuest = true;
                 ListViewItem lvi = lvLines.SelectedItems[0];
                 QuestLine ql = (QuestLine)lvi.Tag;
 
@@ -964,6 +1025,7 @@ namespace ServerDataTool
 
                 FixLineButtons(ql);
                 btnDeleteLine.Enabled = true;
+                _selectingQuest = false;
             }
         }
 
@@ -1043,7 +1105,7 @@ namespace ServerDataTool
         private void btnNewLine_Click(object sender, EventArgs e)
         {
             // Create a quest line
-            QuestLine ql = new QuestLine(0, 0, 0, "", 0);
+            QuestLine ql = new QuestLine(0, (ushort)(cbIcon.SelectedItem != null ? ((IntStrID)cbIcon.SelectedItem).ID : 0), (ushort)Math.Max(cbStaticText.SelectedIndex, 0), "", 0);
             ql.New = true;
 
             // Add it to the step
@@ -1075,14 +1137,17 @@ namespace ServerDataTool
 
         private void cbStaticText_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewItem lvi = lvLines.SelectedItems[0];
-            QuestLine ql = (QuestLine)lvi.Tag;
+            if (lvLines.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvLines.SelectedItems[0];
+                QuestLine ql = (QuestLine)lvi.Tag;
 
-            IntStrID staticText = (IntStrID)cbStaticText.SelectedItem;
-            ql.StaticText = (ushort)staticText.ID;
-            lvi.SubItems[1].Text = Program.s_staticText.ContainsKey(ql.StaticText) ? Program.s_staticText[ql.StaticText].ToString() : ql.DynamicText;
+                IntStrID staticText = (IntStrID)cbStaticText.SelectedItem;
+                ql.StaticText = (ushort)staticText.ID;
+                lvi.SubItems[1].Text = Program.s_staticText.ContainsKey(ql.StaticText) ? Program.s_staticText[ql.StaticText].ToString() : ql.DynamicText;
 
-            SetDirty(true);
+                SetDirty(true);
+            }
         }
 
         private void tbDynamicText_TextChanged(object sender, EventArgs e)

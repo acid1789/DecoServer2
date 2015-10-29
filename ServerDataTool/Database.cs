@@ -284,7 +284,7 @@ namespace ServerDataTool
                 ExecuteQuery(string.Format("UPDATE quest_info SET giver_id={0},giver_map_id={1} WHERE quest_id={2};", q.GiverID, q.GiverMapID, q.ID));
 
                 // Update name
-                ExecuteQuery(string.Format("UPDATE quest_names SET name=\"{0}\" QHERE quest_id={1};", q.Name, q.ID));
+                ExecuteQuery(string.Format("UPDATE quest_names SET name=\"{0}\" WHERE quest_id={1};", q.Name, q.ID));
             }
 
             // Delete all the rewards for this quest
@@ -296,9 +296,9 @@ namespace ServerDataTool
                 QuestStep qs = q.Steps[i];            
                 string sql;
                 if( qs.New )
-                    sql = string.Format("INSERT INTO quest_steps SET step={0},type={1},count={2},target_id={3},owner_id={4},quest_id={5} WHERE quest_step_id={6}; SELECT LAST_INSERT_ID();", i, qs.CompType, qs.CompCount, qs.CompTargetID, qs.OwnerID, q.ID, qs.ID);
+                    sql = string.Format("INSERT INTO quest_steps SET step={0},type={1},count={2},target_id={3},owner_id={4},quest_id={5}; SELECT LAST_INSERT_ID();", i, (byte)qs.CompType, qs.CompCount, qs.CompTargetID, qs.OwnerID, q.ID);
                 else
-                    sql = string.Format("UPDATE quest_steps SET step={0},type={1},count={2},target_id={3},owner_id={4} WHERE quest_step_id={5};", i, qs.CompType, qs.CompCount, qs.CompTargetID, qs.OwnerID, qs.ID);
+                    sql = string.Format("UPDATE quest_steps SET step={0},type={1},count={2},target_id={3},owner_id={4} WHERE quest_step_id={5};", i, (byte)qs.CompType, qs.CompCount, qs.CompTargetID, qs.OwnerID, qs.ID);
                 List<object[]> rows = ExecuteQuery(sql);
                 if (rows.Count > 0)
                 {
@@ -323,6 +323,7 @@ namespace ServerDataTool
                         sql = string.Format("INSERT INTO quest_lines SET quest_id={0},step={1},line={2},icon={3},static_text={4},text=\"{5}\"; SELECT LAST_INSERT_ID();", q.ID, i, ql.Line, ql.Icon, ql.StaticText, ql.DynamicText);
                     else
                         sql = string.Format("UPDATE quest_lines SET step={1},line={2},icon={3},static_text={4},text=\"{5}\" WHERE quest_line_id={0};", ql.ID, i, ql.Line, ql.Icon, ql.StaticText, ql.DynamicText);
+                    rows = ExecuteQuery(sql);
                     if (rows.Count > 0)
                     {
                         ulong id = (ulong)rows[0][0];
@@ -582,7 +583,8 @@ namespace ServerDataTool
             CollectItem,
             GoToLocation,
             TalkToNPC,
-            ReachLevel
+            ReachLevel,
+            WearItem,
         }
 
         public byte Step;

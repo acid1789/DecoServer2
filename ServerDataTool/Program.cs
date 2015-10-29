@@ -217,7 +217,12 @@ namespace ServerDataTool
 
         public override string ToString()
         {
-            return Str;
+            return ID.ToString() + ": " + Str;
+        }
+
+        public string ToIDString()
+        {
+            return ID.ToString() + ": " + Str;
         }
     }
 }

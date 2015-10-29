@@ -85,8 +85,8 @@ namespace DecoServer2
             {
                 QuestLine ql = qs.GetLine(line);
                 client.SetCurrentQuest(_id, q.QuestID, line);
-                bool lastLine = (line < (qs.LineCount - 1));
-                ql.SendToClient(client, lastLine);
+                bool lastLine = (line >= (qs.LineCount - 1));
+                ql.SendToClient(client, !lastLine);
 
                 if( lastLine )
                     client.QuestDialogFinished(_id);

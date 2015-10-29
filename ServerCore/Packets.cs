@@ -370,6 +370,34 @@ namespace JuggleServerCore
         }
     }
 
+    public class GiveItemPacket : SendPacketBase    // 0x0455
+    {
+        Item _item;
+
+        public GiveItemPacket(Item item)
+        {
+            _item = item;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0455;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 17;
+            header.Write(bw);
+
+            bw.Write((byte)1);          // Error code: 1 = no error
+            bw.Write(_item.ID);
+            bw.Write(_item.Model);
+            bw.Write((byte)1);          // Unknown - maybe inventory type?
+            bw.Write(_item.Slot);       // Inventory slot
+            bw.Write((uint)1);          // Unknown
+            bw.Write(_item.Durability);
+            bw.Write(_item.RemainingTime);
+        }
+    }
+
     public class NPCInfoPacket : SendPacketBase     // 0x5002
     {
         DecoServer2.NPC _npc;
