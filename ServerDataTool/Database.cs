@@ -217,7 +217,11 @@ namespace ServerDataTool
                     rows = ExecuteQuery(sql);
                     foreach (object[] row in rows)
                     {
-                        QuestReward qr = new QuestReward((uint)row[2], (uint)row[3], (uint)row[6], (uint)row[4]);
+                        // 0: quest_id	int(10) unsigned
+                        // 1: step	tinyint(3) unsigned
+                        // 2: type	tinyint(10) unsigned
+                        // 3: context	int(10) unsigned
+                        QuestReward qr = new QuestReward((byte)row[2], (uint)row[3]);
                         qs.Rewards.Add(qr);
                     }
 
@@ -310,7 +314,7 @@ namespace ServerDataTool
                 // Do Rewards
                 foreach (QuestReward qr in qs.Rewards)
                 {
-                    sql = string.Format("INSERT INTO quest_rewards SET step={0},gold={1},exp={2},item={3},fame={4},quest_id={5};", i, qr.Gold, qr.Exp, qr.Item, qr.Fame, q.ID);
+                    sql = string.Format("INSERT INTO quest_rewards SET quest_id={0},step={1},type={2},context={3};", q.ID, i, (byte)qr.Type, qr.Context);
                     ExecuteQuery(sql);
                 }
 
@@ -639,18 +643,23 @@ namespace ServerDataTool
 
     public class QuestReward
     {
-        public uint Gold;
-        public uint Exp;
-        public uint Fame;
-        public uint Item;
+        public enum RewardType
+        {
+            Gold,
+            Exp,
+            Fame,
+            Item,
+            Teleport,
+            Skill
+        }
+        public RewardType Type;
+        public uint Context;
         public bool New;
 
-        public QuestReward(uint gold, uint exp, uint fame, uint item)
+        public QuestReward(byte type, uint context)
         {
-            Gold = gold;
-            Exp = exp;
-            Fame = fame;
-            Item = item;
+            Type = (RewardType)type;
+            Context = context;
         }
     }
 

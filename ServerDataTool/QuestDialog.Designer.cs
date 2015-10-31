@@ -54,8 +54,6 @@
             this.lvRewards = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lvLines = new System.Windows.Forms.ListView();
@@ -94,12 +92,9 @@
             this.btnLineUp = new System.Windows.Forms.Button();
             this.btnLineDown = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.tbFame = new System.Windows.Forms.TextBox();
-            this.tbExp = new System.Windows.Forms.TextBox();
-            this.tbGold = new System.Windows.Forms.TextBox();
-            this.cbItem = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
+            this.tbRewardContext = new System.Windows.Forms.TextBox();
+            this.cbRewardType = new System.Windows.Forms.ComboBox();
+            this.cbRewardContext = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.btnDeleteReward = new System.Windows.Forms.Button();
@@ -323,15 +318,13 @@
             // 
             this.lvRewards.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11});
+            this.columnHeader9});
             this.lvRewards.FullRowSelect = true;
             this.lvRewards.GridLines = true;
             this.lvRewards.HideSelection = false;
             this.lvRewards.Location = new System.Drawing.Point(744, 23);
             this.lvRewards.Name = "lvRewards";
-            this.lvRewards.Size = new System.Drawing.Size(257, 263);
+            this.lvRewards.Size = new System.Drawing.Size(467, 121);
             this.lvRewards.TabIndex = 6;
             this.lvRewards.UseCompatibleStateImageBehavior = false;
             this.lvRewards.View = System.Windows.Forms.View.Details;
@@ -339,23 +332,13 @@
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "Gold";
-            this.columnHeader8.Width = 34;
+            this.columnHeader8.Text = "Type";
+            this.columnHeader8.Width = 94;
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "Exp";
-            this.columnHeader9.Width = 34;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Fame";
-            this.columnHeader10.Width = 38;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Item";
-            this.columnHeader11.Width = 125;
+            this.columnHeader9.Text = "Context";
+            this.columnHeader9.Width = 340;
             // 
             // label3
             // 
@@ -718,94 +701,67 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.tbFame);
-            this.groupBox5.Controls.Add(this.tbExp);
-            this.groupBox5.Controls.Add(this.tbGold);
-            this.groupBox5.Controls.Add(this.cbItem);
-            this.groupBox5.Controls.Add(this.label20);
-            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Controls.Add(this.cbRewardContext);
+            this.groupBox5.Controls.Add(this.tbRewardContext);
+            this.groupBox5.Controls.Add(this.cbRewardType);
             this.groupBox5.Controls.Add(this.label18);
             this.groupBox5.Controls.Add(this.label17);
-            this.groupBox5.Location = new System.Drawing.Point(1007, 13);
+            this.groupBox5.Location = new System.Drawing.Point(744, 179);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(198, 131);
+            this.groupBox5.Size = new System.Drawing.Size(467, 75);
             this.groupBox5.TabIndex = 17;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Reward Properties";
             // 
-            // tbFame
+            // tbRewardContext
             // 
-            this.tbFame.Location = new System.Drawing.Point(51, 71);
-            this.tbFame.Name = "tbFame";
-            this.tbFame.Size = new System.Drawing.Size(135, 20);
-            this.tbFame.TabIndex = 2;
-            this.tbFame.TextChanged += new System.EventHandler(this.tbFame_TextChanged);
+            this.tbRewardContext.Location = new System.Drawing.Point(69, 47);
+            this.tbRewardContext.Name = "tbRewardContext";
+            this.tbRewardContext.Size = new System.Drawing.Size(392, 20);
+            this.tbRewardContext.TabIndex = 2;
+            this.tbRewardContext.TextChanged += new System.EventHandler(this.tbRewardContext_TextChanged);
             // 
-            // tbExp
+            // cbRewardType
             // 
-            this.tbExp.Location = new System.Drawing.Point(51, 45);
-            this.tbExp.Name = "tbExp";
-            this.tbExp.Size = new System.Drawing.Size(135, 20);
-            this.tbExp.TabIndex = 2;
-            this.tbExp.TextChanged += new System.EventHandler(this.tbExp_TextChanged);
+            this.cbRewardType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRewardType.FormattingEnabled = true;
+            this.cbRewardType.Location = new System.Drawing.Point(69, 19);
+            this.cbRewardType.Name = "cbRewardType";
+            this.cbRewardType.Size = new System.Drawing.Size(392, 21);
+            this.cbRewardType.TabIndex = 1;
+            this.cbRewardType.SelectedIndexChanged += new System.EventHandler(this.cbRewardType_SelectedIndexChanged);
             // 
-            // tbGold
+            // cbRewardContext
             // 
-            this.tbGold.Location = new System.Drawing.Point(51, 19);
-            this.tbGold.Name = "tbGold";
-            this.tbGold.Size = new System.Drawing.Size(135, 20);
-            this.tbGold.TabIndex = 2;
-            this.tbGold.TextChanged += new System.EventHandler(this.tbGold_TextChanged);
-            // 
-            // cbItem
-            // 
-            this.cbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbItem.FormattingEnabled = true;
-            this.cbItem.Location = new System.Drawing.Point(51, 97);
-            this.cbItem.Name = "cbItem";
-            this.cbItem.Size = new System.Drawing.Size(135, 21);
-            this.cbItem.TabIndex = 1;
-            this.cbItem.SelectedIndexChanged += new System.EventHandler(this.cbItem_SelectedIndexChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(17, 105);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(30, 13);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Item:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(9, 78);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(36, 13);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "Fame:";
+            this.cbRewardContext.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRewardContext.FormattingEnabled = true;
+            this.cbRewardContext.Location = new System.Drawing.Point(69, 46);
+            this.cbRewardContext.Name = "cbRewardContext";
+            this.cbRewardContext.Size = new System.Drawing.Size(392, 21);
+            this.cbRewardContext.TabIndex = 1;
+            this.cbRewardContext.SelectedIndexChanged += new System.EventHandler(this.cbRewardContext_SelectedIndexChanged);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(17, 52);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(28, 13);
+            this.label18.Size = new System.Drawing.Size(46, 13);
             this.label18.TabIndex = 0;
-            this.label18.Text = "Exp:";
+            this.label18.Text = "Context:";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 26);
+            this.label17.Location = new System.Drawing.Point(29, 26);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.Size = new System.Drawing.Size(34, 13);
             this.label17.TabIndex = 0;
-            this.label17.Text = "Gold:";
+            this.label17.Text = "Type:";
             // 
             // btnDeleteReward
             // 
-            this.btnDeleteReward.Location = new System.Drawing.Point(1007, 150);
+            this.btnDeleteReward.Location = new System.Drawing.Point(744, 150);
             this.btnDeleteReward.Name = "btnDeleteReward";
             this.btnDeleteReward.Size = new System.Drawing.Size(87, 23);
             this.btnDeleteReward.TabIndex = 18;
@@ -815,11 +771,11 @@
             // 
             // btnAddReward
             // 
-            this.btnAddReward.Location = new System.Drawing.Point(1130, 150);
+            this.btnAddReward.Location = new System.Drawing.Point(1127, 150);
             this.btnAddReward.Name = "btnAddReward";
-            this.btnAddReward.Size = new System.Drawing.Size(75, 23);
+            this.btnAddReward.Size = new System.Drawing.Size(84, 23);
             this.btnAddReward.TabIndex = 19;
-            this.btnAddReward.Text = "Add Reward";
+            this.btnAddReward.Text = "New Reward";
             this.btnAddReward.UseVisualStyleBackColor = true;
             this.btnAddReward.Click += new System.EventHandler(this.btnAddReward_Click);
             // 
@@ -940,8 +896,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -958,12 +912,6 @@
         private System.Windows.Forms.Button btnLineUp;
         private System.Windows.Forms.Button btnLineDown;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox tbFame;
-        private System.Windows.Forms.TextBox tbExp;
-        private System.Windows.Forms.TextBox tbGold;
-        private System.Windows.Forms.ComboBox cbItem;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btnDeleteReward;
@@ -972,5 +920,8 @@
         private System.Windows.Forms.ComboBox cbReqParam;
         private System.Windows.Forms.ComboBox cbCompTarget;
         private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.TextBox tbRewardContext;
+        private System.Windows.Forms.ComboBox cbRewardType;
+        private System.Windows.Forms.ComboBox cbRewardContext;
     }
 }

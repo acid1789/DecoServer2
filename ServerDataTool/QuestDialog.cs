@@ -13,7 +13,7 @@ namespace ServerDataTool
     public partial class QuestDialog : Form
     {
         Dictionary<uint, NPC> _npcs;
-        Dictionary<uint, ItemTemplate> _items;
+        Dictionary<uint, NamedItemTemplate> _items;
         Quest _selectedQuest;
         bool _selectingQuest;
 
@@ -26,21 +26,22 @@ namespace ServerDataTool
         {
             cbCompletionType.DataSource = Enum.GetValues(typeof(QuestStep.CompletionType));
             cbRequirementType.DataSource = Enum.GetValues(typeof(QuestRequirement.Type));
+            cbRewardType.DataSource = Enum.GetValues(typeof(QuestReward.RewardType));
 
             foreach (IntStrID icon in Program.s_npcIcons.Values)
                 cbIcon.Items.Add(icon);
             foreach( IntStrID staticText in Program.s_staticText.Values )
                 cbStaticText.Items.Add(staticText);
 
-            _items = new Dictionary<uint, ItemTemplate>();
+            _items = new Dictionary<uint, NamedItemTemplate>();
             ItemTemplate[] items = Database.FetchItems();
             foreach (ItemTemplate it in items)
             {
-                _items[it.ID] = it;
-                IntStrID itemID = Program.s_items.ContainsKey(it.Model) ? Program.s_items[it.Model] : new IntStrID("Unknown", it.Model);
-                cbItem.Items.Add(itemID);
+                NamedItemTemplate named = new NamedItemTemplate();
+                named.Name = Program.s_items.ContainsKey(it.Model) ? Program.s_items[it.Model] : new IntStrID("Unknown", it.Model);
+                named.Template = it;
+                _items[it.ID] = named;
             }
-
 
             // Pull all the NPCs
             NPC[] npcs = Database.FetchNPCs(0);
@@ -114,14 +115,11 @@ namespace ServerDataTool
 
             lvRewards.Items.Clear();
             lvRewards.Enabled = false;
-            tbGold.Enabled = false;
-            tbGold.Text = "";
-            tbExp.Enabled = false;
-            tbExp.Text = "";
-            tbFame.Enabled = false;
-            tbFame.Text = "";
-            cbItem.Enabled = false;
-            cbItem.SelectedItem = null;
+            cbRewardType.Enabled = false;
+            tbRewardContext.Enabled = false;
+            tbRewardContext.Text = "";
+            cbRewardContext.Enabled = false;
+            cbRewardContext.Visible = false;
             btnDeleteReward.Enabled = false;
             btnAddReward.Enabled = false;
 
@@ -344,16 +342,15 @@ namespace ServerDataTool
                 case QuestStep.CompletionType.WearItem:
                     cbCompTarget.Visible = true;
                     cbCompTarget.Items.Clear();
-                    foreach (ItemTemplate it in _items.Values)
+                    foreach (NamedItemTemplate nit in _items.Values)
                     {
-                        cbCompTarget.Items.Add(Program.s_items[it.Model]);
+                        cbCompTarget.Items.Add(nit);
                     }
                     cbCompTarget.SelectedItem = null;
                     if (_items.ContainsKey(qs.CompTargetID))
                     {
-                        ItemTemplate it = _items[qs.CompTargetID];
-                        IntStrID itemStr = Program.s_items[it.Model];
-                        cbCompTarget.SelectedItem = itemStr;
+                        NamedItemTemplate nit = _items[qs.CompTargetID];
+                        cbCompTarget.SelectedItem = nit;
                     }
                     break;
             }
@@ -377,9 +374,8 @@ namespace ServerDataTool
                 case QuestStep.CompletionType.WearItem:
                     if (_items.ContainsKey(qs.CompTargetID))
                     {
-                        ItemTemplate it = _items[qs.CompTargetID];
-                        IntStrID itemStr = Program.s_items[it.Model];
-                        cbCompTarget.SelectedItem = itemStr;
+                        NamedItemTemplate nit = _items[qs.CompTargetID];
+                        str = nit.ToString();
                     }
                     else
                         str = qs.CompTargetID.ToString();
@@ -407,6 +403,10 @@ namespace ServerDataTool
             btnDeleteStep.Enabled = false;
             btnStepUp.Enabled = false;
             btnStepDown.Enabled = false;
+
+            cbRewardType.Enabled = false;
+            cbRewardContext.Visible = false;
+            tbRewardContext.Enabled = false;
 
             if (lvSteps.SelectedItems.Count != 0)
             {
@@ -517,10 +517,14 @@ namespace ServerDataTool
                     case QuestStep.CompletionType.TalkToNPC:
                         NPC npc = (NPC)cbCompTarget.SelectedItem;
                         qs.CompTargetID = npc.ID;
+                        lvi.SubItems[1].Text = StepContextString(qs);
                         SetDirty(true);
                         break;
                     case QuestStep.CompletionType.WearItem:
-
+                        NamedItemTemplate nit = (NamedItemTemplate)cbCompTarget.SelectedItem;
+                        qs.CompTargetID = nit.Template.ID;
+                        lvi.SubItems[1].Text = StepContextString(qs);
+                        SetDirty(true);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -802,42 +806,86 @@ namespace ServerDataTool
         #endregion
 
         #region Rewards
-        string RewardItemString(QuestReward qr)
+        string RewardContextString(QuestReward qr)
         {
-            string itemStr = qr.Item.ToString();
-            if (_items.ContainsKey(qr.Item))
+            string str = "";
+            switch (qr.Type)
             {
-                ItemTemplate it = _items[qr.Item];
-                if (it != null && Program.s_items.ContainsKey((int)it.Model))
-                {
-                    itemStr = Program.s_items[(int)it.Model].ToIDString();
-                }
+                case QuestReward.RewardType.Gold:
+                case QuestReward.RewardType.Exp:
+                case QuestReward.RewardType.Fame:
+                    str = qr.Context.ToString();
+                    break;
+                case QuestReward.RewardType.Item:
+                    if (_items.ContainsKey(qr.Context))
+                    {
+                        NamedItemTemplate nit = _items[qr.Context];
+                        str = nit.ToString();
+                    }
+                    else
+                        str = qr.Context.ToString();
+                    break;
+                case QuestReward.RewardType.Teleport:
+                    // TODO: Need to implement teleport target
+                    str = qr.Context.ToString();
+                    break;
+                case QuestReward.RewardType.Skill:
+                    // TODO: Need to implement skills
+                    str = qr.Context.ToString();
+                    break;
             }
-            return itemStr;
+
+            return str;
         }
 
         void AddRewardToDisplay(QuestReward qr)
         {
-            ListViewItem rvi = lvRewards.Items.Add(qr.Gold.ToString());
-            rvi.SubItems.Add(qr.Exp.ToString());
-            rvi.SubItems.Add(qr.Fame.ToString());
-
-
-                           
-            rvi.SubItems.Add(RewardItemString(qr));
+            ListViewItem rvi = lvRewards.Items.Add(qr.Type.ToString());
+            rvi.SubItems.Add(RewardContextString(qr));
             rvi.Tag = qr;
         }
 
+        void SetRewardContext(QuestReward qr)
+        {
+            switch (qr.Type)
+            {
+                case QuestReward.RewardType.Gold:
+                case QuestReward.RewardType.Exp:
+                case QuestReward.RewardType.Fame:
+                    tbRewardContext.Enabled = true;
+                    tbRewardContext.Text = qr.Context.ToString();
+                    break;
+                case QuestReward.RewardType.Item:
+                    cbRewardContext.Enabled = true;
+                    cbRewardContext.Visible = true;
+                    cbRewardContext.Items.Clear();
+                    foreach (NamedItemTemplate nit in _items.Values)
+                        cbRewardContext.Items.Add(nit);
+                    if (_items.ContainsKey(qr.Context))
+                        cbRewardContext.SelectedItem = _items[qr.Context];
+                    else
+                        cbRewardContext.SelectedItem = null;
+                    break;
+                case QuestReward.RewardType.Teleport:
+                    // TODO: Implement teleport
+                    tbRewardContext.Enabled = true;
+                    tbRewardContext.Text = qr.Context.ToString();
+                    break;
+                case QuestReward.RewardType.Skill:
+                    // TODO: Implement skill
+                    tbRewardContext.Enabled = true;
+                    tbRewardContext.Text = qr.Context.ToString();
+                    break;
+            }
+        }
+        
         private void lvRewards_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbGold.Text = "";
-            tbExp.Text = "";
-            tbFame.Text = "";
-            cbItem.SelectedItem = null;
-            tbGold.Enabled = false;
-            tbExp.Enabled = false;
-            tbFame.Enabled = false;
-            cbItem.Enabled = false;
+            cbRewardType.Enabled = false;
+            cbRewardContext.Enabled = false;
+            cbRewardContext.Visible = false;
+            tbRewardContext.Enabled = false;
+            tbRewardContext.Text = "";
             btnDeleteReward.Enabled = false;
 
             if (lvRewards.SelectedItems.Count > 0)
@@ -846,94 +894,11 @@ namespace ServerDataTool
                 ListViewItem lvi = lvRewards.SelectedItems[0];
                 QuestReward qr = (QuestReward)lvi.Tag;
 
-                tbGold.Text = qr.Gold.ToString();
-                tbExp.Text = qr.Exp.ToString();
-                tbFame.Text = qr.Fame.ToString();               
-                                
-                if (_items.ContainsKey(qr.Item))
-                {
-                    ItemTemplate item = _items[qr.Item];
-                    if (Program.s_items.ContainsKey(item.Model))
-                        cbItem.SelectedItem = Program.s_items[item.Model];
-                    else
-                    {
-                        cbItem.SelectedItem = null;
-                        foreach (object obj in cbItem.Items)
-                        {
-                            IntStrID id = (IntStrID)obj;
-                            if (id != null && id.ID == item.ID)
-                            {
-                                cbItem.SelectedItem = obj;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else
-                    cbItem.SelectedItem = null;
-
-                tbGold.Enabled = true;
-                tbExp.Enabled = true;
-                tbFame.Enabled = true;
-                cbItem.Enabled = true;
+                cbRewardType.Enabled = true;
+                SetRewardContext(qr);
                 btnDeleteReward.Enabled = true;
 
                 _selectingQuest = false;
-            }
-        }
-
-        private void tbGold_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                ListViewItem lvi = lvRewards.SelectedItems[0];
-                QuestReward qr = (QuestReward)lvi.Tag;
-
-                qr.Gold = Convert.ToUInt32(tbGold.Text);
-                lvi.Text = tbGold.Text;
-                SetDirty(true);
-            }
-            catch (Exception) { }
-        }
-
-        private void tbExp_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                ListViewItem lvi = lvRewards.SelectedItems[0];
-                QuestReward qr = (QuestReward)lvi.Tag;
-
-                qr.Exp = Convert.ToUInt32(tbExp.Text);
-                lvi.SubItems[1].Text = tbExp.Text;
-                SetDirty(true);
-            }
-            catch (Exception) { }
-        }
-
-        private void tbFame_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                ListViewItem lvi = lvRewards.SelectedItems[0];
-                QuestReward qr = (QuestReward)lvi.Tag;
-
-                qr.Fame = Convert.ToUInt32(tbFame.Text);
-                lvi.SubItems[2].Text = tbFame.Text;
-                SetDirty(true);
-            }
-            catch (Exception) { }
-        }
-
-        private void cbItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbItem.SelectedItem != null)
-            {
-                ListViewItem lvi = lvRewards.SelectedItems[0];
-                QuestReward qr = (QuestReward)lvi.Tag;
-
-                qr.Item = (uint)cbItem.SelectedIndex + 1;
-                lvi.SubItems[3].Text = RewardItemString(qr);
-                SetDirty(true);
             }
         }
 
@@ -966,7 +931,7 @@ namespace ServerDataTool
             QuestStep qs = (QuestStep)lvi.Tag;
 
             // Create reward
-            QuestReward qr = new QuestReward(0, 0, 0, 0);
+            QuestReward qr = new QuestReward((byte)Math.Max(cbRewardType.SelectedIndex, 0), 0);
             qr.New = true;
 
             // Add to the step
@@ -976,6 +941,67 @@ namespace ServerDataTool
             AddRewardToDisplay(qr);
 
             SetDirty(true);
+        }
+
+        private void cbRewardType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbRewardType.SelectedItem != null && lvRewards.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
+
+                qr.Type = (QuestReward.RewardType)cbRewardType.SelectedIndex;
+                SetRewardContext(qr);
+                lvi.SubItems[1].Text = RewardContextString(qr);
+            }
+        }
+
+        private void cbRewardContext_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbRewardContext.SelectedItem != null && lvRewards.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
+
+                switch (qr.Type)
+                {
+                    case QuestReward.RewardType.Teleport:
+                        // TODO: Implement
+                        break;
+                    case QuestReward.RewardType.Skill:
+                        // TODO: Implement
+                        break;
+                    case QuestReward.RewardType.Item:
+                        NamedItemTemplate nit = (NamedItemTemplate)cbRewardContext.SelectedItem;
+                        qr.Context = nit.Template.ID;
+                        lvi.SubItems[1].Text = RewardContextString(qr);
+                        SetDirty(true);
+                        break;
+                }
+            }
+        }
+
+        private void tbRewardContext_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ListViewItem lvi = lvRewards.SelectedItems[0];
+                QuestReward qr = (QuestReward)lvi.Tag;
+
+                switch (qr.Type)
+                {
+                    case QuestReward.RewardType.Exp:
+                    case QuestReward.RewardType.Fame:
+                    case QuestReward.RewardType.Gold:
+                    case QuestReward.RewardType.Teleport:
+                    case QuestReward.RewardType.Skill:
+                        qr.Context = Convert.ToUInt32(tbRewardContext.Text);
+                        lvi.SubItems[1].Text = RewardContextString(qr);
+                        SetDirty(true);
+                        break;
+                }
+            }
+            catch (Exception) { }
         }
         #endregion
 
@@ -1161,5 +1187,18 @@ namespace ServerDataTool
             SetDirty(true);
         }
         #endregion
+
     }
+
+
+    class NamedItemTemplate
+    {
+        public IntStrID Name;
+        public ItemTemplate Template;
+
+        public override string ToString()
+        {
+            return Template.ID.ToString() + ": " + Name.Str;
+        }
+    };
 }
