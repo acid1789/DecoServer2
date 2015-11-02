@@ -32,6 +32,7 @@
             this.btnNPCs = new System.Windows.Forms.Button();
             this.btnQuests = new System.Windows.Forms.Button();
             this.btnItems = new System.Windows.Forms.Button();
+            this.btnLocations = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAccounts
@@ -74,11 +75,22 @@
             this.btnItems.UseVisualStyleBackColor = true;
             this.btnItems.Click += new System.EventHandler(this.btnItems_Click);
             // 
+            // btnLocations
+            // 
+            this.btnLocations.Location = new System.Drawing.Point(310, 380);
+            this.btnLocations.Name = "btnLocations";
+            this.btnLocations.Size = new System.Drawing.Size(75, 23);
+            this.btnLocations.TabIndex = 5;
+            this.btnLocations.Text = "Locations";
+            this.btnLocations.UseVisualStyleBackColor = true;
+            this.btnLocations.Click += new System.EventHandler(this.btnLocations_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 498);
+            this.Controls.Add(this.btnLocations);
             this.Controls.Add(this.btnItems);
             this.Controls.Add(this.btnQuests);
             this.Controls.Add(this.btnNPCs);
@@ -97,6 +109,7 @@
         private System.Windows.Forms.Button btnNPCs;
         private System.Windows.Forms.Button btnQuests;
         private System.Windows.Forms.Button btnItems;
+        private System.Windows.Forms.Button btnLocations;
     }
 }
 

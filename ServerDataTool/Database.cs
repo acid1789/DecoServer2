@@ -427,6 +427,51 @@ namespace ServerDataTool
                 ExecuteQuery(sql);
             }
         }
+
+        public static Location[] FetchLocations(ushort mapID)
+        {
+            // 0: location_id int(10) unsigned
+            // 1: name    varchar(30)
+            // 2: x   int(10) unsigned
+            // 3: y   int(10) unsigned
+            // 4: radius  int(10) unsigned
+            // 5: map	smallint(5) unsigned
+
+            List<Location> locs = new List<Location>();
+
+            string sql = string.Format("SELECT * FROM locations WHERE map={0};", mapID);
+            List<object[]> rows = ExecuteQuery(sql);
+
+            foreach (object[] row in rows)
+            {
+                locs.Add(new Location((uint)row[0], (string)row[1], (uint)row[2], (uint)row[3], (uint)row[4], (ushort)row[5]));
+            }
+            
+            return locs.ToArray();
+        }
+
+        public static void UpdateLocation(Location loc)
+        {
+            string sql = string.Format("UPDATE locations SET name=\"{0}\",x={1},y={2},radius={3},map={4} WHERE location_id={5};", loc.Name, loc.X, loc.Y, loc.Radius, loc.Map, loc.ID);
+            ExecuteQuery(sql);
+        }
+
+        public static Location CreateLocation(uint x, uint y, ushort map)
+        {
+            Location loc = new Location(0, "Unnamed", x, y, 1, map);
+            string sql = string.Format("INSERT INTO locations SET name=\"{0}\",x={1},y={2},radius={3},map={4}; SELECT LAST_INSERT_ID();", loc.Name, loc.X, loc.Y, loc.Radius, loc.Map, loc.ID);
+            List<object[]> rows = ExecuteQuery(sql);
+
+            ulong id = (ulong)rows[0][0];
+            loc.ID = (uint)id;
+            return loc;
+        }
+
+        public static void DeleteLocation(Location loc)
+        {
+            string sql = string.Format("DELETE FROM locations WHERE location_id={0};", loc.ID);
+            ExecuteQuery(sql);
+        }
     }
 
     public class DBAccountRow
@@ -679,6 +724,27 @@ namespace ServerDataTool
             StaticText = staticText;
             DynamicText = dynamicText;
             ID = id;
+        }
+    }
+
+    public class Location
+    {
+        public uint ID;
+        public string Name;
+        public uint X;
+        public uint Y;
+        public uint Radius;
+        public ushort Map;
+        public bool Dirty;
+
+        public Location(uint id, string name, uint x, uint y, uint radius, ushort map)
+        {
+            ID = id;
+            Name = name;
+            X = x;
+            Y = y;
+            Radius = radius;
+            Map = map;
         }
     }
 }

@@ -72,6 +72,12 @@
     <Compile Include="ItemsDialog.Designer.cs">
       <DependentUpon>ItemsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Locations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Locations.Designer.cs">
+      <DependentUpon>Locations.cs</DependentUpon>
+    </Compile>
     <Compile Include="NPCDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ItemsDialog.resx">
       <DependentUpon>ItemsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Locations.resx">
+      <DependentUpon>Locations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NPCDialog.resx">
       <DependentUpon>NPCDialog.cs</DependentUpon>

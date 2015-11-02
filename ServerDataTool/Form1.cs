@@ -65,5 +65,11 @@ namespace ServerDataTool
             ItemsDialog dlg = new ItemsDialog();
             dlg.ShowDialog();
         }
+
+        private void btnLocations_Click(object sender, EventArgs e)
+        {
+            Locations dlg = new Locations();
+            dlg.ShowDialog();
+        }
     }
 }
