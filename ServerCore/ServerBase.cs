@@ -93,6 +93,8 @@ namespace JuggleServerCore
             client.OnMoveTo += Client_OnMoveTo;
             client.OnUpdatePosition += Client_OnUpdatePosition;
             client.OnNPCDialogNextButton += Client_OnNPCDialogNextButton;
+            client.OnGMCommand += Client_OnGMCommand;
+            client.OnMoveItem += Client_OnMoveItem;
 
             InputThread.AddConnection(client);
         }
@@ -147,7 +149,16 @@ namespace JuggleServerCore
         {
             TaskProcessor.AddTask(new Task(Task.TaskType.NPCDialogNextButton, (Connection)sender, null));
         }
+        
+        private void Client_OnGMCommand(object sender, GMCommandPacket e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.GMCommand_Process, (Connection)sender, e));
+        }
 
+        private void Client_OnMoveItem(object sender, MoveItemRequest e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.MoveItem, (Connection)sender, e));
+        }
         #endregion
 
         public void RemoveCharacter(CharacterInfo ci)

@@ -59,7 +59,7 @@ namespace DecoServer2.CharacterThings
         ushort _leftSP;
         ushort _totalSP;
 
-        List<Item> _clothes;
+        List<Item> _equipped;
         List<Item> _generalItems;
         List<Item> _items;
         List<Item> _questItems;
@@ -227,7 +227,7 @@ namespace DecoServer2.CharacterThings
 
         public void ReadItems(DBQuery query)
         {
-            _clothes = new List<Item>();
+            _equipped = new List<Item>();
             _generalItems = new List<Item>();
             _items = new List<Item>();
             _questItems = new List<Item>();
@@ -354,7 +354,7 @@ namespace DecoServer2.CharacterThings
 
             bw.Write((ushort)0);            // Unknown short
 
-            int itemCounts = (_clothes.Count & 0x1F) | ((_generalItems.Count & 0x3F) << 5) | ((_items.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
+            int itemCounts = (_equipped.Count & 0x1F) | ((_generalItems.Count & 0x3F) << 5) | ((_items.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
             bw.Write(itemCounts);
             bw.Write((byte)_buffs.Count);
 
@@ -363,12 +363,8 @@ namespace DecoServer2.CharacterThings
 
             bw.Write((byte)_boosters.Count);
             bw.Write((byte)_ridingItems.Count);
-
-            bw.Write((byte)0);              // Unknown count            
-            for (int i = 0; i < 7; i++)    // more unknown bytes
-                bw.Write((byte)1);
-
-            foreach (Item item in _clothes)
+            
+            foreach (Item item in _equipped)
                 item.Write(bw);
 
             foreach (Item item in _generalItems)
@@ -382,6 +378,12 @@ namespace DecoServer2.CharacterThings
 
             foreach (ushort skill in _skills)
                 bw.Write(skill);
+
+            // Write the mysterious 6 bytes
+            bw.Write((uint)1);
+            bw.Write((ushort)1);
+
+            Utils.WriteByteString(bw, "unk70Bytes", 70);
 
             foreach (ushort buff in _buffs)
                 bw.Write(buff);
@@ -398,7 +400,7 @@ namespace DecoServer2.CharacterThings
             foreach (Item item in _ridingItems)
                 item.Write(bw);
 
-            Utils.WriteZeros(bw, 14);       // Unknown 14 bytes
+            Utils.WriteZeros(bw, 14);       // Extra padding workaround for client bug
         }
 
         #region Quest Area
@@ -448,10 +450,10 @@ namespace DecoServer2.CharacterThings
         }
         #endregion
 
-        public bool HasItem(uint item)
+        public bool HasItem(uint templateID)
         {
             List<Item> allItems = new List<Item>();
-            allItems.AddRange(_clothes);
+            allItems.AddRange(_equipped);
             allItems.AddRange(_generalItems);
             allItems.AddRange(_items);
             allItems.AddRange(_questItems);
@@ -459,21 +461,36 @@ namespace DecoServer2.CharacterThings
 
             foreach (Item i in allItems)
             {
-                if( i.TemplateID == item )
+                if( i.TemplateID == templateID)
                     return true;
             }
 
             return false;
         }
 
+        public Item FindItem(uint itemID)
+        {
+            foreach (Item i in _generalItems)
+            {
+                if( i.ID == itemID )
+                    return i;
+            }
+
+            return null;
+        }
+
         public void AddItem(Item item)
         {
             int index = -1;
+            
+            index = _generalItems.Count;
+            _generalItems.Add(item);
+            /* Not really sure how these item pages work 
             switch (item.ItemType)
             {
                 case Item.Type.Clothing:
-                    index = _clothes.Count;
-                    _clothes.Add(item);
+                    index = _equipped.Count;
+                    _equipped.Add(item);
                     break;
                 case Item.Type.General:
                     index = _generalItems.Count;
@@ -491,7 +508,7 @@ namespace DecoServer2.CharacterThings
                     index = _ridingItems.Count;
                     _ridingItems.Add(item);
                     break;
-            }
+            }*/
             item.Slot = (byte)index;
         }
 
@@ -574,18 +591,26 @@ namespace DecoServer2.CharacterThings
         {
             get
             {
-                int size = 175;
-                size += 16 * _clothes.Count;
+                int size = 167;
+                size += 16 * _equipped.Count;
                 size += 16 * _generalItems.Count;
                 size += 16 * _items.Count;
                 size += 16 * _questItems.Count;
+
                 size += 2 * _skills.Count;
+
+                size += 6;
+                size += 70;
+
                 size += 2 * _buffs.Count;
                 size += 6 * _boosters.Count;
+
                 size += 24; // frontier data
+
                 size += 16 * _ridingItems.Count;
 
-                size += 14; // end bytes
+                size += 14; // Extra junk data for packet header offset.  Stupid bug in the client code
+                
                 return (ushort)size;
             }
         }
@@ -700,7 +725,8 @@ namespace DecoServer2.CharacterThings
     {
         public enum TheReason
         {
-            Quest
+            Quest,
+            GMCommand
         }
 
         public uint ItemTemplateID;

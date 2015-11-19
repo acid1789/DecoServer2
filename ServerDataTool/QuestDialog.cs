@@ -14,6 +14,7 @@ namespace ServerDataTool
     {
         Dictionary<uint, NPC> _npcs;
         Dictionary<uint, NamedItemTemplate> _items;
+        Dictionary<uint, Location> _locations;
         Quest _selectedQuest;
         bool _selectingQuest;
 
@@ -58,6 +59,13 @@ namespace ServerDataTool
             foreach (Quest q in quests)
             {
                 AddQuest(q);
+            }
+
+            Location[] locations = Database.FetchLocations(0);
+            _locations = new Dictionary<uint, Location>();
+            foreach (Location loc in locations)
+            {
+                _locations[loc.ID] = loc;
             }
 
             SelectQuest(null);
@@ -826,8 +834,13 @@ namespace ServerDataTool
                         str = qr.Context.ToString();
                     break;
                 case QuestReward.RewardType.Teleport:
-                    // TODO: Need to implement teleport target
-                    str = qr.Context.ToString();
+                    if (_locations.ContainsKey(qr.Context))
+                    {
+                        Location loc = _locations[qr.Context];
+                        str = loc.ToString();
+                    }
+                    else
+                        str = qr.Context.ToString();
                     break;
                 case QuestReward.RewardType.Skill:
                     // TODO: Need to implement skills
@@ -852,6 +865,7 @@ namespace ServerDataTool
                 case QuestReward.RewardType.Gold:
                 case QuestReward.RewardType.Exp:
                 case QuestReward.RewardType.Fame:
+                    cbRewardContext.Visible = false;
                     tbRewardContext.Enabled = true;
                     tbRewardContext.Text = qr.Context.ToString();
                     break;
@@ -867,12 +881,19 @@ namespace ServerDataTool
                         cbRewardContext.SelectedItem = null;
                     break;
                 case QuestReward.RewardType.Teleport:
-                    // TODO: Implement teleport
-                    tbRewardContext.Enabled = true;
-                    tbRewardContext.Text = qr.Context.ToString();
+                    cbRewardContext.Enabled = true;
+                    cbRewardContext.Visible = true;
+                    cbRewardContext.Items.Clear();
+                    foreach( Location loc in _locations.Values )
+                        cbRewardContext.Items.Add(loc);
+                    if( _locations.ContainsKey(qr.Context) )
+                        cbRewardContext.SelectedItem = _locations[qr.Context];
+                    else
+                        cbRewardContext.SelectedItem = null;
                     break;
                 case QuestReward.RewardType.Skill:
                     // TODO: Implement skill
+                    cbRewardContext.Visible = false;
                     tbRewardContext.Enabled = true;
                     tbRewardContext.Text = qr.Context.ToString();
                     break;
@@ -966,7 +987,10 @@ namespace ServerDataTool
                 switch (qr.Type)
                 {
                     case QuestReward.RewardType.Teleport:
-                        // TODO: Implement
+                        Location loc = (Location)cbRewardContext.SelectedItem;
+                        qr.Context = loc.ID;
+                        lvi.SubItems[1].Text = loc.ToString();
+                        SetDirty(true);
                         break;
                     case QuestReward.RewardType.Skill:
                         // TODO: Implement
@@ -993,7 +1017,6 @@ namespace ServerDataTool
                     case QuestReward.RewardType.Exp:
                     case QuestReward.RewardType.Fame:
                     case QuestReward.RewardType.Gold:
-                    case QuestReward.RewardType.Teleport:
                     case QuestReward.RewardType.Skill:
                         qr.Context = Convert.ToUInt32(tbRewardContext.Text);
                         lvi.SubItems[1].Text = RewardContextString(qr);

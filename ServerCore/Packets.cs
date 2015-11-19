@@ -86,6 +86,44 @@ namespace JuggleServerCore
         }
     }
 
+    public class MoveItemRequest : EventArgs                   // 0x453
+    {
+        public uint ItemID;
+        public uint OtherID;
+        public byte Slot;
+
+        public static MoveItemRequest Read(PacketHeader header, BinaryReader br)
+        {
+            MoveItemRequest mir = new MoveItemRequest();
+            mir.ItemID = br.ReadUInt32();
+            mir.OtherID = br.ReadUInt32();
+            mir.Slot = br.ReadByte();
+            return mir;
+        }
+    }
+
+    public class GMCommandPacket : EventArgs
+    {
+        public uint Command;
+        public int Param;
+        public int X;
+        public int Y;
+        public int Param2;
+        public string Character;
+
+        public static GMCommandPacket Read(PacketHeader header, BinaryReader br)
+        {
+            GMCommandPacket pkt = new GMCommandPacket();
+            pkt.Command = br.ReadUInt32();
+            pkt.Param = br.ReadInt32();
+            pkt.X = br.ReadInt32();
+            pkt.Y = br.ReadInt32();
+            pkt.Param2 = br.ReadInt32();
+            pkt.Character = Utils.ReadByteString(br, 0x1F);
+            return pkt;
+        }
+    }
+
     public class LoginRequestPacket : EventArgs //  0x7FD3
     {
         public PacketHeader Header;
@@ -370,6 +408,37 @@ namespace JuggleServerCore
         }
     }
 
+    public class MoveItemResponse : SendPacketBase  // 0x0454
+    {
+        uint _id;
+        uint _other;
+        byte _slot;
+        bool _success;
+
+        public MoveItemResponse(uint id, uint other, byte slot, bool success)
+        {
+            _id = id;
+            _other = other;
+            _slot = slot;
+            _success = success;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0454;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 11;
+            header.Write(bw);
+
+            bw.Write(_id);
+            bw.Write(_other);
+            bw.Write(_slot);
+            bw.Write((byte)1);  // Unknown
+            bw.Write((byte)(_success ? 1 : 0));
+        }
+    }
+
     public class GiveItemPacket : SendPacketBase    // 0x0455
     {
         Item _item;
@@ -382,19 +451,13 @@ namespace JuggleServerCore
         public override void Write(uint sequence, BinaryWriter bw)
         {
             PacketHeader header = new PacketHeader();
-            header.Opcode = 0x0455;
+            header.Opcode = 0x0445;
             header.PacketSequenceNumber = sequence;
             header.PacketLength = 17;
             header.Write(bw);
 
             bw.Write((byte)1);          // Error code: 1 = no error
-            bw.Write(_item.ID);
-            bw.Write(_item.Model);
-            bw.Write((byte)1);          // Unknown - maybe inventory type?
-            bw.Write(_item.Slot);       // Inventory slot
-            bw.Write((uint)1);          // Unknown
-            bw.Write(_item.Durability);
-            bw.Write(_item.RemainingTime);
+            _item.Write(bw);
         }
     }
 

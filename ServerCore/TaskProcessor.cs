@@ -29,6 +29,7 @@ namespace JuggleServerCore
             CharacterList_Fetch,
             CharacterList_Process,
             CreateCharacter,
+            CreateCharacter_Finish,
             DeleteCharacter,
             SelectCharacter,
             SelectedCharacter_Fetch,
@@ -47,6 +48,8 @@ namespace JuggleServerCore
             GiveGoldExpFame,
             GiveItem,
             RemoveCharacter,
+            GMCommand_Process,
+            MoveItem,
         }
 
         public TaskType Type;
@@ -123,6 +126,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.CharacterList_Fetch] = CharacterList_Fetch_Handler;
             _taskHandlers[Task.TaskType.CharacterList_Process] = CharacterList_Process_Handler;
             _taskHandlers[Task.TaskType.CreateCharacter] = CreateCharacter_Handler;
+            _taskHandlers[Task.TaskType.CreateCharacter_Finish] = CreateCharacter_Finish_Handler;
             _taskHandlers[Task.TaskType.DeleteCharacter] = DeleteCharacter_Handler;
             _taskHandlers[Task.TaskType.SelectCharacter] = SelectCharacter_Handler;
             _taskHandlers[Task.TaskType.SelectedCharacter_Fetch] = SelectedCharacter_Fetch_Handler;
@@ -141,6 +145,8 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.GiveGoldExpFame] = GiveGoldExpFame_Handler;
             _taskHandlers[Task.TaskType.GiveItem] = GiveItem_Handler;
             _taskHandlers[Task.TaskType.RemoveCharacter] = RemoveCharacter_Handler;
+            _taskHandlers[Task.TaskType.GMCommand_Process] = GMCommand_Process_Handler;
+            _taskHandlers[Task.TaskType.MoveItem] = MoveItem_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -361,55 +367,25 @@ namespace JuggleServerCore
         {
             if (t.Query.Rows.Count > 0)
             {
-                // read and consolidate rewards & prewards
-                Dictionary<ulong, QuestReward.Builder> rewards = new Dictionary<ulong, QuestReward.Builder>();
-                Dictionary<ulong, QuestReward.Builder> prewards = new Dictionary<ulong, QuestReward.Builder>();
+                Dictionary<ulong, QuestStep.Builder> steps = (Dictionary<ulong, QuestStep.Builder>)t.Args;
+
+                // read and consolidate rewards
                 foreach (object[] row in t.Query.Rows)
                 {
                     // 0: quest_id    int(10) unsigned
                     // 1: step    tinyint(3) unsigned
-                    // 2: gold    int(10) unsigned
-                    // 3: exp int(10) unsigned
-                    // 4: item    int(10) unsigned
-                    // 5: preward tinyint(3) unsigned
-                    // 6: fame    int(10) unsigned
+                    // 2: type    tinyint(10) unsigned
+                    // 3: context int(10) unsigned
 
                     uint quest = (uint)row[0];
                     byte step = (byte)row[1];
-                    uint gold = (uint)row[2];
-                    uint exp = (uint)row[3];
-                    uint item = (uint)row[4];
-                    byte preward = (byte)row[5];
-                    uint fame = (uint)row[6];
+                    byte type = (byte)row[2];
+                    uint context = (uint)row[3];
 
                     ulong key = ((ulong)step << 32) | quest;
-                    Dictionary<ulong, QuestReward.Builder> rewardDict = (preward != 0) ? prewards : rewards;
 
-                    if (!rewardDict.ContainsKey(key))
-                        rewardDict[key] = new QuestReward.Builder(0, 0, 0);
-
-                    if (item != 0)
-                        rewardDict[key].AddItem(item);
-                    if (gold != 0)
-                        rewardDict[key].AddGold(gold);
-                    if (exp != 0)
-                        rewardDict[key].AddExp(exp);
-                    if( fame != 0 )
-                        rewardDict[key].AddFame(fame);
-                }
-
-                // Put the rewards into the appropriate steps
-                Dictionary<ulong, QuestStep.Builder> steps = (Dictionary<ulong, QuestStep.Builder>)t.Args;
-                foreach (KeyValuePair<ulong, QuestReward.Builder> kvp in rewards)
-                {
-                    steps[kvp.Key].AddReward(kvp.Value.Build());
-                }
-
-                // Put the prewards into the appropriate steps
-                foreach (KeyValuePair<ulong, QuestReward.Builder> kvp in prewards)
-                {
-                    steps[kvp.Key].AddPreward(kvp.Value.Build());
-                }
+                    steps[key].AddReward(new QuestReward((QuestReward.RewardType)type, context));
+                }                
 
                 // now build all the quest steps
                 Dictionary<uint, Quest.Builder> questBuilders = new Dictionary<uint, Quest.Builder>();
@@ -562,10 +538,27 @@ namespace JuggleServerCore
         {
             CreateCharacterPacket ccp = (CreateCharacterPacket)t.Args;
             bool millena = Utils.NationFromModelInfo(ccp.ModelInfo);            
-            string sql = string.Format("INSERT INTO characters SET account_id={0},name=\"{1}\",model_info={2},job={3};", t.Client.AccountID, ccp.Name, ccp.ModelInfo, millena ? 0 : 1);
-            AddDBQuery(sql, null, false);
-
+            string sql = string.Format("INSERT INTO characters SET account_id={0},name=\"{1}\",model_info={2},job={3}; SELECT LAST_INSERT_ID();", t.Client.AccountID, ccp.Name, ccp.ModelInfo, millena ? 0 : 1);
+            t.Type = Task.TaskType.CreateCharacter_Finish;
+            AddDBQuery(sql, t);
+            
             t.Client.SendEmptyPacket(0x3);
+        }
+
+        void CreateCharacter_Finish_Handler(Task t)
+        {
+            ulong result = t.Query.Rows.Count > 0 ? (ulong)t.Query.Rows[0][0] : 0;
+            if (result > 0)
+            {
+                int id = (int)result;
+
+                // Add Skills
+                CreateCharacterPacket ccp = (CreateCharacterPacket)t.Args;
+                bool millena = Utils.NationFromModelInfo(ccp.ModelInfo);
+                string sql = string.Format("INSERT INTO char_skills SET character_id={0},skill_id={1};", id, millena ? 4996 : 4997);
+                sql += string.Format("INSERT INTO char_skills SET character_id={0},skill_id={1};", id, millena ? 4998 : 4999);
+                AddDBQuery(sql, null, false);
+            }
         }
 
         void DeleteCharacter_Handler(Task t)
@@ -780,7 +773,7 @@ namespace JuggleServerCore
             ci.AddItem(item);
 
             // Log it
-            string log = string.Format("Giving item template({1}) to Character ID: {3}. Reason: {4}, Context: {5}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
+            string log = string.Format("Giving item template({0}) to Character ID: {1}. Reason: {2}, Context: {3}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
             LogInterface.Log(log, LogInterface.LogMessageType.Game);
 
             t.Client.SendPacket(new GiveItemPacket(item));
@@ -790,6 +783,60 @@ namespace JuggleServerCore
         {
             CharacterInfo ci = (CharacterInfo)t.Args;
             _server.RemoveCharacterFromMap(ci);
+        }
+
+        void GMCommand_Process_Handler(Task t)
+        {
+            GMCommandPacket cmd = (GMCommandPacket)t.Args;
+
+            string cmdString = string.Format("GM Command - {0} ({1}, {2}, {3}, {4}); Character: {5}", cmd.Command, cmd.Param, cmd.X, cmd.Y, cmd.Param2, cmd.Character);
+            LogInterface.Log(cmdString);
+
+            switch (cmd.Command)
+            {
+                case 0xfa3:
+                    AddTask(new Task(Task.TaskType.GiveItem, t.Client,new GiveItemArgs((uint)cmd.Param, GiveItemArgs.TheReason.GMCommand, 0)));
+                    break;
+                default:
+                    //LogInterface.Log("Unhandled GM Command: 0x" + cmd.Command.ToString("x"));
+                    break;
+            }
+        }
+
+        void MoveItem_Handler(Task t)
+        {
+            MoveItemRequest mir = (MoveItemRequest)t.Args;
+            bool success = true;
+            if (mir.OtherID != 0)
+            {
+                // Swap positions with the other item
+                Item item = t.Client.Character.FindItem(mir.ItemID);
+                Item other = t.Client.Character.FindItem(mir.OtherID);
+                if (item == null || other == null)
+                {
+                    success = false;
+                }
+                else
+                {
+                    byte tempSlot = other.Slot;
+                    other.Slot = item.Slot;
+                    item.Slot = tempSlot;
+                }
+            }
+            else
+            {
+                // Just move this object to the new slot
+                Item item = t.Client.Character.FindItem(mir.ItemID);
+                if (item == null)
+                {
+                    success = false;
+                }
+                else
+                {
+                    item.Slot = mir.Slot;
+                }
+            }
+            t.Client.SendPacket(new MoveItemResponse(mir.ItemID, mir.OtherID, mir.Slot, success));
         }
         #endregion
     }

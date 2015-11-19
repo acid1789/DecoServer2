@@ -439,7 +439,9 @@ namespace ServerDataTool
 
             List<Location> locs = new List<Location>();
 
-            string sql = string.Format("SELECT * FROM locations WHERE map={0};", mapID);
+            string sql = string.Format("SELECT * FROM locations;");
+            if( mapID != 0 )
+                sql = string.Format("SELECT * FROM locations WHERE map={0};", mapID);
             List<object[]> rows = ExecuteQuery(sql);
 
             foreach (object[] row in rows)
@@ -745,6 +747,11 @@ namespace ServerDataTool
             Y = y;
             Radius = radius;
             Map = map;
+        }
+
+        public override string ToString()
+        {
+            return ID.ToString() + ": " + Name + "(" + Map.ToString() + ")";
         }
     }
 }

@@ -31,6 +31,8 @@ namespace JuggleServerCore
         public event EventHandler<CharacterPositionClass> OnMoveTo;
         public event EventHandler<CharacterPositionClass> OnUpdatePosition;
         public event EventHandler OnNPCDialogNextButton;
+        public event EventHandler<GMCommandPacket> OnGMCommand;
+        public event EventHandler<MoveItemRequest> OnMoveItem;
         #endregion
 
         #region Quest Events
@@ -75,8 +77,11 @@ namespace JuggleServerCore
             _packetHandlers[0x0124] = UpdatePosition_Handler;
             _packetHandlers[0x0133] = PlayerEnterMap_Handler;
             _packetHandlers[0x0257] = NextNPCDialogButton_Handler;
+            _packetHandlers[0x0453] = MoveItem_Handler;
+            _packetHandlers[0x6201] = GMCommand_Handler;
             _packetHandlers[0x7FD3] = LoginRequest_Handler;
             _packetHandlers[0x7FD4] = CharacterListRequest_Handler;
+            
         }
 
         public void Disconnect()
@@ -264,6 +269,11 @@ namespace JuggleServerCore
             OnUpdatePosition(this, CharacterPositionClass.Read(header, br));
         }
 
+        void GMCommand_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnGMCommand(this, GMCommandPacket.Read(header, br));
+        }
+
         void LoginRequest_Handler(PacketHeader header, BinaryReader br)
         {
             LoginRequestPacket lrp = LoginRequestPacket.Read(header, br);
@@ -278,6 +288,11 @@ namespace JuggleServerCore
         void NextNPCDialogButton_Handler(PacketHeader header, BinaryReader br)
         {
             OnNPCDialogNextButton(this, null);
+        }
+
+        void MoveItem_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnMoveItem(this, MoveItemRequest.Read(header, br));
         }
         #endregion
 

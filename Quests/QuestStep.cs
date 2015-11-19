@@ -15,10 +15,10 @@ namespace DecoServer2.Quests
             CollectItem,
             GoToLocation,
             TalkToNPC,
-            ReachLevel
+            ReachLevel,
+            WearItem,
         }
-
-        QuestReward[] _prewards;
+        
         QuestReward[] _rewards;
         QuestLine[] _lines;
 
@@ -77,6 +77,7 @@ namespace DecoServer2.Quests
                 case CompletionType.CollectItem:
                 case CompletionType.GoToLocation:
                 case CompletionType.ReachLevel:
+                case CompletionType.WearItem:
                     throw new NotImplementedException();
                 case CompletionType.TalkToNPC:
                     client.OnQuestDialogFinished += Client_OnQuestDialogFinished;
@@ -116,7 +117,6 @@ namespace DecoServer2.Quests
 
         public class Builder
         {
-            List<QuestReward> _prewards;
             List<QuestReward> _rewards;
             Dictionary<int, QuestLine> _lines;
             byte _lastLine;
@@ -127,7 +127,6 @@ namespace DecoServer2.Quests
                 _step = new QuestStep(quest, step, type, completionCount, completionID, owner);
                 _lastLine = 0;
                 _lines = new Dictionary<int, QuestLine>();
-                _prewards = new List<QuestReward>();
                 _rewards = new List<QuestReward>();
             }
 
@@ -143,21 +142,18 @@ namespace DecoServer2.Quests
                 _rewards.Add(reward);
             }
 
-            public void AddPreward(QuestReward reward)
-            {
-                _prewards.Add(reward);
-            }
-
             public QuestStep Build()
             {
-                _step._lines = new QuestLine[_lastLine + 1];
-                for (int i = 0; i < _step._lines.Length; i++)
+                if (_lines.Count > 0)
                 {
-                    _step._lines[i] = _lines[i];
+                    _step._lines = new QuestLine[_lastLine + 1];
+                    for (int i = 0; i < _step._lines.Length; i++)
+                    {
+                        _step._lines[i] = _lines[i];
+                    }
                 }
                 
                 _step._rewards = _rewards.ToArray();
-                _step._prewards = _prewards.ToArray();
                 return _step;
             }
 

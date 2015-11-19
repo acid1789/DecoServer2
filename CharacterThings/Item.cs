@@ -25,21 +25,21 @@ namespace DecoServer2.CharacterThings
         ushort _remainingTime;
         Type _type;
         uint _template;
-
+        
         public void Write(BinaryWriter bw)
         {
             bw.Write(_id);
             bw.Write(_model);
             bw.Write((byte)1);      // Unknown byte
             bw.Write(_slot);
-            bw.Write((uint)2);      // Unknown dword
+            bw.Write((uint)1);      // Unknown dword
             bw.Write(_durability);
             bw.Write(_remainingTime);
         }
 
         public string WriteDBString(uint itemTemplate, int characterID)
         {
-            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type{4};", itemTemplate, _durability, _remainingTime, characterID, _type);
+            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4};", itemTemplate, _durability, _remainingTime, characterID, (byte)_type);
             return sql;
         }
 
