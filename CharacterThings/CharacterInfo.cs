@@ -481,10 +481,6 @@ namespace DecoServer2.CharacterThings
 
         public void AddItem(Item item)
         {
-            int index = -1;
-            
-            index = _generalItems.Count;
-            _generalItems.Add(item);
             /* Not really sure how these item pages work 
             switch (item.ItemType)
             {
@@ -509,7 +505,35 @@ namespace DecoServer2.CharacterThings
                     _ridingItems.Add(item);
                     break;
             }*/
-            item.Slot = (byte)index;
+
+            if (item.Slot == 0xFF)
+            {
+                // Find a free slot for this item
+                byte slot = 0;
+                while (true)
+                {
+                    bool valid = true;
+                    foreach (Item i in _generalItems)
+                    {
+                        if (i.Slot == slot)
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+
+                    if (valid)
+                    {
+                        item.Slot = slot;
+                        break;
+                    }
+                    slot++;
+                    if( slot > 18 )
+                        break;
+                }
+            }
+            _generalItems.Add(item);
+            
         }
 
         public void AddGoldExpFame(uint gold, uint exp, uint fame)

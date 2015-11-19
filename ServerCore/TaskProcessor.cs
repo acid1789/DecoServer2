@@ -765,12 +765,13 @@ namespace JuggleServerCore
             // Instantiate the item
             Item item = _server.InstantiateItem(args.ItemTemplateID);
 
+            // Store it in the character
+            ci.AddItem(item);
+
             // Save it in the database
             string sql = item.WriteDBString(args.ItemTemplateID, ci.ID);
             AddDBQuery(sql, null, false);
 
-            // Store it in the character
-            ci.AddItem(item);
 
             // Log it
             string log = string.Format("Giving item template({0}) to Character ID: {1}. Reason: {2}, Context: {3}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
@@ -821,6 +822,9 @@ namespace JuggleServerCore
                     byte tempSlot = other.Slot;
                     other.Slot = item.Slot;
                     item.Slot = tempSlot;
+
+                    AddDBQuery(item.UpdateDBString(t.Client.Character.ID), null, false);
+                    AddDBQuery(other.UpdateDBString(t.Client.Character.ID), null, false);
                 }
             }
             else
@@ -834,9 +838,12 @@ namespace JuggleServerCore
                 else
                 {
                     item.Slot = mir.Slot;
+
+                    AddDBQuery(item.UpdateDBString(t.Client.Character.ID), null, false);
                 }
             }
             t.Client.SendPacket(new MoveItemResponse(mir.ItemID, mir.OtherID, mir.Slot, success));
+            
         }
         #endregion
     }

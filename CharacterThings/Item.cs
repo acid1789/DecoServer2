@@ -39,7 +39,13 @@ namespace DecoServer2.CharacterThings
 
         public string WriteDBString(uint itemTemplate, int characterID)
         {
-            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4};", itemTemplate, _durability, _remainingTime, characterID, (byte)_type);
+            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4},slot={5};", itemTemplate, _durability, _remainingTime, characterID, (byte)_type, _slot);
+            return sql;
+        }
+
+        public string UpdateDBString(int characterID)
+        {
+            string sql = string.Format("UPDATE item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4},slot={5} WHERE instance_id={6};", _template, _durability, _remainingTime, characterID, (byte)_type, _slot, _id);
             return sql;
         }
 
@@ -51,6 +57,8 @@ namespace DecoServer2.CharacterThings
             // 3: remaining_time    smallint(5) unsigned
             // 4: character_id      int(10) unsigned
             // 5: inventory_type    int(10) unsigned
+            // 6: slot              tinyint
+            
 
             Item i = new Item();
             i._id = (uint)row[0];
@@ -58,6 +66,7 @@ namespace DecoServer2.CharacterThings
             i._durability = (ushort)row[2];
             i._remainingTime = (ushort)row[3];
             i._type = (Type)((uint)row[5]);
+            i._slot = (byte)(row[6]);
 
             ItemTemplate t = Program.Server.GetItemTemplate(i._template);
             i._model = t.Model;

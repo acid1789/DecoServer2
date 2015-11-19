@@ -85,6 +85,7 @@ CREATE TABLE `char_skills` (
 
 LOCK TABLES `char_skills` WRITE;
 /*!40000 ALTER TABLE `char_skills` DISABLE KEYS */;
+INSERT INTO `char_skills` VALUES (5,4996),(5,4998);
 /*!40000 ALTER TABLE `char_skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,8 +271,9 @@ CREATE TABLE `item_instances` (
   `remaining_time` smallint(5) unsigned NOT NULL,
   `character_id` int(10) unsigned NOT NULL,
   `inventory_type` int(10) unsigned NOT NULL,
+  `slot` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`instance_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,6 +282,7 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
+INSERT INTO `item_instances` VALUES (1,1,50,1,5,1,15),(2,2,50,1,5,1,13);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,7 +302,7 @@ CREATE TABLE `item_templates` (
   `duration_min` smallint(5) unsigned DEFAULT '0',
   `duration_max` smallint(5) unsigned DEFAULT '0',
   PRIMARY KEY (`item_template_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,8 +311,36 @@ CREATE TABLE `item_templates` (
 
 LOCK TABLES `item_templates` WRITE;
 /*!40000 ALTER TABLE `item_templates` DISABLE KEYS */;
-INSERT INTO `item_templates` VALUES (1,1,1,50,50,0,0);
+INSERT INTO `item_templates` VALUES (1,1,1,50,50,0,0),(2,4,1,50,50,1,1),(3,5,2,123,124,5000,6000),(4,6,3,123,124,5000,6000),(5,7,4,123,124,5000,6000),(6,8,0,123,124,5000,6000);
 /*!40000 ALTER TABLE `item_templates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `locations` (
+  `location_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `x` int(10) unsigned NOT NULL,
+  `y` int(10) unsigned NOT NULL,
+  `radius` int(10) unsigned NOT NULL,
+  `map` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`location_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `locations`
+--
+
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6);
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -347,7 +378,7 @@ CREATE TABLE `quest_info` (
   `giver_id` int(10) unsigned DEFAULT '5000',
   `giver_map_id` smallint(5) unsigned DEFAULT '2',
   PRIMARY KEY (`quest_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +407,7 @@ CREATE TABLE `quest_lines` (
   `static_text` smallint(5) unsigned NOT NULL DEFAULT '0',
   `text` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`quest_line_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +416,7 @@ CREATE TABLE `quest_lines` (
 
 LOCK TABLES `quest_lines` WRITE;
 /*!40000 ALTER TABLE `quest_lines` DISABLE KEYS */;
-INSERT INTO `quest_lines` VALUES (1,1,0,0,2193,1184,NULL),(2,1,0,1,2193,1185,NULL),(3,1,0,2,2193,1186,NULL),(4,1,0,3,2193,1187,NULL),(5,1,0,4,2193,1188,NULL),(6,1,0,5,2193,1189,NULL),(7,1,0,6,2193,1190,NULL),(8,1,0,7,2193,1191,NULL),(9,1,0,8,2193,1192,NULL);
+INSERT INTO `quest_lines` VALUES (1,1,0,0,454,1184,''),(2,1,0,1,2205,1185,''),(3,1,0,2,2201,1186,''),(4,1,0,3,2193,1187,''),(5,1,0,4,2193,1188,''),(6,1,0,5,2193,1189,''),(7,1,0,6,2193,1190,''),(8,1,0,7,2193,1191,''),(9,1,0,8,2193,1192,''),(10,1,1,0,440,1310,''),(11,1,1,1,440,1311,''),(12,1,1,2,440,1312,''),(13,1,1,3,440,1313,''),(14,1,1,4,440,1314,''),(15,1,1,5,440,1315,''),(16,1,1,6,440,1316,'');
 /*!40000 ALTER TABLE `quest_lines` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,7 +440,7 @@ CREATE TABLE `quest_names` (
 
 LOCK TABLES `quest_names` WRITE;
 /*!40000 ALTER TABLE `quest_names` DISABLE KEYS */;
-INSERT INTO `quest_names` VALUES (1,'First Illena Quest');
+INSERT INTO `quest_names` VALUES (1,'Millena Starter Quest');
 /*!40000 ALTER TABLE `quest_names` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,11 +479,8 @@ DROP TABLE IF EXISTS `quest_rewards`;
 CREATE TABLE `quest_rewards` (
   `quest_id` int(10) unsigned NOT NULL,
   `step` tinyint(3) unsigned NOT NULL,
-  `gold` int(10) unsigned DEFAULT '0',
-  `exp` int(10) unsigned DEFAULT '0',
-  `item` int(10) unsigned DEFAULT '0',
-  `preward` tinyint(3) unsigned DEFAULT '0',
-  `fame` int(10) unsigned DEFAULT '0',
+  `type` tinyint(10) unsigned NOT NULL,
+  `context` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`quest_id`,`step`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -463,7 +491,7 @@ CREATE TABLE `quest_rewards` (
 
 LOCK TABLES `quest_rewards` WRITE;
 /*!40000 ALTER TABLE `quest_rewards` DISABLE KEYS */;
-INSERT INTO `quest_rewards` VALUES (1,0,0,0,4,0,0);
+INSERT INTO `quest_rewards` VALUES (1,0,3,2),(1,1,3,1),(1,3,4,3);
 /*!40000 ALTER TABLE `quest_rewards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +511,7 @@ CREATE TABLE `quest_steps` (
   `owner_id` int(10) unsigned DEFAULT '0',
   `quest_step_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`quest_step_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,7 +520,7 @@ CREATE TABLE `quest_steps` (
 
 LOCK TABLES `quest_steps` WRITE;
 /*!40000 ALTER TABLE `quest_steps` DISABLE KEYS */;
-INSERT INTO `quest_steps` VALUES (1,0,3,0,1,1,1);
+INSERT INTO `quest_steps` VALUES (1,0,3,0,1,1,1),(1,1,3,0,2,2,2),(1,2,5,0,1,2,3),(1,3,3,0,2,2,4);
 /*!40000 ALTER TABLE `quest_steps` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,4 +563,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-26 23:59:54
+-- Dump completed on 2015-11-19  1:37:36
