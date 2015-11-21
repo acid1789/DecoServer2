@@ -59,8 +59,8 @@ namespace DecoServer2.CharacterThings
         ushort _leftSP;
         ushort _totalSP;
 
-        List<Item> _equipped;
-        List<Item> _generalItems;
+        Dictionary<byte, Item> _equipped;
+        Dictionary<uint, Item> _generalItems;
         List<Item> _items;
         List<Item> _questItems;
         List<ushort> _skills;
@@ -227,8 +227,8 @@ namespace DecoServer2.CharacterThings
 
         public void ReadItems(DBQuery query)
         {
-            _equipped = new List<Item>();
-            _generalItems = new List<Item>();
+            _equipped = new Dictionary<byte, Item>();
+            _generalItems = new Dictionary<uint, Item>();
             _items = new List<Item>();
             _questItems = new List<Item>();
             _ridingItems = new List<Item>();
@@ -364,10 +364,10 @@ namespace DecoServer2.CharacterThings
             bw.Write((byte)_boosters.Count);
             bw.Write((byte)_ridingItems.Count);
             
-            foreach (Item item in _equipped)
+            foreach (Item item in _equipped.Values)
                 item.Write(bw);
 
-            foreach (Item item in _generalItems)
+            foreach (Item item in _generalItems.Values)
                 item.Write(bw);
 
             foreach (Item item in _items)
@@ -453,8 +453,8 @@ namespace DecoServer2.CharacterThings
         public bool HasItem(uint templateID)
         {
             List<Item> allItems = new List<Item>();
-            allItems.AddRange(_equipped);
-            allItems.AddRange(_generalItems);
+            allItems.AddRange(_equipped.Values);
+            allItems.AddRange(_generalItems.Values);
             allItems.AddRange(_items);
             allItems.AddRange(_questItems);
             allItems.AddRange(_ridingItems);
@@ -470,50 +470,37 @@ namespace DecoServer2.CharacterThings
 
         public Item FindItem(uint itemID)
         {
-            foreach (Item i in _generalItems)
-            {
-                if( i.ID == itemID )
-                    return i;
-            }
-
+            if( _generalItems.ContainsKey(itemID) )
+                return _generalItems[itemID];
             return null;
         }
 
         public void AddItem(Item item)
         {
-            /* Not really sure how these item pages work 
             switch (item.ItemType)
             {
-                case Item.Type.Clothing:
-                    index = _equipped.Count;
-                    _equipped.Add(item);
+                case Item.Type.Equipped:
+                    _equipped[item.Slot] = item;
                     break;
                 case Item.Type.General:
-                    index = _generalItems.Count;
-                    _generalItems.Add(item);
+                    _generalItems[item.ID] = item;
                     break;
                 case Item.Type.Item:
-                    index = _items.Count;
-                    _items.Add(item);
                     break;
-                case Item.Type.Quest:
-                    index = _questItems.Count;
-                    _questItems.Add(item);
+                case Item.Type.Quest:                    
                     break;
                 case Item.Type.Riding:
-                    index = _ridingItems.Count;
-                    _ridingItems.Add(item);
                     break;
-            }*/
+            }
 
-            if (item.Slot == 0xFF)
+            if (item.Slot == 0xFF && item.ItemType == Item.Type.General)
             {
                 // Find a free slot for this item
                 byte slot = 0;
                 while (true)
                 {
                     bool valid = true;
-                    foreach (Item i in _generalItems)
+                    foreach (Item i in _generalItems.Values)
                     {
                         if (i.Slot == slot)
                         {
@@ -532,8 +519,36 @@ namespace DecoServer2.CharacterThings
                         break;
                 }
             }
-            _generalItems.Add(item);
-            
+        }
+
+        public Item EquippedItem(byte slot)
+        {
+            if( _equipped.ContainsKey(slot) )
+                return _equipped[slot];
+            return null;
+        }
+
+        public void UnEquipItem(byte slot)
+        {
+            if (_equipped.ContainsKey(slot))
+            {
+                Item equipped = _equipped[slot];
+                _equipped.Remove(slot);
+                equipped.Slot = 0xFF;
+                equipped.ItemType = Item.Type.General;
+                AddItem(equipped);
+            }
+        }
+
+        public void EquipItem(Item item, byte slot)
+        {
+            if( _equipped.ContainsKey(slot) )
+                UnEquipItem(slot);
+
+            _equipped[slot] = item;
+            item.Slot = slot;
+            item.ItemType = Item.Type.Equipped;
+            _generalItems.Remove(item.ID);
         }
 
         public void AddGoldExpFame(uint gold, uint exp, uint fame)
@@ -699,6 +714,56 @@ namespace DecoServer2.CharacterThings
         public uint Gold
         {
             get { return _gold; }
+        }
+
+        public ushort PhysicalDef
+        {
+            get { return _physicalDef; }
+        }
+
+        public ushort MagicalDef
+        {
+            get { return _magicalDef; }
+        }
+
+        public ushort AbilityPMin
+        {
+            get { return _abilityPMin; }        
+        }
+
+        public ushort AbilityPMax
+        {
+            get { return _abilityPMax; }
+        }
+
+        public ushort Vitality
+        {
+            get { return _vitality; }
+        }
+
+        public ushort Sympathy
+        {
+            get { return _sympathy; }
+        }
+
+        public ushort Intelligence
+        {
+            get { return _intelligence; }
+        }
+
+        public ushort Dexterity
+        {
+            get { return _dexterity; }
+        }
+
+        public uint MaxHP
+        {
+            get { return _maxHP; }
+        }
+
+        public uint MaxMP
+        {
+            get { return _maxHP; }
         }
         #endregion
 

@@ -95,6 +95,7 @@ namespace JuggleServerCore
             client.OnNPCDialogNextButton += Client_OnNPCDialogNextButton;
             client.OnGMCommand += Client_OnGMCommand;
             client.OnMoveItem += Client_OnMoveItem;
+            client.OnEquipItem += Client_OnEquipItem;
 
             InputThread.AddConnection(client);
         }
@@ -159,6 +160,11 @@ namespace JuggleServerCore
         {
             TaskProcessor.AddTask(new Task(Task.TaskType.MoveItem, (Connection)sender, e));
         }
+
+        private void Client_OnEquipItem(object sender, EquipItemRequest e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.EquipItem, (Connection)sender, e));
+        }
         #endregion
 
         public void RemoveCharacter(CharacterInfo ci)
@@ -212,6 +218,11 @@ namespace JuggleServerCore
         public void AddPlayMap(ushort mapID)
         {
             _maps[mapID] = new PlayMap(mapID);
+        }
+
+        public PlayMap GetPlayMap(ushort mapID)
+        {
+            return _maps[mapID];
         }
 
         public void AddNPC(NPC npc)

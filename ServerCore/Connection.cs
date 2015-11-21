@@ -33,6 +33,7 @@ namespace JuggleServerCore
         public event EventHandler OnNPCDialogNextButton;
         public event EventHandler<GMCommandPacket> OnGMCommand;
         public event EventHandler<MoveItemRequest> OnMoveItem;
+        public event EventHandler<EquipItemRequest> OnEquipItem;
         #endregion
 
         #region Quest Events
@@ -77,6 +78,7 @@ namespace JuggleServerCore
             _packetHandlers[0x0124] = UpdatePosition_Handler;
             _packetHandlers[0x0133] = PlayerEnterMap_Handler;
             _packetHandlers[0x0257] = NextNPCDialogButton_Handler;
+            _packetHandlers[0x0411] = EquipItem_Handler;
             _packetHandlers[0x0453] = MoveItem_Handler;
             _packetHandlers[0x6201] = GMCommand_Handler;
             _packetHandlers[0x7FD3] = LoginRequest_Handler;
@@ -288,6 +290,11 @@ namespace JuggleServerCore
         void NextNPCDialogButton_Handler(PacketHeader header, BinaryReader br)
         {
             OnNPCDialogNextButton(this, null);
+        }
+
+        void EquipItem_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnEquipItem(this, EquipItemRequest.Read(header, br));
         }
 
         void MoveItem_Handler(PacketHeader header, BinaryReader br)

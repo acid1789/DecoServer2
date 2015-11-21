@@ -86,6 +86,20 @@ namespace JuggleServerCore
         }
     }
 
+    public class EquipItemRequest : EventArgs                   // 0x411
+    {
+        public uint ItemID;
+        public byte Slot;
+
+        public static EquipItemRequest Read(PacketHeader header, BinaryReader br)
+        {
+            EquipItemRequest eir = new EquipItemRequest();
+            eir.ItemID = br.ReadUInt32();
+            eir.Slot = br.ReadByte();
+            return eir;
+        }
+    }
+
     public class MoveItemRequest : EventArgs                   // 0x453
     {
         public uint ItemID;
@@ -405,6 +419,83 @@ namespace JuggleServerCore
             bw.Write((ushort)(_showNext ? 1 : 0));    // Should the dialog have the next button?
             bw.Write(_staticText);
             Utils.WriteByteString(bw, _text, 24);
+        }
+    }
+
+    public class EquipItemResponse : SendPacketBase     // 0x0412 / 0x0413
+    {
+        CharacterInfo _character;
+        Item _newItem;
+        Item _oldItem;
+        bool _success;
+
+        public EquipItemResponse(CharacterInfo ci, Item newItem, Item oldItem, bool success)
+        {
+            _character = ci;
+            _newItem = newItem;
+            _oldItem = oldItem;
+            _success = success;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = (ushort)(_oldItem == null ? 0x0412 : 0x0413);
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = (ushort)(_oldItem == null ? 46 : 51);
+            header.Write(bw);
+
+            if( _oldItem != null )
+                bw.Write(_oldItem.ID);
+            bw.Write(_newItem.ID);
+            if( _oldItem != null )
+                bw.Write(_oldItem.Slot);
+            bw.Write(_newItem.Slot);
+            bw.Write((byte)(_success ? 1 : 0));
+            bw.Write((uint)0);
+            bw.Write((ushort)0);
+            bw.Write(_character.PhysicalDef);
+            bw.Write(_character.MagicalDef);
+            bw.Write((byte)0);
+            bw.Write(_character.AbilityPMin);
+            bw.Write(_character.AbilityPMax);
+            bw.Write((byte)0);
+            bw.Write((byte)0);
+            bw.Write(_character.Vitality);
+            bw.Write(_character.Sympathy);
+            bw.Write(_character.Intelligence);
+            bw.Write((ushort)0);
+            bw.Write(_character.Dexterity);
+            bw.Write(_character.MaxHP);
+            bw.Write((uint)0);
+            bw.Write(_character.MaxMP);
+            bw.Write((byte)0);            
+        }
+    }
+
+    public class SeeEquipmentChangePacket : SendPacketBase          // 0x0414
+    {
+        int _characterID;
+        Item _item;
+
+        public SeeEquipmentChangePacket(int charID, Item item)
+        {
+            _characterID = charID;
+            _item = item;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0414;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 9;
+            header.Write(bw);
+
+            bw.Write(_characterID);
+            bw.Write(_item.Model);
+            bw.Write((ushort)0);
+            bw.Write(_item.Slot);
         }
     }
 

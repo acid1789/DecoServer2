@@ -50,6 +50,7 @@ namespace JuggleServerCore
             RemoveCharacter,
             GMCommand_Process,
             MoveItem,
+            EquipItem,
         }
 
         public TaskType Type;
@@ -147,6 +148,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.RemoveCharacter] = RemoveCharacter_Handler;
             _taskHandlers[Task.TaskType.GMCommand_Process] = GMCommand_Process_Handler;
             _taskHandlers[Task.TaskType.MoveItem] = MoveItem_Handler;
+            _taskHandlers[Task.TaskType.EquipItem] = EquipItem_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -842,8 +844,45 @@ namespace JuggleServerCore
                     AddDBQuery(item.UpdateDBString(t.Client.Character.ID), null, false);
                 }
             }
-            t.Client.SendPacket(new MoveItemResponse(mir.ItemID, mir.OtherID, mir.Slot, success));
-            
+            t.Client.SendPacket(new MoveItemResponse(mir.ItemID, mir.OtherID, mir.Slot, success));            
+        }
+
+        void EquipItem_Handler(Task t)
+        {
+            EquipItemRequest eir = (EquipItemRequest)t.Args;
+            Item item = t.Client.Character.FindItem(eir.ItemID);
+            Item equipped = t.Client.Character.EquippedItem(eir.Slot);
+            bool visible = false;
+            if (equipped != null)
+            {
+                t.Client.Character.UnEquipItem(eir.Slot);
+                AddDBQuery(equipped.UpdateDBString(t.Client.Character.ID), null, false);
+                visible = true;
+            }
+
+            if (item != null)
+            {
+                t.Client.Character.EquipItem(item, eir.Slot);
+                AddDBQuery(item.UpdateDBString(t.Client.Character.ID), null, false);
+                visible = true;
+            }
+
+            t.Client.SendPacket(new EquipItemResponse(t.Client.Character, item, equipped, visible));
+
+            if (visible)
+            {
+                // Show all nearby clients the change
+                SeeEquipmentChangePacket pkt = new SeeEquipmentChangePacket(t.Client.Character.ID, item);
+                PlayMap map = _server.GetPlayMap(t.Client.Character.MapID);
+                Connection[] players = map.Players;
+                foreach (Connection c in players)
+                {
+                    if (c != t.Client)
+                    {
+                        c.SendPacket(pkt);
+                    }
+                }
+            }
         }
         #endregion
     }

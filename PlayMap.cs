@@ -123,5 +123,13 @@ namespace DecoServer2
         {
             _npcs[client.CurrentQuestNPC].NextDialog(client);
         }
+
+
+        #region Accessors
+        public Connection[] Players
+        {
+            get { return _players.Values.ToArray(); }
+        }
+        #endregion
     }
 }

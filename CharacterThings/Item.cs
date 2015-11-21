@@ -11,7 +11,7 @@ namespace DecoServer2.CharacterThings
     {
         public enum Type
         {
-            Clothing,
+            Equipped,
             General,
             Item,
             Quest,
@@ -92,6 +92,7 @@ namespace DecoServer2.CharacterThings
         public Type ItemType
         {
             get { return _type; }
+            set { _type = value; }
         }
 
         public byte Slot
