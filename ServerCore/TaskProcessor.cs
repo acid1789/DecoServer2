@@ -696,7 +696,7 @@ namespace JuggleServerCore
         void CharacterActiveQuests_Process_Handler(Task t)
         {
             CharacterInfo ci = (CharacterInfo)t.Args;
-            ci.ReadActiveQuests(t.Query);
+            ci.ReadActiveQuests(t.Query, t.Client);
         }
 
         void CharacterCompletedQuests_Process_Handler(Task t)
@@ -865,6 +865,7 @@ namespace JuggleServerCore
                 t.Client.Character.EquipItem(item, eir.Slot);
                 AddDBQuery(item.UpdateDBString(t.Client.Character.ID), null, false);
                 visible = true;
+                t.Client.NotifyEquipItem();
             }
 
             t.Client.SendPacket(new EquipItemResponse(t.Client.Character, item, equipped, visible));

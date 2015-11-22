@@ -272,7 +272,7 @@ namespace DecoServer2.CharacterThings
             _expectingSkills = false;
         }
 
-        public void ReadActiveQuests(DBQuery query)
+        public void ReadActiveQuests(DBQuery query, Connection client)
         {   
             _activeQuests = new Dictionary<uint, byte>();
             foreach (object[] row in query.Rows)
@@ -283,6 +283,10 @@ namespace DecoServer2.CharacterThings
                 uint quest = (uint)row[1];
                 byte step = (byte)row[2];
                 _activeQuests[quest] = step;
+
+                Quest q = Program.Server.GetQuest(quest);
+                QuestStep qs = q.GetStep(step);
+                qs.Activate(client);
             }
         }
 
@@ -465,6 +469,16 @@ namespace DecoServer2.CharacterThings
                     return true;
             }
 
+            return false;
+        }
+
+        public bool HasItemEquipped(uint templateID)
+        {
+            foreach (Item i in _equipped.Values)
+            {
+                if( i.TemplateID == templateID )
+                    return true;
+            }
             return false;
         }
 

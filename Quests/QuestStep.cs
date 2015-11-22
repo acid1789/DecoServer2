@@ -77,11 +77,34 @@ namespace DecoServer2.Quests
                 case CompletionType.CollectItem:
                 case CompletionType.GoToLocation:
                 case CompletionType.ReachLevel:
-                case CompletionType.WearItem:
                     throw new NotImplementedException();
+                case CompletionType.WearItem:
+                    if( !CheckItemEquipCompletion(client) )
+                        client.OnItemEquipped += Client_OnItemEquipped;
+                    break;
                 case CompletionType.TalkToNPC:
                     client.OnQuestDialogFinished += Client_OnQuestDialogFinished;
                     break;
+            }
+        }
+
+        bool CheckItemEquipCompletion(Connection client)
+        {
+            if (client.Character.HasItemEquipped(_completionID))
+            {
+                FinishStep(client);
+                return true;
+            }
+            return false;
+        }
+
+        private void Client_OnItemEquipped(object sender, EventArgs e)
+        {
+            Connection client = (Connection)sender;
+            if (CheckItemEquipCompletion(client))
+            {
+                // Done and moved on, remove this handler
+                client.OnItemEquipped -= Client_OnItemEquipped;
             }
         }
 

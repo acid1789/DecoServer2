@@ -83,6 +83,7 @@ namespace DecoServer2.CharacterThings
             item._durability = it.GenerateDurability();
             item._remainingTime = it.GenerateDuration();
             item._type = (Type)it.Type;
+            item._slot = 0xFF;
             
             return item;
         }

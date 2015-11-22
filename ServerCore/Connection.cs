@@ -38,6 +38,7 @@ namespace JuggleServerCore
 
         #region Quest Events
         public event EventHandler<QuestDialogFinishedArgs> OnQuestDialogFinished;
+        public event EventHandler OnItemEquipped;
         #endregion
 
         Socket _socket;
@@ -227,6 +228,12 @@ namespace JuggleServerCore
         {
             if( OnQuestDialogFinished != null )
                 OnQuestDialogFinished(this, new QuestDialogFinishedArgs(npcID));
+        }
+
+        public void NotifyEquipItem()
+        {
+            if( OnItemEquipped != null )
+                OnItemEquipped(this, null);
         }
         #endregion
 
