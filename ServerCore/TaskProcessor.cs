@@ -751,7 +751,7 @@ namespace JuggleServerCore
         void PlayerMove_Handler(Task t)
         {
             // For now just allow the move for the client
-            _server.ProcessMoveRequest(t.Client, (CharacterPositionClass)t.Args);            
+            _server.ProcessMoveRequest(t.Client, (CharacterPositionClass)t.Args);
         }
 
         void PlayerUpdatePosition_Handler(Task t)

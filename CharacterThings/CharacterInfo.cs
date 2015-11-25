@@ -641,7 +641,10 @@ namespace DecoServer2.CharacterThings
 
         public string HVString
         {
-            get { return string.Format("INSERT INTO characters_hv SET character_id={0},map_id={1},cell_index={2},hp={3},sp={4},mp={5},gold={6},pvp_wins={7},pvp_count={8},exp={9},fame={10}", _csi.ID, _mapID, _cellIndex, _curHP, _curSP, _curMP, _gold, _pvpWins, _pvpCount, _exp, _fame); }
+            get
+            {
+                return string.Format("INSERT INTO characters_hv (character_id,map_id,cell_index,hp,sp,mp,gold,pvp_wins,pvp_count,exp,fame) VALUES({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ON DUPLICATE KEY UPDATE map_id=VALUES(map_id),cell_index=VALUES(cell_index),hp=VALUES(hp),sp=VALUES(sp),mp=VALUES(mp),gold=VALUES(gold),pvp_wins=VALUES(pvp_wins),pvp_count=VALUES(pvp_count),exp=VALUES(exp),fame=VALUES(fame);", _csi.ID, _mapID, _cellIndex, _curHP, _curSP, _curMP, _gold, _pvpWins, _pvpCount, _exp, _fame);
+            }
         }
 
         public string LVString
@@ -713,7 +716,12 @@ namespace DecoServer2.CharacterThings
         public uint CellIndex
         {
             get { return _cellIndex; }
-            set { _cellIndex = value; }
+            set
+            {
+                _cellIndex = value;
+                // From here, save in the database
+                Program.Server.TaskProcessor.AddDBQuery(HVString, null, false);
+            }
         }
 
         public byte Level

@@ -100,7 +100,7 @@ namespace DecoServer2
 
         public void UpdatePlayerPosition(Connection client, CharacterPositionClass cpc)
         {
-            client.Character.CellIndex = cpc.CellIndex;
+            client.Character.CellIndex = cpc.CellIndex;            
 
             // Inform other clients            
             ObserveMovementPacket omp = new ObserveMovementPacket(client.Character.WorldID, cpc.CellIndex, client.Character.MoveSpeed);
