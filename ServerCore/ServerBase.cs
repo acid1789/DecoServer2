@@ -213,12 +213,26 @@ namespace JuggleServerCore
         #region World Stuff
         Dictionary<ushort, PlayMap> _maps;
         Dictionary<uint, ItemTemplate> _itemTemplates;
+        Dictionary<uint, Location> _locations;
 
         void SetupWorld()
         {
             _maps = new Dictionary<ushort, PlayMap>();
             _itemTemplates = new Dictionary<uint, ItemTemplate>();
+            _locations = new Dictionary<uint, Location>();
             TaskProcessor.AddTask(new Task(Task.TaskType.LoadPlayMaps_Fetch));
+        }
+
+        public void AddLocation(Location loc)
+        {
+            _locations[loc.ID] = loc;
+        }
+
+        public Location GetLocation(uint id)
+        {
+            if( _locations.ContainsKey(id) )
+                return _locations[id];
+            return null;
         }
 
         public void AddPlayMap(ushort mapID)

@@ -51,6 +51,7 @@
     <Compile Include="CharacterThings\CharacterSelectInfo.cs" />
     <Compile Include="CharacterThings\Item.cs" />
     <Compile Include="CharacterThings\ItemTemplate.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="PlayMap.cs" />
     <Compile Include="Program.cs" />

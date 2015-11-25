@@ -62,7 +62,6 @@ CREATE TABLE `active_quests` (
 
 LOCK TABLES `active_quests` WRITE;
 /*!40000 ALTER TABLE `active_quests` DISABLE KEYS */;
-INSERT INTO `active_quests` VALUES (5,1,0);
 /*!40000 ALTER TABLE `active_quests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,6 +227,7 @@ CREATE TABLE `completed_quests` (
 
 LOCK TABLES `completed_quests` WRITE;
 /*!40000 ALTER TABLE `completed_quests` DISABLE KEYS */;
+INSERT INTO `completed_quests` VALUES (5,1);
 /*!40000 ALTER TABLE `completed_quests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +282,7 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
-INSERT INTO `item_instances` VALUES (1,1,50,1,5,1,15),(2,2,50,1,5,1,13);
+INSERT INTO `item_instances` VALUES (1,2,50,1,5,1,0),(2,1,50,0,5,0,2);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +330,7 @@ CREATE TABLE `locations` (
   `radius` int(10) unsigned NOT NULL,
   `map` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +339,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6);
+INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6),(4,'MillenaTrainingLoc',143,153,1,27);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,7 +407,7 @@ CREATE TABLE `quest_lines` (
   `static_text` smallint(5) unsigned NOT NULL DEFAULT '0',
   `text` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`quest_line_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,7 +416,7 @@ CREATE TABLE `quest_lines` (
 
 LOCK TABLES `quest_lines` WRITE;
 /*!40000 ALTER TABLE `quest_lines` DISABLE KEYS */;
-INSERT INTO `quest_lines` VALUES (1,1,0,0,454,1184,''),(2,1,0,1,2205,1185,''),(3,1,0,2,2201,1186,''),(4,1,0,3,2193,1187,''),(5,1,0,4,2193,1188,''),(6,1,0,5,2193,1189,''),(7,1,0,6,2193,1190,''),(8,1,0,7,2193,1191,''),(9,1,0,8,2193,1192,''),(10,1,1,0,440,1310,''),(11,1,1,1,440,1311,''),(12,1,1,2,440,1312,''),(13,1,1,3,440,1313,''),(14,1,1,4,440,1314,''),(15,1,1,5,440,1315,''),(16,1,1,6,440,1316,'');
+INSERT INTO `quest_lines` VALUES (1,1,0,0,454,1184,''),(2,1,0,1,2205,1185,''),(3,1,0,2,2201,1186,''),(4,1,0,3,2193,1187,''),(5,1,0,4,2193,1188,''),(6,1,0,5,2193,1189,''),(7,1,0,6,2193,1190,''),(8,1,0,7,2193,1191,''),(9,1,0,8,2193,1192,''),(10,1,1,0,440,1310,''),(11,1,1,1,440,1311,''),(12,1,1,2,440,1312,''),(13,1,1,3,440,1313,''),(14,1,1,4,440,1314,''),(15,1,1,5,440,1315,''),(16,1,1,6,440,1316,''),(17,1,2,0,440,1318,''),(18,1,2,1,440,1319,''),(19,1,2,2,440,1320,''),(20,1,2,3,440,1321,''),(21,1,3,0,440,1323,''),(22,1,3,1,440,1324,''),(23,1,3,2,440,1325,'');
 /*!40000 ALTER TABLE `quest_lines` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,7 +491,7 @@ CREATE TABLE `quest_rewards` (
 
 LOCK TABLES `quest_rewards` WRITE;
 /*!40000 ALTER TABLE `quest_rewards` DISABLE KEYS */;
-INSERT INTO `quest_rewards` VALUES (1,0,3,2),(1,1,3,1),(1,3,4,3);
+INSERT INTO `quest_rewards` VALUES (1,0,3,2),(1,1,3,1),(1,3,4,4);
 /*!40000 ALTER TABLE `quest_rewards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -563,4 +563,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-19  1:37:36
+-- Dump completed on 2015-11-25  0:55:17

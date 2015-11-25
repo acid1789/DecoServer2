@@ -45,7 +45,8 @@ namespace DecoServer2.Quests
                     Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.GiveItem, client, new GiveItemArgs(_context, GiveItemArgs.TheReason.Quest, questID)));
                     break;
                 case RewardType.Teleport:
-                    throw new NotImplementedException();
+                    Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.Teleport, client, Program.Server.GetLocation(_context)));
+                    break;
                 case RewardType.Skill:
                     throw new NotImplementedException();
             }

@@ -587,6 +587,12 @@ namespace DecoServer2.CharacterThings
             _fame += fame;
         }
 
+        public void Teleport(Location loc)
+        {
+            _mapID = loc.Map;
+            _cellIndex = loc.CellIndex;
+        }
+
         #region Accessors
         public bool LoadComplete
         {

@@ -18,6 +18,7 @@ namespace JuggleServerCore
             LoadNPCs_Fetch,
             LoadNPCs_Process,
             LoadItems_Process,
+            LoadLocations_Process,
             LoadQuestLines_Process,
             LoadQuestSteps_Process,
             LoadQuestRewards_Process,
@@ -53,6 +54,7 @@ namespace JuggleServerCore
             MoveItem,
             EquipItem,
             UnEquipItem,
+            Teleport,
         }
 
         public TaskType Type;
@@ -118,6 +120,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoadNPCs_Fetch] = LoadNPCs_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
             _taskHandlers[Task.TaskType.LoadItems_Process] = LoadItems_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadLocations_Process] = LoadLocations_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestLines_Process] = LoadQuestLines_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestSteps_Process] = LoadQuestSteps_Process_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Fetch] = LoginRequest_Fetch_Handler;
@@ -153,6 +156,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.MoveItem] = MoveItem_Handler;
             _taskHandlers[Task.TaskType.EquipItem] = EquipItem_Handler;
             _taskHandlers[Task.TaskType.UnEquipItem] = UnEquipItem_Handler;
+            _taskHandlers[Task.TaskType.Teleport] = Teleport_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -298,6 +302,18 @@ namespace JuggleServerCore
             {
                 ItemTemplate template = ItemTemplate.ReadFromDB(row);
                 _server.AddItemTemplate(template);
+            }
+
+            t.Type = Task.TaskType.LoadLocations_Process;
+            AddDBQuery("SELECT * FROM locations;", t);
+        }
+
+        void LoadLocations_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                Location loc = Location.ReadFromDB(row);
+                _server.AddLocation(loc);
             }
 
             t.Type = Task.TaskType.LoadQuestLines_Process;
@@ -932,6 +948,16 @@ namespace JuggleServerCore
                     }
                 }
             }
+        }
+
+        void Teleport_Handler(Task t)
+        {
+
+            // Move the character
+            t.Client.Character.Teleport((Location)t.Args);
+
+            // Tell the client
+            t.Client.SendPacket(new MapChangePacket(t.Client.Character));
         }
         #endregion
     }
