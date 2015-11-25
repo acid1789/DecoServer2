@@ -32,7 +32,8 @@ namespace DecoServer2
             if (playerActiveQuest != null)
             {
                 client.SetCurrentQuest(_id, playerActiveQuest.QuestID, 0);
-                QuestLine ql = playerActiveQuest.GetStep(0).GetLine(0);
+                byte step = client.Character.GetQuestStep(playerActiveQuest.QuestID);
+                QuestLine ql = playerActiveQuest.GetStep(step).GetLine(0);
                 ql.SendToClient(client);
                 client.SendPacket(new NPCDialogPacket(_gameID));
                 return;

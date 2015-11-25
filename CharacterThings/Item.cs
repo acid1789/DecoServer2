@@ -43,9 +43,9 @@ namespace DecoServer2.CharacterThings
             return sql;
         }
 
-        public string UpdateDBString(int characterID)
+        public string UpdateDBString()
         {
-            string sql = string.Format("UPDATE item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4},slot={5} WHERE instance_id={6};", _template, _durability, _remainingTime, characterID, (byte)_type, _slot, _id);
+            string sql = string.Format("UPDATE item_instances SET durability={0},remaining_time={1},inventory_type={2},slot={3} WHERE instance_id={4};", _durability, _remainingTime, (byte)_type, _slot, _id);
             return sql;
         }
 

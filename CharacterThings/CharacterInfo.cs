@@ -542,13 +542,23 @@ namespace DecoServer2.CharacterThings
             return null;
         }
 
-        public void UnEquipItem(byte slot)
+        public Item EquippedItem(uint id)
+        {
+            foreach (Item i in _equipped.Values)
+            {
+                if( i.ID == id )
+                    return i;
+            }
+            return null;
+        }
+
+        public void UnEquipItem(byte slot, byte targetSlot = 0xFF)
         {
             if (_equipped.ContainsKey(slot))
             {
                 Item equipped = _equipped[slot];
                 _equipped.Remove(slot);
-                equipped.Slot = 0xFF;
+                equipped.Slot = targetSlot;
                 equipped.ItemType = Item.Type.General;
                 AddItem(equipped);
             }

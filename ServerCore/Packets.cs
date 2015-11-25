@@ -499,6 +499,77 @@ namespace JuggleServerCore
         }
     }
 
+    public class UnEquipItemResponse : SendPacketBase       // 0x0416
+    {
+        CharacterInfo _character;
+        uint _itemID;
+        byte _slot;
+        bool _success;
+
+        public UnEquipItemResponse(CharacterInfo ci, uint itemID, byte slot, bool success)
+        {
+            _character = ci;
+            _itemID = itemID;
+            _slot = slot;
+            _success = success;
+        }
+        
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0416;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 46;
+            header.Write(bw);
+            
+            bw.Write(_itemID);
+            bw.Write(_slot);
+            bw.Write((byte)(_success ? 1 : 2));
+            bw.Write((uint)10);
+            bw.Write((ushort)20);
+            bw.Write(_character.PhysicalDef);
+            bw.Write(_character.MagicalDef);
+            bw.Write((byte)30);
+            bw.Write(_character.AbilityPMin);
+            bw.Write(_character.AbilityPMax);
+            bw.Write((byte)40);
+            bw.Write((byte)50);
+            bw.Write(_character.Vitality);
+            bw.Write(_character.Sympathy);
+            bw.Write(_character.Intelligence);
+            bw.Write((ushort)60);
+            bw.Write(_character.Dexterity);
+            bw.Write(_character.MaxHP);
+            bw.Write((uint)70);
+            bw.Write(_character.MaxMP);
+            bw.Write((byte)80);
+        }
+    }
+
+    public class SeeUnequipPacket : SendPacketBase  // 0x0417
+    {
+        int _characterID;
+        byte _equipmentSlot;
+
+        public SeeUnequipPacket(int charID, byte equipSlot)
+        {
+            _characterID = charID;
+            _equipmentSlot = equipSlot;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0417;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 5;
+            header.Write(bw);
+
+            bw.Write(_characterID);
+            bw.Write(_equipmentSlot);
+        }
+    }
+
     public class MoveItemResponse : SendPacketBase  // 0x0454
     {
         uint _id;
