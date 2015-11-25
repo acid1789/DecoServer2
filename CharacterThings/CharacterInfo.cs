@@ -443,7 +443,7 @@ namespace DecoServer2.CharacterThings
         public void SetActiveQuestStep(uint questID, byte step)
         {
             _activeQuests[questID] = step;
-            Program.Server.TaskProcessor.AddTask(new JuggleServerCore.Task(JuggleServerCore.Task.TaskType.CharacterActiveQuest_Save, null, new ActiveQuestArgs(ID, questID, 0)));
+            Program.Server.TaskProcessor.AddTask(new JuggleServerCore.Task(JuggleServerCore.Task.TaskType.CharacterActiveQuest_Save, null, new ActiveQuestArgs(ID, questID, step)));
         }
 
         public void CompleteQuest(uint questID)
@@ -509,30 +509,35 @@ namespace DecoServer2.CharacterThings
 
             if (item.Slot == 0xFF && item.ItemType == Item.Type.General)
             {
-                // Find a free slot for this item
-                byte slot = 0;
-                while (true)
-                {
-                    bool valid = true;
-                    foreach (Item i in _generalItems.Values)
-                    {
-                        if (i.Slot == slot)
-                        {
-                            valid = false;
-                            break;
-                        }
-                    }
-
-                    if (valid)
-                    {
-                        item.Slot = slot;
-                        break;
-                    }
-                    slot++;
-                    if( slot > 18 )
-                        break;
-                }
+                item.Slot = FindGeneralSlot();                
             }
+        }
+
+        public byte FindGeneralSlot()
+        {
+            // Find a free slot for this item
+            byte slot = 0;
+            while (true)
+            {
+                bool valid = true;
+                foreach (Item i in _generalItems.Values)
+                {
+                    if (i.Slot == slot)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (valid)
+                {
+                    return slot;
+                }
+                slot++;
+                if (slot > 18)
+                    break;
+            }
+            return 0xFF;
         }
 
         public Item EquippedItem(byte slot)

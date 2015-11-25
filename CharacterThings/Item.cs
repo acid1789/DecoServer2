@@ -39,7 +39,7 @@ namespace DecoServer2.CharacterThings
 
         public string WriteDBString(uint itemTemplate, int characterID)
         {
-            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4},slot={5};", itemTemplate, _durability, _remainingTime, characterID, (byte)_type, _slot);
+            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4},slot={5}; SELECT LAST_INSERT_ID();", itemTemplate, _durability, _remainingTime, characterID, (byte)_type, _slot);
             return sql;
         }
 
@@ -78,12 +78,13 @@ namespace DecoServer2.CharacterThings
         {
             // Setup the item
             Item item = new Item();
-            item._id = it.ID;
+            item._id = 0;
             item._model = it.Model;
             item._durability = it.GenerateDurability();
             item._remainingTime = it.GenerateDuration();
             item._type = (Type)it.Type;
             item._slot = 0xFF;
+            item._template = it.ID;
             
             return item;
         }
@@ -105,6 +106,7 @@ namespace DecoServer2.CharacterThings
         public uint ID
         {
             get { return _id; }
+            set { _id = value; }
         }
 
         public ushort Model

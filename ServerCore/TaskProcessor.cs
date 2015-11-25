@@ -47,6 +47,7 @@ namespace JuggleServerCore
             NPCDialogNextButton,
             GiveGoldExpFame,
             GiveItem,
+            GiveItem_Finish,
             RemoveCharacter,
             GMCommand_Process,
             MoveItem,
@@ -146,6 +147,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.NPCDialogNextButton] = NPCDialogNextButton_Handler;
             _taskHandlers[Task.TaskType.GiveGoldExpFame] = GiveGoldExpFame_Handler;
             _taskHandlers[Task.TaskType.GiveItem] = GiveItem_Handler;
+            _taskHandlers[Task.TaskType.GiveItem_Finish] = GiveItem_Finish_Handler;
             _taskHandlers[Task.TaskType.RemoveCharacter] = RemoveCharacter_Handler;
             _taskHandlers[Task.TaskType.GMCommand_Process] = GMCommand_Process_Handler;
             _taskHandlers[Task.TaskType.MoveItem] = MoveItem_Handler;
@@ -713,7 +715,7 @@ namespace JuggleServerCore
 
             string sql;
             if (rqa.Remove)
-                sql = string.Format("DELETE FROM completed_quests WHERE character_id={0} AND quest_id={1};", rqa.CharacterID, rqa.QuestID);
+                sql = string.Format("DELETE FROM active_quests WHERE character_id={0} AND quest_id={1};", rqa.CharacterID, rqa.QuestID);
             else
                 sql = string.Format("INSERT INTO active_quests (character_id,quest_id,step) VALUES ({0},{1},{2}) ON DUPLICATE KEY UPDATE step={2};", rqa.CharacterID, rqa.QuestID, rqa.Step);
             AddDBQuery(sql, null, false);
@@ -765,22 +767,34 @@ namespace JuggleServerCore
         {
             GiveItemArgs args = (GiveItemArgs)t.Args;
             CharacterInfo ci = t.Client.Character;
-            
+
             // Instantiate the item
             Item item = _server.InstantiateItem(args.ItemTemplateID);
 
-            // Store it in the character
-            ci.AddItem(item);
+            // Find a slot for it
+            item.Slot = ci.FindGeneralSlot();
 
             // Save it in the database
             string sql = item.WriteDBString(args.ItemTemplateID, ci.ID);
-            AddDBQuery(sql, null, false);
-
+            t.Type = Task.TaskType.GiveItem_Finish;
+            t.Args = item;
+            AddDBQuery(sql, t);
 
             // Log it
             string log = string.Format("Giving item template({0}) to Character ID: {1}. Reason: {2}, Context: {3}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
             LogInterface.Log(log, LogInterface.LogMessageType.Game);
+        }
+        
+        void GiveItem_Finish_Handler(Task t)
+        {
+            Item item = (Item)t.Args;
+            ulong res = (ulong)t.Query.Rows[0][0];
+            item.ID = (uint)res;
+            
+            // Store it in the character
+            t.Client.Character.AddItem(item);
 
+            // Tell the client about it
             t.Client.SendPacket(new GiveItemPacket(item));
         }
 
