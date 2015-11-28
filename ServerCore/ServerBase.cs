@@ -15,6 +15,7 @@ namespace JuggleServerCore
         DatabaseThread _db;
         ListenThread _lt;
         InputThread _inputThread;
+        AIThread _aiThread;
         TaskProcessor _taskProcessor;
         int _listenPort;
 
@@ -22,8 +23,11 @@ namespace JuggleServerCore
 
         Dictionary<string, int> _expectedConnections;
 
+        Random _rand;
+
         public ServerBase(int listenPort, string dbConnectString)
         {
+            _rand = new Random();
             _playServers = new List<PlayServerInfo>();
             _expectedConnections = new Dictionary<string, int>();
 
@@ -41,6 +45,9 @@ namespace JuggleServerCore
             // Start database thread
             if( dbConnectString != null )
                 _db = new DatabaseThread(dbConnectString);
+
+            // Start AI Thread
+            _aiThread = new AIThread();
 
             _listenPort = listenPort;
 
@@ -214,12 +221,14 @@ namespace JuggleServerCore
         Dictionary<ushort, PlayMap> _maps;
         Dictionary<uint, ItemTemplate> _itemTemplates;
         Dictionary<uint, Location> _locations;
+        Dictionary<uint, MonsterTemplate> _monsterTemplates;
 
         void SetupWorld()
         {
             _maps = new Dictionary<ushort, PlayMap>();
             _itemTemplates = new Dictionary<uint, ItemTemplate>();
             _locations = new Dictionary<uint, Location>();
+            _monsterTemplates = new Dictionary<uint, MonsterTemplate>();
             TaskProcessor.AddTask(new Task(Task.TaskType.LoadPlayMaps_Fetch));
         }
 
@@ -233,6 +242,23 @@ namespace JuggleServerCore
             if( _locations.ContainsKey(id) )
                 return _locations[id];
             return null;
+        }
+
+        public void AddMonsterTemplate(MonsterTemplate mt)
+        {
+            _monsterTemplates[mt.ID] = mt;
+        }
+
+        public MonsterTemplate GetMonsterTemplate(uint id)
+        {
+            if( _monsterTemplates.ContainsKey(id) )
+                return _monsterTemplates[id];
+            return null;
+        }
+
+        public void AddMonsterSpawner(MonsterSpawner ms)
+        {
+            _aiThread.AddSpawner(ms);
         }
 
         public void AddPlayMap(ushort mapID)
@@ -343,6 +369,11 @@ namespace JuggleServerCore
         public PlayServerInfo[] PlayServers
         {
             get { return _playServers.ToArray(); }
+        }
+
+        public Random Rand
+        {
+            get { return _rand; }
         }
         #endregion
 

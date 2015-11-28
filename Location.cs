@@ -50,6 +50,16 @@ namespace DecoServer2
             get { return Utils.EncodeCellIndex(_map, _x, _y); }
         }
 
+        public uint X
+        {
+            get { return _x; }
+        }
+
+        public uint Y
+        {
+            get { return _y; }
+        }
+
         public uint Radius
         {
             get { return _radius; }

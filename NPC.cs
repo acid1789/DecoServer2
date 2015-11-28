@@ -11,16 +11,16 @@ namespace DecoServer2
 {
     public class NPC
     {
-        uint _id;
-        ushort _gameID;
-        uint _cellIndex;
-        uint _hp;
-        float _direction;
-        ushort _mapID;
+        protected uint _id;
+        protected ushort _gameID;
+        protected uint _cellIndex;
+        protected uint _hp;
+        protected float _direction;
+        protected ushort _mapID;
 
         Dictionary<uint, Quest> _quests;
 
-        private NPC()
+        protected NPC()
         {
             _quests = new Dictionary<uint, Quest>();
         }
@@ -101,7 +101,7 @@ namespace DecoServer2
             _quests[q.QuestID] = q;
         }
 
-        public void Write(BinaryWriter bw)
+        public virtual void Write(BinaryWriter bw)
         {
             bw.Write(_id);
             bw.Write(_gameID);

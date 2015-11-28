@@ -14,6 +14,7 @@ namespace DecoServer2
     {
         Dictionary<int, Connection> _players;
         Dictionary<uint, NPC> _npcs;
+        Dictionary<uint, Monster> _monsters;
 
         ushort _mapID;
         uint _worldIDs;
@@ -22,6 +23,7 @@ namespace DecoServer2
         {
             _worldIDs = 0;
             _npcs = new Dictionary<uint, NPC>();
+            _monsters = new Dictionary<uint, Monster>();
             _players = new Dictionary<int, Connection>();
             _mapID = mapID;
         }
@@ -29,6 +31,17 @@ namespace DecoServer2
         public void AddNPC(NPC npc)
         {
             _npcs[npc.ID] = npc;
+        }
+
+        public void AddMonster(Monster m)
+        {
+            _monsters[m.ID] = m;
+
+            // Send this monster to all plaers
+            foreach (Connection c in _players.Values)
+            {
+                c.SendPacket(new NPCInfoPacket(m));
+            }
         }
 
         public void AddPlayer(Connection client, CharacterInfo ci)
@@ -41,6 +54,12 @@ namespace DecoServer2
                 foreach (NPC npc in _npcs.Values)
                 {
                     client.SendPacket(new NPCInfoPacket(npc));
+                }
+
+                // Send Monster info to player
+                foreach (Monster m in _monsters.Values)
+                {
+                    client.SendPacket(new NPCInfoPacket(m));
                 }
 
                 // Send player character info to all other players

@@ -156,7 +156,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,13447,150,150,150,123,0,0,0,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,30859,150,150,150,123,0,0,0,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,6 @@ CREATE TABLE `completed_quests` (
 
 LOCK TABLES `completed_quests` WRITE;
 /*!40000 ALTER TABLE `completed_quests` DISABLE KEYS */;
-INSERT INTO `completed_quests` VALUES (5,1);
 /*!40000 ALTER TABLE `completed_quests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +272,7 @@ CREATE TABLE `item_instances` (
   `inventory_type` int(10) unsigned NOT NULL,
   `slot` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`instance_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +281,6 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
-INSERT INTO `item_instances` VALUES (1,2,50,1,5,1,0),(2,1,50,0,5,0,2);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +328,7 @@ CREATE TABLE `locations` (
   `radius` int(10) unsigned NOT NULL,
   `map` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,8 +337,63 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6),(4,'MillenaTrainingLoc',143,153,1,27);
+INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6),(4,'MillenaTrainingLoc',143,153,1,27),(5,'TestSpawn',129,120,40,5);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `monster_spawners`
+--
+
+DROP TABLE IF EXISTS `monster_spawners`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `monster_spawners` (
+  `spawner_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `monster` int(10) unsigned NOT NULL,
+  `location` int(10) unsigned NOT NULL,
+  `max` int(10) unsigned NOT NULL,
+  `rate_min` int(10) unsigned NOT NULL DEFAULT '1',
+  `rate_max` int(10) unsigned NOT NULL DEFAULT '1',
+  `interval_min` int(10) unsigned NOT NULL DEFAULT '1',
+  `interval_max` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`spawner_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `monster_spawners`
+--
+
+LOCK TABLES `monster_spawners` WRITE;
+/*!40000 ALTER TABLE `monster_spawners` DISABLE KEYS */;
+INSERT INTO `monster_spawners` VALUES (1,1,5,20,1,3,1,5);
+/*!40000 ALTER TABLE `monster_spawners` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `monster_templates`
+--
+
+DROP TABLE IF EXISTS `monster_templates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `monster_templates` (
+  `template_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `game_id` int(10) unsigned NOT NULL,
+  `hp` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`template_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `monster_templates`
+--
+
+LOCK TABLES `monster_templates` WRITE;
+/*!40000 ALTER TABLE `monster_templates` DISABLE KEYS */;
+INSERT INTO `monster_templates` VALUES (1,2901,35);
+/*!40000 ALTER TABLE `monster_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -563,4 +616,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-25  0:55:17
+-- Dump completed on 2015-11-28 14:27:37

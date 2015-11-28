@@ -19,6 +19,8 @@ namespace JuggleServerCore
             LoadNPCs_Process,
             LoadItems_Process,
             LoadLocations_Process,
+            LoadMonsterTemplates_Process,
+            LoadMonsterSpawners_Process,
             LoadQuestLines_Process,
             LoadQuestSteps_Process,
             LoadQuestRewards_Process,
@@ -121,6 +123,8 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
             _taskHandlers[Task.TaskType.LoadItems_Process] = LoadItems_Process_Handler;
             _taskHandlers[Task.TaskType.LoadLocations_Process] = LoadLocations_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadMonsterTemplates_Process] = LoadMonsterTemplates_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadMonsterSpawners_Process] = LoadMonsterSpawners_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestLines_Process] = LoadQuestLines_Process_Handler;
             _taskHandlers[Task.TaskType.LoadQuestSteps_Process] = LoadQuestSteps_Process_Handler;
             _taskHandlers[Task.TaskType.LoginRequest_Fetch] = LoginRequest_Fetch_Handler;
@@ -314,6 +318,30 @@ namespace JuggleServerCore
             {
                 Location loc = Location.ReadFromDB(row);
                 _server.AddLocation(loc);
+            }
+
+            t.Type = Task.TaskType.LoadMonsterTemplates_Process;
+            AddDBQuery("SELECT * FROM monster_templates;", t);
+        }
+
+        void LoadMonsterTemplates_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                MonsterTemplate mt = MonsterTemplate.ReadFromDB(row);
+                _server.AddMonsterTemplate(mt);
+            }
+
+            t.Type = Task.TaskType.LoadMonsterSpawners_Process;
+            AddDBQuery("SELECT * FROM monster_spawners;", t);
+        }
+
+        void LoadMonsterSpawners_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                MonsterSpawner ms = MonsterSpawner.ReadFromDB(row);
+                _server.AddMonsterSpawner(ms);
             }
 
             t.Type = Task.TaskType.LoadQuestLines_Process;

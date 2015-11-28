@@ -215,9 +215,13 @@ namespace ServerDataTool
             if (_currentSelection != null)
             {
                 Location loc = (Location)_currentSelection.Tag;
-                loc.Radius = Math.Max(0, Convert.ToUInt32(tbRadius.Text));
-                SetMapMarkerLight(FindPictureBox(_currentSelection), loc);
-                loc.Dirty = true;
+                try
+                {
+                    loc.Radius = Math.Max(0, Convert.ToUInt32(tbRadius.Text));
+                    SetMapMarkerLight(FindPictureBox(_currentSelection), loc);
+                    loc.Dirty = true;
+                }
+                catch (Exception) { }
             }
         }
 
