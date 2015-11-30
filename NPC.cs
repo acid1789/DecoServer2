@@ -165,6 +165,11 @@ namespace DecoServer2
         {
             get { return 27; }  // For now just going to do this since the write is hardcoded as well
         }
+
+        public virtual byte MoveSpeed
+        {
+            get { return 0; }
+        }
         #endregion
     }
 }

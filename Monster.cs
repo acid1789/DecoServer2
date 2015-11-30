@@ -3,31 +3,102 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using JuggleServerCore;
 
 namespace DecoServer2
 {
     public class Monster : NPC
     {
+        enum AIState
+        {
+            Idle,
+            Moving,
+            Attack,
+            Dead,
+        };
+
+        MonsterTemplate _template;
+        Location _loc;
+
+        AIState _aiState;
+        AIState _aiNextState;
+        double _aiTimer;
+        Vector _moveTarget;
+        float _moveSpeed;
+
+
         static uint s_monsterID = 0xFFFF;
-        public Monster(ushort map, uint x, uint y, uint hp, ushort gameID) : base()
+        public Monster(Location loc, MonsterTemplate template) : base()
         {
             s_monsterID++;
             if( s_monsterID < 0xFFFF )
                 s_monsterID = 0xFFFF + 1;
 
+            _loc = loc;
+            _template = template;
+
             _id = s_monsterID;
-            _gameID = gameID;
-            _cellIndex = Utils.EncodeCellIndex(map, x, y);
-            _mapID = map;
-            _hp = hp;
+            _gameID = (ushort)_template.GameID;
+            _cellIndex = loc.RandomCell;
+            _mapID = loc.Map;
+            _hp = _template.HP;
+            _aiState = AIState.Idle;
+            _aiTimer = 0;
         }
 
-        public void SetPosition(ushort map, uint x, uint y)
+        public void Update(double deltaSeconds)
         {
-            _mapID = map;
-            _cellIndex = Utils.EncodeCellIndex(map, x, y);
+            if (_aiTimer > 0)
+                _aiTimer -= deltaSeconds;
+
+            switch (_aiState)
+            {
+                case AIState.Idle:
+                    if (_aiTimer <= 0)
+                    {
+                        if (Program.Server.Rand.NextDouble() < _template.IdleMoveChance)
+                        {
+                            // Wander to a new spot
+                            _moveTarget = Utils.DecodeCellIndex(_loc.Map, _loc.RandomCell);
+                            _moveSpeed = _template.IdleMoveSpeed;
+                            _aiState = AIState.Moving;
+                            _aiNextState = AIState.Idle;
+                        }
+                        else
+                            _aiTimer = 1;
+                    }
+                    break;
+                case AIState.Moving:
+                    if (_aiTimer <= 0)
+                    {
+                        // Move along the vector
+                        Vector pos = Utils.DecodeCellIndex(_loc.Map, _cellIndex);
+                        Vector delta = _moveTarget - pos;
+                        double dist = delta.Length;
+                        if (dist > _moveSpeed)
+                            dist = _moveSpeed;
+                        if (dist < 1)
+                        {
+                            // done moving
+                            _aiState = _aiNextState;
+                        }
+                        else
+                        {
+                            delta.Normalize();
+                            Vector target = pos + (delta * dist);
+
+                            _cellIndex = Utils.EncodeCellIndex(_loc.Map, (uint)target.X, (uint)target.Y);
+                            Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.UpdateNPCPosition, null, this));
+                        }                        
+                        _aiTimer = 1;
+                    }
+                    break;
+                case AIState.Attack:
+                    break;
+                case AIState.Dead:
+                    break;
+            }
         }
 
         public override void Write(BinaryWriter bw)
@@ -82,6 +153,11 @@ namespace DecoServer2
         {
             get { return false; }
         }
+
+        public override byte MoveSpeed
+        {
+            get { return (byte)_moveSpeed; }
+        }
         #endregion
     }
 
@@ -90,19 +166,13 @@ namespace DecoServer2
         uint _id;
         uint _gameID;
         uint _hp;
+        double _idleMoveChance;
+        byte _idleMoveSpeed;
+        byte _attackMoveSpeed;
 
         public Monster Instantiate(Location loc)
         {
-            int radius = (int)loc.Radius;
-            int randX = Program.Server.Rand.Next(-radius, radius);
-            int randY = Program.Server.Rand.Next(-radius, radius);
-
-            uint x = (uint)((int)loc.X - randX);
-            uint y = (uint)((int)loc.Y - randY);
-
-            Monster m = new Monster(loc.Map, x, y, _hp, (ushort)_gameID);
-
-            Console.WriteLine("Spawning monster ({0}) @ ({1},{2}) on map {3}", m.ID, x, y, m.MapID);
+            Monster m = new Monster(loc, this);
 
             return m;
         }
@@ -112,13 +182,18 @@ namespace DecoServer2
             // 0: template_id int(11) unsigned
             // 1: game_id int(10) unsigned
             // 2: hp  int(10) unsigned
+            // 3: idle_move_chance    double
+            // 4: idle_move_speed tinyint(3) unsigned
+            // 5: attack_move_speed   tinyint(3) unsigned
 
             MonsterTemplate mt = new MonsterTemplate();
 
             mt._id = (uint)row[0];
             mt._gameID = (uint)row[1];
             mt._hp = (uint)row[2];
-
+            mt._idleMoveChance = (double)row[3];
+            mt._idleMoveSpeed = (byte)row[4];
+            mt._attackMoveSpeed = (byte)row[5];
             return mt;
         }
 
@@ -136,6 +211,21 @@ namespace DecoServer2
         public uint HP
         {
             get { return _hp; }
+        }
+
+        public byte IdleMoveSpeed
+        {
+            get { return _idleMoveSpeed; }
+        }
+
+        public byte AttackMoveSpeed
+        {
+            get { return _attackMoveSpeed; }
+        }
+
+        public double IdleMoveChance
+        {
+            get { return _idleMoveChance; }
         }
         #endregion
     }
@@ -169,6 +259,7 @@ namespace DecoServer2
             List<Monster> remove = new List<Monster>();
             foreach (Monster m in _spawns)
             {
+                m.Update(deltaSeconds);
                 if( m.Dead )
                     remove.Add(m);
             }

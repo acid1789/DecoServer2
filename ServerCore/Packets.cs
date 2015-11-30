@@ -644,6 +644,31 @@ namespace JuggleServerCore
         }
     }
 
+    public class NPCMovePacket : SendPacketBase         // 0x5011
+    {
+        DecoServer2.NPC _npc;
+
+        public NPCMovePacket(DecoServer2.NPC npc)
+        {
+            _npc = npc;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x5011;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 10;
+            header.Write(bw);
+
+            bw.Write(_npc.ID);
+            bw.Write(_npc.MoveSpeed);
+            bw.Write((byte)1);
+            bw.Write(_npc.CellIndex);
+
+        }
+    }
+
     public class LoginResponsePacket : SendPacketBase           // 0x7FD2
     {
         string Unknown;

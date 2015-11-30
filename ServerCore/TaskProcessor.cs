@@ -57,6 +57,7 @@ namespace JuggleServerCore
             EquipItem,
             UnEquipItem,
             Teleport,
+            UpdateNPCPosition,
         }
 
         public TaskType Type;
@@ -161,6 +162,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.EquipItem] = EquipItem_Handler;
             _taskHandlers[Task.TaskType.UnEquipItem] = UnEquipItem_Handler;
             _taskHandlers[Task.TaskType.Teleport] = Teleport_Handler;
+            _taskHandlers[Task.TaskType.UpdateNPCPosition] = UpdateNPCPosition_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -980,12 +982,18 @@ namespace JuggleServerCore
 
         void Teleport_Handler(Task t)
         {
-
             // Move the character
             t.Client.Character.Teleport((Location)t.Args);
 
             // Tell the client
             t.Client.SendPacket(new MapChangePacket(t.Client.Character));
+        }
+
+        void UpdateNPCPosition_Handler(Task t)
+        {
+            NPC npc = (NPC)t.Args;
+            PlayMap map = _server.GetPlayMap(npc.MapID);
+            map.UpdateNPCPosition(npc);
         }
         #endregion
     }

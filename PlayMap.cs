@@ -133,6 +133,15 @@ namespace DecoServer2
             }
         }
 
+        public void UpdateNPCPosition(NPC npc)
+        {
+            NPCMovePacket pkt = new NPCMovePacket(npc);
+            foreach (Connection c in _players.Values)
+            {
+                c.SendPacket(pkt);
+            }
+        }
+
         public void SetQuestGiver(Quest q, uint giverID)
         {
             _npcs[giverID].AddQuest(q);

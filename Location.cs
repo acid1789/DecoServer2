@@ -64,6 +64,21 @@ namespace DecoServer2
         {
             get { return _radius; }
         }
+
+        public uint RandomCell
+        {
+            get
+            {
+                int radius = (int)_radius;
+                int randX = Program.Server.Rand.Next(-radius, radius);
+                int randY = Program.Server.Rand.Next(-radius, radius);
+
+                uint x = (uint)((int)_x - randX);
+                uint y = (uint)((int)_y - randY);
+
+                return Utils.EncodeCellIndex(_map, x, y);
+            }
+        }
         #endregion
     }
 }

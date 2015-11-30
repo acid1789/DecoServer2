@@ -272,7 +272,7 @@ namespace ServerDataTool
             int mapScale = 512 / _mapSize;
             int X = (int)loc.X;
             int Y = (int)loc.Y;
-            int size = 6 + (int)loc.Radius;
+            int size = 6 + (int)(loc.Radius * mapScale);
             int halfSize = size >> 1;
             pb.Size = new Size(size, size);
             int x = (X * mapScale) - halfSize;
@@ -286,7 +286,7 @@ namespace ServerDataTool
             int mapScale = 512 / _mapSize;
             int X = (int)loc.X;
             int Y = (int)loc.Y;
-            int size = 6 + (int)loc.Radius;
+            int size = 6 + (int)(loc.Radius * mapScale);
             int halfSize = size >> 1;
             pb.Size = new Size(size, size);
             int x = (X * mapScale) - halfSize;

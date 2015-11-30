@@ -156,7 +156,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,30859,150,150,150,123,0,0,0,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32382,150,150,150,123,0,0,0,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +337,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6),(4,'MillenaTrainingLoc',143,153,1,27),(5,'TestSpawn',129,120,40,5);
+INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6),(4,'MillenaTrainingLoc',143,153,1,27),(5,'TestSpawn',129,120,15,5);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,6 +382,9 @@ CREATE TABLE `monster_templates` (
   `template_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `game_id` int(10) unsigned NOT NULL,
   `hp` int(10) unsigned NOT NULL,
+  `idle_move_chance` double NOT NULL,
+  `idle_move_speed` tinyint(3) unsigned NOT NULL,
+  `attack_move_speed` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`template_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -392,7 +395,7 @@ CREATE TABLE `monster_templates` (
 
 LOCK TABLES `monster_templates` WRITE;
 /*!40000 ALTER TABLE `monster_templates` DISABLE KEYS */;
-INSERT INTO `monster_templates` VALUES (1,2901,35);
+INSERT INTO `monster_templates` VALUES (1,2901,35,0.01,5,8);
 /*!40000 ALTER TABLE `monster_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -616,4 +619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-28 14:27:37
+-- Dump completed on 2015-11-29 21:09:54
