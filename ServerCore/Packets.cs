@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using DecoServer2.CharacterThings;
+using DecoServer2;
 
 namespace JuggleServerCore
 {
@@ -83,6 +84,47 @@ namespace JuggleServerCore
             CharacterPositionClass mtp = new CharacterPositionClass();
             mtp.CellIndex = br.ReadUInt32();
             return mtp;
+        }
+    }
+
+    public class AttackTargetRequest : EventArgs                // 0x301
+    {
+        public enum TargetType
+        {
+            Monster,
+            Player
+        };
+
+        enum ComboType
+        {
+        };
+
+        public uint TargetID;
+        public TargetType TargetT;
+        public int ComboT;
+        public int ComboCount;
+        public int ComboStatus;
+        public ushort Motion;
+
+        public static AttackTargetRequest Read(PacketHeader header, BinaryReader br)
+        {
+            AttackTargetRequest atr = new AttackTargetRequest();
+
+            atr.TargetID = br.ReadUInt32();
+            
+            byte typeByte = br.ReadByte();
+            atr.TargetT = (typeByte & 3) == 0 ? TargetType.Player : TargetType.Monster;
+            atr.ComboT = ((typeByte >> 2) & 0x3F);
+
+            byte unkByte = br.ReadByte();
+
+            byte comboByte = br.ReadByte();
+            atr.ComboCount = (comboByte & 0x3F);
+            atr.ComboStatus = ((comboByte >> 6) & 0x3);
+
+            atr.Motion = br.ReadUInt16();
+
+            return atr;
         }
     }
 
@@ -419,6 +461,80 @@ namespace JuggleServerCore
             bw.Write((ushort)(_showNext ? 1 : 0));    // Should the dialog have the next button?
             bw.Write(_staticText);
             Utils.WriteByteString(bw, _text, 24);
+        }
+    }
+
+    public class SeePlayerAttack : SendPacketBase       // 0x0302
+    {
+        Monster _m;
+        CharacterInfo _ci;
+        AttackTargetRequest _atr;
+
+        public SeePlayerAttack(Monster m, CharacterInfo ci, AttackTargetRequest atr)
+        {
+            _m = m;
+            _ci = ci;
+            _atr = atr;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0302;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 23;
+            header.Write(bw);
+
+            int attackType = _atr.TargetT == AttackTargetRequest.TargetType.Monster ? 1 : 0;
+            int critical = 0;
+            int comboCount = _atr.ComboCount;
+            int comboStatus = _atr.ComboStatus;
+            byte attackData = (byte)(attackType | (critical << 1) | ((comboCount & 15) << 2) | ((comboStatus & 3) << 6));
+            byte comboGauge = 2;
+
+            bw.Write(_m.ID);
+            bw.Write(_m.CurHP);
+            bw.Write(_ci.CellIndex);
+            bw.Write(_atr.Motion);
+            bw.Write((ushort)1);
+            bw.Write(attackData);
+            bw.Write(_ci.CurSP);
+            bw.Write(comboGauge);
+            bw.Write((byte)1);
+        }
+    }
+
+    public class PlayerGetAttackedPacket : SendPacketBase     // 0x0303
+    {
+        uint _attackerID;
+        CharacterInfo _ci;
+        ushort _motion;
+        ushort _attackType;
+
+        public PlayerGetAttackedPacket(uint attacker, CharacterInfo victim, ushort motion, ushort attackType)
+        {
+            _attackerID = attacker;
+            _ci = victim;
+            _motion = motion;
+            _attackType = attackType;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0303;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 20;
+            header.Write(bw);
+
+            bw.Write(_attackerID);
+            bw.Write(_ci.CellIndex);
+            bw.Write(_ci.CurHP);
+            bw.Write(_motion);
+            bw.Write((ushort)0);
+            bw.Write(_attackType);
+            bw.Write((byte)(_ci.CurHP > 0 ? 0 : 1));
+            bw.Write((byte)1);
         }
     }
 

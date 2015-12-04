@@ -104,6 +104,7 @@ namespace JuggleServerCore
             client.OnMoveItem += Client_OnMoveItem;
             client.OnEquipItem += Client_OnEquipItem;
             client.OnUnEquipItem += Client_OnUnEquipItem;
+            client.OnAttack += Client_OnAttack;
 
             InputThread.AddConnection(client);
         }
@@ -177,6 +178,11 @@ namespace JuggleServerCore
         private void Client_OnUnEquipItem(object sender, EquipItemRequest e)
         {
             TaskProcessor.AddTask(new Task(Task.TaskType.UnEquipItem, (Connection)sender, e));
+        }
+
+        private void Client_OnAttack(object sender, AttackTargetRequest e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.DoAttack, (Connection)sender, e));
         }
         #endregion
 

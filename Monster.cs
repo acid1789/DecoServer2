@@ -27,6 +27,8 @@ namespace DecoServer2
         Vector _moveTarget;
         float _moveSpeed;
 
+        uint _curhp;
+
 
         static uint s_monsterID = 0xFFFF;
         public Monster(Location loc, MonsterTemplate template) : base()
@@ -42,7 +44,7 @@ namespace DecoServer2
             _gameID = (ushort)_template.GameID;
             _cellIndex = loc.RandomCell;
             _mapID = loc.Map;
-            _hp = _template.HP;
+            _hp = _curhp = _template.HP;
             _aiState = AIState.Idle;
             _aiTimer = 0;
         }
@@ -157,6 +159,12 @@ namespace DecoServer2
         public override byte MoveSpeed
         {
             get { return (byte)_moveSpeed; }
+        }
+
+        public uint CurHP
+        {
+            get { return _curhp; }
+            set { _curhp = value; }
         }
         #endregion
     }
@@ -309,6 +317,7 @@ namespace DecoServer2
             ms._monsterTemplateID = (uint)row[1];
             ms._locationID = (uint)row[2];
             ms._max = (uint)row[3];
+            ms._max = 2;
             ms._rateMin = (uint)row[4];
             ms._rateMax = (uint)row[5];
             ms._intervalMin = (uint)row[6];

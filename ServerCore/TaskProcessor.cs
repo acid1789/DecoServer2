@@ -58,6 +58,7 @@ namespace JuggleServerCore
             UnEquipItem,
             Teleport,
             UpdateNPCPosition,
+            DoAttack,
         }
 
         public TaskType Type;
@@ -163,6 +164,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.UnEquipItem] = UnEquipItem_Handler;
             _taskHandlers[Task.TaskType.Teleport] = Teleport_Handler;
             _taskHandlers[Task.TaskType.UpdateNPCPosition] = UpdateNPCPosition_Handler;
+            _taskHandlers[Task.TaskType.DoAttack] = DoAttack_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -994,6 +996,14 @@ namespace JuggleServerCore
             NPC npc = (NPC)t.Args;
             PlayMap map = _server.GetPlayMap(npc.MapID);
             map.UpdateNPCPosition(npc);
+        }
+
+        void DoAttack_Handler(Task t)
+        {
+            AttackTargetRequest atr = (AttackTargetRequest)t.Args;
+            PlayMap map = _server.GetPlayMap(t.Client.Character.MapID);
+            if( atr.TargetT == AttackTargetRequest.TargetType.Monster )
+                map.PlayerAttackMonster(t.Client, atr);
         }
         #endregion
     }

@@ -152,6 +152,26 @@ namespace DecoServer2
             _npcs[client.CurrentQuestNPC].NextDialog(client);
         }
 
+        public void PlayerAttackMonster(Connection client, AttackTargetRequest atr)
+        {
+            if (!_monsters.ContainsKey(atr.TargetID))
+            {
+                LogInterface.Log(string.Format("Character({0}) attacking non existant monster {1} on map {2}", client.Character.ID, atr.TargetID, client.Character.MapID), LogInterface.LogMessageType.Game);
+            }
+            else
+            {
+                Monster m = _monsters[atr.TargetID];
+
+                //int damage = client.Character.AttackDamage;
+                //m.TakeDamage(damage);
+
+                SeePlayerAttack pkt = new SeePlayerAttack(m, client.Character, atr);
+                foreach( Connection c in _players.Values )
+                    c.SendPacket(pkt);
+
+                client.SendPacket(new PlayerGetAttackedPacket(m.ID, client.Character, atr.Motion, (ushort)(atr.TargetT == AttackTargetRequest.TargetType.Monster ? 1 : 0)));
+            }
+        }
 
         #region Accessors
         public Connection[] Players

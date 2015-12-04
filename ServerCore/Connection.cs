@@ -35,6 +35,7 @@ namespace JuggleServerCore
         public event EventHandler<MoveItemRequest> OnMoveItem;
         public event EventHandler<EquipItemRequest> OnEquipItem;
         public event EventHandler<EquipItemRequest> OnUnEquipItem;
+        public event EventHandler<AttackTargetRequest> OnAttack;
         #endregion
 
         #region Quest Events
@@ -80,6 +81,7 @@ namespace JuggleServerCore
             _packetHandlers[0x0124] = UpdatePosition_Handler;
             _packetHandlers[0x0133] = PlayerEnterMap_Handler;
             _packetHandlers[0x0257] = NextNPCDialogButton_Handler;
+            _packetHandlers[0x0301] = Attack_Handler;
             _packetHandlers[0x0411] = EquipItem_Handler;
             _packetHandlers[0x0415] = UnEquipItem_Handler;
             _packetHandlers[0x0453] = MoveItem_Handler;
@@ -314,6 +316,11 @@ namespace JuggleServerCore
         void MoveItem_Handler(PacketHeader header, BinaryReader br)
         {
             OnMoveItem(this, MoveItemRequest.Read(header, br));
+        }
+
+        void Attack_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnAttack(this, AttackTargetRequest.Read(header, br));
         }
         #endregion
 

@@ -808,6 +808,26 @@ namespace DecoServer2.CharacterThings
         {
             get { return _maxHP; }
         }
+
+        public uint MaxSP
+        {
+            get { return _maxSP; }
+        }
+
+        public uint CurHP
+        {
+            get { return _curHP; }
+        }
+
+        public uint CurMP
+        {
+            get { return _curMP; }
+        }
+
+        public uint CurSP
+        {
+            get { return _curSP; }
+        }
         #endregion
 
     }
