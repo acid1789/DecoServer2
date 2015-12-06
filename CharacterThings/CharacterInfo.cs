@@ -593,6 +593,24 @@ namespace DecoServer2
             _cellIndex = loc.CellIndex;
         }
 
+        public void TakeDamage(int damage)
+        {
+            if (damage < 0)
+                _curHP += (uint)(-damage);
+            else
+            {
+                uint dmg = (uint)damage;
+                if( dmg < _physicalDef )
+                    dmg = 0;
+                else
+                    dmg -= _physicalDef;
+                if ( dmg > _curHP )
+                    _curHP = 0;
+                else
+                    _curHP -= dmg;
+            }
+        }
+
         #region Accessors
         public bool LoadComplete
         {

@@ -1010,7 +1010,15 @@ namespace JuggleServerCore
 
         void MonsterAttackPlayer_Handler(Task t)
         {
-            t.Client.SendPacket((PlayerGetAttackedPacket)t.Args);
+            object[] args = (object[])t.Args;
+            Monster m = (Monster)args[0];
+            int damage = (int)args[1];
+            ushort attackType = (ushort)args[2];
+
+            t.Client.Character.TakeDamage(damage);
+
+            PlayerGetAttackedPacket pkt = new PlayerGetAttackedPacket(m, t.Client.Character, attackType);
+            t.Client.SendPacket(pkt);
         }
         #endregion
     }

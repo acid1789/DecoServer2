@@ -154,13 +154,16 @@ namespace DecoServer2
 
             if (_aiTimer <= 0 && dist < _template.IdleMoveSpeed)
             {
-                //if( Program.Server.Rand.NextDouble() < _template.CriticalChance )
-
                 // Attack the player
-                PlayerGetAttackedPacket pkt = new PlayerGetAttackedPacket(ID, enemy.Character, 1, 1);
-                Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.MonsterAttackPlayer, enemy, pkt));
+                bool critical = ( Program.Server.Rand.NextDouble() < _template.CriticalChance );
+                int damage = Program.Server.Rand.Next(_template.AttackMin, _template.AttackMax);
+                if( critical )
+                    damage *= 2;
+                
+                ushort attackType = (ushort)(critical ? 3 : 1);
+                Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.MonsterAttackPlayer, enemy, new object[] { this, damage, attackType }));
 
-                _aiTimer = 2;//_template.AttackDelay;
+                _aiTimer = _template.AttackDelay;
             }
         }
 
@@ -286,7 +289,10 @@ namespace DecoServer2
         uint _hp;
         double _idleMoveChance;
         byte _idleMoveSpeed;
-        byte _attackMoveSpeed;
+        double _criticalChance;
+        double _attackDelay;
+        ushort _attackMin;
+        ushort _attackMax;
 
         public Monster Instantiate(Location loc)
         {
@@ -297,13 +303,16 @@ namespace DecoServer2
 
         public static MonsterTemplate ReadFromDB(object[] row)
         {
-            // 0: template_id int(11) unsigned
+            // 0: template_id	int(11) unsigned
             // 1: game_id int(10) unsigned
             // 2: hp  int(10) unsigned
             // 3: idle_move_chance    double
             // 4: idle_move_speed tinyint(3) unsigned
-            // 5: attack_move_speed   tinyint(3) unsigned
-
+            // 5: critical_chance double
+            // 6: attack_delay    double
+            // 7: attack_min  smallint(5) unsigned
+            // 8: attack_max  smallint(5) unsigned
+            
             MonsterTemplate mt = new MonsterTemplate();
 
             mt._id = (uint)row[0];
@@ -311,7 +320,10 @@ namespace DecoServer2
             mt._hp = (uint)row[2];
             mt._idleMoveChance = (double)row[3];
             mt._idleMoveSpeed = (byte)row[4];
-            mt._attackMoveSpeed = (byte)row[5];
+            mt._criticalChance = (double)row[5];
+            mt._attackDelay = (double)row[6];
+            mt._attackMin = (ushort)row[7];
+            mt._attackMax = (ushort)row[8];
             return mt;
         }
 
@@ -336,14 +348,29 @@ namespace DecoServer2
             get { return _idleMoveSpeed; }
         }
 
-        public byte AttackMoveSpeed
-        {
-            get { return _attackMoveSpeed; }
-        }
-
         public double IdleMoveChance
         {
             get { return _idleMoveChance; }
+        }
+
+        public double CriticalChance
+        {
+            get { return _criticalChance; }
+        }
+
+        public int AttackMin
+        {
+            get { return _attackMin; }
+        }
+
+        public int AttackMax
+        {
+            get { return _attackMax; }
+        }
+
+        public double AttackDelay
+        {
+            get { return _attackDelay; }
         }
         #endregion
     }

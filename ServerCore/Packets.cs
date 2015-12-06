@@ -506,16 +506,16 @@ namespace JuggleServerCore
 
     public class PlayerGetAttackedPacket : SendPacketBase     // 0x0303
     {
-        uint _attackerID;
+        Monster _attacker;
         CharacterInfo _ci;
         ushort _motion;
         ushort _attackType;
 
-        public PlayerGetAttackedPacket(uint attacker, CharacterInfo victim, ushort motion, ushort attackType)
+        public PlayerGetAttackedPacket(Monster attacker, CharacterInfo victim, ushort attackType)
         {
-            _attackerID = attacker;
+            _attacker = attacker;
             _ci = victim;
-            _motion = motion;
+            _motion = 1;
             _attackType = attackType;
         }
 
@@ -527,8 +527,8 @@ namespace JuggleServerCore
             header.PacketLength = 20;
             header.Write(bw);
             
-            bw.Write(_attackerID);
-            bw.Write(_ci.CellIndex);
+            bw.Write(_attacker.ID);
+            bw.Write(_attacker.CellIndex);
             bw.Write(_ci.CurHP);
             bw.Write(_motion);
             bw.Write((ushort)1);
