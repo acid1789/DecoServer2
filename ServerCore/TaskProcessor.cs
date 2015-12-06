@@ -59,6 +59,7 @@ namespace JuggleServerCore
             Teleport,
             UpdateNPCPosition,
             DoAttack,
+            MonsterAttackPlayer,
         }
 
         public TaskType Type;
@@ -165,6 +166,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.Teleport] = Teleport_Handler;
             _taskHandlers[Task.TaskType.UpdateNPCPosition] = UpdateNPCPosition_Handler;
             _taskHandlers[Task.TaskType.DoAttack] = DoAttack_Handler;
+            _taskHandlers[Task.TaskType.MonsterAttackPlayer] = MonsterAttackPlayer_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -1004,6 +1006,11 @@ namespace JuggleServerCore
             PlayMap map = _server.GetPlayMap(t.Client.Character.MapID);
             if( atr.TargetT == AttackTargetRequest.TargetType.Monster )
                 map.PlayerAttackMonster(t.Client, atr);
+        }
+
+        void MonsterAttackPlayer_Handler(Task t)
+        {
+            t.Client.SendPacket((PlayerGetAttackedPacket)t.Args);
         }
         #endregion
     }

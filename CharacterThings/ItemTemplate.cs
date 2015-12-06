@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DecoServer2.CharacterThings
+namespace DecoServer2
 {
     public class ItemTemplate
     {

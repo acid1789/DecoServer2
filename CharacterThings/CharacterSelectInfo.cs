@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using JuggleServerCore;
 
-namespace DecoServer2.CharacterThings
+namespace DecoServer2
 {
     public class CharacterSelectInfo
     {

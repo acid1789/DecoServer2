@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Threading;
 using JuggleServerCore;
 
 namespace DecoServer2
@@ -13,21 +14,24 @@ namespace DecoServer2
         enum AIState
         {
             Idle,
-            Moving,
             Attack,
             Dead,
         };
-
+        
         MonsterTemplate _template;
         Location _loc;
 
         AIState _aiState;
-        AIState _aiNextState;
         double _aiTimer;
+
         Vector _moveTarget;
+        uint _moveTargetCell;
         float _moveSpeed;
+        double _moveTimer;
 
         uint _curhp;
+        Dictionary<int, uint> _enemies;
+        Mutex _enemyLock;
 
 
         static uint s_monsterID = 0xFFFF;
@@ -37,23 +41,75 @@ namespace DecoServer2
             if( s_monsterID < 0xFFFF )
                 s_monsterID = 0xFFFF + 1;
 
+            _enemies = new Dictionary<int, uint>();
+            _enemyLock = new Mutex();
+
             _loc = loc;
             _template = template;
 
             _id = s_monsterID;
             _gameID = (ushort)_template.GameID;
-            _cellIndex = loc.RandomCell;
+            _cellIndex = _moveTargetCell = loc.RandomCell;
             _mapID = loc.Map;
             _hp = _curhp = _template.HP;
             _aiState = AIState.Idle;
             _aiTimer = 0;
+
+            _moveTimer = 0;
         }
 
         public void Update(double deltaSeconds)
         {
+            Connection enemy = FindEnemy();
+            if (enemy != null && _aiState != AIState.Attack)
+            {
+                // There is a valid enemy, go into attack mode!
+                _aiState = AIState.Attack;
+                _aiTimer = 0;
+            }
+            else if (enemy == null && _aiState != AIState.Idle)
+            {
+                _aiState = AIState.Idle;
+                _aiTimer = 0;
+            }
+
+            if( _curhp <= 0 )
+                _aiState = AIState.Dead;
+
+
             if (_aiTimer > 0)
                 _aiTimer -= deltaSeconds;
 
+            UpdateMove(deltaSeconds);
+            UpdateAI(deltaSeconds, enemy);            
+        }
+
+        void UpdateMove(double deltaSeconds)
+        {            
+            if (_cellIndex != _moveTargetCell)
+            {
+                _moveTimer -= deltaSeconds;
+                if (_moveTimer <= 0)
+                {
+                    // Move along the vector
+                    Vector pos = Utils.DecodeCellIndex(_loc.Map, _cellIndex);
+                    Vector delta = _moveTarget - pos;
+                    double dist = delta.Length;
+                    if (dist > _moveSpeed)
+                        dist = _moveSpeed;
+
+                    delta.Normalize();
+                    Vector target = pos + (delta * dist);
+
+                    _cellIndex = Utils.EncodeCellIndex(_loc.Map, (uint)target.X, (uint)target.Y);
+                    Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.UpdateNPCPosition, null, this));
+                    _moveTimer = 1;
+                }
+            }
+        }
+
+        void UpdateAI(double deltaSeconds, Connection enemy)
+        {
             switch (_aiState)
             {
                 case AIState.Idle:
@@ -62,45 +118,99 @@ namespace DecoServer2
                         if (Program.Server.Rand.NextDouble() < _template.IdleMoveChance)
                         {
                             // Wander to a new spot
-                            _moveTarget = Utils.DecodeCellIndex(_loc.Map, _loc.RandomCell);
+                            _moveTargetCell = _loc.RandomCell;
+                            _moveTarget = Utils.DecodeCellIndex(_loc.Map, _moveTargetCell);
                             _moveSpeed = _template.IdleMoveSpeed;
-                            _aiState = AIState.Moving;
-                            _aiNextState = AIState.Idle;
                         }
                         else
                             _aiTimer = 1;
                     }
                     break;
-                case AIState.Moving:
-                    if (_aiTimer <= 0)
-                    {
-                        // Move along the vector
-                        Vector pos = Utils.DecodeCellIndex(_loc.Map, _cellIndex);
-                        Vector delta = _moveTarget - pos;
-                        double dist = delta.Length;
-                        if (dist > _moveSpeed)
-                            dist = _moveSpeed;
-                        if (dist < 1)
-                        {
-                            // done moving
-                            _aiState = _aiNextState;
-                        }
-                        else
-                        {
-                            delta.Normalize();
-                            Vector target = pos + (delta * dist);
-
-                            _cellIndex = Utils.EncodeCellIndex(_loc.Map, (uint)target.X, (uint)target.Y);
-                            Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.UpdateNPCPosition, null, this));
-                        }                        
-                        _aiTimer = 1;
-                    }
-                    break;
                 case AIState.Attack:
+                    DoAttack(enemy);                    
                     break;
                 case AIState.Dead:
                     break;
             }
+        }
+
+        void DoAttack(Connection enemy)
+        {
+            Vector myPos = Utils.DecodeCellIndex(_loc.Map, _cellIndex);
+            Vector ePos = Utils.DecodeCellIndex(enemy.Character.MapID, enemy.Character.CellIndex);
+
+            Vector fromEnemy = myPos - ePos;
+            double dist = fromEnemy.Length;
+            if (dist > _template.IdleMoveSpeed)
+            {
+                fromEnemy.Normalize();
+                fromEnemy *= 2;
+                _moveTarget = ePos + fromEnemy;
+                _moveTargetCell = Utils.EncodeCellIndex(_mapID, _moveTarget);
+                _moveSpeed = _template.IdleMoveSpeed;
+                _aiTimer = 1;
+                UpdateMove(0);
+            }
+
+            if (_aiTimer <= 0 && dist < _template.IdleMoveSpeed)
+            {
+                //if( Program.Server.Rand.NextDouble() < _template.CriticalChance )
+
+                // Attack the player
+                PlayerGetAttackedPacket pkt = new PlayerGetAttackedPacket(ID, enemy.Character, 1, 1);
+                Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.MonsterAttackPlayer, enemy, pkt));
+
+                _aiTimer = 2;//_template.AttackDelay;
+            }
+        }
+
+        Connection FindEnemy()
+        {
+            Connection enemy = null;
+            if (_enemies.Count > 0)
+            {
+                // Grab all the enemies
+                _enemyLock.WaitOne();
+                KeyValuePair<int, uint>[] enemies = _enemies.ToArray();
+                _enemyLock.ReleaseMutex();
+                List<int> toRemove = new List<int>();
+
+                // Pick the one that has done the most damage
+                PlayMap myMap = Program.Server.GetPlayMap(_mapID);
+                uint bestThreatVal = 0;
+                Connection bestThreat = null;
+                foreach (KeyValuePair<int, uint> kvp in enemies)
+                {
+                    Connection e = myMap.GetPlayer(kvp.Key);
+                    if (e.Character.CurHP <= 0 || kvp.Value == 0)
+                        toRemove.Add(kvp.Key);
+                    else if (kvp.Value > bestThreatVal)
+                    {
+                        bestThreatVal = kvp.Value;
+                        bestThreat = e;
+                    }
+                }
+
+                enemy = bestThreat;
+
+                // Remove any dead guys
+                if (toRemove.Count > 0)
+                {
+                    _enemyLock.WaitOne();
+                    foreach (int remove in toRemove)
+                        _enemies.Remove(remove);
+                    _enemyLock.ReleaseMutex();
+                }
+            }
+            return enemy;
+        }
+
+        public void TakeDamage(uint damage, int fromId)
+        {
+            _enemyLock.WaitOne();
+            uint prevDmg = _enemies.ContainsKey(fromId) ? _enemies[fromId] : 0;
+            _enemies[fromId] = prevDmg + damage + 1;
+            _enemyLock.ReleaseMutex();
         }
 
         public override void Write(BinaryWriter bw)

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.IO;
-using DecoServer2.CharacterThings;
+using DecoServer2;
 using DecoServer2.Quests;
 
 namespace JuggleServerCore

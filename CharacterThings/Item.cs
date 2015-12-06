@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace DecoServer2.CharacterThings
+namespace DecoServer2
 {
     public class Item
     {

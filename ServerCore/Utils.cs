@@ -121,6 +121,11 @@ namespace JuggleServerCore
             return mapSize;
         }
 
+        public static uint EncodeCellIndex(ushort map, Vector v)
+        {
+            return EncodeCellIndex(map, (uint)v.X, (uint)v.Y);
+        }
+
         public static uint EncodeCellIndex(ushort map, uint x, uint y)
         {
             uint mapSize = GetMapSize(map);

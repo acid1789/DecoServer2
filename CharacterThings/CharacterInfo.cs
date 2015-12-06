@@ -7,7 +7,7 @@ using System.IO;
 using JuggleServerCore;
 using DecoServer2.Quests;
 
-namespace DecoServer2.CharacterThings
+namespace DecoServer2
 {
     public class CharacterInfo
     {

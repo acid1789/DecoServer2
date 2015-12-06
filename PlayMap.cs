@@ -81,6 +81,13 @@ namespace DecoServer2
             }
         }
 
+        public Connection GetPlayer(int id)
+        {
+            if( _players.ContainsKey(id) )
+                return _players[id];
+            return null;
+        }
+
         public void ProcessMoveRequest(Connection client, CharacterPositionClass mtp)
         {
             // Check to see if we hit any npcs
@@ -163,13 +170,14 @@ namespace DecoServer2
                 Monster m = _monsters[atr.TargetID];
 
                 //int damage = client.Character.AttackDamage;
-                //m.TakeDamage(damage);
+                uint damage = 0;
+                m.TakeDamage(damage, client.Character.ID);
 
                 SeePlayerAttack pkt = new SeePlayerAttack(m, client.Character, atr);
                 foreach( Connection c in _players.Values )
                     c.SendPacket(pkt);
 
-                client.SendPacket(new PlayerGetAttackedPacket(m.ID, client.Character, atr.Motion, (ushort)(atr.TargetT == AttackTargetRequest.TargetType.Monster ? 1 : 0)));
+                //client.SendPacket(new PlayerGetAttackedPacket(m.ID, client.Character, atr.Motion, (ushort)(atr.TargetT == AttackTargetRequest.TargetType.Monster ? 1 : 0)));
             }
         }
 

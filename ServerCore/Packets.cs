@@ -526,12 +526,12 @@ namespace JuggleServerCore
             header.PacketSequenceNumber = sequence;
             header.PacketLength = 20;
             header.Write(bw);
-
+            
             bw.Write(_attackerID);
             bw.Write(_ci.CellIndex);
             bw.Write(_ci.CurHP);
             bw.Write(_motion);
-            bw.Write((ushort)0);
+            bw.Write((ushort)1);
             bw.Write(_attackType);
             bw.Write((byte)(_ci.CurHP > 0 ? 0 : 1));
             bw.Write((byte)1);
