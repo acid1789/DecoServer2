@@ -119,6 +119,8 @@ namespace DecoServer2
             _exp = (ulong)row[9];
             _fame = (uint)row[10];
 
+            _curHP = 150;
+
             _expectingHV = false;
         }
 
@@ -591,6 +593,19 @@ namespace DecoServer2
         {
             _mapID = loc.Map;
             _cellIndex = loc.CellIndex;
+        }
+
+        public void AttackTarget(Monster m, AttackTargetRequest atr)
+        {
+            bool millena = Millena;
+            int damage = Program.Server.Rand.Next(millena ? _abilityPMin : _abilityMMin, millena ? _abilityPMax : _abilityMMax);
+
+            bool critical = (Program.Server.Rand.NextDouble() < 0.25);
+            if( critical )
+                damage *= 2;
+            atr.Critical = critical;
+
+            m.TakeDamage((uint)damage, ID);
         }
 
         public void TakeDamage(int damage)

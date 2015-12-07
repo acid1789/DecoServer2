@@ -169,15 +169,11 @@ namespace DecoServer2
             {
                 Monster m = _monsters[atr.TargetID];
 
-                //int damage = client.Character.AttackDamage;
-                uint damage = 0;
-                m.TakeDamage(damage, client.Character.ID);
-
+                client.Character.AttackTarget(m, atr);
+                
                 SeePlayerAttack pkt = new SeePlayerAttack(m, client.Character, atr);
                 foreach( Connection c in _players.Values )
-                    c.SendPacket(pkt);
-
-                //client.SendPacket(new PlayerGetAttackedPacket(m.ID, client.Character, atr.Motion, (ushort)(atr.TargetT == AttackTargetRequest.TargetType.Monster ? 1 : 0)));
+                    c.SendPacket(pkt);                
             }
         }
 

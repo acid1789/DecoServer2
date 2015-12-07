@@ -62,6 +62,7 @@ CREATE TABLE `active_quests` (
 
 LOCK TABLES `active_quests` WRITE;
 /*!40000 ALTER TABLE `active_quests` DISABLE KEYS */;
+INSERT INTO `active_quests` VALUES (5,1,3);
 /*!40000 ALTER TABLE `active_quests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +157,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32382,150,150,150,123,0,0,0,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32377,150,150,150,123,0,0,0,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +273,7 @@ CREATE TABLE `item_instances` (
   `inventory_type` int(10) unsigned NOT NULL,
   `slot` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`instance_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,6 +282,7 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
+INSERT INTO `item_instances` VALUES (1,2,50,1,5,1,0),(2,1,50,0,5,0,2);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,7 +386,10 @@ CREATE TABLE `monster_templates` (
   `hp` int(10) unsigned NOT NULL,
   `idle_move_chance` double NOT NULL,
   `idle_move_speed` tinyint(3) unsigned NOT NULL,
-  `attack_move_speed` tinyint(3) unsigned NOT NULL,
+  `critical_chance` double NOT NULL,
+  `attack_delay` double NOT NULL,
+  `attack_min` smallint(5) unsigned NOT NULL,
+  `attack_max` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`template_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -395,7 +400,7 @@ CREATE TABLE `monster_templates` (
 
 LOCK TABLES `monster_templates` WRITE;
 /*!40000 ALTER TABLE `monster_templates` DISABLE KEYS */;
-INSERT INTO `monster_templates` VALUES (1,2901,35,0.01,5,8);
+INSERT INTO `monster_templates` VALUES (1,2901,35,0.01,3,0.1,2,8,15);
 /*!40000 ALTER TABLE `monster_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -619,4 +624,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-29 21:09:54
+-- Dump completed on 2015-12-06 12:40:36

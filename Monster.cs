@@ -214,6 +214,12 @@ namespace DecoServer2
             uint prevDmg = _enemies.ContainsKey(fromId) ? _enemies[fromId] : 0;
             _enemies[fromId] = prevDmg + damage + 1;
             _enemyLock.ReleaseMutex();
+
+            if( damage > _curhp )
+                _curhp = 0;
+            else
+                _curhp -= damage;
+           
         }
 
         public override void Write(BinaryWriter bw)
@@ -266,7 +272,7 @@ namespace DecoServer2
         #region Accessors
         public bool Dead
         {
-            get { return false; }
+            get { return _curhp <= 0; }
         }
 
         public override byte MoveSpeed
@@ -408,10 +414,14 @@ namespace DecoServer2
                 if( m.Dead )
                     remove.Add(m);
             }
-            foreach( Monster r in remove )
-                _spawns.Remove(r);
+            if (remove.Count > 0)
+            {
+                foreach (Monster r in remove)
+                    _spawns.Remove(r);
+                _nextSpawnTime = _intervalMin;
+            }
 
-            // Advance the spawn timer
+            // Advance the spawn timer            
             _nextSpawnTime -= deltaSeconds;
             if (_nextSpawnTime <= 0)
             {

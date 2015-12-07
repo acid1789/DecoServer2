@@ -105,13 +105,15 @@ namespace JuggleServerCore
         public int ComboCount;
         public int ComboStatus;
         public ushort Motion;
+        public bool Critical;
 
         public static AttackTargetRequest Read(PacketHeader header, BinaryReader br)
         {
             AttackTargetRequest atr = new AttackTargetRequest();
 
             atr.TargetID = br.ReadUInt32();
-            
+            atr.Critical = false;
+
             byte typeByte = br.ReadByte();
             atr.TargetT = (typeByte & 3) == 0 ? TargetType.Player : TargetType.Monster;
             atr.ComboT = ((typeByte >> 2) & 0x3F);
@@ -469,12 +471,14 @@ namespace JuggleServerCore
         Monster _m;
         CharacterInfo _ci;
         AttackTargetRequest _atr;
+        byte _errorByte;
 
         public SeePlayerAttack(Monster m, CharacterInfo ci, AttackTargetRequest atr)
         {
             _m = m;
             _ci = ci;
             _atr = atr;
+            _errorByte = 1;
         }
 
         public override void Write(uint sequence, BinaryWriter bw)
@@ -486,21 +490,42 @@ namespace JuggleServerCore
             header.Write(bw);
 
             int attackType = _atr.TargetT == AttackTargetRequest.TargetType.Monster ? 1 : 0;
-            int critical = 0;
+            int critical = _atr.Critical ? 1 : 0;
             int comboCount = _atr.ComboCount;
             int comboStatus = _atr.ComboStatus;
-            byte attackData = (byte)(attackType | (critical << 1) | ((comboCount & 15) << 2) | ((comboStatus & 3) << 6));
-            byte comboGauge = 2;
+            byte attackData = (byte)(attackType | (critical << 1) | ((comboCount & 0xF) << 2) | ((comboStatus & 3) << 6));
+            byte comboGauge = (byte)(_m.Dead ? 0xC0 : 0);
 
-            bw.Write(_m.ID);
-            bw.Write(_m.CurHP);
-            bw.Write(_ci.CellIndex);
-            bw.Write(_atr.Motion);
-            bw.Write((ushort)1);
-            bw.Write(attackData);
-            bw.Write(_ci.CurSP);
-            bw.Write(comboGauge);
-            bw.Write((byte)1);
+            bw.Write(_m.ID);            // 0Eh
+            bw.Write(_m.CurHP);         // 12h
+            bw.Write(_ci.CellIndex);    // 16h
+            bw.Write(_atr.Motion);      // 1Ah
+            bw.Write((ushort)0);        // 1Ch
+            bw.Write(attackData);       // 1Eh
+            bw.Write(_ci.CurSP);        // 1Fh
+            bw.Write(comboGauge);       // 23h
+            bw.Write(_errorByte);       // 24h
+
+            // 1: No error
+            // 3: No Equipments For Using the Skill
+            // 5: Insufficient Gauge for Using the Skill
+            // 6: Wrong Target
+            // 7: Unable to use the skill yet
+            // 8: Away from the skill use range
+            // 13: Skill wlready in use
+            // 14: Unable to find target
+            // 15: Already dead target
+            // 16: the number to attack is short
+            // 20: unable to use durring multiple character status
+            // 21: the lasting skill was canceled
+            // 26: You can use it after certain time passed after attacking
+            // 28: If the necessary continuing skill is not learnt, you will be unable to use it
+            // 29: The combo sequence does not exist
+            // 31: Exceeded maximum multiple characteristic
+            // 32: Targeting failed
+            // 33: Protected safe mode after moving map
+            // 34: Unable to use with duplication
+            // 36: You can must select only one of among attack mode or defense mode
         }
     }
 
@@ -757,6 +782,27 @@ namespace JuggleServerCore
             header.Write(bw);
             
             _npc.Write(bw);
+        }
+    }
+
+    public class NPCDeadPacket : SendPacketBase         // 0x5003
+    {
+        uint _id;
+
+        public NPCDeadPacket(uint id)
+        {
+            _id = id;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x5003;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 4;
+            header.Write(bw);
+
+            bw.Write(_id);
         }
     }
 
