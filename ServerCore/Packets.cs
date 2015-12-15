@@ -466,27 +466,6 @@ namespace JuggleServerCore
         }
     }
 
-    public class ExpGainPacket : SendPacketBase         // 0x0300
-    {
-        ulong _exp;
-
-        public ExpGainPacket(ulong exp)
-        {
-            _exp = exp;
-        }
-
-        public override void Write(uint sequence, BinaryWriter bw)
-        {
-            PacketHeader header = new PacketHeader();
-            header.Opcode = 0x0300;
-            header.PacketSequenceNumber = sequence;
-            header.PacketLength = 8;
-            header.Write(bw);
-
-            bw.Write(_exp);
-        }
-    }
-
     public class SeePlayerAttack : SendPacketBase       // 0x0302
     {
         uint _victimID;
@@ -583,6 +562,27 @@ namespace JuggleServerCore
             bw.Write(_attackType);
             bw.Write((byte)(_ci.CurHP > 0 ? 0 : 1));
             bw.Write((byte)1);
+        }
+    }
+
+    public class ExpGainPacket : SendPacketBase         // 0x0320
+    {
+        ulong _exp;
+
+        public ExpGainPacket(ulong exp)
+        {
+            _exp = exp;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0320;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 8;
+            header.Write(bw);
+
+            bw.Write(_exp);
         }
     }
 
