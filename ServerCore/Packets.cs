@@ -466,19 +466,42 @@ namespace JuggleServerCore
         }
     }
 
+    public class ExpGainPacket : SendPacketBase         // 0x0300
+    {
+        ulong _exp;
+
+        public ExpGainPacket(ulong exp)
+        {
+            _exp = exp;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0300;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 8;
+            header.Write(bw);
+
+            bw.Write(_exp);
+        }
+    }
+
     public class SeePlayerAttack : SendPacketBase       // 0x0302
     {
-        Monster _m;
+        uint _victimID;
+        uint _victimHP;
         CharacterInfo _ci;
         AttackTargetRequest _atr;
         byte _errorByte;
 
-        public SeePlayerAttack(Monster m, CharacterInfo ci, AttackTargetRequest atr)
+        public SeePlayerAttack(uint victimID, uint victimHP, CharacterInfo ci, AttackTargetRequest atr, byte error = 1)
         {
-            _m = m;
+            _victimID = victimID;
+            _victimHP = victimHP;
             _ci = ci;
             _atr = atr;
-            _errorByte = 1;
+            _errorByte = error;
         }
 
         public override void Write(uint sequence, BinaryWriter bw)
@@ -494,10 +517,10 @@ namespace JuggleServerCore
             int comboCount = _atr.ComboCount;
             int comboStatus = _atr.ComboStatus;
             byte attackData = (byte)(attackType | (critical << 1) | ((comboCount & 0xF) << 2) | ((comboStatus & 3) << 6));
-            byte comboGauge = (byte)(_m.Dead ? 0xC0 : 0);
+            byte comboGauge = (byte)(_victimHP == 0 ? 0xC0 : 0);
 
-            bw.Write(_m.ID);            // 0Eh
-            bw.Write(_m.CurHP);         // 12h
+            bw.Write(_victimID);        // 0Eh
+            bw.Write(_victimHP);        // 12h
             bw.Write(_ci.CellIndex);    // 16h
             bw.Write(_atr.Motion);      // 1Ah
             bw.Write((ushort)0);        // 1Ch
@@ -560,6 +583,60 @@ namespace JuggleServerCore
             bw.Write(_attackType);
             bw.Write((byte)(_ci.CurHP > 0 ? 0 : 1));
             bw.Write((byte)1);
+        }
+    }
+
+    public class ItemLootPacket : SendPacketBase        // 0x0402
+    {
+        uint _monsterID;
+        Item _item;
+
+        public ItemLootPacket(Item item, uint monsterID)
+        {
+            _monsterID = monsterID;
+            _item = item;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0402;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 22;
+            header.Write(bw);
+
+            bw.Write((byte)1);              // 0xE - Error Byte
+            _item.Write(bw);
+            bw.Write((byte)0);              // Unused spacer byte
+
+            // 0x20 - 112 bytes of some data, starts with npc id?, maybe npc data?
+            bw.Write(_monsterID);          
+            //Utils.WriteZeros(bw, 108);      
+        }
+    }
+
+    public class GoldLootPacket : SendPacketBase        // 0x0403
+    {
+        uint _gold;
+        uint _victim;
+
+        public GoldLootPacket(uint gold, uint victim)
+        {
+            _gold = gold;
+            _victim = victim;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0403;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 9;
+            header.Write(bw);
+
+            bw.Write(_gold);
+            bw.Write((byte)1);
+            bw.Write(_victim);
         }
     }
 

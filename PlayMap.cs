@@ -164,6 +164,7 @@ namespace DecoServer2
             if (!_monsters.ContainsKey(atr.TargetID))
             {
                 LogInterface.Log(string.Format("Character({0}) attacking non existant monster {1} on map {2}", client.Character.ID, atr.TargetID, client.Character.MapID), LogInterface.LogMessageType.Game);
+                client.SendPacket(new SeePlayerAttack(atr.TargetID, 0, client.Character, atr, 6));        // Wrong target
             }
             else
             {
@@ -171,9 +172,15 @@ namespace DecoServer2
 
                 client.Character.AttackTarget(m, atr);
                 
-                SeePlayerAttack pkt = new SeePlayerAttack(m, client.Character, atr);
+                SeePlayerAttack pkt = new SeePlayerAttack(m.ID, m.CurHP, client.Character, atr);
                 foreach( Connection c in _players.Values )
-                    c.SendPacket(pkt);                
+                    c.SendPacket(pkt);
+
+                if (m.Dead)
+                {
+                    // Do loot!
+                    m.GiveLoot(client);
+                }
             }
         }
 

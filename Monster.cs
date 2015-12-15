@@ -222,6 +222,34 @@ namespace DecoServer2
            
         }
 
+        public void GiveLoot(Connection client)
+        {
+            int exp = Program.Server.Rand.Next(_template.ExpMin, _template.ExpMax);
+            int gold = Program.Server.Rand.Next(_template.GoldMin, _template.GoldMax);
+            uint? lootTemplate = _template.LootTable.Generate();
+
+            bool hvUpdate = false;
+            if (exp > 0)
+            {
+                client.Character.GainExp(exp);
+                client.SendPacket(new ExpGainPacket(client.Character.Exp));
+                hvUpdate = true;
+            }
+            if (gold > 0)
+            {
+                client.Character.GainGold(gold);
+                client.SendPacket(new GoldLootPacket(client.Character.Gold, ID));
+                hvUpdate = true;
+            }
+            if (lootTemplate != null)
+            {                
+                Program.Server.TaskProcessor.AddTask(new Task(Task.TaskType.GiveItem, client, new GiveItemArgs(lootTemplate.Value, GiveItemArgs.TheReason.Loot, ID)));
+            }
+
+            if( hvUpdate )
+                Program.Server.TaskProcessor.AddDBQuery(client.Character.HVString, null, false);
+        }
+
         public override void Write(BinaryWriter bw)
         {
             base.Write(bw);
@@ -299,6 +327,11 @@ namespace DecoServer2
         double _attackDelay;
         ushort _attackMin;
         ushort _attackMax;
+        int _expMin;
+        int _expMax;
+        int _goldMin;
+        int _goldMax;
+        LootTable _lootTable;
 
         public Monster Instantiate(Location loc)
         {
@@ -318,7 +351,12 @@ namespace DecoServer2
             // 6: attack_delay    double
             // 7: attack_min  smallint(5) unsigned
             // 8: attack_max  smallint(5) unsigned
-            
+            // 9: exp_min int(11)
+            // 10: exp_max int(11)
+            // 11: gold_min    int(11)
+            // 12: gold_max    int(11)
+            // 13: loot_table  int(11)
+
             MonsterTemplate mt = new MonsterTemplate();
 
             mt._id = (uint)row[0];
@@ -330,6 +368,13 @@ namespace DecoServer2
             mt._attackDelay = (double)row[6];
             mt._attackMin = (ushort)row[7];
             mt._attackMax = (ushort)row[8];
+            mt._expMin = (int)row[9];
+            mt._expMax = (int)row[10];
+            mt._goldMin = (int)row[11];
+            mt._goldMax = (int)row[12];
+            int lootTable = (int)row[13];
+            mt._lootTable = Program.Server.GetLootTable(lootTable);
+
             return mt;
         }
 
@@ -377,6 +422,31 @@ namespace DecoServer2
         public double AttackDelay
         {
             get { return _attackDelay; }
+        }
+
+        public int ExpMin
+        {
+            get { return _expMin; }
+        }
+
+        public int ExpMax
+        {
+            get { return _expMax; }
+        }
+
+        public int GoldMin
+        {
+            get { return _goldMin; }
+        }
+
+        public int GoldMax
+        {
+            get { return _goldMax; }
+        }
+
+        public LootTable LootTable
+        {
+            get { return _lootTable; }
         }
         #endregion
     }

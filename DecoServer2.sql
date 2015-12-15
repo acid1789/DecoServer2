@@ -157,7 +157,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32377,150,150,150,123,0,0,0,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,29825,150,150,150,241,0,0,61,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +273,7 @@ CREATE TABLE `item_instances` (
   `inventory_type` int(10) unsigned NOT NULL,
   `slot` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`instance_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +282,7 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
-INSERT INTO `item_instances` VALUES (1,2,50,1,5,1,0),(2,1,50,0,5,0,2);
+INSERT INTO `item_instances` VALUES (1,2,50,1,5,1,0),(2,1,50,0,5,0,2),(3,1,50,0,5,1,1),(4,1,50,0,5,1,2),(5,1,50,0,5,1,3),(6,1,50,0,5,1,4),(7,3,2,5604,5,1,5),(8,3,3,5906,5,1,6),(9,1,50,0,5,1,7),(10,3,3,5753,5,1,8),(11,1,50,0,5,1,9),(12,1,50,0,5,1,10);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +311,7 @@ CREATE TABLE `item_templates` (
 
 LOCK TABLES `item_templates` WRITE;
 /*!40000 ALTER TABLE `item_templates` DISABLE KEYS */;
-INSERT INTO `item_templates` VALUES (1,1,1,50,50,0,0),(2,4,1,50,50,1,1),(3,5,2,123,124,5000,6000),(4,6,3,123,124,5000,6000),(5,7,4,123,124,5000,6000),(6,8,0,123,124,5000,6000);
+INSERT INTO `item_templates` VALUES (1,1,1,50,50,0,0),(2,4,1,50,50,1,1),(3,3,1,1,4,5000,6000),(4,6,3,123,124,5000,6000),(5,7,4,123,124,5000,6000),(6,8,0,123,124,5000,6000);
 /*!40000 ALTER TABLE `item_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,6 +341,30 @@ LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
 INSERT INTO `locations` VALUES (3,'RainSquare',220,289,10,6),(4,'MillenaTrainingLoc',143,153,1,27),(5,'TestSpawn',129,120,15,5);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `loot_tables`
+--
+
+DROP TABLE IF EXISTS `loot_tables`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loot_tables` (
+  `loot_table_id` int(11) NOT NULL,
+  `chance` double NOT NULL,
+  `item_template` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loot_tables`
+--
+
+LOCK TABLES `loot_tables` WRITE;
+/*!40000 ALTER TABLE `loot_tables` DISABLE KEYS */;
+INSERT INTO `loot_tables` VALUES (1,0.25,1),(1,0.4,3);
+/*!40000 ALTER TABLE `loot_tables` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -390,6 +414,11 @@ CREATE TABLE `monster_templates` (
   `attack_delay` double NOT NULL,
   `attack_min` smallint(5) unsigned NOT NULL,
   `attack_max` smallint(5) unsigned NOT NULL,
+  `exp_min` int(11) DEFAULT NULL,
+  `exp_max` int(11) DEFAULT NULL,
+  `gold_min` int(11) DEFAULT NULL,
+  `gold_max` int(11) DEFAULT NULL,
+  `loot_table` int(11) DEFAULT NULL,
   PRIMARY KEY (`template_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -400,7 +429,7 @@ CREATE TABLE `monster_templates` (
 
 LOCK TABLES `monster_templates` WRITE;
 /*!40000 ALTER TABLE `monster_templates` DISABLE KEYS */;
-INSERT INTO `monster_templates` VALUES (1,2901,35,0.01,3,0.1,2,8,15);
+INSERT INTO `monster_templates` VALUES (1,2901,35,0.01,3,0.1,2,8,15,3,5,4,10,1);
 /*!40000 ALTER TABLE `monster_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,7 +581,7 @@ CREATE TABLE `quest_rewards` (
 
 LOCK TABLES `quest_rewards` WRITE;
 /*!40000 ALTER TABLE `quest_rewards` DISABLE KEYS */;
-INSERT INTO `quest_rewards` VALUES (1,0,3,2),(1,1,3,1),(1,3,4,4);
+INSERT INTO `quest_rewards` VALUES (1,0,3,2),(1,1,3,1),(1,3,4,2);
 /*!40000 ALTER TABLE `quest_rewards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -624,4 +653,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-06 12:40:36
+-- Dump completed on 2015-12-14 23:42:01

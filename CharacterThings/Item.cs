@@ -28,13 +28,13 @@ namespace DecoServer2
         
         public void Write(BinaryWriter bw)
         {
-            bw.Write(_id);
-            bw.Write(_model);
-            bw.Write((byte)1);      // Unknown byte
-            bw.Write(_slot);
-            bw.Write((uint)1);      // Unknown dword
-            bw.Write(_durability);
-            bw.Write(_remainingTime);
+            bw.Write(_id);              // 0xF  - DWORD - Item ID
+            bw.Write(_model);           // 0x13 - WORD - Model ID
+            bw.Write((byte)0);          // 0x15 - BYTE - Unused by client
+            bw.Write(_slot);            // 0x16 - BYTE - Slot
+            bw.Write((uint)0);          // 0x17 - DWORD - Unused by client
+            bw.Write(_durability);      // 0x1B - WORD - Durability/Quantity
+            bw.Write(_remainingTime);   // 0x1D - WORD - Not used by client?
         }
 
         public string WriteDBString(uint itemTemplate, int characterID)

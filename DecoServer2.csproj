@@ -53,6 +53,7 @@
     <Compile Include="CharacterThings\Item.cs" />
     <Compile Include="CharacterThings\ItemTemplate.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="LootTable.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="PlayMap.cs" />

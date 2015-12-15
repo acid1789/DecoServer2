@@ -360,7 +360,8 @@ namespace DecoServer2
 
             bw.Write((ushort)0);            // Unknown short
 
-            int itemCounts = (_equipped.Count & 0x1F) | ((_generalItems.Count & 0x3F) << 5) | ((_items.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
+            //int itemCounts = (_equipped.Count & 0x1F) | ((_generalItems.Count & 0x3F) << 5) | ((_items.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
+            int itemCounts = (_equipped.Count & 0x1F) | ((_items.Count & 0x3F) << 5) | ((_generalItems.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
             bw.Write(itemCounts);
             bw.Write((byte)_buffs.Count);
 
@@ -372,11 +373,11 @@ namespace DecoServer2
             
             foreach (Item item in _equipped.Values)
                 item.Write(bw);
-
-            foreach (Item item in _generalItems.Values)
+            
+            foreach (Item item in _items)
                 item.Write(bw);
 
-            foreach (Item item in _items)
+            foreach (Item item in _generalItems.Values)
                 item.Write(bw);
 
             foreach (Item item in _questItems)
@@ -407,6 +408,18 @@ namespace DecoServer2
                 item.Write(bw);
 
             Utils.WriteZeros(bw, 14);       // Extra padding workaround for client bug
+        }
+
+        public void GainExp(int exp)
+        {
+            if( exp >= 0 )
+                _exp += (ulong)exp;
+        }
+
+        public void GainGold(int gold)
+        {
+            if( gold >= 0 )
+                _gold += (uint)gold;
         }
 
         #region Quest Area
@@ -610,6 +623,7 @@ namespace DecoServer2
 
         public void TakeDamage(int damage)
         {
+            /*
             if (damage < 0)
                 _curHP += (uint)(-damage);
             else
@@ -624,6 +638,7 @@ namespace DecoServer2
                 else
                     _curHP -= dmg;
             }
+            */
         }
 
         #region Accessors
@@ -911,12 +926,14 @@ namespace DecoServer2
         public enum TheReason
         {
             Quest,
+            Loot,
             GMCommand
         }
 
         public uint ItemTemplateID;
         public TheReason Reason;
         public uint Context;
+        public Item Item;
 
         public GiveItemArgs(uint itemTemplateID, TheReason reason, uint context)
         {

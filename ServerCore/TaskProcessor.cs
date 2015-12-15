@@ -18,6 +18,7 @@ namespace JuggleServerCore
             LoadNPCs_Fetch,
             LoadNPCs_Process,
             LoadItems_Process,
+            LoadLootTables_Process,
             LoadLocations_Process,
             LoadMonsterTemplates_Process,
             LoadMonsterSpawners_Process,
@@ -125,6 +126,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoadNPCs_Fetch] = LoadNPCs_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
             _taskHandlers[Task.TaskType.LoadItems_Process] = LoadItems_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadLootTables_Process] = LoadLootTables_Process_Handler;
             _taskHandlers[Task.TaskType.LoadLocations_Process] = LoadLocations_Process_Handler;
             _taskHandlers[Task.TaskType.LoadMonsterTemplates_Process] = LoadMonsterTemplates_Process_Handler;
             _taskHandlers[Task.TaskType.LoadMonsterSpawners_Process] = LoadMonsterSpawners_Process_Handler;
@@ -312,6 +314,31 @@ namespace JuggleServerCore
             {
                 ItemTemplate template = ItemTemplate.ReadFromDB(row);
                 _server.AddItemTemplate(template);
+            }
+
+            t.Type = Task.TaskType.LoadLootTables_Process;
+            AddDBQuery("SELECT * FROM loot_tables;", t);
+        }
+
+        void LoadLootTables_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                // 0: loot_table_id   int(11)
+                // 1: chance  double
+                // 2: item_template   int(11)
+
+                int table = (int)row[0];
+                double chance = (double)row[1];
+                uint item_template = (uint)row[2];
+
+                LootTable lt = _server.GetLootTable(table);
+                if (lt == null)
+                {
+                    lt = new LootTable();
+                    _server.AddLootTable(table, lt);                    
+                }
+                lt.AddEntry(chance, item_template);
             }
 
             t.Type = Task.TaskType.LoadLocations_Process;
@@ -827,7 +854,7 @@ namespace JuggleServerCore
             // Save it in the database
             string sql = item.WriteDBString(args.ItemTemplateID, ci.ID);
             t.Type = Task.TaskType.GiveItem_Finish;
-            t.Args = item;
+            args.Item = item;
             AddDBQuery(sql, t);
 
             // Log it
@@ -837,7 +864,8 @@ namespace JuggleServerCore
         
         void GiveItem_Finish_Handler(Task t)
         {
-            Item item = (Item)t.Args;
+            GiveItemArgs args = (GiveItemArgs)t.Args;
+            Item item = args.Item;
             ulong res = (ulong)t.Query.Rows[0][0];
             item.ID = (uint)res;
             
@@ -845,7 +873,10 @@ namespace JuggleServerCore
             t.Client.Character.AddItem(item);
 
             // Tell the client about it
-            t.Client.SendPacket(new GiveItemPacket(item));
+            if( args.Reason == GiveItemArgs.TheReason.Loot )
+                t.Client.SendPacket(new ItemLootPacket(item, args.Context));
+            else
+                t.Client.SendPacket(new GiveItemPacket(item));
         }
 
         void RemoveCharacter_Handler(Task t)
