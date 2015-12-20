@@ -1,33 +1,9 @@
 Deploy crypto dlls properly
 Create Character cant play that character immediately
 
-CharacterListPacket - 0x1
-	Investigate 3rd slot
-
-DeleteCharacterConfirmPacket - 0x5
-	Figure out what the 8 integers are
-
-PlayCharacterAuthorizedPacket - 0x13
-	Figure out what the one integer is
-
-LoginResponsePacket - 0x7FD2
-	Figure out what the strings are for
-
-LoginErrorPacket - 0x7FD9
-	Figure out what the unknown fields are for
-
-ServerListPacket - 0x7FDA
-	Figure out the unknowns
-	Support multiple servers
-
-MapChangePacket - 0x15
-	 Figure out the unknowns
-	 Figure out Item data
-	 Figure out Buff data
-	 Find out about luck
-
-Skills, Buffs & Boosters
-
-
-Figure out how to send gold/exp/fame updates to client
-Figure out how to send items to client
+Use Items
+Exp
+Loot fall on ground
+Skills
+Item quest triggers
+Kill quest triggers

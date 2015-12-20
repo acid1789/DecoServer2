@@ -847,6 +847,44 @@ namespace JuggleServerCore
 
             // Instantiate the item
             Item item = _server.InstantiateItem(args.ItemTemplateID);
+            
+            // Log it
+            string log = string.Format("Giving item template({0}) to Character ID: {1}. Reason: {2}, Context: {3}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
+            LogInterface.Log(log, LogInterface.LogMessageType.Game);
+
+            // Do autostacking
+            if (item.ItemType == Item.Type.Stackable)
+            {
+                // Find all existing stacks with this model id
+                Item[] stacks = ci.FindItemsByModel(item.Model);
+                if (stacks.Length > 0)
+                {
+                    foreach (Item stack in stacks)
+                    {
+                        if (stack.StackSpace > 0)
+                        {
+                            // There is room in this stack, put items into this stack until full
+                            int amountToAdd = Math.Min(stack.StackSpace, item.Quantity);
+
+                            // Change this stacks quantity, save in the database, and send to the client
+                            stack.AddQuantity(amountToAdd);
+                            AddDBQuery(stack.UpdateDBString(), null, false);
+                            if( item.Quantity > amountToAdd )
+                                t.Client.SendPacket(new GiveItemPacket(stack));
+
+                            // Remove the quantity from the new item
+                            item.AddQuantity(-amountToAdd);
+                            if (item.Quantity <= 0)
+                            {
+                                // All of the quantity has been distributed
+                                // Tell the client about the loot with the last stack
+                                t.Client.SendPacket(new ItemLootPacket(stack, args.Context));
+                                return;     
+                            }
+                        }
+                    }
+                }
+            }
 
             // Find a slot for it
             item.Slot = ci.FindGeneralSlot();
@@ -857,9 +895,6 @@ namespace JuggleServerCore
             args.Item = item;
             AddDBQuery(sql, t);
 
-            // Log it
-            string log = string.Format("Giving item template({0}) to Character ID: {1}. Reason: {2}, Context: {3}", args.ItemTemplateID, ci.ID, args.Reason, args.Context);
-            LogInterface.Log(log, LogInterface.LogMessageType.Game);
         }
         
         void GiveItem_Finish_Handler(Task t)

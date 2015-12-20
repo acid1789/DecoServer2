@@ -40,10 +40,9 @@ namespace ServerDataTool
             string itModelName = Program.s_items.ContainsKey(it.Model) ? Program.s_items[it.Model].ToString() : "Unknown";
             ListViewItem lvi = lvItems.Items.Add(itModelName);
             lvi.SubItems.Add(it.Type.ToString());
-            lvi.SubItems.Add(it.DurabilityMin.ToString());
-            lvi.SubItems.Add(it.DurabilityMax.ToString());
-            lvi.SubItems.Add(it.DurationMin.ToString());
-            lvi.SubItems.Add(it.DurationMax.ToString());
+            lvi.SubItems.Add(it.GenDQMin.ToString());
+            lvi.SubItems.Add(it.GenDQMax.ToString());
+            lvi.SubItems.Add(it.DQMax.ToString());
             lvi.Tag = it;
         }
 
@@ -64,16 +63,14 @@ namespace ServerDataTool
 
         private void btnNewItem_Click(object sender, EventArgs e)
         {
-            ushort durability_min = 0;
-            ushort durability_max = 0;
-            ushort duration_min = 0;
-            ushort duration_max = 0;
-            try { durability_min = Convert.ToUInt16(tbDurabilityMin.Text); } catch (Exception) { }
-            try { durability_max = Convert.ToUInt16(tbDurabilityMax.Text); } catch (Exception) { }
-            try { duration_min = Convert.ToUInt16(tbDurationMin.Text); } catch (Exception) { }
-            try { duration_max = Convert.ToUInt16(tbDurationMax.Text); } catch (Exception) { }
+            byte genDQMin = 0;
+            byte genDQMax = 0;
+            byte dqMax = 0;
+            try { genDQMin = Convert.ToByte(tbDurabilityMin.Text); } catch (Exception) { }
+            try { genDQMax = Convert.ToByte(tbDurabilityMax.Text); } catch (Exception) { }
+            try { dqMax = Convert.ToByte(tbDurationMax.Text); } catch (Exception) { }
 
-            ItemTemplate it = new ItemTemplate(0, (ushort)Math.Max(cbModel.SelectedIndex, 0), (uint)Math.Max(cbType.SelectedIndex, 0), durability_min, durability_max, duration_min, duration_max);
+            ItemTemplate it = new ItemTemplate(0, (ushort)Math.Max(cbModel.SelectedIndex, 0), (byte)Math.Max(cbType.SelectedIndex, 0), genDQMin, genDQMax, dqMax);
             it.New = true;
             AddItem(it);
         }
@@ -89,10 +86,9 @@ namespace ServerDataTool
                 IntStrID model = Program.s_items.ContainsKey(it.Model) ? Program.s_items[it.Model] : null;
                 cbModel.SelectedItem = model;
                 cbType.SelectedIndex = (int)it.Type;
-                tbDurabilityMin.Text = it.DurabilityMin.ToString();
-                tbDurabilityMax.Text = it.DurabilityMax.ToString();
-                tbDurationMin.Text = it.DurationMin.ToString();
-                tbDurationMax.Text = it.DurationMax.ToString();
+                tbDurabilityMin.Text = it.GenDQMin.ToString();
+                tbDurabilityMax.Text = it.GenDQMax.ToString();
+                tbDurationMax.Text = it.DQMax.ToString();
 
                 btnDeleteItem.Enabled = true;
             }
@@ -136,7 +132,7 @@ namespace ServerDataTool
 
                 try
                 {
-                    it.DurabilityMin = Convert.ToUInt16(tbDurabilityMin.Text);
+                    it.GenDQMin = Convert.ToByte(tbDurabilityMin.Text);
                     lvi.SubItems[2].Text = tbDurabilityMin.Text;
                     it.Dirty = true;
                 }
@@ -153,25 +149,8 @@ namespace ServerDataTool
 
                 try
                 {
-                    it.DurabilityMax = Convert.ToUInt16(tbDurabilityMax.Text);
+                    it.GenDQMax = Convert.ToByte(tbDurabilityMax.Text);
                     lvi.SubItems[3].Text = tbDurabilityMax.Text;
-                    it.Dirty = true;
-                }
-                catch (Exception) { }
-            }
-        }
-
-        private void tbDurationMin_TextChanged(object sender, EventArgs e)
-        {
-            if (lvItems.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvItems.SelectedItems[0];
-                ItemTemplate it = (ItemTemplate)lvi.Tag;
-
-                try
-                {
-                    it.DurationMin = Convert.ToUInt16(tbDurationMin.Text);
-                    lvi.SubItems[4].Text = tbDurationMin.Text;
                     it.Dirty = true;
                 }
                 catch (Exception) { }
@@ -187,7 +166,7 @@ namespace ServerDataTool
 
                 try
                 {
-                    it.DurationMax = Convert.ToUInt16(tbDurationMax.Text);
+                    it.DQMax = Convert.ToByte(tbDurationMax.Text);
                     lvi.SubItems[5].Text = tbDurationMax.Text;
                     it.Dirty = true;
                 }

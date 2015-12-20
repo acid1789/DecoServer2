@@ -32,23 +32,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cbModel = new System.Windows.Forms.ComboBox();
             this.cbType = new System.Windows.Forms.ComboBox();
             this.tbDurabilityMin = new System.Windows.Forms.TextBox();
             this.tbDurabilityMax = new System.Windows.Forms.TextBox();
-            this.tbDurationMin = new System.Windows.Forms.TextBox();
             this.tbDurationMax = new System.Windows.Forms.TextBox();
             this.lvItems = new System.Windows.Forms.ListView();
-            this.btnDeleteItem = new System.Windows.Forms.Button();
-            this.btnNewItem = new System.Windows.Forms.Button();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.btnNewItem = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -74,36 +71,27 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 291);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.Size = new System.Drawing.Size(109, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Minimum Durability:";
+            this.label4.Text = "Min Spawn Durability:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(3, 317);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 13);
+            this.label5.Size = new System.Drawing.Size(112, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Maximum Durability:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(455, 291);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Minimum Duration:";
+            this.label5.Text = "Max Spawn Durability:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(452, 317);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 13);
+            this.label7.Size = new System.Drawing.Size(100, 13);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Maximum Duration:";
+            this.label7.Text = "Maximum Durability:";
             // 
             // cbModel
             // 
@@ -127,7 +115,7 @@
             // 
             // tbDurabilityMin
             // 
-            this.tbDurabilityMin.Location = new System.Drawing.Point(109, 284);
+            this.tbDurabilityMin.Location = new System.Drawing.Point(121, 284);
             this.tbDurabilityMin.Name = "tbDurabilityMin";
             this.tbDurabilityMin.Size = new System.Drawing.Size(114, 20);
             this.tbDurabilityMin.TabIndex = 7;
@@ -135,19 +123,11 @@
             // 
             // tbDurabilityMax
             // 
-            this.tbDurabilityMax.Location = new System.Drawing.Point(109, 310);
+            this.tbDurabilityMax.Location = new System.Drawing.Point(121, 310);
             this.tbDurabilityMax.Name = "tbDurabilityMax";
             this.tbDurabilityMax.Size = new System.Drawing.Size(114, 20);
             this.tbDurabilityMax.TabIndex = 7;
             this.tbDurabilityMax.TextChanged += new System.EventHandler(this.tbDurabilityMax_TextChanged);
-            // 
-            // tbDurationMin
-            // 
-            this.tbDurationMin.Location = new System.Drawing.Point(555, 284);
-            this.tbDurationMin.Name = "tbDurationMin";
-            this.tbDurationMin.Size = new System.Drawing.Size(114, 20);
-            this.tbDurationMin.TabIndex = 7;
-            this.tbDurationMin.TextChanged += new System.EventHandler(this.tbDurationMin_TextChanged);
             // 
             // tbDurationMax
             // 
@@ -164,8 +144,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader6});
             this.lvItems.FullRowSelect = true;
             this.lvItems.GridLines = true;
             this.lvItems.Location = new System.Drawing.Point(12, 12);
@@ -175,6 +154,31 @@
             this.lvItems.UseCompatibleStateImageBehavior = false;
             this.lvItems.View = System.Windows.Forms.View.Details;
             this.lvItems.SelectedIndexChanged += new System.EventHandler(this.lvItems_SelectedIndexChanged);
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Model";
+            this.columnHeader2.Width = 303;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Type";
+            this.columnHeader3.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Gen DQ Min";
+            this.columnHeader4.Width = 78;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Gen DQ Max";
+            this.columnHeader5.Width = 81;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "DQ Max";
+            this.columnHeader6.Width = 75;
             // 
             // btnDeleteItem
             // 
@@ -196,36 +200,6 @@
             this.btnNewItem.UseVisualStyleBackColor = true;
             this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
             // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Model";
-            this.columnHeader2.Width = 121;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Type";
-            this.columnHeader3.Width = 80;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Durability_Min";
-            this.columnHeader4.Width = 78;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Durability_Max";
-            this.columnHeader5.Width = 81;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Duration_Min";
-            this.columnHeader6.Width = 75;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Duration_Max";
-            this.columnHeader7.Width = 81;
-            // 
             // ItemsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,13 +209,11 @@
             this.Controls.Add(this.btnDeleteItem);
             this.Controls.Add(this.lvItems);
             this.Controls.Add(this.tbDurationMax);
-            this.Controls.Add(this.tbDurationMin);
             this.Controls.Add(this.tbDurabilityMax);
             this.Controls.Add(this.tbDurabilityMin);
             this.Controls.Add(this.cbType);
             this.Controls.Add(this.cbModel);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -266,13 +238,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbModel;
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.TextBox tbDurabilityMin;
         private System.Windows.Forms.TextBox tbDurabilityMax;
-        private System.Windows.Forms.TextBox tbDurationMin;
         private System.Windows.Forms.TextBox tbDurationMax;
         private System.Windows.Forms.ListView lvItems;
         private System.Windows.Forms.Button btnDeleteItem;
@@ -282,6 +252,5 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
     }
 }

@@ -13,7 +13,7 @@ namespace DecoServer2
         {
             Equipped,
             General,
-            Item,
+            Stackable,
             Quest,
             Riding
         }
@@ -24,7 +24,8 @@ namespace DecoServer2
         ushort _durability;
         ushort _remainingTime;
         Type _type;
-        uint _template;
+        uint _templateID;
+        ItemTemplate _template;
         
         public void Write(BinaryWriter bw)
         {
@@ -39,37 +40,40 @@ namespace DecoServer2
 
         public string WriteDBString(uint itemTemplate, int characterID)
         {
-            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},remaining_time={2},character_id={3},inventory_type={4},slot={5}; SELECT LAST_INSERT_ID();", itemTemplate, _durability, _remainingTime, characterID, (byte)_type, _slot);
+            string sql = string.Format("INSERT INTO item_instances SET template_id={0},durability={1},character_id={2},inventory_type={3},slot={4}; SELECT LAST_INSERT_ID();", itemTemplate, _durability, characterID, (byte)_type, _slot);
             return sql;
         }
 
         public string UpdateDBString()
         {
-            string sql = string.Format("UPDATE item_instances SET durability={0},remaining_time={1},inventory_type={2},slot={3} WHERE instance_id={4};", _durability, _remainingTime, (byte)_type, _slot, _id);
+            string sql = string.Format("UPDATE item_instances SET durability={0},inventory_type={1},slot={2} WHERE instance_id={3};", _durability, (byte)_type, _slot, _id);
             return sql;
+        }
+
+        public void AddQuantity(int quantity)
+        {
+            _durability = (ushort)(_durability + quantity);
         }
 
         public static Item ReadFromDB(object[] row)
         {
-            // 0: instance_id       int(10) unsigned
-            // 1: template_id       int(10) unsigned
-            // 2: durability        smallint(5) unsigned
-            // 3: remaining_time    smallint(5) unsigned
-            // 4: character_id      int(10) unsigned
-            // 5: inventory_type    int(10) unsigned
-            // 6: slot              tinyint
-            
+            // 0: instance_id int(10) unsigned
+            // 1: template_id int(10) unsigned
+            // 2: durability  tinyint(3) unsigned
+            // 3: character_id    int(10) unsigned
+            // 4: inventory_type  tinyint(3) unsigned
+            // 5: slot    tinyint(3) unsigned
+
 
             Item i = new Item();
             i._id = (uint)row[0];
-            i._template = (uint)row[1];
-            i._durability = (ushort)row[2];
-            i._remainingTime = (ushort)row[3];
-            i._type = (Type)((uint)row[5]);
-            i._slot = (byte)(row[6]);
+            i._templateID = (uint)row[1];
+            i._durability = (byte)row[2];
+            i._type = (Type)((byte)row[4]);
+            i._slot = (byte)(row[5]);
 
-            ItemTemplate t = Program.Server.GetItemTemplate(i._template);
-            i._model = t.Model;
+            i._template = Program.Server.GetItemTemplate(i._templateID);
+            i._model = i._template.Model;
 
             return i;
         }
@@ -81,11 +85,12 @@ namespace DecoServer2
             item._id = 0;
             item._model = it.Model;
             item._durability = it.GenerateDurability();
-            item._remainingTime = it.GenerateDuration();
+            item._remainingTime = 0;
             item._type = (Type)it.Type;
             item._slot = 0xFF;
-            item._template = it.ID;
-            
+            item._templateID = it.ID;
+            item._template = it;
+
             return item;
         }
 
@@ -119,6 +124,16 @@ namespace DecoServer2
             get { return _durability; }
         }
 
+        public ushort Quantity
+        {
+            get { return _durability; }
+        }
+
+        public int StackSpace
+        {
+            get { return _template.DQMax - _durability; }
+        }
+
         public ushort RemainingTime
         {
             get { return _remainingTime; }
@@ -126,7 +141,7 @@ namespace DecoServer2
 
         public uint TemplateID
         {
-            get { return _template; }
+            get { return _templateID; }
         }
         #endregion
     }

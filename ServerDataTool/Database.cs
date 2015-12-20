@@ -386,7 +386,7 @@ namespace ServerDataTool
             List<ItemTemplate> templates = new List<ItemTemplate>();
             foreach (object[] row in rows)
             {
-                ItemTemplate it = new ItemTemplate((uint)row[0], (ushort)row[1], (uint)row[2], (ushort)row[3], (ushort)row[4], (ushort)row[5], (ushort)row[6]);
+                ItemTemplate it = new ItemTemplate((uint)row[0], (ushort)row[1], (byte)row[2], (byte)row[3], (byte)row[4], (byte)row[5]);
                 templates.Add(it);
             }
 
@@ -395,19 +395,18 @@ namespace ServerDataTool
 
         public static void SaveItem(ItemTemplate it)
         {
-            // 0: item_template_id int(10) unsigned
+            // 0: item_template_id    int(10) unsigned
             // 1: model   smallint(5) unsigned
-            // 2: type int(10) unsigned
-            // 3: durability_min smallint(5) unsigned
-            // 4: durability_max smallint(5) unsigned
-            // 5: duration_min smallint(5) unsigned
-            // 6: duration_max smallint(5) unsigned
+            // 2: type    tinyint(3) unsigned
+            // 3: gen_dq_min  tinyint(3) unsigned
+            // 4: gen_dq_max  tinyint(3) unsigned
+            // 5: dq_max  tinyint(3) unsigned
 
             string sql;
             if( it.New )
-                sql = string.Format("INSERT INTO item_templates SET model={0},type={1},durability_min={2},durability_max={3},duration_min={4},duration_max={5}; SELECT LAST_INSERT_ID();", it.Model, (int)it.Type, it.DurabilityMin, it.DurabilityMax, it.DurationMin, it.DurationMax);
+                sql = string.Format("INSERT INTO item_templates SET model={0},type={1},gen_dq_min={2},gen_dq_max={3},dq_max={4}; SELECT LAST_INSERT_ID();", it.Model, (int)it.Type, it.GenDQMin, it.GenDQMax, it.DQMax);
             else
-                sql = string.Format("UPDATE item_templates SET model={0},type={1},durability_min={2},durability_max={3},duration_min={4},duration_max={5} WHERE item_template_id={6};", it.Model, (int)it.Type, it.DurabilityMin, it.DurabilityMax, it.DurationMin, it.DurationMax, it.ID);
+                sql = string.Format("UPDATE item_templates SET model={0},type={1},gen_dq_min={2},gen_dq_max={3},dq_max={4} WHERE item_template_id={5};", it.Model, (int)it.Type, it.GenDQMin, it.GenDQMax, it.DQMax, it.ID);
             List<object[]> rows = ExecuteQuery(sql);
             if (rows.Count > 0)
             {
@@ -525,7 +524,7 @@ namespace ServerDataTool
         {
             Clothing,
             General,
-            Item,
+            Stackable,
             Quest,
             Riding
         }
@@ -534,22 +533,20 @@ namespace ServerDataTool
         public uint ID;
         public ushort Model;
         public ItemType Type;
-        public ushort DurabilityMin;
-        public ushort DurabilityMax;
-        public ushort DurationMin;
-        public ushort DurationMax;
+        public byte GenDQMin;
+        public byte GenDQMax;
+        public byte DQMax;
         public bool New;
         public bool Dirty;
 
-        public ItemTemplate(uint id, ushort model, uint type, ushort durabilityMin, ushort durabilityMax, ushort durationMin, ushort durationMax)
+        public ItemTemplate(uint id, ushort model, byte type, byte genDQMin, byte genDQMax, byte dqMax)
         {
             ID = id;
             Model = model;
             Type = (ItemType)type;
-            DurabilityMin = durabilityMin;
-            DurabilityMax = durabilityMax;
-            DurationMin = durationMin;
-            DurationMax = durationMax;
+            GenDQMin = genDQMin;
+            GenDQMax = genDQMax;
+            DQMax = dqMax;
         }
     }
 

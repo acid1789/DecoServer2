@@ -61,7 +61,7 @@ namespace DecoServer2
 
         Dictionary<byte, Item> _equipped;
         Dictionary<uint, Item> _generalItems;
-        List<Item> _items;
+        Dictionary<uint, Item> _stackableItems;
         List<Item> _questItems;
         List<ushort> _skills;
         List<ushort> _buffs = new List<ushort>();
@@ -231,7 +231,7 @@ namespace DecoServer2
         {
             _equipped = new Dictionary<byte, Item>();
             _generalItems = new Dictionary<uint, Item>();
-            _items = new List<Item>();
+            _stackableItems = new Dictionary<uint, Item>();
             _questItems = new List<Item>();
             _ridingItems = new List<Item>();
 
@@ -360,8 +360,7 @@ namespace DecoServer2
 
             bw.Write((ushort)0);            // Unknown short
 
-            //int itemCounts = (_equipped.Count & 0x1F) | ((_generalItems.Count & 0x3F) << 5) | ((_items.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
-            int itemCounts = (_equipped.Count & 0x1F) | ((_items.Count & 0x3F) << 5) | ((_generalItems.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
+            int itemCounts = (_equipped.Count & 0x1F) | ((_generalItems.Count & 0x3F) << 5) | ((_stackableItems.Count & 0x3F) << 11) | ((_questItems.Count & 0x1F) << 17) | ((_skills.Count & 0x7F) << 22);
             bw.Write(itemCounts);
             bw.Write((byte)_buffs.Count);
 
@@ -373,11 +372,11 @@ namespace DecoServer2
             
             foreach (Item item in _equipped.Values)
                 item.Write(bw);
-            
-            foreach (Item item in _items)
-                item.Write(bw);
 
             foreach (Item item in _generalItems.Values)
+                item.Write(bw);
+
+            foreach (Item item in _stackableItems.Values)
                 item.Write(bw);
 
             foreach (Item item in _questItems)
@@ -474,7 +473,7 @@ namespace DecoServer2
             List<Item> allItems = new List<Item>();
             allItems.AddRange(_equipped.Values);
             allItems.AddRange(_generalItems.Values);
-            allItems.AddRange(_items);
+            allItems.AddRange(_stackableItems.Values);
             allItems.AddRange(_questItems);
             allItems.AddRange(_ridingItems);
 
@@ -501,7 +500,29 @@ namespace DecoServer2
         {
             if( _generalItems.ContainsKey(itemID) )
                 return _generalItems[itemID];
+            if( _stackableItems.ContainsKey(itemID) )
+                return _stackableItems[itemID];
             return null;
+        }
+
+        public Item[] FindItemsByModel(ushort modelID)
+        {
+            List<Item> found = new List<Item>();
+
+            List<Item> allItems = new List<Item>();
+            allItems.AddRange(_equipped.Values);
+            allItems.AddRange(_generalItems.Values);
+            allItems.AddRange(_stackableItems.Values);
+            allItems.AddRange(_questItems);
+            allItems.AddRange(_ridingItems);
+
+            foreach (Item i in allItems)
+            {
+                if (i.Model == modelID)
+                    found.Add(i);
+            }
+
+            return found.ToArray();
         }
 
         public void AddItem(Item item)
@@ -514,7 +535,8 @@ namespace DecoServer2
                 case Item.Type.General:
                     _generalItems[item.ID] = item;
                     break;
-                case Item.Type.Item:
+                case Item.Type.Stackable:
+                    _stackableItems[item.ID] = item;
                     break;
                 case Item.Type.Quest:                    
                     break;
@@ -522,7 +544,7 @@ namespace DecoServer2
                     break;
             }
 
-            if (item.Slot == 0xFF && item.ItemType == Item.Type.General)
+            if (item.Slot == 0xFF && (item.ItemType == Item.Type.General || item.ItemType == Item.Type.Stackable))
             {
                 item.Slot = FindGeneralSlot();                
             }
@@ -530,12 +552,16 @@ namespace DecoServer2
 
         public byte FindGeneralSlot()
         {
+            List<Item> general = new List<Item>();
+            general.AddRange(_generalItems.Values);
+            general.AddRange(_stackableItems.Values);
+
             // Find a free slot for this item
             byte slot = 0;
             while (true)
             {
                 bool valid = true;
-                foreach (Item i in _generalItems.Values)
+                foreach (Item i in general)
                 {
                     if (i.Slot == slot)
                     {
@@ -719,7 +745,7 @@ namespace DecoServer2
                 int size = 167;
                 size += 16 * _equipped.Count;
                 size += 16 * _generalItems.Count;
-                size += 16 * _items.Count;
+                size += 16 * _stackableItems.Count;
                 size += 16 * _questItems.Count;
 
                 size += 2 * _skills.Count;
