@@ -296,12 +296,69 @@ namespace JuggleServerCore
         {
             PacketHeader header = new PacketHeader();
             header.Opcode = 0x5;
-            header.PacketLength = (ushort)(32);
+            header.PacketLength = 32;
             header.PacketSequenceNumber = sequence;
             header.Write(bw);
 
             for (int i = 0; i < 8; i++)
                 bw.Write((int)1);
+        }
+    }
+
+    public class AddOtherPlayerPacket : SendPacketBase          // 0xF
+    {
+        CharacterInfo _op;
+
+        public AddOtherPlayerPacket(CharacterInfo other)
+        {
+            _op = other;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0xF;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 258;
+            header.Write(bw);
+
+            bw.Write(_op.ID);
+            Utils.WriteByteString(bw, _op.Name, 17);
+            bw.Write(_op.ModelInfo);
+            bw.Write(_op.Job);
+
+            bw.Write((byte)0);
+            bw.Write((uint)0);
+
+            bw.Write(_op.Level);
+            bw.Write(_op.CellIndex);
+            bw.Write(_op.CurHP);
+            bw.Write(_op.CurMP);
+            bw.Write(_op.MaxHP);
+            bw.Write(_op.MaxMP);
+
+            bw.Write((byte)0);
+            bw.Write((ushort)1);
+
+            for (int i = 0; i < 10; i++)
+            {
+                int id = 0;
+                Item equipped = _op.EquippedItem((byte)i);
+                if( equipped != null )
+                    id = equipped.Model;
+                bw.Write(id);
+            }
+
+            bw.Write((uint)0);
+            bw.Write((uint)0);
+            bw.Write((uint)0);
+            bw.Write((uint)0);
+            for( int i = 0; i < 20; i++ )
+                bw.Write((ushort)0);
+            bw.Write((ushort)0);
+            bw.Write((uint)0);
+            bw.Write((byte)0);
+            Utils.WriteByteString(bw, "", 100);
         }
     }
 

@@ -1,9 +1,9 @@
 Deploy crypto dlls properly
 Create Character cant play that character immediately
 
-MultiPlayer
 Skills
 Exp
 Loot fall on ground
 Item quest triggers
 Kill quest triggers
+Revive

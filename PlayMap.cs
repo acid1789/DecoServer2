@@ -63,7 +63,18 @@ namespace DecoServer2
                 }
 
                 // Send player character info to all other players
-                // TODO
+                if (_players.Count > 0)
+                {
+                    AddOtherPlayerPacket theNewGuy = new AddOtherPlayerPacket(ci);
+                    foreach (Connection pc in _players.Values)
+                    {
+                        // Tell the other player about the new guy
+                        pc.SendPacket(theNewGuy);
+
+                        // Tell the new guy about this player
+                        client.SendPacket(new AddOtherPlayerPacket(pc.Character));
+                    }
+                }
             }
 
             _players[ci.ID] = client;            

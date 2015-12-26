@@ -800,6 +800,16 @@ namespace DecoServer2
             }
         }
 
+        public string Name
+        {
+            get { return _csi.Name; }
+        }
+
+        public int ModelInfo
+        {
+            get { return _csi.ModelInfo; }
+        }
+
         public byte Level
         {
             get { return _csi.Level; }
