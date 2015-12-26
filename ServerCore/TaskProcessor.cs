@@ -61,6 +61,7 @@ namespace JuggleServerCore
             UpdateNPCPosition,
             DoAttack,
             MonsterAttackPlayer,
+            UseItem,
         }
 
         public TaskType Type;
@@ -169,6 +170,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.UpdateNPCPosition] = UpdateNPCPosition_Handler;
             _taskHandlers[Task.TaskType.DoAttack] = DoAttack_Handler;
             _taskHandlers[Task.TaskType.MonsterAttackPlayer] = MonsterAttackPlayer_Handler;
+            _taskHandlers[Task.TaskType.UseItem] = UseItem_Handler;
 
 
             _pendingQueries = new Dictionary<long, Task>();
@@ -1085,6 +1087,28 @@ namespace JuggleServerCore
 
             PlayerGetAttackedPacket pkt = new PlayerGetAttackedPacket(m, t.Client.Character, attackType);
             t.Client.SendPacket(pkt);
+        }
+
+        void UseItem_Handler(Task t)
+        {
+            uint item = (uint)t.Args;
+            Item stack = t.Client.Character.FindItem(item);
+            
+            Item.ItemError err = stack.Use(t.Client);
+
+            if (stack.Quantity <= 0)
+            {
+                // Stack is gone, delete the item
+                string sql = string.Format("DELETE FROM item_instances WHERE instance_id={0};", stack.ID);
+                AddDBQuery(sql, null, false);
+            }
+            else
+            {
+                // Update the stack in the database and the client
+                AddDBQuery(stack.UpdateDBString(), null, false);
+                t.Client.SendPacket(new GiveItemPacket(stack));
+            }
+            t.Client.SendPacket(new UseItemResponse(stack.ID, (byte)stack.Quantity, err));
         }
         #endregion
     }

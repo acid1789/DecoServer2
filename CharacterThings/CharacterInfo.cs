@@ -649,22 +649,24 @@ namespace DecoServer2
 
         public void TakeDamage(int damage)
         {
-            /*
             if (damage < 0)
+            {
                 _curHP += (uint)(-damage);
+                if( _curHP > _maxHP )
+                    _curHP = _maxHP;
+            }
             else
             {
                 uint dmg = (uint)damage;
-                if( dmg < _physicalDef )
+                if (dmg < _physicalDef)
                     dmg = 0;
                 else
                     dmg -= _physicalDef;
-                if ( dmg > _curHP )
+                if (dmg > _curHP)
                     _curHP = 0;
                 else
                     _curHP -= dmg;
             }
-            */
         }
 
         #region Accessors

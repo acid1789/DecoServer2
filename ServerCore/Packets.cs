@@ -260,7 +260,7 @@ namespace JuggleServerCore
             header.PacketLength = (ushort)(ascii.Length + 5);
             header.PacketSequenceNumber = sequence;
             header.Write(bw);
-                        
+
             bw.Write((int)0);   // Message Type: Server Provided
             bw.Write(ascii);
             bw.Write((byte)0);
@@ -285,7 +285,7 @@ namespace JuggleServerCore
             header.Write(bw);
 
             bw.Write((uint)2);  // 2 Character slots... Retarded client.  Can do a third but character creation fails...
-            for( int i = 0; i < 3; i++ )
+            for (int i = 0; i < 3; i++)
                 Slots[i].Write(bw);
         }
     }
@@ -300,7 +300,7 @@ namespace JuggleServerCore
             header.PacketSequenceNumber = sequence;
             header.Write(bw);
 
-            for( int i = 0; i < 8; i++ )
+            for (int i = 0; i < 8; i++)
                 bw.Write((int)1);
         }
     }
@@ -344,6 +344,27 @@ namespace JuggleServerCore
             header.Write(bw);
 
             _ci.WritePacket(bw);
+        }
+    }
+
+    public class HealthChangePacket : SendPacketBase    // 0xFF
+    {
+        uint _hp;
+
+        public HealthChangePacket(uint health)
+        {
+            _hp = health;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0xFF;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 4;
+            header.Write(bw);
+
+            bw.Write(_hp);
         }
     }
 
@@ -433,7 +454,7 @@ namespace JuggleServerCore
             header.PacketSequenceNumber = sequence;
             header.PacketLength = 3;
             header.Write(bw);
-            
+
             bw.Write((byte)11);     // NPC_Icon
             bw.Write(_icon);        // Icon texture id
         }
@@ -553,10 +574,10 @@ namespace JuggleServerCore
             header.PacketSequenceNumber = sequence;
             header.PacketLength = 20;
             header.Write(bw);
-            
-            bw.Write(_attacker.ID);
-            bw.Write(_attacker.CellIndex);
-            bw.Write(_ci.CurHP);
+
+            bw.Write(_attacker.ID);                     // 0xE
+            bw.Write(_attacker.CellIndex);              // 0x12
+            bw.Write(_ci.CurHP);                        // 0x16
             bw.Write(_motion);
             bw.Write((ushort)1);
             bw.Write(_attackType);
@@ -610,7 +631,7 @@ namespace JuggleServerCore
             bw.Write((byte)0);              // Unused spacer byte
 
             // 0x20 - 112 bytes of some data, starts with npc id?, maybe npc data?
-            bw.Write(_monsterID);          
+            bw.Write(_monsterID);
             //Utils.WriteZeros(bw, 108);      
         }
     }
@@ -637,6 +658,37 @@ namespace JuggleServerCore
             bw.Write(_gold);
             bw.Write((byte)1);
             bw.Write(_victim);
+        }
+    }
+
+    public class UseItemResponse : SendPacketBase                // 0x409
+    {
+        uint _itemID;
+        byte _quantity;
+        byte _err;
+
+        public UseItemResponse(uint item, byte newQuantity, Item.ItemError err = Item.ItemError.None)
+        {
+            _itemID = item;
+            _quantity = newQuantity;
+            _err = (byte)err;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0409;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 6;
+            header.Write(bw);
+
+            // 0xE - Dword - Item id
+            // 0x12- Byte - Remaining Quantity
+            // 0x13 - Byte - Item Error
+
+            bw.Write(_itemID);
+            bw.Write(_quantity);
+            bw.Write(_err);
         }
     }
 

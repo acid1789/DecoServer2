@@ -8,12 +8,21 @@ namespace DecoServer2
 {
     public class ItemTemplate
     {
+        public enum ItemUseFunction
+        {
+            None,
+            GainHealth,
+        }
+
+
         uint _id;
         ushort _model;
         byte _type;
         byte _genDQMin;
         byte _genDQMax;
         byte _dqMax;
+        ItemUseFunction _useFunc;
+        int _useFuncParam;
 
         public Item Instantiate()
         {
@@ -46,6 +55,16 @@ namespace DecoServer2
             get { return _dqMax; }
         }
 
+        public ItemUseFunction ItemFunction
+        {
+            get { return _useFunc; }
+        }
+
+        public int ItemFunctionParam
+        {
+            get { return _useFuncParam; }
+        }
+
         public static ItemTemplate ReadFromDB(object[] row)
         {
             // 0: item_template_id    int(10) unsigned
@@ -62,6 +81,8 @@ namespace DecoServer2
             it._genDQMin = (byte)row[3];
             it._genDQMax = (byte)row[4];
             it._dqMax = (byte)row[5];
+            it._useFunc = (ItemUseFunction)((byte)row[6]);
+            it._useFuncParam = (int)row[7];
 
             return it;
         }

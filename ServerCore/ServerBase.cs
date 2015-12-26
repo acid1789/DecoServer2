@@ -102,6 +102,7 @@ namespace JuggleServerCore
             client.OnNPCDialogNextButton += Client_OnNPCDialogNextButton;
             client.OnGMCommand += Client_OnGMCommand;
             client.OnMoveItem += Client_OnMoveItem;
+            client.OnUseItem += Client_OnUseItem;
             client.OnEquipItem += Client_OnEquipItem;
             client.OnUnEquipItem += Client_OnUnEquipItem;
             client.OnAttack += Client_OnAttack;
@@ -183,6 +184,11 @@ namespace JuggleServerCore
         private void Client_OnAttack(object sender, AttackTargetRequest e)
         {
             TaskProcessor.AddTask(new Task(Task.TaskType.DoAttack, (Connection)sender, e));
+        }
+
+        private void Client_OnUseItem(Connection arg1, uint arg2)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.UseItem, arg1, arg2)); 
         }
         #endregion
 

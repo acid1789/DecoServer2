@@ -157,7 +157,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32900,150,150,150,805,0,0,382,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32130,150,150,150,864,0,0,409,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +281,7 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
-INSERT INTO `item_instances` VALUES (1,2,50,5,2,0),(2,1,50,5,0,2),(3,1,50,5,1,1),(4,3,40,5,2,2),(5,1,50,5,1,3),(6,1,50,5,1,4),(7,1,50,5,1,5),(8,1,50,5,1,6),(9,1,50,5,1,7),(10,1,50,5,1,8),(11,1,50,5,1,9),(12,1,50,5,1,10),(13,1,50,5,1,11),(14,1,50,5,1,12),(15,1,50,5,1,13),(16,1,50,5,1,14),(17,1,50,5,1,15),(18,1,50,5,1,16),(19,1,50,5,1,17),(20,3,40,5,2,18),(21,3,1,5,2,255);
+INSERT INTO `item_instances` VALUES (1,2,50,5,2,0),(2,1,50,5,1,255),(3,1,50,5,1,1),(4,3,40,5,2,2),(5,1,50,5,1,3),(6,1,50,5,1,4),(7,1,50,5,1,5),(8,1,50,5,1,6),(9,1,50,5,1,7),(10,1,50,5,1,8),(11,1,50,5,1,9),(12,1,50,5,1,10),(13,1,50,5,1,11),(14,1,50,5,1,12),(15,1,50,5,1,13),(16,1,50,5,1,14),(17,1,50,5,0,2),(18,1,50,5,1,16),(19,1,50,5,1,17),(20,3,39,5,2,18),(21,3,18,5,2,15);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,6 +299,8 @@ CREATE TABLE `item_templates` (
   `gen_dq_min` tinyint(3) unsigned DEFAULT '0',
   `gen_dq_max` tinyint(3) unsigned DEFAULT '0',
   `dq_max` tinyint(3) unsigned DEFAULT '0',
+  `use_func` tinyint(3) unsigned DEFAULT '0',
+  `use_func_param` int(11) DEFAULT '0',
   PRIMARY KEY (`item_template_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -309,7 +311,7 @@ CREATE TABLE `item_templates` (
 
 LOCK TABLES `item_templates` WRITE;
 /*!40000 ALTER TABLE `item_templates` DISABLE KEYS */;
-INSERT INTO `item_templates` VALUES (1,1,1,50,50,100),(2,4,2,50,50,100),(3,3,2,1,4,40),(4,6,3,123,124,100),(5,7,4,123,124,100),(6,8,0,123,124,100);
+INSERT INTO `item_templates` VALUES (1,1,1,50,50,100,0,0),(2,4,2,50,50,100,0,0),(3,3,2,1,4,40,1,50),(4,6,3,123,124,100,0,0),(5,7,4,123,124,100,0,0),(6,8,0,123,124,100,0,0);
 /*!40000 ALTER TABLE `item_templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -651,4 +653,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-20 12:55:42
+-- Dump completed on 2015-12-26 13:55:54
