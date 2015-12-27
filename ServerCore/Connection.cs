@@ -33,6 +33,8 @@ namespace JuggleServerCore
         public event EventHandler OnNPCDialogNextButton;
         public event EventHandler<GMCommandPacket> OnGMCommand;
         public event EventHandler<MoveItemRequest> OnMoveItem;
+        public event EventHandler<ToolbarItemSetRequest> OnToolbarItemSet;
+        public event Action<Connection, byte> OnToolbarItemClear;
         public event Action<Connection, uint> OnUseItem;
         public event EventHandler<EquipItemRequest> OnEquipItem;
         public event EventHandler<EquipItemRequest> OnUnEquipItem;
@@ -86,7 +88,9 @@ namespace JuggleServerCore
             _packetHandlers[0x0408] = UseItem_Handler;
             _packetHandlers[0x0411] = EquipItem_Handler;
             _packetHandlers[0x0415] = UnEquipItem_Handler;
-            _packetHandlers[0x0453] = MoveItem_Handler;            
+            _packetHandlers[0x0453] = MoveItem_Handler;
+            _packetHandlers[0x0455] = Toolbar_Item_Set_Handler;
+            _packetHandlers[0x0457] = Toolbar_Item_Clear_Handler;
             _packetHandlers[0x6201] = GMCommand_Handler;
             _packetHandlers[0x7FD3] = LoginRequest_Handler;
             _packetHandlers[0x7FD4] = CharacterListRequest_Handler;
@@ -323,6 +327,16 @@ namespace JuggleServerCore
         void MoveItem_Handler(PacketHeader header, BinaryReader br)
         {
             OnMoveItem(this, MoveItemRequest.Read(header, br));
+        }
+
+        void Toolbar_Item_Set_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnToolbarItemSet(this, ToolbarItemSetRequest.Read(header, br));
+        }
+
+        void Toolbar_Item_Clear_Handler(PacketHeader header, BinaryReader br)
+        {
+            OnToolbarItemClear(this, br.ReadByte());
         }
 
         void Attack_Handler(PacketHeader header, BinaryReader br)

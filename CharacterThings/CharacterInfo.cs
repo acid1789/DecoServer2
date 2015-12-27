@@ -17,6 +17,7 @@ namespace DecoServer2
 
 
         CharacterSelectInfo _csi;
+        CharacterToolbar _tb;
 
         uint _worldID;
 
@@ -913,6 +914,12 @@ namespace DecoServer2
         public uint CurSP
         {
             get { return _curSP; }
+        }
+
+        public CharacterToolbar Toolbar
+        {
+            get { return _tb; }
+            set { _tb = value; }
         }
         #endregion
 

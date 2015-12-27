@@ -160,6 +160,44 @@ namespace JuggleServerCore
         }
     }
 
+    public class ToolbarItemSetRequest : EventArgs                     // 0x455
+    {
+        public enum TargetType
+        {
+            Item,
+            Skill,
+            Unknown
+        }
+
+        public uint TargetID;
+        public TargetType Type;
+        public int Slot;
+
+        public static ToolbarItemSetRequest Read(PacketHeader header, BinaryReader br)
+        {
+            uint id = br.ReadUInt32();
+            byte extra = br.ReadByte();
+            TargetType t = TargetType.Unknown;
+            switch (extra & 0x3)
+            {
+                case 2:
+                    t = TargetType.Item;
+                    break;
+                case 3:
+                    t = TargetType.Skill;
+                    id &= 0xFFFF;
+                    break;
+            }
+
+            ToolbarItemSetRequest tbr = new ToolbarItemSetRequest();
+            tbr.TargetID = id;
+            tbr.Type = t;
+            tbr.Slot = extra >> 2;
+
+            return tbr;
+        }
+    }
+
     public class GMCommandPacket : EventArgs
     {
         public uint Command;
@@ -897,6 +935,29 @@ namespace JuggleServerCore
         }
     }
 
+    public class GiveItemPacket : SendPacketBase    // 0x0445
+    {
+        Item _item;
+
+        public GiveItemPacket(Item item)
+        {
+            _item = item;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0445;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 17;
+            header.Write(bw);
+
+            bw.Write((byte)1);          // Error code: 1 = no error
+            _item.Write(bw);
+        }
+    }
+
+
     public class MoveItemResponse : SendPacketBase  // 0x0454
     {
         uint _id;
@@ -928,25 +989,58 @@ namespace JuggleServerCore
         }
     }
 
-    public class GiveItemPacket : SendPacketBase    // 0x0455
+    public class SetToolbarLink : SendPacketBase            // 0x0456
     {
-        Item _item;
+        uint _id;
+        byte _type;
+        byte _err;
 
-        public GiveItemPacket(Item item)
+        public SetToolbarLink(uint id, ToolbarItemSetRequest.TargetType type, int slot, Item.ItemError err = Item.ItemError.None)
         {
-            _item = item;
+            _id = id;
+            int t = (type == ToolbarItemSetRequest.TargetType.Skill ? 3 : 2);
+            int typeByte = (slot << 2) | t;
+            _type = (byte)typeByte;
+            _err = (byte)err;
         }
 
         public override void Write(uint sequence, BinaryWriter bw)
         {
             PacketHeader header = new PacketHeader();
-            header.Opcode = 0x0445;
+            header.Opcode = 0x0456;
             header.PacketSequenceNumber = sequence;
-            header.PacketLength = 17;
+            header.PacketLength = 11;
             header.Write(bw);
 
-            bw.Write((byte)1);          // Error code: 1 = no error
-            _item.Write(bw);
+            bw.Write(_id);              // 0xE - DWord - Skill ID/ItemID
+            bw.Write(_type);            // 0x12 - Byte - Type, 2 = Item, 3 = Skill
+            bw.Write((uint)0);          // 0x13 - DWord - Secondary ID
+            bw.Write((byte)0);          // 0x17 - Byte - Use secondary id, not sure why this is in there, its the same as the first set
+            bw.Write(_err);             // 0x18 - Byte - ItemError
+        }
+    }
+
+    public class ClearToolbarLink : SendPacketBase        // 0x0458
+    {
+        byte _slot;
+        byte _err;
+
+        public ClearToolbarLink(byte slot, Item.ItemError err = Item.ItemError.None)
+        {
+            _slot = slot;
+            _err = (byte)err;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0458;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 2;
+            header.Write(bw);
+
+            bw.Write(_slot);
+            bw.Write(_err);
         }
     }
 

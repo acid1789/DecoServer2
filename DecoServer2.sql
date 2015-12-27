@@ -157,7 +157,7 @@ CREATE TABLE `characters_hv` (
 
 LOCK TABLES `characters_hv` WRITE;
 /*!40000 ALTER TABLE `characters_hv` DISABLE KEYS */;
-INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,32130,150,150,150,864,0,0,409,0);
+INSERT INTO `characters_hv` VALUES (4,7,113885,150,150,150,123,0,0,0,0),(5,5,30853,123,150,150,868,0,0,412,0);
 /*!40000 ALTER TABLE `characters_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,6 +206,60 @@ LOCK TABLES `characters_lv` WRITE;
 /*!40000 ALTER TABLE `characters_lv` DISABLE KEYS */;
 INSERT INTO `characters_lv` VALUES (4,0,192,10,12,8,10,12,150,150,150,5,2,13,9,13,12,12,13,0,0,0,0,100,0),(5,0,192,10,12,8,10,12,150,150,150,2,5,13,9,13,12,12,13,0,0,0,0,100,0);
 /*!40000 ALTER TABLE `characters_lv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `characters_toolbar`
+--
+
+DROP TABLE IF EXISTS `characters_toolbar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `characters_toolbar` (
+  `character_id` int(11) NOT NULL,
+  `slot_0` int(10) unsigned DEFAULT '0',
+  `slot_1` int(10) unsigned DEFAULT '0',
+  `slot_2` int(10) unsigned DEFAULT '0',
+  `slot_3` int(10) unsigned DEFAULT '0',
+  `slot_4` int(10) unsigned DEFAULT '0',
+  `slot_5` int(10) unsigned DEFAULT '0',
+  `slot_6` int(10) unsigned DEFAULT '0',
+  `slot_7` int(10) unsigned DEFAULT '0',
+  `slot_8` int(10) unsigned DEFAULT '0',
+  `slot_9` int(10) unsigned DEFAULT '0',
+  `slot_10` int(10) unsigned DEFAULT '0',
+  `slot_11` int(10) unsigned DEFAULT '0',
+  `slot_12` int(10) unsigned DEFAULT '0',
+  `slot_13` int(10) unsigned DEFAULT '0',
+  `slot_14` int(10) unsigned DEFAULT '0',
+  `slot_15` int(10) unsigned DEFAULT '0',
+  `slot_16` int(10) unsigned DEFAULT '0',
+  `slot_17` int(10) unsigned DEFAULT '0',
+  `slot_18` int(10) unsigned DEFAULT '0',
+  `slot_19` int(10) unsigned DEFAULT '0',
+  `slot_20` int(10) unsigned DEFAULT '0',
+  `slot_21` int(10) unsigned DEFAULT '0',
+  `slot_22` int(10) unsigned DEFAULT '0',
+  `slot_23` int(10) unsigned DEFAULT '0',
+  `slot_24` int(10) unsigned DEFAULT '0',
+  `slot_25` int(10) unsigned DEFAULT '0',
+  `slot_26` int(10) unsigned DEFAULT '0',
+  `slot_27` int(10) unsigned DEFAULT '0',
+  `slot_28` int(10) unsigned DEFAULT '0',
+  `slot_29` int(10) unsigned DEFAULT '0',
+  PRIMARY KEY (`character_id`),
+  UNIQUE KEY `character_id_UNIQUE` (`character_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `characters_toolbar`
+--
+
+LOCK TABLES `characters_toolbar` WRITE;
+/*!40000 ALTER TABLE `characters_toolbar` DISABLE KEYS */;
+INSERT INTO `characters_toolbar` VALUES (4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),(5,2147488644,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0);
+/*!40000 ALTER TABLE `characters_toolbar` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -281,7 +335,7 @@ CREATE TABLE `item_instances` (
 
 LOCK TABLES `item_instances` WRITE;
 /*!40000 ALTER TABLE `item_instances` DISABLE KEYS */;
-INSERT INTO `item_instances` VALUES (1,2,50,5,2,0),(2,1,50,5,1,255),(3,1,50,5,1,1),(4,3,40,5,2,2),(5,1,50,5,1,3),(6,1,50,5,1,4),(7,1,50,5,1,5),(8,1,50,5,1,6),(9,1,50,5,1,7),(10,1,50,5,1,8),(11,1,50,5,1,9),(12,1,50,5,1,10),(13,1,50,5,1,11),(14,1,50,5,1,12),(15,1,50,5,1,13),(16,1,50,5,1,14),(17,1,50,5,0,2),(18,1,50,5,1,16),(19,1,50,5,1,17),(20,3,39,5,2,18),(21,3,18,5,2,15);
+INSERT INTO `item_instances` VALUES (1,2,50,5,2,0),(2,1,50,5,1,255),(3,1,50,5,1,1),(4,3,40,5,2,2),(5,1,50,5,1,3),(6,1,50,5,1,4),(7,1,50,5,1,5),(8,1,50,5,1,6),(9,1,50,5,1,7),(10,1,50,5,1,8),(11,1,50,5,1,9),(12,1,50,5,1,10),(13,1,50,5,1,11),(14,1,50,5,1,12),(15,1,50,5,1,13),(16,1,50,5,1,14),(17,1,50,5,0,2),(18,1,50,5,1,16),(19,1,50,5,1,17),(20,3,39,5,2,18),(21,3,20,5,2,15);
 /*!40000 ALTER TABLE `item_instances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -653,4 +707,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-26 13:55:54
+-- Dump completed on 2015-12-27  0:33:59

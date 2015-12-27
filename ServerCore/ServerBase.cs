@@ -102,6 +102,8 @@ namespace JuggleServerCore
             client.OnNPCDialogNextButton += Client_OnNPCDialogNextButton;
             client.OnGMCommand += Client_OnGMCommand;
             client.OnMoveItem += Client_OnMoveItem;
+            client.OnToolbarItemSet += Client_OnToolbar;
+            client.OnToolbarItemClear += Client_OnToolbarItemClear;
             client.OnUseItem += Client_OnUseItem;
             client.OnEquipItem += Client_OnEquipItem;
             client.OnUnEquipItem += Client_OnUnEquipItem;
@@ -188,7 +190,17 @@ namespace JuggleServerCore
 
         private void Client_OnUseItem(Connection arg1, uint arg2)
         {
-            TaskProcessor.AddTask(new Task(Task.TaskType.UseItem, arg1, arg2)); 
+            TaskProcessor.AddTask(new Task(Task.TaskType.UseItem, arg1, arg2));
+        }
+
+        private void Client_OnToolbar(object sender, ToolbarItemSetRequest e)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.ToolbarItemSet, (Connection)sender, e));
+        }
+
+        private void Client_OnToolbarItemClear(Connection arg1, byte arg2)
+        {
+            TaskProcessor.AddTask(new Task(Task.TaskType.ToolbarItemClear, arg1, arg2));
         }
         #endregion
 

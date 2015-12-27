@@ -44,6 +44,7 @@ namespace JuggleServerCore
             CharacterSkills_Process,
             CharacterActiveQuests_Process,
             CharacterCompletedQuests_Process,
+            CharacterToolbar_Process,
             CharacterActiveQuest_Save,
             PlayerEnterMap,
             PlayerMove,
@@ -62,6 +63,8 @@ namespace JuggleServerCore
             DoAttack,
             MonsterAttackPlayer,
             UseItem,
+            ToolbarItemSet,
+            ToolbarItemClear,
         }
 
         public TaskType Type;
@@ -153,6 +156,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.CharacterSkills_Process] = CharacterSkills_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterActiveQuests_Process] = CharacterActiveQuests_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterCompletedQuests_Process] = CharacterCompletedQuests_Process_Handler;
+            _taskHandlers[Task.TaskType.CharacterToolbar_Process] = CharacterToolbar_Process_Handler;
             _taskHandlers[Task.TaskType.CharacterActiveQuest_Save] = CharacterActiveQuest_Save_Handler;
             _taskHandlers[Task.TaskType.PlayerEnterMap] = PlayerEnterMap_Handler;
             _taskHandlers[Task.TaskType.PlayerMove] = PlayerMove_Handler;
@@ -171,7 +175,8 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.DoAttack] = DoAttack_Handler;
             _taskHandlers[Task.TaskType.MonsterAttackPlayer] = MonsterAttackPlayer_Handler;
             _taskHandlers[Task.TaskType.UseItem] = UseItem_Handler;
-
+            _taskHandlers[Task.TaskType.ToolbarItemSet] = ToolbarItemSet_Handler;
+            _taskHandlers[Task.TaskType.ToolbarItemClear] = ToolbarItemClear_Handler;
 
             _pendingQueries = new Dictionary<long, Task>();
             _pqLock = new Mutex();
@@ -642,6 +647,7 @@ namespace JuggleServerCore
                 bool millena = Utils.NationFromModelInfo(ccp.ModelInfo);
                 string sql = string.Format("INSERT INTO char_skills SET character_id={0},skill_id={1};", id, millena ? 4996 : 4997);
                 sql += string.Format("INSERT INTO char_skills SET character_id={0},skill_id={1};", id, millena ? 4998 : 4999);
+                sql += string.Format("INSERT INTO characters_toolbar SET character_id={0};", id);
                 AddDBQuery(sql, null, false);
             }
         }
@@ -651,10 +657,14 @@ namespace JuggleServerCore
             CharacterNameClass dcp = (CharacterNameClass)t.Args;
             int id = t.Client.GetCharacterID(dcp.Name);
             string sql;
-            if( id < 0 )
+            if (id < 0)
                 sql = string.Format("DELETE FROM characters WHERE account_id={0} AND name=\"{1}\";", t.Client.AccountID, dcp.Name);
             else
+            {
                 sql = string.Format("DELETE FROM characters WHERE character_id={0};", id);
+                sql += string.Format("DELETE FROM char_skills WHERE character_id={0};", id);
+                sql += string.Format("DELETE FROM characters_toolbar WHERE character_id={0};", id);
+            }
             AddDBQuery(sql, null, false);
 
             t.Client.SendPacket(new DeleteCharacterConfirmPacket());
@@ -693,6 +703,9 @@ namespace JuggleServerCore
 
             sql = string.Format("SELECT * FROM completed_quests WHERE character_id={0};", id);
             AddDBQuery(sql, new Task(Task.TaskType.CharacterCompletedQuests_Process, t.Client, ci));
+
+            sql = string.Format("SELECT * FROM characters_toolbar WHERE character_id={0};", id);
+            AddDBQuery(sql, new Task(Task.TaskType.CharacterToolbar_Process, t.Client, ci));
         }
 
         void CharacterDataHV_Process_Handler(Task t)
@@ -786,6 +799,18 @@ namespace JuggleServerCore
         {
             CharacterInfo ci = (CharacterInfo)t.Args;
             ci.ReadCompletedQuests(t.Query);
+        }
+
+        void CharacterToolbar_Process_Handler(Task t)
+        {
+            CharacterInfo ci = (CharacterInfo)t.Args;
+            CharacterToolbar tb = new CharacterToolbar();
+            if (t.Query.Rows.Count > 0)
+            {
+                tb.ReadFromDB(t.Query.Rows[0]);
+                tb.SendToClient(t.Client, false);
+            }
+            ci.Toolbar = tb;
         }
 
         void CharacterActiveQuest_Save_Handler(Task t)
@@ -1109,6 +1134,20 @@ namespace JuggleServerCore
                 t.Client.SendPacket(new GiveItemPacket(stack));
             }
             t.Client.SendPacket(new UseItemResponse(stack.ID, (byte)stack.Quantity, err));
+        }
+
+        void ToolbarItemSet_Handler(Task t)
+        {
+            ToolbarItemSetRequest tbr = (ToolbarItemSetRequest)t.Args;
+
+            string sql = t.Client.Character.Toolbar.SetItem(t.Client, tbr);            
+            AddDBQuery(sql, null, false);
+        }
+
+        void ToolbarItemClear_Handler(Task t)
+        {
+            string sql = t.Client.Character.Toolbar.ClearItem(t.Client, (byte)t.Args);
+            AddDBQuery(sql, null, false);
         }
         #endregion
     }
