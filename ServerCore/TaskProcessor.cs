@@ -1116,24 +1116,29 @@ namespace JuggleServerCore
 
         void UseItem_Handler(Task t)
         {
+            Item.ItemError err = Item.ItemError.None;
             uint item = (uint)t.Args;
             Item stack = t.Client.Character.FindItem(item);
-            
-            Item.ItemError err = stack.Use(t.Client);
-
-            if (stack.Quantity <= 0)
+            if (stack != null)
             {
-                // Stack is gone, delete the item
-                string sql = string.Format("DELETE FROM item_instances WHERE instance_id={0};", stack.ID);
-                AddDBQuery(sql, null, false);
+                err = stack.Use(t.Client);
+                if (stack.Quantity <= 0)
+                {
+                    // Stack is gone, delete the item
+                    string sql = string.Format("DELETE FROM item_instances WHERE instance_id={0};", stack.ID);
+                    AddDBQuery(sql, null, false);
+                }
+                else
+                {
+                    // Update the stack in the database and the client
+                    AddDBQuery(stack.UpdateDBString(), null, false);
+                    t.Client.SendPacket(new GiveItemPacket(stack));
+                }
+
+                t.Client.SendPacket(new UseItemResponse(stack.ID, (byte)stack.Quantity, err));
             }
             else
-            {
-                // Update the stack in the database and the client
-                AddDBQuery(stack.UpdateDBString(), null, false);
-                t.Client.SendPacket(new GiveItemPacket(stack));
-            }
-            t.Client.SendPacket(new UseItemResponse(stack.ID, (byte)stack.Quantity, err));
+                t.Client.SendPacket(new UseItemResponse(0, 0, Item.ItemError.UnableToFindItem));
         }
 
         void ToolbarItemSet_Handler(Task t)

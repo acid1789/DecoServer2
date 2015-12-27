@@ -23,6 +23,7 @@ namespace DecoServer2
         byte _dqMax;
         ItemUseFunction _useFunc;
         int _useFuncParam;
+        float _useFuncCooldown;
 
         public Item Instantiate()
         {
@@ -65,6 +66,11 @@ namespace DecoServer2
             get { return _useFuncParam; }
         }
 
+        public float Cooldown
+        {
+            get { return _useFuncCooldown; }
+        }
+
         public static ItemTemplate ReadFromDB(object[] row)
         {
             // 0: item_template_id    int(10) unsigned
@@ -73,6 +79,9 @@ namespace DecoServer2
             // 3: gen_dq_min  tinyint(3) unsigned
             // 4: gen_dq_max  tinyint(3) unsigned
             // 5: dq_max  tinyint(3) unsigned
+            // 6: use_func    tinyint(3) unsigned
+            // 7: use_func_param  int(11)
+            // 8: use_func_cooldown   float
 
             ItemTemplate it = new ItemTemplate();
             it._id = (uint)row[0];
@@ -83,6 +92,7 @@ namespace DecoServer2
             it._dqMax = (byte)row[5];
             it._useFunc = (ItemUseFunction)((byte)row[6]);
             it._useFuncParam = (int)row[7];
+            it._useFuncCooldown = (float)row[8];
 
             return it;
         }

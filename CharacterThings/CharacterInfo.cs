@@ -83,10 +83,13 @@ namespace DecoServer2
 
         Dictionary<uint, byte> _activeQuests;
         List<uint> _completedQuests;
+        Dictionary<uint, long> _lastItemUse;
 
         public CharacterInfo(CharacterSelectInfo csi)
         {
             _csi = csi;
+
+            _lastItemUse = new Dictionary<uint, long>();
 
             //_buffs.Add(125);   
             //_boosters.Add(new Booster(11114, 500));
@@ -620,6 +623,20 @@ namespace DecoServer2
             item.Slot = slot;
             item.ItemType = Item.Type.Equipped;
             _generalItems.Remove(item.ID);
+        }
+
+        public bool CanUseItemNow(Item item)
+        {
+            if (_lastItemUse.ContainsKey(item.TemplateID))
+            {
+                DateTime last = new DateTime(_lastItemUse[item.TemplateID]);
+                TimeSpan span = DateTime.Now - last;
+                if( span.TotalSeconds < item.Template.Cooldown )
+                    return false;
+            }
+            
+            _lastItemUse[item.TemplateID] = DateTime.Now.Ticks;
+            return true;
         }
 
         public void AddGoldExpFame(uint gold, uint exp, uint fame)

@@ -161,26 +161,32 @@ namespace DecoServer2
         public ItemError Use(Connection c)
         {
             ItemError err = ItemError.None;
-            switch (_template.ItemFunction)
+
+            if (c.Character.CanUseItemNow(this))
             {
-                case ItemTemplate.ItemUseFunction.GainHealth:
-                    if (c.Character.CurHP < c.Character.MaxHP)
-                    {
-                        _durability--;
+                switch (_template.ItemFunction)
+                {
+                    case ItemTemplate.ItemUseFunction.GainHealth:
+                        if (c.Character.CurHP < c.Character.MaxHP)
+                        {
+                            _durability--;
 
-                        // Adjust character health
-                        c.Character.TakeDamage(-_template.ItemFunctionParam);
+                            // Adjust character health
+                            c.Character.TakeDamage(-_template.ItemFunctionParam);
 
-                        // Send health change to client
-                        c.SendPacket(new HealthChangePacket(c.Character.CurHP));
-                    }
-                    else
-                        err = ItemError.UnableToUseItem;
-                    break;
-                default:
-                case ItemTemplate.ItemUseFunction.None:
-                    break;
+                            // Send health change to client
+                            c.SendPacket(new HealthChangePacket(c.Character.CurHP));
+                        }
+                        else
+                            err = ItemError.UnableToUseItem;
+                        break;
+                    default:
+                    case ItemTemplate.ItemUseFunction.None:
+                        break;
+                }
             }
+            else
+                err = ItemError.YouCanUseItAfterTheCooldownTimeRunsOut;
             return err;
         }
 
@@ -271,6 +277,11 @@ namespace DecoServer2
         public uint TemplateID
         {
             get { return _templateID; }
+        }
+
+        public ItemTemplate Template
+        {
+            get { return _template; }
         }
         #endregion
     }
