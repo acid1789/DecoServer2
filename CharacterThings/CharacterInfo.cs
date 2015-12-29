@@ -122,9 +122,7 @@ namespace DecoServer2
             _pvpCount = (uint)row[8];
             _exp = (ulong)row[9];
             _fame = (uint)row[10];
-
-            _curHP = 150;
-
+            
             _expectingHV = false;
         }
 
@@ -333,14 +331,7 @@ namespace DecoServer2
 
             bw.Write((byte)0);              // Unknown byte
 
-            bw.Write(_moveSpeed);
-            bw.Write(_abilityPMin);
-            bw.Write(_abilityPMax);
-            bw.Write(_physicalDef);
-            bw.Write(_magicalDef);
-            bw.Write(_attackSpeed);
-            bw.Write(_abilityMMin);
-            bw.Write(_abilityMMax);
+            WriteAbilityBlock(bw);
 
             bw.Write(_maxHP);
             bw.Write(_maxSP);
@@ -413,16 +404,78 @@ namespace DecoServer2
             Utils.WriteZeros(bw, 14);       // Extra padding workaround for client bug
         }
 
-        public void GainExp(int exp)
+        public void WriteAbilityBlock(BinaryWriter bw)
+        {
+            bw.Write(_moveSpeed);
+            bw.Write(_abilityPMin);
+            bw.Write(_abilityPMax);
+            bw.Write(_physicalDef);
+            bw.Write(_magicalDef);
+            bw.Write(_attackSpeed);
+            bw.Write(_abilityMMin);
+            bw.Write(_abilityMMax);
+        }
+
+        public void GainExp(Connection client, int exp)
         {
             if( exp >= 0 )
                 _exp += (ulong)exp;
+            
+            client.SendPacket(new ExpGainPacket(client.Character.Exp));
+
+            DoLevelUp(client);
+                       
         }
 
         public void GainGold(int gold)
         {
             if( gold >= 0 )
                 _gold += (uint)gold;
+        }
+
+        public void GainFame(uint fame)
+        {
+            _fame += fame;
+        }
+
+        void DoLevelUp(Connection client)
+        {
+            LevelData ld = Program.Server.GetLevelData((uint)(Level + 1));
+            if (_exp >= ld.Exp)
+            {
+                // Set all the stats
+                Level++;
+                _exp = _exp - ld.Exp;
+                _maxHP = _curHP = ld.MaxHP;
+                _maxMP = _curMP = ld.MaxMP;
+                _maxSP = _curSP = ld.MaxSP;
+                _power = (ushort)ld.Power;
+                _vitality = (ushort)ld.Vitality;
+                _sympathy = (ushort)ld.Sympathy;
+                _intelligence = (ushort)ld.Intelligence;
+                _stamina = (ushort)ld.Stamina;
+                _dexterity = (ushort)ld.Dexterity;
+                _abilityPoints += (ushort)ld.AbilityPoints;
+                _leftSP += (ushort)ld.SkillPoints;
+                _totalSP += (ushort)ld.SkillPoints;
+                _moveSpeed = (ushort)ld.MoveSpeed;
+                _abilityPMin = (ushort)ld.AbilityPMin;
+                _abilityPMax = (ushort)ld.AbilityPMax;
+                _physicalDef = _csi.Millena ? (ushort)ld.PhysicalDef : (ushort)ld.MagicalDef;
+                _magicalDef = _csi.Millena ? (ushort)ld.MagicalDef : (ushort)ld.PhysicalDef;
+                _attackSpeed = (byte)ld.AttackSpeed;
+                _abilityMMin = (ushort)ld.AbilityMMin;
+                _abilityMMax = (ushort)ld.AbilityMMax;
+
+                // Store in the database
+                string sql = _csi.UpdateString;
+                sql += HVString;
+                sql += UpdateLVString;
+                Program.Server.TaskProcessor.AddDBQuery(sql, null, false);
+
+                // Tell the client
+                client.SendPacket(new LevelUpPacket(this));
+            }
         }
 
         #region Quest Area
@@ -637,14 +690,7 @@ namespace DecoServer2
             
             _lastItemUse[item.TemplateID] = DateTime.Now.Ticks;
             return true;
-        }
-
-        public void AddGoldExpFame(uint gold, uint exp, uint fame)
-        {
-            _gold += gold;
-            _exp += exp;
-            _fame += fame;
-        }
+        }        
 
         public void Teleport(Location loc)
         {
@@ -745,12 +791,23 @@ namespace DecoServer2
         {
             get
             {
-                return string.Format(@"INSERT INTO characters_lv SET character_id={0},nation_rate={2},move_speed={3},ability_p_min={4},ability_p_max={5},attack_speed={6},ability_m_min={7},ability_m_max={8},
-                                                                    hp={9},sp={10},mp={11},magical_def={12},physical_def={13},power={14},vitality={15},sympathy={16},intelligence={17},stamina={18},dexterity={19},charisma={20},
-                                                                    luck={21},ability_points={22},left_sp={23},total_sp={24},frontier_id={25};",
-                                                                    _csi.ID, _fame, _nationRate, _moveSpeed, _abilityPMin, _abilityPMax, _attackSpeed, _abilityMMin, _abilityMMax, _maxHP, _maxSP, _maxMP, _magicalDef, _physicalDef, _power, _vitality, _sympathy, _intelligence, _stamina, _dexterity, _charisma, _luck, _abilityPoints, _leftSP, _totalSP, _frontierID);
+                return string.Format(@"INSERT INTO characters_lv (character_id, nation_rate, move_speed, ability_p_min, ability_p_max, attack_speed, ability_m_min, ability_m_max, hp, sp, mp, magical_def, physical_def, power, vitality, sympathy, 
+                                                                                intelligence, stamina, dexterity, charisma, luck, ability_points, left_sp, total_sp, frontier_id) 
+                                                           VALUES({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24})", 
+                                                            _csi.ID, _nationRate, _moveSpeed, _abilityPMin, _abilityPMax, _attackSpeed, _abilityMMin, _abilityMMax, _maxHP, _maxSP, _maxMP, _magicalDef, _physicalDef, _power, _vitality, _sympathy, _intelligence, _stamina, _dexterity, _charisma, _luck, _abilityPoints, _leftSP, _totalSP, _frontierID);                
             }
 
+        }
+
+        public string UpdateLVString
+        {
+            get
+            {
+                return string.Format(@"UPDATE characters_lv SET nation_rate={0}, move_speed={1}, ability_p_min={2}, ability_p_max={3}, attack_speed={4}, ability_m_min={5}, ability_m_max={6}, hp={7}, sp={8}, mp={9}, magical_def={10}, physical_def={11},
+                                                                power={12}, vitality={13}, sympathy={14}, intelligence={15}, stamina={16}, dexterity={17}, charisma={18}, luck={19}, ability_points={20}, left_sp={21}, total_sp={22}, frontier_id={23} WHERE character_id={24};",
+                                                                _nationRate, _moveSpeed, _abilityPMin, _abilityPMax, _attackSpeed, _abilityMMin, _abilityMMax, _maxHP, _maxSP, _maxMP, _magicalDef, _physicalDef, _power, _vitality, _sympathy, _intelligence, _stamina, _dexterity, _charisma, _luck, _abilityPoints, _leftSP, _totalSP, _frontierID, _csi.ID);
+            }
+            
         }
 
         public int FrontierID
@@ -831,6 +888,7 @@ namespace DecoServer2
         public byte Level
         {
             get { return _csi.Level; }
+            set { _csi.Level = value; }
         }
 
         public bool Millena
@@ -883,6 +941,26 @@ namespace DecoServer2
             get { return _abilityPMax; }
         }
 
+        public ushort AbilityPoints
+        {
+            get { return _abilityPoints; }
+        }
+
+        public ushort AvailableSkillPoints
+        {
+            get { return _leftSP; }
+        }
+
+        public ushort TotalSkillPoints
+        {
+            get { return _totalSP; }
+        }
+
+        public ushort Power
+        {
+            get { return _power; }
+        }
+
         public ushort Vitality
         {
             get { return _vitality; }
@@ -896,6 +974,11 @@ namespace DecoServer2
         public ushort Intelligence
         {
             get { return _intelligence; }
+        }
+
+        public ushort Stamina
+        {
+            get { return _stamina; }
         }
 
         public ushort Dexterity

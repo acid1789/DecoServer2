@@ -231,8 +231,7 @@ namespace DecoServer2
             bool hvUpdate = false;
             if (exp > 0)
             {
-                client.Character.GainExp(exp);
-                client.SendPacket(new ExpGainPacket(client.Character.Exp));
+                client.Character.GainExp(client, exp);
                 hvUpdate = true;
             }
             if (gold > 0)

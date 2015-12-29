@@ -2,8 +2,11 @@ Deploy crypto dlls properly
 Create Character cant play that character immediately
 
 Skills
-Exp
+Level UP
 Loot fall on ground
 Item quest triggers
 Kill quest triggers
 Revive
+Stats
+Equipment
+Combine Item stacks

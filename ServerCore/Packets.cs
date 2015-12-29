@@ -695,10 +695,47 @@ namespace JuggleServerCore
             PacketHeader header = new PacketHeader();
             header.Opcode = 0x0320;
             header.PacketSequenceNumber = sequence;
-            header.PacketLength = 8;
+            header.PacketLength = 9;
             header.Write(bw);
 
-            bw.Write(_exp);
+            bw.Write(_exp);             // 0xE - Dword - exp gain
+            bw.Write((byte)0);          // 0x16 - Byte - gain type?
+
+        }
+    }
+
+    public class LevelUpPacket : SendPacketBase         // 0x0321
+    {
+        CharacterInfo _ci;
+
+        public LevelUpPacket(CharacterInfo ci)
+        {
+            _ci = ci;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0321;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 54;
+            header.Write(bw);
+
+            bw.Write(_ci.Level);
+            bw.Write(_ci.MaxHP);
+            bw.Write(_ci.MaxSP);
+            bw.Write(_ci.MaxMP);
+            bw.Write(_ci.Power);
+            bw.Write(_ci.Vitality);
+            bw.Write(_ci.Sympathy);
+            bw.Write(_ci.Intelligence);
+            bw.Write(_ci.Stamina);
+            bw.Write(_ci.Dexterity);
+            bw.Write(_ci.AbilityPoints);
+            bw.Write(_ci.AvailableSkillPoints);
+            bw.Write(_ci.TotalSkillPoints);
+            _ci.WriteAbilityBlock(bw);
+            bw.Write(_ci.Exp);
         }
     }
 
@@ -1041,6 +1078,36 @@ namespace JuggleServerCore
 
             bw.Write(_slot);
             bw.Write(_err);
+        }
+    }
+
+    public class GiveQuest : SendPacketBase                // 0x0651
+    {
+        ushort _wordE;
+        ushort _word10;
+        byte _byte12;
+        uint _dword13;
+
+        public GiveQuest(ushort wordE, ushort word10, byte byte12, uint dword13)
+        {
+            _wordE = wordE;
+            _word10 = word10;
+            _byte12 = byte12;
+            _dword13 = dword13;
+        }
+
+        public override void Write(uint sequence, BinaryWriter bw)
+        {
+            PacketHeader header = new PacketHeader();
+            header.Opcode = 0x0651;
+            header.PacketSequenceNumber = sequence;
+            header.PacketLength = 9;
+            header.Write(bw);
+
+            bw.Write(_wordE);           // 0x0E - Word - QuestID?
+            bw.Write(_word10);          // 0x10 - Word - Some other ID?
+            bw.Write(_byte12);          // 0x12 - Byte - 1 = Give Quest?
+            bw.Write(_dword13);         // 0x13 - Dword - 
         }
     }
 

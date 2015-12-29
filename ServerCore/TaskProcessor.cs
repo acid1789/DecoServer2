@@ -14,9 +14,10 @@ namespace JuggleServerCore
         public enum TaskType
         {
             LoadPlayMaps_Fetch,
-            LoadPlayMaps_Process,
+            LoadPlayMaps_Process,            
             LoadNPCs_Fetch,
             LoadNPCs_Process,
+            LoadLevelData_Process,
             LoadItems_Process,
             LoadLootTables_Process,
             LoadLocations_Process,
@@ -129,6 +130,7 @@ namespace JuggleServerCore
             _taskHandlers[Task.TaskType.LoadPlayMaps_Process] = LoadPlayMaps_Process_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Fetch] = LoadNPCs_Fetch_Handler;
             _taskHandlers[Task.TaskType.LoadNPCs_Process] = LoadNPCs_Process_Handler;
+            _taskHandlers[Task.TaskType.LoadLevelData_Process] = LoadLevelData_Process_Handler;
             _taskHandlers[Task.TaskType.LoadItems_Process] = LoadItems_Process_Handler;
             _taskHandlers[Task.TaskType.LoadLootTables_Process] = LoadLootTables_Process_Handler;
             _taskHandlers[Task.TaskType.LoadLocations_Process] = LoadLocations_Process_Handler;
@@ -309,6 +311,18 @@ namespace JuggleServerCore
             {
                 NPC npc = NPC.ReadFromDB(row);
                 _server.AddNPC(npc);
+            }
+
+            t.Type = Task.TaskType.LoadLevelData_Process;
+            AddDBQuery("SELECT * FROM level_data;", t);
+        }
+
+        void LoadLevelData_Process_Handler(Task t)
+        {
+            foreach (object[] row in t.Query.Rows)
+            {
+                LevelData ld = LevelData.ReadFromDB(row);
+                _server.AddLevelData(ld);
             }
 
             t.Type = Task.TaskType.LoadItems_Process;
@@ -856,7 +870,9 @@ namespace JuggleServerCore
         {
             GiveGoldExpFameArgs args = (GiveGoldExpFameArgs)t.Args;
             CharacterInfo ci = t.Client.Character;
-            ci.AddGoldExpFame(args.Gold, args.Exp, args.Fame);
+            ci.GainGold((int)args.Gold);
+            ci.GainExp(t.Client, (int)args.Exp);
+            ci.GainFame(args.Fame);
 
             string sql = string.Format("UPDATE characters_hv SET gold={0},exp={1},fame={2} WHERE character_id={3};", ci.Gold, ci.Exp, ci.Fame, ci.ID);
             AddDBQuery(sql, null, false);
@@ -1113,7 +1129,7 @@ namespace JuggleServerCore
             PlayerGetAttackedPacket pkt = new PlayerGetAttackedPacket(m, t.Client.Character, attackType);
             t.Client.SendPacket(pkt);
         }
-
+        
         void UseItem_Handler(Task t)
         {
             Item.ItemError err = Item.ItemError.None;
@@ -1122,20 +1138,24 @@ namespace JuggleServerCore
             if (stack != null)
             {
                 err = stack.Use(t.Client);
-                if (stack.Quantity <= 0)
+                if (err == Item.ItemError.None)
                 {
-                    // Stack is gone, delete the item
-                    string sql = string.Format("DELETE FROM item_instances WHERE instance_id={0};", stack.ID);
-                    AddDBQuery(sql, null, false);
-                }
-                else
-                {
-                    // Update the stack in the database and the client
-                    AddDBQuery(stack.UpdateDBString(), null, false);
-                    t.Client.SendPacket(new GiveItemPacket(stack));
+                    if (stack.Quantity <= 0)
+                    {
+                        // Stack is gone, delete the item
+                        string sql = string.Format("DELETE FROM item_instances WHERE instance_id={0};", stack.ID);
+                        AddDBQuery(sql, null, false);
+                    }
+                    else
+                    {
+                        // Update the stack in the database and the client
+                        AddDBQuery(stack.UpdateDBString(), null, false);
+                        t.Client.SendPacket(new GiveItemPacket(stack));
+                    }
                 }
 
                 t.Client.SendPacket(new UseItemResponse(stack.ID, (byte)stack.Quantity, err));
+
             }
             else
                 t.Client.SendPacket(new UseItemResponse(0, 0, Item.ItemError.UnableToFindItem));

@@ -135,6 +135,7 @@ namespace DecoServer2
         public byte Level
         {
             get { return (byte)_level; }
+            set { _level = (sbyte)value; }
         }
 
         public bool Millena
@@ -145,6 +146,15 @@ namespace DecoServer2
         public bool Male
         {
             get { return Utils.GenderFromModelInfo(_modelInfo); }
+        }
+
+        public string UpdateString
+        {
+            get
+            {
+                return string.Format("UPDATE characters SET model_info={0},job={1},level={2},shirt={3},pants={4},right_hand={5},left_hand={6},hat={7},suit={8},gloves={9},boots={10},neck1={11},neck2={12} WHERE character_id={13};", 
+                                                            _modelInfo, _job, _level, _shirt, _pants, _rightHand, _leftHand, _hat, _suit, _gloves, _boots, _neck1, _neck2, _id);
+            }
         }
     }
 }

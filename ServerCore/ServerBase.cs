@@ -247,6 +247,7 @@ namespace JuggleServerCore
         Dictionary<uint, Location> _locations;
         Dictionary<uint, MonsterTemplate> _monsterTemplates;
         Dictionary<int, LootTable> _lootTables;
+        Dictionary<uint, LevelData> _levelData;
 
         void SetupWorld()
         {
@@ -255,7 +256,18 @@ namespace JuggleServerCore
             _locations = new Dictionary<uint, Location>();
             _monsterTemplates = new Dictionary<uint, MonsterTemplate>();
             _lootTables = new Dictionary<int, LootTable>();
+            _levelData = new Dictionary<uint, LevelData>();
             TaskProcessor.AddTask(new Task(Task.TaskType.LoadPlayMaps_Fetch));
+        }
+
+        public void AddLevelData(LevelData ld)
+        {
+            _levelData[ld.Level] = ld;
+        }
+
+        public LevelData GetLevelData(uint level)
+        {
+            return _levelData[level];
         }
 
         public void AddLootTable(int table, LootTable lt)
